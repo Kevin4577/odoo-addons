@@ -19,8 +19,8 @@
         <field name="inherit_id" ref="sale_product_hs_code.view_product_hs_code_form" />
         <field name="arch" type="xml">
             <field name="name" position="after">
-                <field name="tax_id" />
-                <field name="cn_name" />
+                <field name="tax_id" required="1"/>
+                <field name="cn_name" required="1"/>
             </field>
         </field>
     </record>
