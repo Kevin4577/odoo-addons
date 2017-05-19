@@ -6,7 +6,7 @@
 Sale Product HS Code China
 ==========================
 
-This module extend sale_product_hs_code to add chinese name on HS code model
+This module extend sale_product_hs_code to add Chinese name on HS code model
 adapts the module with the necessary translations to Chinese language.
 
 
@@ -37,6 +37,7 @@ Images
 Contributors
 ------------
 
+* Eric Caudal eric.caudal@elico-corp.com
 * Victor Martin <victor.martin@elico-corp.com>
 
 
