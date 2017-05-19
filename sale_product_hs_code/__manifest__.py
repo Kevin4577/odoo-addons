@@ -8,6 +8,7 @@
     'category': 'Sales',
     'summary': """This module specifies HS Code per product.""",
     'author': "Elico corp",
+    'website': 'www.elico-corp.com',
     'license': 'AGPL-3',
     'depends': [
                 'sale',
