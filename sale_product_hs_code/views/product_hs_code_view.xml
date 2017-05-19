@@ -20,9 +20,9 @@
             <form>
                 <sheet>
                     <group colspan="4" col="4">
-                        <field name="hs_code" />
-                        <field name="uom_id"/>
-                        <field name="name" />
+                        <field name="hs_code" required="1"/>
+                        <field name="uom_id" required="1"/>
+                        <field name="name" required="1"/>
                     </group>
                     <notebook>
                         <page string="Definition">
