@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sale_product_hs_code.group_hs_code_user" model="res.groups">
+        <field name="name">HS Code User</field>
+    </record>
+
+    <record id="sale_product_hs_code.group_hs_code_manager" model="res.groups">
+        <field name="name">HS Code Manager</field>
+        <field name="implied_ids" eval="[(4, ref('sale_product_hs_code.group_hs_code_user'))]"/>
+    </record>
+
+</odoo>

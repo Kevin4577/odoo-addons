@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sale_product_hs_code_user,sale.product.hs.code.user,model_product_hs_code,sale_product_hs_code.group_hs_code_user,0,0,1,0
+access_sale_product_hs_code_manager,sale.product.hs.code.manager,model_product_hs_code,sale_product_hs_code.group_hs_code_manager,1,1,1,1
