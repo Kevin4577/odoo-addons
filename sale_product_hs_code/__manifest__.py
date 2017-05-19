@@ -6,7 +6,7 @@
     'name': 'Sale Product HS Code',
     'version': '10.0.1.0.0',
     'category': 'Sales',
-    'summary': """This module specifies HS Code per product for China.""",
+    'summary': """This module specifies HS Code per product.""",
     'author': "Elico corp",
     'license': 'AGPL-3',
     'depends': [
