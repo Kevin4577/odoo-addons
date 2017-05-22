@@ -6,8 +6,8 @@ from odoo import fields, models
 
 
 class ProductHsCode(models.Model):
-
     _name = "product.hs.code"
+    _description = "Product HS Code"
 
     hs_code = fields.Char('HS Code')
     name = fields.Char('Name')

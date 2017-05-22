@@ -11,8 +11,8 @@
     'website': 'www.elico-corp.com',
     'license': 'AGPL-3',
     'depends': [
-                'sale',
-                ],
+        'sale',
+    ],
     'data': [
         'security/product_hs_code_security.xml',
         'security/ir.model.access.csv',
