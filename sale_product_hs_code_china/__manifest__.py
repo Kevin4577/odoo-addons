@@ -11,8 +11,8 @@
     'website': 'www.elico-corp.com',
     'license': 'AGPL-3',
     'depends': [
-                'sale_product_hs_code',
-                ],
+        'sale_product_hs_code',
+    ],
     'data': [
         'views/product_hs_code_view.xml',
         'views/product_template_view.xml'
