@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_product_hs_code_tree" model="ir.ui.view">
+        <field name="name">product.hs.code.tree</field>
+        <field name="model">product.hs.code</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="hs_code" />
+                <field name="uom_id"/>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_product_hs_code_form" model="ir.ui.view">
+        <field name="name">product.hs.code.form</field>
+        <field name="model">product.hs.code</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group colspan="4" col="4">
+                        <field name="hs_code" required="1"/>
+                        <field name="uom_id" required="1"/>
+                        <field name="name" required="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Definition">
+                            <group col="4" colspan="4">
+                                <field name="description" string="Description" />
+                                <field name="note" string="Note" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_product_hs_code_filter" model="ir.ui.view">
+        <field name="name">product.hs.code.search</field>
+        <field name="model">product.hs.code</field>
+        <field name="arch" type="xml">
+            <search >
+                <field name="hs_code" />
+                <field name="uom_id" />
+                <field name="name" />
+                <group expand="0" string="Group By" name="groupby">
+                    <filter string="HS Code" domain="[]"
+                            context="{'group_by':'hs_code'}" />
+                    <filter string="Unit of Measure" domain="[]"
+                            context="{'group_by':'uom_id'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="product_hs_code_action_form" model="ir.actions.act_window">
+        <field name="name">Product HS Code</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.hs.code</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_product_hs_code_tree"/>
+        <field name="search_view_id" ref="view_product_hs_code_filter"/>
+    </record>
+
+    <menuitem id="menu_product_hs_code"
+              action="product_hs_code_action_form"
+              parent="sale.prod_config_main"
+              sequence="3"
+              groups="sales_team.group_sale_manager"/>
+
+</odoo>
