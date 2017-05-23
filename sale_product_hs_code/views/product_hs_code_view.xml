@@ -28,7 +28,7 @@
                         <page string="Definition">
                             <group col="4" colspan="4">
                                 <field name="description" string="Description" />
-                                <field name="note" />
+                                <field name="note" string="Note" />
                             </group>
                         </page>
                     </notebook>
