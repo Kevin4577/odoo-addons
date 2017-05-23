@@ -9,7 +9,7 @@ class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     product_hs_code_id = fields.Many2one('product.hs.code', 'HS Code')
-    hs_name = fields.Char(string='Name', related='product_hs_code_id.name',
+    hs_name = fields.Char(string='HS Name', related='product_hs_code_id.name',
                           readonly=True)
     hs_code_uom = fields.Many2one("product.uom", "HS UoM",
                                   related='product_hs_code_id.uom_id',

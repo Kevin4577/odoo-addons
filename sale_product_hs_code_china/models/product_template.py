@@ -8,7 +8,7 @@ from odoo import fields, models
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    hs_cn_name = fields.Char('Name (CN)',
+    hs_cn_name = fields.Char('HS Name (CN)',
                              related='product_hs_code_id.cn_name',
                              readonly=True,
                              help='Chinese Name')
