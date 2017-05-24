@@ -7,10 +7,12 @@ Product Class
 =============
 
 The new module 'Product Class' would be required to add four new models: 
-Product Stage,
-Product Line,
-Product Class,
-Product Family.
+
+* Product Stage,
+* Product Line,
+* Product Class,
+* Product Family.
+
 They should be related to the product template model,
 in order to provide specific code to generate product code based on the selection of user.
 
