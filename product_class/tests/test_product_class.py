@@ -17,30 +17,22 @@ class TestProductClass(common.TransactionCase):
         self.product_tmpl2 = self.product_tmpl.copy({
             'name': 'Test2',
             'default_code': '',
-            'product_line_id': False,
-            'product_class_id': False,
-            'product_family_id': False,
+            'product_stage_id': False,
         })
         self.product_tmpl3 = self.product_tmpl.copy({
             'name': 'Test3',
             'default_code': '',
-            'product_stage_id': False,
-            'product_class_id': False,
-            'product_family_id': False,
+            'product_line_id': False,
         })
         self.product_tmpl4 = self.product_tmpl.copy({
             'name': 'Test4',
             'default_code': '',
-            'product_stage_id': False,
-            'product_line_id': False,
-            'product_family_id': False,
+            'product_class_id': False,
         })
         self.product_tmpl5 = self.product_tmpl.copy({
             'name': 'Test5',
             'default_code': '',
-            'product_stage_id': False,
-            'product_line_id': False,
-            'product_class_id': False,
+            'product_family_id': False,
         })
         self.stage_id = self.env.ref('product_class.product_stage_data_1').id
         self.class_id = self.env.ref('product_class.product_class_data_1').id
@@ -87,8 +79,11 @@ class TestProductClass(common.TransactionCase):
 
         with self.assertRaises(ValidationError):
             self.product_tmpl2.generate_product_code()
+        with self.assertRaises(ValidationError):
             self.product_tmpl3.generate_product_code()
+        with self.assertRaises(ValidationError):
             self.product_tmpl4.generate_product_code()
+        with self.assertRaises(ValidationError):
             self.product_tmpl5.generate_product_code()
 
 
