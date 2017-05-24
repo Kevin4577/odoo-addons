@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="1">
 
-        <record id="product_class_data_1" model="product.class">
-            <field name="name">classA</field>
-            <field name="code">3</field>
-            <field name="line_id" ref="product_class.product_line_data_1"/>
-        </record>
+    <record id="product_class_data_1" model="product.class">
+        <field name="name">classA</field>
+        <field name="code">3</field>
+        <field name="line_id" ref="product_class.product_line_data_1"/>
+    </record>
 
-    </data>
 </odoo>
