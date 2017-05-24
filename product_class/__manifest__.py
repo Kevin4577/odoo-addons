@@ -8,7 +8,7 @@
     'category': 'Product',
     'summary': """This module specifies product classes,
     and generates the product code per product.""",
-    'author': "Elico corp",
+    'author': "Elico Corp",
     'website': 'www.elico-corp.com',
     'license': 'AGPL-3',
     'depends': [

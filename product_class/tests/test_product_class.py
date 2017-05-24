@@ -85,5 +85,3 @@ class TestProductClass(common.TransactionCase):
             self.product_tmpl4.generate_product_code()
         with self.assertRaises(ValidationError):
             self.product_tmpl5.generate_product_code()
-
-
