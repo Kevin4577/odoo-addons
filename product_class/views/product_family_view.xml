@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_family_tree_view" model="ir.ui.view">
+        <field name="name">product.family.tree</field>
+        <field name="model">product.family</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="code"/>
+                <field name="class_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="product_family_form_view" model="ir.ui.view">
+        <field name="name">product.family.form</field>
+        <field name="model">product.family</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group colspan="6" col="6">
+                        <field name="name" required="1"/>
+                        <field name="code" required="1"/>
+                        <field name="class_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="product_family_search_view" model="ir.ui.view">
+        <field name="name">product.family.search</field>
+        <field name="model">product.family</field>
+        <field name="arch" type="xml">
+            <search >
+                <field name="name" />
+                <field name="code"/>
+                <field name="class_id"/>
+                <group expand="0" string="Group By" name="groupby">
+                    <filter string="Name" domain="[]"
+                        context="{'group_by':'name'}" />
+                    <filter string="Code" domain="[]"
+                        context="{'group_by':'code'}" />
+                    <filter string="Available Class" domain="[]"
+                            context="{'group_by':'class_id'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_product_family_form" model="ir.actions.act_window">
+        <field name="name">Product Family</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.family</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="product_family_tree_view"/>
+        <field name="search_view_id" ref="product_family_search_view"/>
+    </record>
+
+    <menuitem id="menu_product_family_config"
+              action="action_product_family_form"
+              parent="product_class.menu_product_assortment_config"
+              sequence="4" />
+
+</odoo>

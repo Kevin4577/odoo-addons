@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="product_family_data_1" model="product.family">
+            <field name="name">familyA</field>
+            <field name="code">44</field>
+            <field name="class_id" ref="product_class.product_class_data_1"/>
+        </record>
+
+    </data>
+</odoo>
