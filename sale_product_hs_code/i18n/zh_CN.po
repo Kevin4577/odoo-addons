@@ -1,0 +1,99 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* sale_product_hs_code
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-25 09:09+0000\n"
+"PO-Revision-Date: 2017-05-25 09:09+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sale_product_hs_code
+#: model:ir.model.fields,field_description:sale_product_hs_code.field_product_hs_code_description
+msgid "Additional Description"
+msgstr "辅助说明"
+
+#. module: sale_product_hs_code
+#: model:ir.model.fields,field_description:sale_product_hs_code.field_product_hs_code_note
+msgid "Declaration Note"
+msgstr "申报要素"
+
+#. module: sale_product_hs_code
+#: model:ir.ui.view,arch_db:sale_product_hs_code.view_product_hs_code_form
+msgid "Definition"
+msgstr "定义"
+
+#. module: sale_product_hs_code
+#: model:ir.ui.view,arch_db:sale_product_hs_code.view_product_hs_code_form
+msgid "Description"
+msgstr "说明"
+
+#. module: sale_product_hs_code
+#: model:ir.model.fields,field_description:sale_product_hs_code.field_product_hs_code_hs_code
+#: model:ir.model.fields,field_description:sale_product_hs_code.field_product_product_hs_code
+#: model:ir.model.fields,field_description:sale_product_hs_code.field_product_product_product_hs_code_id
+#: model:ir.model.fields,field_description:sale_product_hs_code.field_product_template_hs_code
+#: model:ir.model.fields,field_description:sale_product_hs_code.field_product_template_product_hs_code_id
+#: model:ir.ui.view,arch_db:sale_product_hs_code.view_product_hs_code_filter
+msgid "HS Code"
+msgstr "海关编码"
+
+#. module: sale_product_hs_code
+#: model:res.groups,name:sale_product_hs_code.group_hs_code_manager
+msgid "HS Code Manager"
+msgstr "海关编码管理员"
+
+#. module: sale_product_hs_code
+#: model:res.groups,name:sale_product_hs_code.group_hs_code_user
+msgid "HS Code User"
+msgstr "海关编码用户"
+
+#. module: sale_product_hs_code
+#: model:ir.model.fields,field_description:sale_product_hs_code.field_product_product_hs_name
+#: model:ir.model.fields,field_description:sale_product_hs_code.field_product_template_hs_name
+msgid "HS Name"
+msgstr "英文名称"
+
+#. module: sale_product_hs_code
+#: model:ir.model.fields,field_description:sale_product_hs_code.field_product_product_hs_code_uom
+#: model:ir.model.fields,field_description:sale_product_hs_code.field_product_template_hs_code_uom
+msgid "HS UoM"
+msgstr "报关单位"
+
+#. module: sale_product_hs_code
+#: model:ir.model.fields,field_description:sale_product_hs_code.field_product_hs_code_name
+msgid "Name"
+msgstr "英文名称"
+
+#. module: sale_product_hs_code
+#: model:ir.actions.act_window,name:sale_product_hs_code.product_hs_code_action_form
+#: model:ir.model,name:sale_product_hs_code.model_product_hs_code
+#: model:ir.ui.menu,name:sale_product_hs_code.menu_product_hs_code
+msgid "Product HS Code"
+msgstr "海关编码"
+
+#. module: sale_product_hs_code
+#: code:addons/sale_product_hs_code/models/product_hs_code.py:25
+#, python-format
+msgid "The HS Code must be unique."
+msgstr "The HS Code must be unique."
+
+#. module: sale_product_hs_code
+#: model:ir.model.fields,field_description:sale_product_hs_code.field_product_hs_code_uom_id
+#: model:ir.ui.view,arch_db:sale_product_hs_code.view_product_hs_code_filter
+msgid "Unit of Measure"
+msgstr "报关单位"
+
+#. module: sale_product_hs_code
+#: model:ir.model.fields,help:sale_product_hs_code.field_product_product_hs_code_uom
+#: model:ir.model.fields,help:sale_product_hs_code.field_product_template_hs_code_uom
+msgid "Unit of Measure related to HS Code"
+msgstr "报关单位"
+
