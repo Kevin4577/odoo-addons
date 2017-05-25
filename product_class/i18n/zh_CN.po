@@ -70,6 +70,16 @@ msgid "Name"
 msgstr "名称"
 
 #. module: product_class
+#: model:res.groups,name:product_class.group_product_code_manager
+msgid "Product Code Manager"
+msgstr "产品编码经理"
+
+#. module: product_class
+#: model:res.groups,name:product_class.group_product_code_user
+msgid "Product Code User"
+msgstr "产品编码用户"
+
+#. module: product_class
 #: model:ir.model.fields,field_description:product_class.field_product_stage_name
 msgid "Name"
 msgstr "状态名称"
@@ -92,31 +102,31 @@ msgstr "中类名称"
 #. module: product_class
 #: code:addons/product_class/models/product_template.py:80
 #, python-format
-msgid "Please select product class!"
-msgstr "Please select product class!"
+msgid "Please select product class."
+msgstr "请选择产品中类."
 
 #. module: product_class
 #: code:addons/product_class/models/product_template.py:82
 #, python-format
-msgid "Please select product family!"
-msgstr "Please select product family!"
+msgid "Please select product family."
+msgstr "请选择产品小类."
 
 #. module: product_class
 #: code:addons/product_class/models/product_template.py:78
 #, python-format
-msgid "Please select product line!"
-msgstr "Please select product line!"
+msgid "Please select product line."
+msgstr "请选择产品大类."
 
 #. module: product_class
 #: code:addons/product_class/models/product_template.py:76
 #, python-format
-msgid "Please select product stage!"
-msgstr "Please select product stage!"
+msgid "Please select product stage."
+msgstr "请选择产品状态."
 
 #. module: product_class
 #: model:ir.ui.menu,name:product_class.menu_product_assortment_config
 msgid "Product Assortment"
-msgstr "Product Assortment"
+msgstr "产品分类"
 
 #. module: product_class
 #: model:ir.actions.act_window,name:product_class.action_product_class_form
