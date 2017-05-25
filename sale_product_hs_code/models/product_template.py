@@ -18,6 +18,3 @@ class ProductTemplate(models.Model):
                                   related='product_hs_code_id.uom_id',
                                   help='Unit of Measure related to HS Code',
                                   readonly=True)
-
-    _sql_constraints = [('hs_code_uniq', 'UNIQUE(hs_code)',
-                         _('The HS Code must be unique.'))]
