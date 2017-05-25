@@ -83,7 +83,7 @@ msgstr "海关编码"
 #: code:addons/sale_product_hs_code/models/product_hs_code.py:25
 #, python-format
 msgid "The HS Code must be unique."
-msgstr "The HS Code must be unique."
+msgstr "海关编码应唯一."
 
 #. module: sale_product_hs_code
 #: model:ir.model.fields,field_description:sale_product_hs_code.field_product_hs_code_uom_id
