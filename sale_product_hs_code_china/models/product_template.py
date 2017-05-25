@@ -8,10 +8,6 @@ from odoo import fields, models
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    hs_cn_name = fields.Char('HS Name (CN)',
-                             related='product_hs_code_id.cn_name',
-                             readonly=True,
-                             help='Chinese Name')
     tax_code = fields.Many2one('account.tax', 'Rebate Rate',
                                related='product_hs_code_id.tax_id',
                                help='Tax Rebate Rate',

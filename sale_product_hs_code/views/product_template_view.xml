@@ -12,6 +12,7 @@
             </field>
             <div name="standard_price_uom" position="after">
                 <field name="hs_name" />
+                <field name="hs_code" />
                 <field name="hs_code_uom" />
             </div>
         </field>
