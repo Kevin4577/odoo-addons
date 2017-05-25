@@ -80,13 +80,13 @@ class ProductTemplate(models.Model):
         for product in self:
             if not product.default_code:
                 if not product.product_stage_id:
-                    raise ValidationError(_("Please select product stage!"))
+                    raise ValidationError(_("Please select product stage."))
                 if not product.product_line_id:
-                    raise ValidationError(_("Please select product line!"))
+                    raise ValidationError(_("Please select product line."))
                 if not product.product_class_id:
-                    raise ValidationError(_("Please select product class!"))
+                    raise ValidationError(_("Please select product class."))
                 if not product.product_family_id:
-                    raise ValidationError(_("Please select product family!"))
+                    raise ValidationError(_("Please select product family."))
                 prefix = product.product_stage_id.code + \
                     product.product_line_id.code + \
                     product.product_class_id.code + \
