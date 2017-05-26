@@ -12,7 +12,9 @@ class TestProductHSCode(common.TransactionCase):
         super(TestProductHSCode, self).setUp()
         self.prod_hs_code_obj = self.env['product.hs.code']
         self.prod_hs_code = self.prod_hs_code_obj.create({
-                      'hs_code': 'HSCode1', 'name': 'Test1'})
+            'hs_code': 'HSCode1',
+            'name': 'Test1',
+        })
 
     def test_check_hs_code(self):
         "Test product code based on sequence"
