@@ -9,6 +9,7 @@ from openerp.exceptions import ValidationError
 class ProductHsCode(models.Model):
     _name = "product.hs.code"
     _description = "Product HS Code"
+    _rec_name = 'name'
 
     hs_code = fields.Char('HS Code')
     name = fields.Char('Name')

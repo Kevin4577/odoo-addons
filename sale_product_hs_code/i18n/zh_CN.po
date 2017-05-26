@@ -36,11 +36,15 @@ msgid "Description"
 msgstr "说明"
 
 #. module: sale_product_hs_code
+#: model:ir.model.fields,field_description:sale_product_hs_code.field_product_product_product_hs_code_id
+#: model:ir.model.fields,field_description:sale_product_hs_code.field_product_template_product_hs_code_id
+msgid "HS Name (CN)"
+msgstr "英文名称 (CN)"
+
+#. module: sale_product_hs_code
 #: model:ir.model.fields,field_description:sale_product_hs_code.field_product_hs_code_hs_code
 #: model:ir.model.fields,field_description:sale_product_hs_code.field_product_product_hs_code
-#: model:ir.model.fields,field_description:sale_product_hs_code.field_product_product_product_hs_code_id
 #: model:ir.model.fields,field_description:sale_product_hs_code.field_product_template_hs_code
-#: model:ir.model.fields,field_description:sale_product_hs_code.field_product_template_product_hs_code_id
 #: model:ir.ui.view,arch_db:sale_product_hs_code.view_product_hs_code_filter
 msgid "HS Code"
 msgstr "海关编码"

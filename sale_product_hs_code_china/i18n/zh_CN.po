@@ -31,6 +31,12 @@ msgid "Product HS Code"
 msgstr "海关编码"
 
 #. module: sale_product_hs_code_china
+#: model:ir.model.fields,field_description:sale_product_hs_code_china.field_product_product_hs_cn_name
+#: model:ir.model.fields,field_description:sale_product_hs_code_china.field_product_template_hs_cn_name
+msgid "HS Name (CN)"
+msgstr "英文名称 (CN)"
+
+#. module: sale_product_hs_code_china
 #: model:ir.model.fields,field_description:sale_product_hs_code_china.field_product_hs_code_tax_id
 #: model:ir.model.fields,field_description:sale_product_hs_code_china.field_product_product_tax_code
 #: model:ir.model.fields,field_description:sale_product_hs_code_china.field_product_template_tax_code
