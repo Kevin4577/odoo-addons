@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 # © 2017 Elico corp (www.elico-corp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
-from odoo.tests import common
 from odoo.exceptions import ValidationError
+from odoo.addons.sale.tests.test_sale_common import TestSale
 
 
-class TestSaleOrder(common.TransactionCase):
+class TestSaleOrder(TestSale):
 
     def setUp(self):
         super(TestSaleOrder, self).setUp()
@@ -15,9 +15,8 @@ class TestSaleOrder(common.TransactionCase):
         self.partner_id = self.env['res.partner'].\
             create({'name': 'Test Customer',
                     'ref': False})
-        self.partner = self.env.ref('base.res_partner_1')
-        vas = {
-            'partner_id': self.partner.id,
+        vals = {
+            'partner_id': self.partner_id.id,
             'order_line': [(0, 0, {'name': self.product1.name,
                                    'product_id': self.product1.id,
                                    'product_uom_qty': 2,
@@ -25,13 +24,17 @@ class TestSaleOrder(common.TransactionCase):
                                    'price_unit': self.product1.list_price})],
             'pricelist_id': self.env.ref('product.list0').id,
         }
-        self.so = self.env['sale.order'].create(vas)
+        self.sale = self.env['sale.order'].create(vals)
 
     def test_action_confirm(self):
         """Check whether customer and product has or not internal reference
         number"""
         with self.assertRaises(ValidationError):
-            self.so.action_confirm()
-        self.partner.write({'ref': 'test_reference'})
+            self.sale.action_confirm()
+
+        self.partner_id.write({'ref': 'test_reference'})
         with self.assertRaises(ValidationError):
-            self.so.action_confirm()
+            self.sale.action_confirm()
+
+        self.product1.write({'default_code': 'Test Default Code'})
+        self.sale.action_confirm()

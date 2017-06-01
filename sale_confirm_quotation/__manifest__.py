@@ -13,6 +13,11 @@
     "support": "support@elico-corp.com",
     "license": "AGPL-3",
     "website": "www.elico-corp.com",
-    "depends": ['sale'],
+    "depends": [
+        "sale",
+    ],
+    "demo": [
+        "demo/quatation_demo.xml",
+    ],
     "installable": True
 }
