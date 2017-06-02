@@ -5,10 +5,6 @@
     "name": "Sale Confirm Quotation",
     "summary": "Sale Confirm Quotation",
     "version": "10.0.1.0.0",
-    "description": "This module extends sale module by adding an additional "
-                   "confirmation for quotation. Will check whether customer "
-                   "has or not internal reference number. On the order lines"
-                   "will check if product has their internal reference.",
     "author": "Elico Corp",
     "support": "support@elico-corp.com",
     "license": "AGPL-3",
@@ -17,7 +13,7 @@
         "sale",
     ],
     "demo": [
-        "demo/quatation_demo.xml",
+        "demo/quotation_demo.xml",
     ],
     "installable": True
 }
