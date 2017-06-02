@@ -10,12 +10,6 @@ This module extends the Package and Package Types to add extra fields
 related to product conditioning.
 
 
-Usage
-=====
-
-
-
-
 Bug Tracker
 ===========
 
