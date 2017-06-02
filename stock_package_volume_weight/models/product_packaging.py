@@ -9,4 +9,4 @@ class ProductPackaging(models.Model):
     _inherit = "product.packaging"
 
     weight = fields.Float("Weight (KG)")
-    carton_qty = fields.Float("Volume (CBM)")
+    volume = fields.Float("Volume (CBM)")

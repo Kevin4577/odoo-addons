@@ -16,7 +16,7 @@ class TestStockPackageVolumeWeight(common.TransactionCase):
             create({'name': 'Test Product Packaging',
                     'qty': 5,
                     'weight': 10.0,
-                    'carton_qty': 7.0,
+                    'volume': 7.0,
                     })
 
 #        Create Stock Quant Package
@@ -25,13 +25,13 @@ class TestStockPackageVolumeWeight(common.TransactionCase):
                     })
 
     def test_onchange_packaging_id(self):
-        """To set weight,carton_qty fields based on product packaging"""
+        """To set weight,volume fields based on product packaging"""
         self.assertNotEqual(self.product_packaging.weight,
                             self.stock_quant_package.weight)
-        self.assertNotEqual(self.product_packaging.carton_qty,
-                            self.stock_quant_package.carton_qty)
+        self.assertNotEqual(self.product_packaging.volume,
+                            self.stock_quant_package.volume)
         self.stock_quant_package._onchange_packaging_id()
         self.assertEqual(self.product_packaging.weight,
                          self.stock_quant_package.weight)
-        self.assertEqual(self.product_packaging.carton_qty,
-                         self.stock_quant_package.carton_qty)
+        self.assertEqual(self.product_packaging.volume,
+                         self.stock_quant_package.volume)

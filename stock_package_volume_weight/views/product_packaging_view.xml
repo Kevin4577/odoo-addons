@@ -8,7 +8,7 @@
         <field name="arch" type="xml">
             <field name="qty" position="after">
                 <field name="weight"/>
-                <field name="carton_qty"/>
+                <field name="volume"/>
             </field>
         </field>
     </record>
