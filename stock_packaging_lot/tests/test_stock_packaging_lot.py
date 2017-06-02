@@ -5,10 +5,10 @@
 from odoo.tests import common
 
 
-class TestStockProductionLot(common.TransactionCase):
+class TestStockPackagingLot(common.TransactionCase):
 
     def setUp(self):
-        super(TestStockProductionLot, self).setUp()
+        super(TestStockPackagingLot, self).setUp()
         self.stock_production_lot_obj = self.env['stock.production.lot']
         self.product_id = self.env.ref('product.product_product_25').id
         self.stock_production_lot = self.stock_production_lot_obj.create({

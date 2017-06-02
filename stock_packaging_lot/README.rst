@@ -2,9 +2,9 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-==========================
-Stock Sale Product HS Code
-==========================
+===================
+Stock Packaging Lot
+===================
 
 This module extends the model to add extra fields to manage information on sales orders lines regards package.
 

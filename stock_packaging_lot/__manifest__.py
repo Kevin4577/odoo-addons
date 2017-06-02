@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': 'Stock Sale Product HS Code',
+    'name': 'Stock Packaging Lot',
     'version': '10.0.1.0.0',
     'category': 'Stock',
     'summary': """This module extends the model stock production lot to add
