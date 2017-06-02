@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# © 2017 Elico corp (www.elico-corp.com)
+# © 2017 Elico corp (https://www.elico-corp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
@@ -9,7 +9,7 @@
     'summary': """This module extends the model stock production lot to add
     extra fields related to product conditioning.""",
     'author': "Elico Corp",
-    'website': 'www.elico-corp.com',
+    'website': 'https://www.elico-corp.com',
     'license': 'AGPL-3',
     'depends': [
         'stock',
