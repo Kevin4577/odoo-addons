@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_stage_data_1" model="product.stage">
+        <field name="name">stageA</field>
+        <field name="code">1</field>
+    </record>
+
+</odoo>
+
