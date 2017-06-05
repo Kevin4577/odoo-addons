@@ -6,14 +6,12 @@
 Stock Shipping
 ==============
 
-The new module 'Stock Shipping' would allow user to maintain the
-shipping
-detail about
+The new module 'Stock Shipping' would allow user to maintain the shipping
+detail about:
 
 * Source Location
 * Destination Location
 * Shipping Type
-
 
 Usage
 =====
