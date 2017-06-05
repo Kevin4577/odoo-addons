@@ -45,7 +45,7 @@
                 <field name="ship_to" />
                 <field name="ship_by"/>
                 <group expand="0" string="Group By" name="groupby">
-                    <filter string="name" domain="[]"
+                    <filter string="Name" domain="[]"
                             context="{'group_by':'name'}" />
                     <filter string="Ship From" domain="[]"
                             context="{'group_by':'ship_from'}" />

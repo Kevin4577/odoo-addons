@@ -4,4 +4,3 @@
 
 from . import shipping
 from . import stock_picking
-

@@ -6,7 +6,7 @@
     'name': 'Stock Shipping',
     'version': '10.0.1.0.0',
     'category': 'Stock',
-    'summary': """This module specifies Stock Shipping.""",
+    'summary': """This module specifies Stock shipping information.""",
     'author': "Elico corp",
     'website': 'www.elico-corp.com',
     'license': 'AGPL-3',

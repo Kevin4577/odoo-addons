@@ -18,7 +18,7 @@ class Shipping(models.Model):
     ship_by = fields.Char("Shipping Type", help="Shipping Type")
 
     _sql_constraints = [
-        ('name_uniq', 'unique (name)', "The name must be unique !"),
+        ('name_uniq', 'unique (name)', "The name must be unique."),
     ]
 
     @api.multi

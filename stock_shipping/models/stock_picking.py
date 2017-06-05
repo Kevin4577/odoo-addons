@@ -18,4 +18,5 @@ class StockPicking(models.Model):
                                        "know whether this picking order need "
                                        "to be checked by custom. It would "
                                        "just provide the description feature.")
-    ship_info_id = fields.Many2one("shipping", help="Shipping Information")
+    ship_info_id = fields.Many2one("shipping", 'Shipping Information',
+                                   help="Shipping Information")
