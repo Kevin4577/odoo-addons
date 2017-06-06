@@ -2,6 +2,7 @@
 # © 2017 Elico Corp (https://www.elico-corp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo.tests import common
+from odoo.exceptions import ValidationError
 
 
 class TestCommercialInvoiceReport(common.TransactionCase):
@@ -17,6 +18,8 @@ class TestCommercialInvoiceReport(common.TransactionCase):
         self.product_uom_unit = self.env.ref('product.product_uom_unit')
         self.product_4 = self.env.ref('product.product_product_4')
         self.product_5 = self.env.ref('product.product_product_5')
+
+        self.ir_actions_report_xml_model = self.env['ir.actions.report.xml']
 
         self.tax = self.env['account.tax'].\
             create({'name': 'Expense 10%',
@@ -54,18 +57,13 @@ class TestCommercialInvoiceReport(common.TransactionCase):
                      ]
                     })
         self.sale_order.action_confirm()
-        picking = self.stock_picking_model.\
-            search([('sale_id', '=', self.sale_order.id)])
-        self.data = {}
-        self.data['sum_qty'], self.data['sum_amount'], \
-            self.data['product_lines'] =\
-            self.base_sale_export_model.get_product_sale_list(picking.sale_id)
-        self.data['pallet_sum'], gross_weight, net_weight, volume, \
-            package_list = \
-            self.base_sale_export_model.get_product_stock_list(picking)
+        for pick_id in self.sale_order.picking_ids:
+            self.ir_actions_report_xml_model.\
+                render_report(pick_id.ids, 'commercial_invoice', {})
 
     def test_get_product_sale_list(self):
-        self.assertEqual(self.sale_order.amount_total,
-                         self.data['sum_amount'])
-        self.assertEqual(self.data['product_lines'][0]['qty'],
-                         self.data['sum_qty'])
+        with self.assertRaises(ValidationError):
+            for pick_id in self.sale_order.picking_ids:
+                pick_id.sale_id = False
+                self.ir_actions_report_xml_model.\
+                    render_report(pick_id.ids, 'commercial_invoice', {})
