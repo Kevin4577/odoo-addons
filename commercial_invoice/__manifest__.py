@@ -3,11 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     "name": "Commercial Invoice",
-    "summary": """This module would generate commercial invoice report for
-        each sale orders, and supported by the OCA report enginee module named
-        'report_py3o'. Invoice and hs code of each products in this sale order
-        would be provided to display in this report with the specific
-        format.""",
+    "summary": """Commercial invoice report for each sale orders
+        (report_py3o)""",
     "version": "10.0.1.0.0",
     "author": "Elico Corp",
     "support": "support@elico-corp.com",
