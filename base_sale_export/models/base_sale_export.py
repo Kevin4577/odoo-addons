@@ -37,7 +37,7 @@ class BaseSaleExport(models.Model):
         of lines per hs code would be summed.
         Unit price = summary of price total / summary of quantity"""
         product_pricelist_name = so.pricelist_id.currency_id.name
-        product_standard_unit = 'PCS'
+        PRODUCT_STANDARD_UNIT = 'PCS'
         hs_code_list = list(set([product.product_hs_code_id for product in
                                  so.order_line.mapped('product_id')]))
         production_lines = []
@@ -57,7 +57,7 @@ class BaseSaleExport(models.Model):
                 total_price_with_same_hs_code / qty_with_same_hs_code
             production_lines.append({
                 'hs_code': hs_code,
-                'qty': str(qty_with_same_hs_code) + product_standard_unit,
+                'qty': str(qty_with_same_hs_code) + PRODUCT_STANDARD_UNIT,
                 'unit_price': unit_price_with_same_hs_code,
                 'total': total_price_with_same_hs_code,
                 'pricelist': product_pricelist_name,
