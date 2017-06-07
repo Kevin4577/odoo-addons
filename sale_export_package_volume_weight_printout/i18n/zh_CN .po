@@ -1,0 +1,34 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* sale_export_package_volume_weight_printout
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-07 05:20+0000\n"
+"PO-Revision-Date: 2017-06-07 05:20+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sale_export_package_volume_weight_printout
+#: code:addons/sale_export_package_volume_weight_printout/models/sale_export_package_volume_weight_printout.py:46
+#, python-format
+msgid "Please check whether this stock picking was generated from sale order."
+msgstr "确认出库单由销售单生成."
+
+#. module: sale_export_package_volume_weight_printout
+#: code:addons/sale_export_package_volume_weight_printout/models/sale_export_package_volume_weight_printout.py:30
+#, python-format
+msgid "Please confirm your stock picking state."
+msgstr "请确认你的单据状态."
+
+#. module: sale_export_package_volume_weight_printout
+#: model:ir.actions.report.xml,name:sale_export_package_volume_weight_printout.sale_export_package_volume_weight_printout_py3o
+msgid "Sale Export Package Volume Weight Printout"
+msgstr "Sale Export Package Volume Weight Printout"
+
