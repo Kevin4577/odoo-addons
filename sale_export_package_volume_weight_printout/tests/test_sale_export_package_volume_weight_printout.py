@@ -17,7 +17,6 @@ class TestSaleExportPackageVolumeWeightPrintout(common.TransactionCase):
         self.pricelist = self.env.ref('product.list0')
         self.product_uom_unit = self.env.ref('product.product_uom_unit')
         self.product_4 = self.env.ref('product.product_product_4')
-        self.product_5 = self.env.ref('product.product_product_5')
         self.ir_actions_report_xml = self.env['ir.actions.report.xml']
 
         self.tax = self.env['account.tax'].\
@@ -36,7 +35,6 @@ class TestSaleExportPackageVolumeWeightPrintout(common.TransactionCase):
                     'tax_id': self.tax.id})
 
         self.product_4.write({'product_hs_code_id': self.product_hs_code.id})
-        self.product_5.write({'product_hs_code_id': self.product_hs_code.id})
 
         self.sale_order = self.sale_order_model.\
             create({'partner_id': self.partner_id.id,
