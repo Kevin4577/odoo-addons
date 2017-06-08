@@ -92,13 +92,16 @@ class BaseSaleExport(models.Model):
             total_price_with_same_hs_code =\
                 sum([line.price_total for line in
                      order_lines_with_same_hs_code])
-            unit_price_with_same_hs_code =\
-                total_price_with_same_hs_code / qty_with_same_hs_code
+            if qty_with_same_hs_code != 0:
+                unit_price_with_same_hs_code =\
+                    total_price_with_same_hs_code / qty_with_same_hs_code
+                production_lines.append({
+                    'unit_price': '@' + product_pricelist_name +
+                                  str(unit_price_with_same_hs_code),
+                })
             production_lines.append({
                 'hs_code': hs_code,
                 'qty': str(qty_with_same_hs_code) + PRODUCT_STANDARD_UNIT,
-                'unit_price': '@'+product_pricelist_name +
-                              str(unit_price_with_same_hs_code),
                 'total': product_pricelist_name + product_pricelist_sample +
                 str(total_price_with_same_hs_code)
             })
