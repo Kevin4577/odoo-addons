@@ -12,7 +12,7 @@ class IrActionsReportXml(models.Model):
 
     py3o_template_fallback_base = fields.\
         Char(size=128, help='If the user does not provide a template'
-             ' this will be used.')
+             ' this one will be used.')
 
 
 class ReportPy3oMultisheet(models.Model):
@@ -55,8 +55,8 @@ class ReportPy3oMultisheet(models.Model):
                         if index2 >= 9:
                             sheet[row + head_end_line + 1,
                                   index2 + 2 -
-                                  attribute_num_per_line].set_value((
-                                         attr % (index1 * lines_per_sheet +
-                                                 row / lines_per_line)))
+                                  attribute_num_per_line].\
+                                  set_value((attr % (index1 * lines_per_sheet +
+                                                     row / lines_per_line)))
         doc.saveas(template_new_path)
         return True

@@ -32,7 +32,7 @@ Contributors
 
 * Eric Caudal <eric.caudal@elico-corp.com>
 * Victor Martin <victor.martin@elico-corp.com>
-
+* Zhou Hao <zhou.hao@elico-corp.com>
 
 Maintainer
 ----------
