@@ -2,9 +2,17 @@
 # © 2017 Elico Corp (https://www.elico-corp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import api, fields, models
-from ezodf import opendoc
+
 import math
 import copy
+import logging
+
+_logger = logging.getLogger(__name__)
+
+try:
+    from ezodf import opendoc
+except (ImportError, IOError) as err:
+    _logger.debug(err)
 
 
 class IrActionsReportXml(models.Model):

@@ -10,6 +10,12 @@ The new module 'report_py3o_multisheet' would modify the template required by 'r
 It would help to add multi-sheet into the template. Each sheets would repeat the same head and footer
 part of first sheet. The body would be customized with specified list.
 
+Installation
+============
+To install this module, you need to install ezodf python library:
+
+sudo pip install ezodf
+
 
 Bug Tracker
 ===========
