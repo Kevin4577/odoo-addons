@@ -27,8 +27,8 @@ class SaleExportPackageVolumeWeightPrintout(models.Model):
             available_picking_state = ['assigned', 'partially_available',
                                        'done']
             if picking.state not in available_picking_state:
-                raise ValidationError(_('Please confirm your stock picking '
-                                        'state.'))
+                raise ValidationError(_('Please first confirm your stock '
+                                        'picking state.'))
             if picking.sale_id:
                 data['so'] = picking.sale_id
                 data['pallet_sum'], gw_sum_witout_package, data['nw_sum'],\
