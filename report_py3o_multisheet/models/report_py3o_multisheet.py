@@ -54,9 +54,9 @@ class ReportPy3oMultisheet(models.Model):
                             sheet[row + head_end_line, index2].set_value(attr)
                         if index2 >= 9:
                             sheet[row + head_end_line + 1,
-                                  index2 + 2 -
-                                  attribute_num_per_line].\
-                                  set_value((attr % (index1 * lines_per_sheet +
-                                                     row / lines_per_line)))
+                                  index2 + 2 - attribute_num_per_line
+                                  ].set_value((attr %
+                                               (index1 * lines_per_sheet +
+                                                row / lines_per_line)))
         doc.saveas(template_new_path)
         return True

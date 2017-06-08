@@ -12,7 +12,7 @@
     "license": "AGPL-3",
     "website": "https://www.elico-corp.com",
     "external_dependencies": {
-                        'python': ["ezodf"],
+        "python": ["ezodf"],
     },
     "depends": [
         "report_py3o",
