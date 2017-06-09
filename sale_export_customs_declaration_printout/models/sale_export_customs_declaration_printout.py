@@ -5,6 +5,19 @@ from odoo import api, models, _
 from odoo.exceptions import ValidationError
 import os
 
+HEAD_END_LINE = 20
+LINES_PER_SHEET = 8
+ATTRIBUTE_NUM_PER_LINE = 9
+ATTRIBUTE_PER_LINE = ['${data.line%d.index}', '${data.line%d.hs_code.hs_code}',
+                      '${data.line%d.hs_code.name}', '${data.line%d.qty}',
+                      '${objects.ship_info_id.ship_to.country_id.name}',
+                      '${objects.ship_info_id.ship_from.country_id.name}',
+                      '${data.line%d.unit_price}', '${data.line%d.total}',
+                      '${data.line%d.pricelist}',
+                      '${data.line%d.hs_code.cn_name}',
+                      '${data.line%d.hs_code.uom_id.name}',
+                      ]
+
 
 class SaleExportCustomsDeclarationPrintout(models.Model):
 
@@ -13,7 +26,7 @@ class SaleExportCustomsDeclarationPrintout(models.Model):
     def _get_related_path(self, filename):
         """This function would generate the related path of template"""
         if filename:
-            return os.path.dirname(os.path.dirname(__file__))+'/'+filename
+            return os.path.dirname(os.path.dirname(__file__)) + '/' + filename
 
     @api.model
     def render_report(self, res_ids, name, data):
@@ -25,11 +38,11 @@ class SaleExportCustomsDeclarationPrintout(models.Model):
         action_py3o_report = self.search(
             [("report_name", "=", name),
              ("report_type", "=", "py3o")])
-        existed_report =\
+        existed_report = \
             self.env.ref('sale_export_customs_declaration_printout.'
                          'sale_export_customs_declaration_printout_py3o')
         if action_py3o_report and action_py3o_report.id == existed_report.id:
-            template_new =\
+            template_new = \
                 self.env.ref('sale_export_customs_declaration_printout.'
                              'sale_export_customs_declaration_printout_py3o'
                              ).py3o_template_fallback
@@ -41,27 +54,11 @@ class SaleExportCustomsDeclarationPrintout(models.Model):
             template_base_path = self._get_related_path(template_base)
             base_sale_export_obj = self.env['base.sale.export']
             py3o_multi_sheet_obj = self.env['report.py3o.multisheet']
-            head_end_line = 20
-            lines_per_sheet = 8
-            attribute_num_per_line = 9
-            attribute_per_line =\
-                ['${data.line%d.index}',
-                 '${data.line%d.hs_code.hs_code}',
-                 '${data.line%d.hs_code.name}',
-                 '${data.line%d.qty}',
-                 '${objects.ship_info_id.ship_to.country_id.name}',
-                 '${objects.ship_info_id.ship_from.country_id.name}',
-                 '${data.line%d.unit_price}',
-                 '${data.line%d.total}',
-                 '${data.line%d.pricelist}',
-                 '${data.line%d.hs_code.cn_name}',
-                 '${data.line%d.hs_code.uom_id.name}',
-                 ]
             stock_picking = self.env['stock.picking'].browse(res_ids)
             if stock_picking.sale_id:
                 data['so'] = stock_picking.sale_id
-                data['pallet_sum'], gw_sum_witout_package, data['nw_sum'],\
-                    volume, package_list =\
+                data['pallet_sum'], gw_sum_witout_package, data['nw_sum'], \
+                    volume, package_list = \
                     base_sale_export_obj.get_product_stock_list(stock_picking)
                 product_list = base_sale_export_obj.\
                     get_product_sale_list_with_pricelist(stock_picking.sale_id)
@@ -69,11 +66,11 @@ class SaleExportCustomsDeclarationPrintout(models.Model):
                 for index, line in enumerate(product_list):
                     data[('line%d' % (index))] = line
                 py3o_multi_sheet_obj.\
-                    create_new_template(head_end_line, lines_per_sheet,
-                                        total_line_num, attribute_num_per_line,
-                                        attribute_per_line, template_new_path,
+                    create_new_template(HEAD_END_LINE, LINES_PER_SHEET,
+                                        total_line_num, ATTRIBUTE_NUM_PER_LINE,
+                                        ATTRIBUTE_PER_LINE, template_new_path,
                                         template_base_path)
-                package_qty, total_package_gw, package_meas =\
+                package_qty, total_package_gw, package_meas = \
                     base_sale_export_obj.get_package_sum(stock_picking)
                 data['gw_sum'] = gw_sum_witout_package + total_package_gw
             else:
