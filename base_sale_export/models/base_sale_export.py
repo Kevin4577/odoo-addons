@@ -54,12 +54,15 @@ class BaseSaleExport(models.Model):
             total_price_with_same_hs_code =\
                 sum([line.price_total for line in
                      order_lines_with_same_hs_code])
-            unit_price_with_same_hs_code =\
-                total_price_with_same_hs_code / qty_with_same_hs_code
+            if qty_with_same_hs_code != 0:
+                unit_price_with_same_hs_code =\
+                    total_price_with_same_hs_code / qty_with_same_hs_code
+                production_lines.append({
+                    'unit_price': unit_price_with_same_hs_code
+                })
             production_lines.append({
                 'hs_code': hs_code,
                 'qty': str(qty_with_same_hs_code) + PRODUCT_STANDARD_UNIT,
-                'unit_price': unit_price_with_same_hs_code,
                 'total': total_price_with_same_hs_code,
                 'pricelist': product_pricelist_name,
                 'index': index
@@ -158,10 +161,10 @@ class BaseSaleExport(models.Model):
     def get_package_sum(self, sp):
         """This function would return the sum of quantity, gross weight,
         and volume of packages which was used in this stock picking."""
-        quantity_packages = 0
-        total_package_gross_weight = 0
-        total_package_meas = 0
         if sp.pack_operation_product_ids.mapped('result_package_id'):
+            quantity_packages = 0
+            total_package_gross_weight = 0
+            total_package_meas = 0
             package_list = sp.pack_operation_product_ids.mapped(
                 'result_package_id')
             no_repeat_package_ids = list(set(package_list.ids))
@@ -172,7 +175,6 @@ class BaseSaleExport(models.Model):
                                               no_repeat_package_list])
             total_package_meas = sum([package.volume for package in
                                       no_repeat_package_list])
-        else:
-            return False
-        return quantity_packages, total_package_gross_weight,\
-            total_package_meas
+            return quantity_packages, total_package_gross_weight, \
+                total_package_meas
+        return False
