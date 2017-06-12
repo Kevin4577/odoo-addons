@@ -7,11 +7,11 @@ from odoo import api, models
 PRODUCT_STANDARD_UNIT = 'PCS'
 
 
-class BaseSaleExport(models.Model):
+class TradingSale(models.Model):
     """Data model of Base Sale Export."""
 
-    _name = "base.sale.export"
-    _description = "Base Sale Export"
+    _name = "trading.sale"
+    _description = "Trading Sale"
 
     @api.multi
     def get_product_hs_code_list(self, so):

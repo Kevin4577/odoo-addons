@@ -6,7 +6,8 @@
 Base Sale Export
 ================
 
-The new module 'base_sale_export' would provide methods for sale report modules with the data.
+The new module 'trading_sale' would provide methods for sale report modules
+with the data.
 Those methods would be reused by several modules, in order to improve the maintainability of project modules.
 
 
