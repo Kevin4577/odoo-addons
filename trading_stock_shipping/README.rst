@@ -6,8 +6,8 @@
 Stock Shipping
 ==============
 
-The new module 'Stock Shipping' would allow user to maintain the shipping
-detail about:
+The new module 'Trading Stock Shipping' would allow user to maintain the
+shipping detail about:
 
 * Source Location
 * Destination Location

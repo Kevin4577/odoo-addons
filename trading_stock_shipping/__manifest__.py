@@ -3,10 +3,10 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': 'Stock Shipping',
+    'name': 'Trading Stock Shipping',
     'version': '10.0.1.0.0',
     'category': 'Stock',
-    'summary': """This module specifies Stock shipping information.""",
+    'summary': """This module specifies Trading Stock shipping information.""",
     'author': "Elico Corp",
     'website': 'www.elico-corp.com',
     'license': 'AGPL-3',

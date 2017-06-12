@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_shipping_manager,shipping.manager,model_shipping,stock_shipping.group_shipping_manager,1,1,1,1
-access_shipping_user,shipping.user,model_shipping,stock_shipping.group_shipping_user,1,0,0,0
