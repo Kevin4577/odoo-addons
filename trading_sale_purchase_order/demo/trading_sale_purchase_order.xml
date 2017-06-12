@@ -5,24 +5,24 @@
         <field name="url">http://localhost:8765/form</field>
     </record>
 
-    <record id="sale_export_purchase_order_printout_py3o" model="ir.actions.report.xml">
-        <field name="name">Sale Export Purchase Order Printout</field>
+    <record id="trading_sale_purchase_order_py3o" model="ir.actions.report.xml">
+        <field name="name">Trading Sale Purchase Order</field>
         <field name="type">ir.actions.report.xml</field>
         <field name="model">stock.picking</field>
-        <field name="report_name">sale_reporting_purchase_order_report</field>
+        <field name="report_name">trading_sale_purchase_order</field>
         <field name="report_type">py3o</field>
         <field name="py3o_filetype">ods</field>
         <field name="py3o_server_id" ref="local_py3o_server"/>
-        <field name="module">sale_export_purchase_order_printout</field>
+        <field name="module">trading_sale_purchase_order</field>
         <field name="py3o_template_fallback">demo/sale_reporting_purchase_order_template.ods</field>
     </record>
 
-    <record id="sale_export_purchase_order_printout_py3o_print_action" model="ir.values">
+    <record id="trading_sale_purchase_order_py3o_print_action" model="ir.values">
         <field eval="'action'" name="key" />
         <field eval="'client_print_multi'" name="key2" />
         <field name="model">stock.picking</field>
-        <field name="name">Sale Export Purchase Order Printout</field>
-        <field eval="'ir.actions.report.xml,'+str(sale_export_purchase_order_printout_py3o)" name="value"/>
+        <field name="name">Trading Sale Purchase Order</field>
+        <field eval="'ir.actions.report.xml,'+str(trading_sale_purchase_order_py3o)" name="value"/>
     </record>
 
 </odoo>

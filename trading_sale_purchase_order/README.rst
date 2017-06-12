@@ -2,11 +2,11 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-===================================
-Sale Export Purchase Order Printout
-===================================
+===========================
+Trading Sale Purchase Order
+===========================
 
-The new module 'sale_export_purchase_order_printout' would generate the xls or ods report from ods template file.
+The new module 'trading_sale_purchase_order' would generate the xls or ods report from ods template file.
 This report would contain the data about sale order,
 which was required to delivery to the customer with the invoice.
 

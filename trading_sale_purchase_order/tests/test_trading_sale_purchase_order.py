@@ -5,12 +5,10 @@ from odoo.tests import common
 from odoo.exceptions import ValidationError
 
 
-class TestSaleExportPurchaseOrderPrintout(common.TransactionCase):
+class TestTradingSalePurchaseOrder(common.TransactionCase):
 
     def setUp(self):
-        super(TestSaleExportPurchaseOrderPrintout, self).setUp()
-        self.base_sale_export_model = self.env['base.sale.export']
-        self.stock_picking_model = self.env['stock.picking']
+        super(TestTradingSalePurchaseOrder, self).setUp()
         self.sale_order_model = self.env['sale.order']
         self.product_hs_code_model = self.env['product.hs.code']
         self.partner_id = self.env.ref('base.res_partner_2')
@@ -53,10 +51,10 @@ class TestSaleExportPurchaseOrderPrintout(common.TransactionCase):
         for pick in self.sale_order.picking_ids:
             self.ir_actions_report_xml.\
                 render_report(pick.ids,
-                              'sale_reporting_purchase_order_report', {})
+                              'trading_sale_purchase_order', {})
         with self.assertRaises(ValidationError):
             for pick in self.sale_order.picking_ids:
                 pick.sale_id = False
                 self.ir_actions_report_xml.\
                     render_report(pick.ids,
-                                  'sale_reporting_purchase_order_report', {})
+                                  'trading_sale_purchase_order', {})

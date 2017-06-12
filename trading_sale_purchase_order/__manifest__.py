@@ -3,20 +3,20 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': 'Sale Export Purchase Order Printout',
+    'name': 'Trading Sale Purchase Order',
     'version': '10.0.1.0.0',
     'category': 'Stock',
-    'summary': """Sale Export Purchase Order Printout report for each
+    'summary': """Trading Sale Purchase Order report for each
     sale orders (report_py3o).""",
     'author': "Elico Corp",
     'website': 'https://www.elico-corp.com',
     'license': 'AGPL-3',
     'depends': [
-        'base_sale_export',
+        'trading_sale',
         'report_py3o',
     ],
     'demo': [
-        'demo/sale_export_purchase_order_printout.xml',
+        'demo/trading_sale_purchase_order.xml',
     ],
     'installable': True,
     'auto_install': False,

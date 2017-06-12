@@ -2,4 +2,4 @@
 # © 2017 Elico corp (https://www.elico-corp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from . import test_sale_export_purchase_order_printout
+from . import test_trading_sale_purchase_order
