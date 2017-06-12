@@ -10,10 +10,12 @@ class StockQuantPackage(models.Model):
 
     weight = fields.Float("Weight (KG)")
     volume = fields.Float("Volume (CBM)")
+    forwarder_no = fields.Char("Forwarder No")
 
     @api.onchange('packaging_id')
     def _onchange_packaging_id(self):
         """Will catch the packaging related values if change with default
         values for weight and volume."""
-        self.weight = self.packaging_id.weight
-        self.volume = self.packaging_id.volume
+        if self.packaging_id:
+            self.weight = self.packaging_id.weight
+            self.volume = self.packaging_id.volume

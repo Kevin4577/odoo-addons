@@ -22,6 +22,7 @@ class TestStockPackageVolumeWeight(common.TransactionCase):
 #        Create Stock Quant Package
         self.stock_quant_package = self.stock_quant_package_obj.\
             create({'packaging_id': self.product_packaging.id,
+                    'forwarder_no': 3,
                     })
 
     def test_onchange_packaging_id(self):
