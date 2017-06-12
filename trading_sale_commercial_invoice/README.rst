@@ -2,13 +2,14 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-===================
-Commercial Invoice
-===================
+================================
+Trading Sale Commercial Invoice
+================================
 
-This module would generate commercial invoice report for each sale orders, and supported
-by the OCA report enginee module named 'report_py3o'. Invoice and hs code of each products
-in this sale order would be provided to display in this report with the specific format.
+This module would generate Trading Sale Commercial Invoice for each sale orders,
+and supported by the OCA report enginee module named 'report_py3o'. Invoice and
+hs code of each products in this sale order would be provided to display in this
+report with the specific format.
 
 Usage
 =====

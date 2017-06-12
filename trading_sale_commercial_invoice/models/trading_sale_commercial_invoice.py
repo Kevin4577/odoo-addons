@@ -5,7 +5,7 @@ from odoo import api, models, _
 from odoo.exceptions import ValidationError
 
 
-class CommercialInvoiceReport(models.Model):
+class TradingSaleCommercialInvoice(models.Model):
 
     _inherit = 'ir.actions.report.xml'
 
@@ -14,23 +14,23 @@ class CommercialInvoiceReport(models.Model):
         action_py3o_report = self.search(
             [("report_name", "=", name),
              ("report_type", "=", "py3o")])
-        existed_report = self.env.ref('commercial_invoice.'
-                                      'commercial_invoice_report_py3o')
+        existed_report = self.env.ref('trading_sale_commercial_invoice.'
+                                      'trading_sale_commercial_invoice_py3o')
         if action_py3o_report and action_py3o_report.id == existed_report.id:
-            base_sale_export_obj = self.env['base.sale.export']
+            trading_sale_obj = self.env['trading.sale']
             stock_picking = self.env['stock.picking'].browse(res_ids)
             if stock_picking.sale_id:
                 data['so'] = stock_picking.sale_id
                 data['sum_qty'], data['sum_amount'], data['product_lines'] =\
-                    base_sale_export_obj.\
+                    trading_sale_obj.\
                     get_product_sale_list(stock_picking.sale_id)
                 data['pallet_sum'], gross_weight, net_weight, volume,\
                     package_list =\
-                    base_sale_export_obj.\
+                    trading_sale_obj.\
                     get_product_stock_list(stock_picking)
             else:
                 raise ValidationError(_('Please check whether this stock '
                                         'picking was generated from sale'
                                         ' order.'))
-        return super(CommercialInvoiceReport, self).render_report(
+        return super(TradingSaleCommercialInvoice, self).render_report(
             res_ids, name, data)

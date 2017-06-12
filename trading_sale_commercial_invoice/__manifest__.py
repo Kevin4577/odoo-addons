@@ -2,8 +2,8 @@
 # © 2017 Elico Corp (https://www.elico-corp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
-    "name": "Commercial Invoice",
-    "summary": """Commercial invoice report for each sale orders
+    "name": "Trading Sale Commercial Invoice",
+    "summary": """Trading Sale Commercial Invoice report for each sale orders
         (report_py3o)""",
     "version": "10.0.1.0.0",
     "author": "Elico Corp",
@@ -11,11 +11,11 @@
     "license": "AGPL-3",
     "website": "https://www.elico-corp.com",
     "depends": [
-        "base_sale_export",
+        "trading_sale",
         "report_py3o",
     ],
     "data": [
-        "demo/commercial_invoice_report.xml",
+        "demo/trading_sale_commercial_invoice.xml",
     ],
     "installable": True,
 }
