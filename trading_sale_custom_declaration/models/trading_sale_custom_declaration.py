@@ -19,7 +19,7 @@ ATTRIBUTE_PER_LINE = ['${data.line%d.index}', '${data.line%d.hs_code.hs_code}',
                       ]
 
 
-class SaleExportCustomsDeclarationPrintout(models.Model):
+class TradingSaleCustomDeclaration(models.Model):
 
     _inherit = 'ir.actions.report.xml'
 
@@ -34,33 +34,32 @@ class SaleExportCustomsDeclarationPrintout(models.Model):
         sale order of specific stock picking, and sum the product quantity
         and price group by same hs code, in order to render the ods template
         with necessary data."""
-
         action_py3o_report = self.search(
             [("report_name", "=", name),
              ("report_type", "=", "py3o")])
         existed_report = \
-            self.env.ref('sale_export_customs_declaration_printout.'
-                         'sale_export_customs_declaration_printout_py3o')
+            self.env.ref('trading_sale_custom_declaration.'
+                         'trading_sale_custom_declaration_py3o')
         if action_py3o_report and action_py3o_report.id == existed_report.id:
             template_new = \
-                self.env.ref('sale_export_customs_declaration_printout.'
-                             'sale_export_customs_declaration_printout_py3o'
+                self.env.ref('trading_sale_custom_declaration.'
+                             'trading_sale_custom_declaration_py3o'
                              ).py3o_template_fallback
             template_new_path = self._get_related_path(template_new)
             template_base = \
-                self.env.ref('sale_export_customs_declaration_printout.'
-                             'sale_export_customs_declaration_printout_py3o'
+                self.env.ref('trading_sale_custom_declaration.'
+                             'trading_sale_custom_declaration_py3o'
                              ).py3o_template_fallback_base
             template_base_path = self._get_related_path(template_base)
-            base_sale_export_obj = self.env['base.sale.export']
+            trading_sale_obj = self.env['trading.sale']
             py3o_multi_sheet_obj = self.env['report.py3o.multisheet']
             stock_picking = self.env['stock.picking'].browse(res_ids)
             if stock_picking.sale_id:
                 data['so'] = stock_picking.sale_id
                 data['pallet_sum'], gw_sum_witout_package, data['nw_sum'], \
                     volume, package_list = \
-                    base_sale_export_obj.get_product_stock_list(stock_picking)
-                product_list = base_sale_export_obj.\
+                    trading_sale_obj.get_product_stock_list(stock_picking)
+                product_list = trading_sale_obj.\
                     get_product_sale_list_with_pricelist(stock_picking.sale_id)
                 total_line_num = len(product_list)
                 for index, line in enumerate(product_list):
@@ -71,11 +70,11 @@ class SaleExportCustomsDeclarationPrintout(models.Model):
                                         ATTRIBUTE_PER_LINE, template_new_path,
                                         template_base_path)
                 package_qty, total_package_gw, package_meas = \
-                    base_sale_export_obj.get_package_sum(stock_picking)
+                    trading_sale_obj.get_package_sum(stock_picking)
                 data['gw_sum'] = gw_sum_witout_package + total_package_gw
             else:
                 raise ValidationError(_('Please check whether this stock '
                                         'picking was generated from'
                                         ' sale order.'))
-        return super(SaleExportCustomsDeclarationPrintout, self
+        return super(TradingSaleCustomDeclaration, self
                      ).render_report(res_ids, name, data)

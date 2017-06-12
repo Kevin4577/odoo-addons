@@ -2,13 +2,14 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-========================================
-Sale Export Customs Declaration Printout
-========================================
+================================
+Trading Sale Custom Declaration
+================================
 
-The new module 'sale_export_customs_declaration_printout' would generate the xls or ods
-report from ods template file. This report would contain the data about sale order,
-which was required to delivery to the customer with the invoice.
+The new module 'trading_sale_custom_declaration' would generate the xls
+or ods report from ods template file. This report would contain the data
+about sale order, which was required to delivery to the customer with the
+invoice.
 
 
 

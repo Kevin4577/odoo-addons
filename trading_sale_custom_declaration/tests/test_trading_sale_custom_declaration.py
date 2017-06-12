@@ -5,12 +5,11 @@ from odoo.tests import common
 from odoo.exceptions import ValidationError
 
 
-class TestSaleExportCustomsDeclarationPrintout(common.TransactionCase):
+class TestTradingSaleCustomDeclaration(common.TransactionCase):
 
     def setUp(self):
-        super(TestSaleExportCustomsDeclarationPrintout, self).setUp()
+        super(TestTradingSaleCustomDeclaration, self).setUp()
         self.ir_actions_report_xml_model = self.env['ir.actions.report.xml']
-        self.base_sale_export_model = self.env['base.sale.export']
         self.stock_picking_model = self.env['stock.picking']
         self.sale_order_model = self.env['sale.order']
         self.product_hs_code_model = self.env['product.hs.code']
@@ -59,11 +58,11 @@ class TestSaleExportCustomsDeclarationPrintout(common.TransactionCase):
             pick.action_done()
             self.ir_actions_report_xml_model.\
                 render_report(pick.ids,
-                              'Sale_Export_Customs_Declaration_Printout', {})
+                              'trading_sale_custom_declaration', {})
         with self.assertRaises(ValidationError):
             for pick in self.sale_order.picking_ids:
                 pick.sale_id = False
                 self.ir_actions_report_xml_model.\
                     render_report(pick.ids,
-                                  'Sale_Export_Customs_Declaration_Printout',
+                                  'trading_sale_custom_declaration',
                                   {})
