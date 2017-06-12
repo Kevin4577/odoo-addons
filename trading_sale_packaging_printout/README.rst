@@ -2,13 +2,13 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-==========================================
-Sale Export Package Volume Weight Printout
-==========================================
+===============================
+Trading Sale Packaging Printout
+===============================
 
-The new module 'sale_export_package_volume_weight_printout' would generate the xls or
-ods report from ods template file. This report would contain the data about stock picking,
-which was generated from sale order, and packed with specific packages.
+The new module 'trading_sale_packaging_printout' would generate the xls or ods report
+from ods template file. This report would contain the data about stock picking,
+which was generated from sale order, and packed with specific packages
 
 
 Usage

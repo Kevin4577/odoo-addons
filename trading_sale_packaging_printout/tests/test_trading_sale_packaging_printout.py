@@ -5,12 +5,10 @@ from odoo.tests import common
 from odoo.exceptions import ValidationError
 
 
-class TestSaleExportPackageVolumeWeightPrintout(common.TransactionCase):
+class TestTradingSalePackagingPrintout(common.TransactionCase):
 
     def setUp(self):
-        super(TestSaleExportPackageVolumeWeightPrintout, self).setUp()
-        self.base_sale_export_model = self.env['base.sale.export']
-        self.stock_picking_model = self.env['stock.picking']
+        super(TestTradingSalePackagingPrintout, self).setUp()
         self.sale_order_model = self.env['sale.order']
         self.product_hs_code_model = self.env['product.hs.code']
         self.partner_id = self.env.ref('base.res_partner_2')

@@ -6,7 +6,7 @@ from odoo import api, models, _
 from odoo.exceptions import ValidationError
 
 
-class SaleExportPackageVolumeWeightPrintout(models.Model):
+class TradingSalePackagingPrintout(models.Model):
     _inherit = "ir.actions.report.xml"
 
     @api.model
@@ -19,10 +19,10 @@ class SaleExportPackageVolumeWeightPrintout(models.Model):
         action_py3o_report = self.search([("report_name", "=", name),
                                           ("report_type", "=", "py3o")])
         existed_report =\
-            self.env.ref('sale_export_package_volume_weight_printout.'
-                         'sale_export_package_volume_weight_printout_py3o')
+            self.env.ref('trading_sale_packaging_printout.'
+                         'trading_sale_packaging_printout_py3o')
         if action_py3o_report and action_py3o_report.id == existed_report.id:
-            base_sale_report_obj = self.env['base.sale.export']
+            trading_sale_obj = self.env['trading.sale']
             picking = self.env['stock.picking'].browse(res_ids)
             available_picking_state = ['assigned', 'partially_available',
                                        'done']
@@ -33,10 +33,10 @@ class SaleExportPackageVolumeWeightPrintout(models.Model):
                 data['so'] = picking.sale_id
                 data['pallet_sum'], gw_sum_witout_package, data['nw_sum'],\
                     meas_sum_witout_package, data['product_lines'] =\
-                    base_sale_report_obj.get_product_stock_list(picking)
+                    trading_sale_obj.get_product_stock_list(picking)
                 data['qty_package'], data['total_package_gw'],\
                     data['total_package_meas'] =\
-                    base_sale_report_obj.get_package_sum(picking)
+                    trading_sale_obj.get_package_sum(picking)
                 data['gw_sum'] =\
                     gw_sum_witout_package + data['total_package_gw']
                 data['meas_sum'] =\
@@ -45,5 +45,5 @@ class SaleExportPackageVolumeWeightPrintout(models.Model):
                 raise ValidationError(_('Please check whether this stock '
                                         'picking was generated from sale '
                                         'order.'))
-        return super(SaleExportPackageVolumeWeightPrintout,
+        return super(TradingSalePackagingPrintout,
                      self).render_report(res_ids, name, data)
