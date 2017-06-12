@@ -43,6 +43,7 @@ class TradingSale(models.Model):
                                  so.order_line.mapped('product_id')]))
         production_lines = []
         for index, hs_code in enumerate(hs_code_list):
+            production_dict = {}
             if not hs_code:
                 continue
             order_lines_with_same_hs_code =\
@@ -57,16 +58,17 @@ class TradingSale(models.Model):
             if qty_with_same_hs_code != 0:
                 unit_price_with_same_hs_code =\
                     total_price_with_same_hs_code / qty_with_same_hs_code
-                production_lines.append({
+                production_dict.update({
                     'unit_price': unit_price_with_same_hs_code
                 })
-            production_lines.append({
+            production_dict.update({
                 'hs_code': hs_code,
                 'qty': str(qty_with_same_hs_code) + PRODUCT_STANDARD_UNIT,
                 'total': total_price_with_same_hs_code,
                 'pricelist': product_pricelist_name,
                 'index': index
             })
+            production_lines.append(production_dict)
         return production_lines
 
     @api.multi
@@ -85,6 +87,7 @@ class TradingSale(models.Model):
         sum_qty = 0
         sum_amount = 0
         for hs_code in hs_code_list:
+            production_dict = {}
             if not hs_code:
                 continue
             order_lines_with_same_hs_code =\
@@ -98,16 +101,17 @@ class TradingSale(models.Model):
             if qty_with_same_hs_code != 0:
                 unit_price_with_same_hs_code =\
                     total_price_with_same_hs_code / qty_with_same_hs_code
-                production_lines.append({
+                production_dict.update({
                     'unit_price': '@' + product_pricelist_name +
-                                  str(unit_price_with_same_hs_code),
+                                  str(unit_price_with_same_hs_code)
                 })
-            production_lines.append({
+            production_dict.update({
                 'hs_code': hs_code,
                 'qty': str(qty_with_same_hs_code) + PRODUCT_STANDARD_UNIT,
                 'total': product_pricelist_name + product_pricelist_sample +
                 str(total_price_with_same_hs_code)
             })
+            production_lines.append(production_dict)
             sum_qty += qty_with_same_hs_code
             sum_amount += total_price_with_same_hs_code
         return sum_qty, sum_amount, production_lines
