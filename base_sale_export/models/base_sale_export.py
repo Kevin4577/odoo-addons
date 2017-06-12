@@ -177,4 +177,4 @@ class BaseSaleExport(models.Model):
                                       no_repeat_package_list])
             return quantity_packages, total_package_gross_weight, \
                 total_package_meas
-        return False
+        return 0, 0, 0
