@@ -6,7 +6,8 @@
     'name': 'Trading Stock',
     'version': '10.0.1.0.0',
     'category': 'Stock',
-    'summary': """The new module 'trading_stock' would provide custom management about custom check or so on.""",
+    'summary': """The new module 'trading_stock' would provide custom
+    management about custom check or so on.""",
     'author': "Elico corp",
     'website': 'www.elico-corp.com',
     'license': 'AGPL-3',
