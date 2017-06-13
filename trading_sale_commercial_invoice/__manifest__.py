@@ -15,7 +15,7 @@
         "report_py3o",
     ],
     "data": [
-        "demo/trading_sale_commercial_invoice.xml",
+        "report/trading_sale_commercial_invoice.xml",
     ],
     "installable": True,
 }
