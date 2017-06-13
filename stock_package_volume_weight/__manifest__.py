@@ -5,7 +5,7 @@
     "name": "Stock Package Volume Weight",
     "version": "10.0.1.0.0",
     "summary": """This module extends the Package and Package Types to
-                    add extra fields related to product conditioning.""",
+                  add extra fields related to product conditioning.""",
     "author": "Elico Corp",
     "support": "support@elico-corp.com",
     "license": "AGPL-3",

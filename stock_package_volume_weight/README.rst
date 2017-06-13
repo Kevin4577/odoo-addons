@@ -9,7 +9,6 @@ Stock Package Volume Weight
 This module extends the Package and Package Types to add extra fields
 related to product conditioning.
 
-
 Bug Tracker
 ===========
 
