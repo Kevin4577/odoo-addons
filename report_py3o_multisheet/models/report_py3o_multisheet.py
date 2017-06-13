@@ -50,11 +50,11 @@ class ReportPy3oMultisheet(models.Model):
         doc = opendoc(template_base_path)
         sheets = doc.sheets
         sheet = sheets[0]
-        for sheet_num in range(add_sheet_num):
+        for index in range(add_sheet_num):
             sheet_new = copy.deepcopy(sheet)
             sheets.append(sheet_new)
         for sheet_index, sheet in enumerate(sheets):
-            sheet.insert_rows(sheet_num=head_end_line,
+            sheet.insert_rows(index=head_end_line,
                               count=lines_per_sheet * lines_per_line)
             for row in range(0, lines_per_sheet * lines_per_line,
                              lines_per_line):
