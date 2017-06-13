@@ -35,8 +35,8 @@ class ReportPy3oMultisheet(models.Model):
                             template_base_path):
         """This function would generate the new template from base one. It
         would duplicate the head and footer of first sheet into new sheets,
-        and make the body could be customized by user."""
-        """The whole template should be rendered with the selected delivery
+        and make the body could be customized by user.
+        The whole template should be rendered with the selected delivery
         order data. 'Attribute per line' should be the list of several fields
         of each stock move lines of this delivery order. 4,5 should be the
         index of attribute_per_line to store fields, which would get data from
