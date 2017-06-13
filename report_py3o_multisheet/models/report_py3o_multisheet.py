@@ -36,6 +36,13 @@ class ReportPy3oMultisheet(models.Model):
         """This function would generate the new template from base one. It
         would duplicate the head and footer of first sheet into new sheets,
         and make the body could be customized by user."""
+        """The whole template should be rendered with the selected delivery
+        order data. 'Attribute per line' should be the list of several fields
+        of each stock move lines of this delivery order. 4,5 should be the
+        index of attribute_per_line to store fields, which would get data from
+        delivery order, not from the specific move line. 9 should be the index
+        of attribute_per_line, which should start with the second line of
+        template."""
         lines_per_line =\
             int(math.ceil(len(attribute_per_line
                               ) / float(attribute_num_per_line)))
@@ -43,28 +50,29 @@ class ReportPy3oMultisheet(models.Model):
         doc = opendoc(template_base_path)
         sheets = doc.sheets
         sheet = sheets[0]
-        for index in range(add_sheet_num):
+        for sheet_num in range(add_sheet_num):
             sheet_new = copy.deepcopy(sheet)
             sheets.append(sheet_new)
-        for index1, sheet in enumerate(sheets):
-            sheet.insert_rows(index=head_end_line,
+        for sheet_index, sheet in enumerate(sheets):
+            sheet.insert_rows(sheet_num=head_end_line,
                               count=lines_per_sheet * lines_per_line)
             for row in range(0, lines_per_sheet * lines_per_line,
                              lines_per_line):
-                for index2, attr in enumerate(attribute_per_line):
-                    if (index1 * lines_per_sheet + row /
+                for attr_index, attr in enumerate(attribute_per_line):
+                    if (sheet_index * lines_per_sheet + row /
                             lines_per_line < total_line_num):
-                        if index2 < 4 or 5 < index2 < 9:
-                            sheet[row + head_end_line, index2].set_value((
-                                attr % (index1 * lines_per_sheet + row /
+                        if attr_index < 4 or 5 < attr_index < 9:
+                            sheet[row + head_end_line, attr_index].set_value((
+                                attr % (sheet_index * lines_per_sheet + row /
                                         lines_per_line)))
-                        if index2 in [4, 5]:
-                            sheet[row + head_end_line, index2].set_value(attr)
-                        if index2 >= 9:
+                        if attr_index in [4, 5]:
+                            sheet[row + head_end_line, attr_index].\
+                                set_value(attr)
+                        if attr_index >= 9:
                             sheet[row + head_end_line + 1,
-                                  index2 + 2 - attribute_num_per_line
+                                  attr_index + 2 - attribute_num_per_line
                                   ].set_value((attr %
-                                               (index1 * lines_per_sheet +
+                                               (sheet_index * lines_per_sheet +
                                                 row / lines_per_line)))
         doc.saveas(template_new_path)
         return True
