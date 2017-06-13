@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="stock_picking_form_view_inherit" model="ir.ui.view">
+        <field name="name">product.template.only.form.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <field name="location_dest_id" position="after">
+                <field name="sale_id" invisible="1"/>
+                <field name="custom_check"
+                       attrs="{'invisible': [('sale_id', '=', False)],
+                               'required': [('sale_id', '=', True)]}"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
