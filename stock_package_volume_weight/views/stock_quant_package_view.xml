@@ -4,7 +4,7 @@
     <record id="stock_quant_package_form_view" model="ir.ui.view">
         <field name="name">Stock Quant Package Form</field>
         <field name="model">stock.quant.package</field>
-        <field name="inherit_id" ref="stock.view_quant_package_form"></field>
+        <field name="inherit_id" ref="stock.view_quant_package_form"/>
         <field name="arch" type="xml">
             <field name="packaging_id" position="after">
                 <field name="forwarder_no"/>
