@@ -15,7 +15,7 @@
         "report_py3o_multisheet",
     ],
     "data": [
-        "demo/trading_sale_custom_declaration.xml",
+        "report/trading_sale_custom_declaration.xml",
     ],
     "installable": True,
 }

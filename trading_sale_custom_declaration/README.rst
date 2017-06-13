@@ -11,9 +11,6 @@ or ods report from ods template file. This report would contain the data
 about sale order, which was required to delivery to the customer with the
 invoice.
 
-
-
-
 Bug Tracker
 ===========
 
