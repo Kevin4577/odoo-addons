@@ -15,7 +15,6 @@ class SaleOrder(models.Model):
         """
         action_confirm method will check whether customer and product has or
         not internal reference number.
-        :return:
         """
         so_cnt = self.search_count([('id', 'in', self.ids),
                                     ('partner_id.ref', '=', False)])
