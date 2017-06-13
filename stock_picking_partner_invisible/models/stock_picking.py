@@ -14,5 +14,6 @@ class StockPicking(models.Model):
 
     @api.multi
     def compute_user_group(self):
-        self.user_group = self.env.user.has_group(
-            'stock_picking_partner_invisible.partner_invisible')
+        for rec in self:
+            rec.user_group = self.env.user.has_group(
+                'stock_picking_partner_invisible.partner_invisible')
