@@ -22,7 +22,8 @@
         <field eval="'client_print_multi'" name="key2" />
         <field name="model">stock.picking</field>
         <field name="name">Trading Sale Commercial Invoice</field>
-        <field eval="'ir.actions.report.xml,'+str(trading_sale_commercial_invoice_py3o)" name="value"/>
+        <field eval="'ir.actions.report.xml,' + str(trading_sale_commercial_invoice_py3o)"
+               name="value"/>
     </record>
 
 </odoo>
