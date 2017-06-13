@@ -166,9 +166,6 @@ class TradingSale(models.Model):
         """This function would return the sum of quantity, gross weight,
         and volume of packages which was used in this stock picking."""
         if sp.pack_operation_product_ids.mapped('result_package_id'):
-            quantity_packages = 0
-            total_package_gross_weight = 0
-            total_package_meas = 0
             package_list = sp.pack_operation_product_ids.mapped(
                 'result_package_id')
             no_repeat_package_ids = list(set(package_list.ids))
