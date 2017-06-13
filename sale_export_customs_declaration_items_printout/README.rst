@@ -7,11 +7,12 @@ Sale Export Customs Declaration Items Printout
 ==============================================
 
 The new module 'sale_export_customs_declaration_items_printout would generate
-the xls or ods report from ods template file. This report would display the
-reporting element of each products. Those products would be delivered by
-stock picking order, which was generated
-from sale order
+the .xls or .ods report from ods template file.
 
+This report would display the reporting element of each products.
+
+Those products would be delivered by stock picking order, which was
+generated from sale order.
 
 Usage
 =====
@@ -19,7 +20,6 @@ Usage
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.my-odoo.com/runbot/63/10.0
-
 
 Bug Tracker
 ===========
@@ -42,7 +42,6 @@ Contributors
 
 * Eric Caudal <eric.caudal@elico-corp.com>
 * Victor Martin <victor.martin@elico-corp.com>
-
 
 Maintainer
 ----------

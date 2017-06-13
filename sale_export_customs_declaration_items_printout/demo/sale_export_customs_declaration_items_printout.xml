@@ -15,12 +15,13 @@
         <field name="module">sale_export_customs_declaration_items_printout</field>
         <field name="py3o_template_fallback">demo/sale_reporting_elements_template.ods</field>
     </record>
-    
+
     <record id="sale_export_customs_declaration_items_printout_py3o_print_action" model="ir.values">
         <field eval="'action'" name="key" />
         <field eval="'client_print_multi'" name="key2" />
         <field name="model">stock.picking</field>
         <field name="name">Sale Export Customs Declaration Items Printout</field>
-        <field eval="'ir.actions.report.xml,'+str(sale_export_customs_declaration_items_printout_py3o)" name="value"/>
+        <field eval="'ir.actions.report.xml,'+ str(sale_export_customs_declaration_items_printout_py3o)"
+               name="value"/>
     </record>
 </odoo>
