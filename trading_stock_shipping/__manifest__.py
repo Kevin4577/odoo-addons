@@ -11,8 +11,7 @@
     'website': 'www.elico-corp.com',
     'license': 'AGPL-3',
     'depends': [
-        'sale_stock',
-        'stock'
+        'trading_stock',
     ],
     'data': [
         'security/stock_security.xml',
