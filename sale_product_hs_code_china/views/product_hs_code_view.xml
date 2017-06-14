@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_product_hs_code_tree_inherit" model="ir.ui.view">
+        <field name="name">product.hs.code.tree.inherit</field>
+        <field name="model">product.hs.code</field>
+        <field name="inherit_id" ref="sale_product_hs_code.view_product_hs_code_tree" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="cn_name" />
+                <field name="tax_id" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_product_hs_code_form_inherit" model="ir.ui.view">
+        <field name="name">product.hs.code.form.inherit</field>
+        <field name="model">product.hs.code</field>
+        <field name="inherit_id" ref="sale_product_hs_code.view_product_hs_code_form" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="tax_id" required="1"/>
+                <field name="cn_name" required="1"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_product_hs_code_filter_inherit" model="ir.ui.view">
+        <field name="name">product.hs.code.search.inherit</field>
+        <field name="model">product.hs.code</field>
+        <field name="inherit_id" ref="sale_product_hs_code.view_product_hs_code_filter" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="cn_name" />
+                <field name="tax_id" />
+            </field>
+            <xpath expr="//group[@name='groupby']" position="after">
+                <filter string="Rebate Rate" domain="[]"
+                        context="{'group_by': 'tax_id'}" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

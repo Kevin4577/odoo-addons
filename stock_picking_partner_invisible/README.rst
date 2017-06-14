@@ -2,11 +2,13 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-====================
-Sale Product HS Code
-====================
+===============================
+Stock Picking Partner Invisible
+===============================
 
-This module creates the master data models for HS code necessary for custom reports.
+On the standard Delivery Order for SO the user can check the related partner
+field to check detailed information. That customer information should be not
+not be visible by all Inventory users.
 
 
 Usage
@@ -38,7 +40,7 @@ Contributors
 
 * Eric Caudal <eric.caudal@elico-corp.com>
 * Victor Martin <victor.martin@elico-corp.com>
-
+* Zhou Hao <zhou.hao@elico-corp.com>
 
 Maintainer
 ----------
