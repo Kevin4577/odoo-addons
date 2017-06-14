@@ -8,7 +8,7 @@
         <field name="arch" type="xml">
             <field name="custom_check" position="after">
                 <field name="ship_info_id"
-                       attrs="{'invisible': [('sale_id', '=', False)],
+                       attrs="{'invisible': ['|', ('sale_id', '=', False), ('custom_check', '=', False)],
                                'required': [('sale_id', '=', True)]}"/>
             </field>
         </field>
