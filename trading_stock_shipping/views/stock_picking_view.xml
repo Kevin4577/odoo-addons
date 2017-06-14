@@ -6,7 +6,11 @@
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.view_picking_form" />
         <field name="arch" type="xml">
-            <field name="custom_check" position="after">
+            <field name="location_dest_id" position="after">
+                <field name="sale_id" invisible="1"/>
+                <field name="custom_check"
+                       attrs="{'invisible': [('sale_id', '=', False)],
+                               'required': [('sale_id', '=', True)]}"/>
                 <field name="ship_info_id"
                        attrs="{'invisible': ['|', ('sale_id', '=', False), ('custom_check', '=', False)],
                                'required': [('sale_id', '=', True)]}"/>

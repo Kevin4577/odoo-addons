@@ -10,6 +10,9 @@ class StockPicking(models.Model):
     _inherit = "stock.picking"
     _description = "Stock Picking"
 
+    custom_check = fields.Boolean("Custom Check",
+                                  help="Mark this if customs need to check"
+                                       "the stock picking")
     ship_info_id = fields.Many2one("shipping", 'Shipping Information',
                                    help="Shipping Information")
 
