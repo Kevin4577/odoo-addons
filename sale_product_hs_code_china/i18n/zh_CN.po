@@ -23,7 +23,7 @@ msgstr "中文名称"
 #. module: sale_product_hs_code_china
 #: model:ir.model.fields,field_description:sale_product_hs_code_china.field_product_hs_code_cn_name
 msgid "Name (CN)"
-msgstr "报关中文名称"
+msgstr "中文名称"
 
 #. module: sale_product_hs_code_china
 #: model:ir.model,name:sale_product_hs_code_china.model_product_hs_code
