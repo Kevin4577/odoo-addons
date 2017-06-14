@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock_picking_partner_invisible.partner_invisible" model="res.groups">
+        <field name="name">Partner Invisible</field>
+    </record>
+</odoo>

@@ -2,11 +2,19 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-====================
-Sale Product HS Code
-====================
+=============
+Product Class
+=============
 
-This module creates the master data models for HS code necessary for custom reports.
+The new module 'Product Class' would be required to add four new models: 
+
+* Product Stage,
+* Product Line,
+* Product Class,
+* Product Family.
+
+They should be related to the product template model,
+in order to provide specific code to generate product code based on the selection of user.
 
 
 Usage

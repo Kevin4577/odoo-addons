@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_template_form_view_inherit" model="ir.ui.view">
+        <field name="name">product.template.form.view.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view" />
+        <field name="arch" type="xml">
+            <field name="categ_id" position="after">
+                <field name="customer_product_code" />
+                <field name="product_ordering_code" />
+                <field name="rd_product_code" />
+                <field name="rd_drawing_number" />
+            </field>
+            <xpath expr="//page[@name='general_information']" position="inside">
+                <group string="Product Class" col="4">
+                    <field name="product_stage_id" nolabel="1" options="{'no_open': True}" style="padding: 0px 0px 2px 8px !important;"/>
+                    <field name="product_line_id" nolabel="1" options="{'no_open': True}"/>
+                    <field name="product_class_id" nolabel="1" options="{'no_open': True}"/>
+                    <field name="product_family_id" nolabel="1" options="{'no_open': True}"/>
+                </group>
+                <button name="generate_product_code"
+                        type="object" class="oe_stat_button"
+                        string="Generate Product Code"
+                        attrs="{'invisible':[('default_code','!=',False)]}"
+                        groups="product_class.group_product_code_manager"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

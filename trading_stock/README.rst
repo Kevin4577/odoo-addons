@@ -2,20 +2,12 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-====================
-Sale Product HS Code
-====================
+=============
+Trading Stock
+=============
 
-This module creates the master data models for HS code necessary for custom reports.
-
-
-Usage
-=====
-
-.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
-   :alt: Try me on Runbot
-   :target: https://runbot.my-odoo.com/runbot/63/10.0
-
+This module gathers all common methods and models necessary for other
+trading modules related to stock management.
 
 Bug Tracker
 ===========
@@ -38,7 +30,7 @@ Contributors
 
 * Eric Caudal <eric.caudal@elico-corp.com>
 * Victor Martin <victor.martin@elico-corp.com>
-
+* Zhou Hao <zhou.hao@elico-corp.com>
 
 Maintainer
 ----------

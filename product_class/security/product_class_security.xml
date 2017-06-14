@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="group_product_code_user" model="res.groups">
+        <field name="name">Product Code User</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_product_code_manager" model="res.groups">
+        <field name="name">Product Code Manager</field>
+        <field name="implied_ids" eval="[(4, ref('product_class.group_product_code_user'))]"/>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+
+</odoo>
