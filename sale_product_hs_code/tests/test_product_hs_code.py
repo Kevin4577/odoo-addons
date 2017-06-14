@@ -23,7 +23,3 @@ class TestProductHSCode(common.TransactionCase):
                 'hs_code': 'HSCode1',
                 'name': 'HSCode1',
             })
-
-    def test_copy(self):
-        "Test to reset product hs code"
-        self.prod_hs_code.copy()
