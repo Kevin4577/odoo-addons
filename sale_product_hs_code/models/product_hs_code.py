@@ -24,3 +24,12 @@ class ProductHsCode(models.Model):
                                        ('id', '!=', self.id)])
             if hs_code_rec:
                 raise ValidationError(_("The HS Code must be unique."))
+
+    @api.multi
+    def copy(self, default=None):
+        """
+        Overridden copy method to reset HS Code value
+        """
+        default = default or {}
+        default.update({'hs_code': False})
+        return super(ProductHsCode, self).copy(default)

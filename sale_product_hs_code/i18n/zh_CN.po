@@ -74,7 +74,7 @@ msgstr "报关单位"
 #. module: sale_product_hs_code
 #: model:ir.model.fields,field_description:sale_product_hs_code.field_product_hs_code_name
 msgid "Name"
-msgstr "英文名称"
+msgstr "报告英文名称"
 
 #. module: sale_product_hs_code
 #: model:ir.actions.act_window,name:sale_product_hs_code.product_hs_code_action_form
