@@ -6,12 +6,8 @@
 Trading Stock
 =============
 
-The new module 'trading_stock' would provide custom management about custom
-check or so on.
-
-Usage
-=====
-
+This module gathers all common methods and models necessary for other
+trading modules related to stock management.
 
 Bug Tracker
 ===========
