@@ -13,7 +13,7 @@
                                'required': [('sale_id', '=', True)]}"/>
                 <field name="ship_info_id"
                        attrs="{'invisible': ['|', ('sale_id', '=', False), ('custom_check', '=', False)],
-                               'required': [('sale_id', '=', True)]}"/>
+                               'required': [('sale_id', '=', True), ('custom_check', '=', True)]}"/>
             </field>
         </field>
     </record>

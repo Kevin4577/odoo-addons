@@ -70,8 +70,8 @@
 
     <menuitem id="menu_shipping_config"
               action="action_shipping_form"
-              parent="stock.menu_stock_config_settings"
-              sequence="3"
+              parent="stock.menu_stock_inventory_control"
+              sequence="14"
               groups="trading_stock_shipping.group_shipping_user"/>
 
 </odoo>
