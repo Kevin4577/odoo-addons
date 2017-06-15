@@ -2,6 +2,12 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
+=============
+Trading Stock
+=============
+
+This module gathers all common methods and models necessary for other
+trading modules related to stock management.
 
 Bug Tracker
 ===========
