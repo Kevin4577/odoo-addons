@@ -30,18 +30,11 @@ class ProductTemplate(models.Model):
         if view_type != 'form':
             return res
         user_obj = self.env['res.users']
-        hs_code_user_grp_id = user_obj.has_group('sale_product_hs_code'
-                                                 '.group_hs_code_user')
         hs_code_mang_grp_id = user_obj.has_group('sale_product_hs_code'
                                                  '.group_hs_code_manager')
         if hs_code_mang_grp_id:
             doc = etree.XML(res['arch'])
             for node in doc.xpath("//field[@name='hs_cn_name']"):
-                node.set("modifiers", '{"invisible": true}')
-            res['arch'] = etree.tostring(doc)
-        elif hs_code_user_grp_id:
-            doc = etree.XML(res['arch'])
-            for node in doc.xpath("//field[@name='hs_name']"):
                 node.set("modifiers", '{"invisible": true}')
             res['arch'] = etree.tostring(doc)
         return res
