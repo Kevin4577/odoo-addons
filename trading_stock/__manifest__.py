@@ -8,7 +8,7 @@
     'category': 'Stock',
     'summary': """The new module 'trading_stock' provides all common
     objects and methods related to stock and tranding""",
-        'author': "Elico corp",
+    'author': "Elico corp",
     'website': 'www.elico-corp.com',
     'license': 'AGPL-3',
     'depends': [
