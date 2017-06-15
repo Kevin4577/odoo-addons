@@ -35,17 +35,22 @@ class ReportPy3oMultisheet(models.Model):
                             template_base_path):
         """This function would generate the new template from base one. It
         would duplicate the head and footer of first sheet into new sheets,
-        and make the body could be customized by user.
-        The whole template should be rendered with the selected delivery
+        and make the body could be customized by user."""
+        """The whole template should be rendered with the selected delivery
         order data. 'Attribute per line' should be the list of several fields
         of each stock move lines of this delivery order. 4,5 should be the
         index of attribute_per_line to store fields, which would get data from
         delivery order, not from the specific move line. 9 should be the index
         of attribute_per_line, which should start with the second line of
         template."""
-        lines_per_line =\
-            int(math.ceil(len(attribute_per_line
-                              ) / float(attribute_num_per_line)))
+        """
+        attribute_per_line : store fields in list
+        total_line_num: product list(lines),
+        template_base_path: ODS template file path,
+        template_new_path: generate the related path of template_base_path
+        """
+        lines_per_line = int(math.ceil(len(attribute_per_line
+                                           ) / float(attribute_num_per_line)))
         add_sheet_num = int(math.floor(total_line_num / lines_per_sheet))
         doc = opendoc(template_base_path)
         sheets = doc.sheets
@@ -56,23 +61,26 @@ class ReportPy3oMultisheet(models.Model):
         for sheet_index, sheet in enumerate(sheets):
             sheet.insert_rows(index=head_end_line,
                               count=lines_per_sheet * lines_per_line)
+            """Append the new sheet"""
             for row in range(0, lines_per_sheet * lines_per_line,
                              lines_per_line):
                 for attr_index, attr in enumerate(attribute_per_line):
                     if (sheet_index * lines_per_sheet + row /
                             lines_per_line < total_line_num):
                         if attr_index < 4 or 5 < attr_index < 9:
+                            """Duplicate the header"""
                             sheet[row + head_end_line, attr_index].set_value((
                                 attr % (sheet_index * lines_per_sheet + row /
                                         lines_per_line)))
                         if attr_index in [4, 5]:
+                            """Copy the attribute name"""
                             sheet[row + head_end_line, attr_index].\
                                 set_value(attr)
                         if attr_index >= 9:
+                            """Copy the attribute's value"""
                             sheet[row + head_end_line + 1,
                                   attr_index + 2 - attribute_num_per_line
                                   ].set_value((attr %
                                                (sheet_index * lines_per_sheet +
                                                 row / lines_per_line)))
         doc.saveas(template_new_path)
-        return True
