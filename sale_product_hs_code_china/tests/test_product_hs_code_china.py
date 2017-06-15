@@ -16,7 +16,11 @@ class TestProductHSCodeChina(common.TransactionCase):
         self.user.write({'groups_id': [(6, 0, self.hs_manager.ids)]})
         self.view_id = self.env.ref('product.'
                                     'product_template_only_form_view').id
+        self.tree_view_id = self.env.ref('product.'
+                                         'product_template_tree_view').id
 
     def test_fields_view_get(self):
         """Test fields view get method for invisible hs name"""
+        self.prod_temp_obj.fields_view_get(view_id=self.tree_view_id,
+                                           view_type='tree')
         self.prod_temp_obj.fields_view_get(view_id=self.view_id)
