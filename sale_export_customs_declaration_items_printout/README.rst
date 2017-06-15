@@ -7,7 +7,7 @@ Sale Export Customs Declaration Items Printout
 ==============================================
 
 The new module 'sale_export_customs_declaration_items_printout would generate
-the .xls or .ods report from ods template file.
+the .xls or .ods report from .ods template file.
 
 This report would display the reporting element of each products.
 
