@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="trading_stock_shipping_tree_view" model="ir.ui.view">
+        <field name="name">shipping.tree</field>
+        <field name="model">shipping</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="ship_from"/>
+                <field name="ship_to"/>
+                <field name="ship_by"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="trading_stock_shipping_form_view" model="ir.ui.view">
+        <field name="name">shipping.form</field>
+        <field name="model">shipping</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group colspan="4" col="4">
+                            <field name="name" required="1"/>
+                            <field name="ship_to" required="1"/>
+                        </group>
+                        <group colspan="4" col="4">
+                            <field name="ship_from" required="1"/>
+                            <field name="ship_by" required="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="trading_stock_shipping_search_view" model="ir.ui.view">
+        <field name="name">stock.shipping.search.view</field>
+        <field name="model">shipping</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="ship_from"/>
+                <field name="ship_to"/>
+                <field name="ship_by"/>
+                <group expand="0" string="Group By" name="groupby">
+                    <filter string="Name" domain="[]"
+                            context="{'group_by': 'name'}"/>
+                    <filter string="Ship From" domain="[]"
+                            context="{'group_by': 'ship_from'}"/>
+                    <filter string="Ship To" domain="[]"
+                            context="{'group_by': 'ship_to'}"/>
+                    <filter string="Ship By" domain="[]"
+                            context="{'group_by': 'ship_by'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_shipping_form" model="ir.actions.act_window">
+        <field name="name">Shipping</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">shipping</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="trading_stock_shipping_tree_view"/>
+        <field name="search_view_id" ref="trading_stock_shipping_search_view"/>
+    </record>
+
+    <menuitem id="menu_shipping_config"
+              action="action_shipping_form"
+              parent="stock.menu_stock_inventory_control"
+              sequence="14"
+              groups="trading_stock_shipping.group_shipping_user"/>
+
+</odoo>
