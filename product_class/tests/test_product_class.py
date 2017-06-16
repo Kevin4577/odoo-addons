@@ -69,8 +69,9 @@ class TestProductClass(common.TransactionCase):
         new_tmpl = self.prod_tmpl_obj.new({
             'product_family_id': self.product_tmpl.product_family_id.id,
         })
-        new_tmpl.onchange_family()
-        self.assertEqual(new_tmpl.product_class_id.id, self.class_id)
+        domain = new_tmpl.onchange_family().get('domain',
+                                                {}).get('product_class_id')
+        self.assertEqual(bool(domain), True)
 
     def test_generate_product_code(self):
         "Test product code based on sequence"

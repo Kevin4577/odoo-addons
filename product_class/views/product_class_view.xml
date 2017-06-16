@@ -8,7 +8,7 @@
             <tree>
                 <field name="name" />
                 <field name="code"/>
-                <field name="line_id"/>
+                <field name="line_ids"/>
             </tree>
         </field>
     </record>
@@ -22,7 +22,7 @@
                     <group colspan="6" col="6">
                         <field name="name" required="1"/>
                         <field name="code" required="1"/>
-                        <field name="line_id"/>
+                        <field name="line_ids" widget="many2many_tags"/>
                     </group>
                 </sheet>
             </form>
@@ -36,14 +36,14 @@
             <search >
                 <field name="name" />
                 <field name="code"/>
-                <field name="line_id"/>
+                <field name="line_ids"/>
                 <group expand="0" string="Group By" name="groupby">
                     <filter string="Name" domain="[]"
                         context="{'group_by':'name'}" />
                     <filter string="Code" domain="[]"
                         context="{'group_by':'code'}" />
-                    <filter string="Available Line" domain="[]"
-                            context="{'group_by':'line_id'}" />
+                    <filter string="Available line" domain="[]"
+                            context="{'group_by':'line_ids'}" />
                 </group>
             </search>
         </field>
