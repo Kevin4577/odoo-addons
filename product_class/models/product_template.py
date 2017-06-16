@@ -11,7 +11,7 @@ class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     product_stage_id = fields.Many2one('product.stage',
-                                       'Product stage', ondelete='restrict',
+                                       'Product Stage', ondelete='restrict',
                                        help='Product Stage', index=True)
     product_line_id = fields.Many2one('product.line', 'Product Line',
                                       ondelete='restrict',

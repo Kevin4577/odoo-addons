@@ -13,8 +13,8 @@ class ProductStage(models.Model):
     name = fields.Char('Name', index=True,
                        help='Stage Name')
     code = fields.Char('Code', help='Stage Code')
-    line_ids = fields.Many2many('product.line', 'product_line_stage_rel',
-                                'stage_id', 'line_id', 'Available Line',
+    line_ids = fields.Many2many(comodel_name='product.line',
+                                string='Available Line',
                                 help='Related Line')
 
     _sql_constraints = [('code_check', 'CHECK(length(code) < 2)',

@@ -13,12 +13,11 @@ class ProductClass(models.Model):
     name = fields.Char('Name', index=True,
                        help='Class Name')
     code = fields.Char('Code', help='Class Code')
-    line_ids = fields.Many2many('product.line', 'product_line_rel', 'class_id',
-                                'c_line_id', 'Available Line',
+    line_ids = fields.Many2many(comodel_name='product.line',
+                                string='Available Line',
                                 help='Related Line')
-    family_ids = fields.Many2many('product.family', 'product_family_rel',
-                                  'class_id',
-                                  'family_id', 'Available Family',
+    family_ids = fields.Many2many(comodel_name='product.family',
+                                  string='Available Family',
                                   help='Related Family')
 
     _sql_constraints = [('code_check', 'CHECK(length(code) < 2)',

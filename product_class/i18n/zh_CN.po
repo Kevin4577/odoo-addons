@@ -147,7 +147,7 @@ msgstr "产品分类"
 #: model:ir.ui.menu,name:product_class.menu_product_class_config
 #: model:ir.ui.view,arch_db:product_class.product_template_form_view_inherit
 msgid "Product Class"
-msgstr "产品中类"
+msgstr "产品分类"
 
 #. module: product_class
 #: model:res.groups,name:product_class.group_product_code_manager

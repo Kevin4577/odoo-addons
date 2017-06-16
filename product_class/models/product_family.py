@@ -13,9 +13,8 @@ class ProductFamily(models.Model):
     name = fields.Char('Name', index=True,
                        help='Family Name')
     code = fields.Char('Code', help='Family Code')
-    class_ids = fields.Many2many('product.class', 'product_class_rel',
-                                 'family_id',
-                                 'class_id', 'Available Class',
+    class_ids = fields.Many2many(comodel_name='product.class',
+                                 string='Available Class',
                                  help='Related Class')
 
     _sql_constraints = [('code_check',
