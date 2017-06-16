@@ -13,6 +13,12 @@ class ProductStage(models.Model):
     name = fields.Char('Name', index=True,
                        help='Stage Name')
     code = fields.Char('Code', help='Stage Code')
+    line_ids = fields.Many2many('product.line', 'product_line_stage_rel',
+                                'stage_id', 'line_id', 'Available Line',
+                                help='Related Line')
 
     _sql_constraints = [('code_check', 'CHECK(length(code) < 2)',
                          _('The code length of the stage must be 1.'))]
+
+    _sql_constraints = [('code_uniq', 'UNIQUE(code)',
+                         _('The code of the stage must be unique.'))]

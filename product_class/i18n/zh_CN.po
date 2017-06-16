@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-23 07:39+0000\n"
-"PO-Revision-Date: 2017-05-23 07:39+0000\n"
+"POT-Creation-Date: 2017-06-16 02:46+0000\n"
+"PO-Revision-Date: 2017-06-16 02:46+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,22 +16,33 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: product_class
-#: model:ir.model.fields,field_description:product_class.field_product_family_class_id
+#: model:ir.model.fields,field_description:product_class.field_product_family_class_ids
+#: model:ir.model.fields,field_description:product_class.field_product_line_class_ids
 #: model:ir.ui.view,arch_db:product_class.product_family_search_view
 msgid "Available Class"
 msgstr "可选中类"
 
 #. module: product_class
-#: model:ir.model.fields,field_description:product_class.field_product_class_line_id
-#: model:ir.ui.view,arch_db:product_class.product_class_search_view
-msgid "Available Line"
-msgstr "可选大类"
+#: model:ir.model.fields,field_description:product_class.field_product_class_family_ids
+msgid "Available Family"
+msgstr "相关小类"
 
 #. module: product_class
-#: model:ir.model.fields,field_description:product_class.field_product_line_stage_id
+#: model:ir.model.fields,field_description:product_class.field_product_class_line_ids
+#: model:ir.model.fields,field_description:product_class.field_product_stage_line_ids
+msgid "Available Line"
+msgstr "相关大类"
+
+#. module: product_class
+#: model:ir.model.fields,field_description:product_class.field_product_line_stage_ids
 #: model:ir.ui.view,arch_db:product_class.product_line_search_view
 msgid "Available Stage"
-msgstr "可选状态"
+msgstr "可用状态"
+
+#. module: product_class
+#: model:ir.ui.view,arch_db:product_class.product_class_search_view
+msgid "Available line"
+msgstr "可选大类"
 
 #. module: product_class
 #: model:product.template,name:product_class.product_template_data_1
@@ -39,16 +50,29 @@ msgid "Bolt"
 msgstr "Bolt"
 
 #. module: product_class
-#: model:ir.model.fields,field_description:product_class.field_product_class_code
 #: model:ir.model.fields,field_description:product_class.field_product_family_code
-#: model:ir.model.fields,field_description:product_class.field_product_line_code
-#: model:ir.model.fields,field_description:product_class.field_product_stage_code
-#: model:ir.ui.view,arch_db:product_class.product_class_search_view
 #: model:ir.ui.view,arch_db:product_class.product_family_search_view
-#: model:ir.ui.view,arch_db:product_class.product_line_search_view
+msgid "Code"
+msgstr "小类编码"
+
+#. module: product_class
+#: model:ir.model.fields,field_description:product_class.field_product_stage_code
 #: model:ir.ui.view,arch_db:product_class.product_stage_search_view
 msgid "Code"
-msgstr "编码"
+msgstr "状态编码"
+
+#. module: product_class
+#: model:ir.model.fields,field_description:product_class.field_product_line_code
+#: model:ir.ui.view,arch_db:product_class.product_line_search_view
+msgid "Code"
+msgstr "大类编码"
+
+#. module: product_class
+#: model:ir.model.fields,field_description:product_class.field_product_class_code
+#: model:ir.ui.view,arch_db:product_class.product_class_search_view
+msgid "Code"
+msgstr "中类编码"
+
 
 #. module: product_class
 #: model:ir.model.fields,field_description:product_class.field_product_product_customer_product_code
@@ -57,71 +81,58 @@ msgid "Customer Product Code"
 msgstr "客户产品编码"
 
 #. module: product_class
+#: model:ir.model.fields,field_description:product_class.field_product_class_display_name
+#: model:ir.model.fields,field_description:product_class.field_product_family_display_name
+#: model:ir.model.fields,field_description:product_class.field_product_line_display_name
+#: model:ir.model.fields,field_description:product_class.field_product_stage_display_name
+msgid "Display Name"
+msgstr "显示名称"
+
+#. module: product_class
 #: model:ir.ui.view,arch_db:product_class.product_template_form_view_inherit
 msgid "Generate Product Code"
 msgstr "编码生成"
 
 #. module: product_class
-#: model:ir.ui.view,arch_db:product_class.product_stage_search_view
-#: model:ir.ui.view,arch_db:product_class.product_line_search_view
-#: model:ir.ui.view,arch_db:product_class.product_family_search_view
-#: model:ir.ui.view,arch_db:product_class.product_class_search_view
-msgid "Name"
-msgstr "名称"
-
-#. module: product_class
-#: model:res.groups,name:product_class.group_product_code_manager
-msgid "Product Code Manager"
-msgstr "产品编码经理"
-
-#. module: product_class
-#: model:res.groups,name:product_class.group_product_code_user
-msgid "Product Code User"
-msgstr "产品编码用户"
-
-#. module: product_class
-#: model:ir.model.fields,field_description:product_class.field_product_stage_name
-msgid "Name"
-msgstr "状态名称"
-
-#. module: product_class
-#: model:ir.model.fields,field_description:product_class.field_product_line_name
-msgid "Name"
-msgstr "大类名称"
-
-#. module: product_class
-#: model:ir.model.fields,field_description:product_class.field_product_family_name
-msgid "Name"
-msgstr "小类名称"
-
-#. module: product_class
 #: model:ir.model.fields,field_description:product_class.field_product_class_name
+#: model:ir.model.fields,field_description:product_class.field_product_family_name
+#: model:ir.model.fields,field_description:product_class.field_product_line_name
+#: model:ir.model.fields,field_description:product_class.field_product_stage_name
+#: model:ir.ui.view,arch_db:product_class.product_class_search_view
+#: model:ir.ui.view,arch_db:product_class.product_family_search_view
+#: model:ir.ui.view,arch_db:product_class.product_line_search_view
+#: model:ir.ui.view,arch_db:product_class.product_stage_search_view
 msgid "Name"
-msgstr "中类名称"
+msgstr "名字"
 
 #. module: product_class
-#: code:addons/product_class/models/product_template.py:80
+#: code:addons/product_class/models/product_template.py:98
 #, python-format
 msgid "Please select product class."
 msgstr "请选择产品中类."
 
 #. module: product_class
-#: code:addons/product_class/models/product_template.py:82
+#: code:addons/product_class/models/product_template.py:100
 #, python-format
 msgid "Please select product family."
 msgstr "请选择产品小类."
 
 #. module: product_class
-#: code:addons/product_class/models/product_template.py:78
+#: code:addons/product_class/models/product_template.py:96
 #, python-format
 msgid "Please select product line."
 msgstr "请选择产品大类."
 
 #. module: product_class
-#: code:addons/product_class/models/product_template.py:76
+#: code:addons/product_class/models/product_template.py:94
 #, python-format
 msgid "Please select product stage."
 msgstr "请选择产品状态."
+
+#. module: product_class
+#: model:ir.model,name:product_class.model_product_product
+msgid "Product"
+msgstr "产品"
 
 #. module: product_class
 #: model:ir.ui.menu,name:product_class.menu_product_assortment_config
@@ -136,7 +147,17 @@ msgstr "产品分类"
 #: model:ir.ui.menu,name:product_class.menu_product_class_config
 #: model:ir.ui.view,arch_db:product_class.product_template_form_view_inherit
 msgid "Product Class"
-msgstr "中类类型"
+msgstr "产品中类"
+
+#. module: product_class
+#: model:res.groups,name:product_class.group_product_code_manager
+msgid "Product Code Manager"
+msgstr "产品编码经理"
+
+#. module: product_class
+#: model:res.groups,name:product_class.group_product_code_user
+msgid "Product Code User"
+msgstr "产品编码用户"
 
 #. module: product_class
 #: model:ir.actions.act_window,name:product_class.action_product_family_form
@@ -145,7 +166,7 @@ msgstr "中类类型"
 #: model:ir.model.fields,field_description:product_class.field_product_template_product_family_id
 #: model:ir.ui.menu,name:product_class.menu_product_family_config
 msgid "Product Family"
-msgstr "小类类型"
+msgstr "产品小类"
 
 #. module: product_class
 #: model:ir.actions.act_window,name:product_class.action_product_line_form
@@ -154,7 +175,7 @@ msgstr "小类类型"
 #: model:ir.model.fields,field_description:product_class.field_product_template_product_line_id
 #: model:ir.ui.menu,name:product_class.menu_product_line_config
 msgid "Product Line"
-msgstr "大类类型"
+msgstr "产品大类"
 
 #. module: product_class
 #: model:ir.model.fields,field_description:product_class.field_product_product_product_ordering_code
@@ -167,13 +188,18 @@ msgstr "产品订货号"
 #: model:ir.model,name:product_class.model_product_stage
 #: model:ir.ui.menu,name:product_class.menu_product_stage_config
 msgid "Product Stage"
-msgstr "状态类型"
+msgstr "产品类型"
+
+#. module: product_class
+#: model:ir.model,name:product_class.model_product_template
+msgid "Product Template"
+msgstr "产品模板"
 
 #. module: product_class
 #: model:ir.model.fields,field_description:product_class.field_product_product_product_stage_id
 #: model:ir.model.fields,field_description:product_class.field_product_template_product_stage_id
 msgid "Product stage"
-msgstr "状态类型"
+msgstr "产品类型"
 
 #. module: product_class
 #: model:ir.model.fields,field_description:product_class.field_product_product_rd_drawing_number
@@ -188,32 +214,68 @@ msgid "R&D Product Code"
 msgstr "研发产品编码"
 
 #. module: product_class
-#: sql_constraint:product.class:0
+#: code:addons/product_class/models/product_class.py:24
+#, python-format
 msgid "The code length of the class must be 1."
 msgstr "产品中类编码长度必须为1位."
 
 #. module: product_class
-#: sql_constraint:product.family:0
+#: code:addons/product_class/models/product_family.py:22
+#, python-format
 msgid "The code length of the family must be 2."
 msgstr "产品小类编码长度必须为2位."
 
 #. module: product_class
-#: sql_constraint:product.line:0
+#: code:addons/product_class/models/product_line.py:25
+#, python-format
 msgid "The code length of the line must be 1."
 msgstr "产品大类编码长度必须为1位."
 
 #. module: product_class
-#: sql_constraint:product.stage:0
+#: code:addons/product_class/models/product_stage.py:21
+#, python-format
 msgid "The code length of the stage must be 1."
 msgstr "产品状态编码长度必须为1位."
 
 #. module: product_class
+#: code:addons/product_class/models/product_class.py:27
+#: sql_constraint:product.class:0
+#, python-format
+msgid "The code of the class must be unique."
+msgstr "产品中类编码必须唯一."
+
+#. module: product_class
+#: code:addons/product_class/models/product_family.py:25
+#: sql_constraint:product.family:0
+#, python-format
+msgid "The code of the family must be unique."
+msgstr "产品小类编码必须唯一."
+
+#. module: product_class
+#: code:addons/product_class/models/product_line.py:28
+#: sql_constraint:product.line:0
+#, python-format
+msgid "The code of the line must be unique."
+msgstr "产品大类编码必须唯一."
+
+#. module: product_class
+#: code:addons/product_class/models/product_stage.py:24
+#: sql_constraint:product.stage:0
+#, python-format
+msgid "The code of the stage must be unique."
+msgstr "产品状态编码必须唯一."
+
+#. module: product_class
+#: code:addons/product_class/models/product.py:13
 #: sql_constraint:product.product:0
+#, python-format
 msgid "The default code of the product must be unique."
 msgstr "产品编码必须唯一."
 
 #. module: product_class
+#: code:addons/product_class/models/product_template.py:35
 #: sql_constraint:product.template:0
+#, python-format
 msgid "The name of the product must be unique."
 msgstr "产品名称必须唯一."
 
