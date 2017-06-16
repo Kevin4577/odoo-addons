@@ -8,7 +8,8 @@ from odoo import fields, models
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    product_hs_code_id = fields.Many2one('product.hs.code', 'HS Name (CN)')
+    product_hs_code_id = fields.Many2one('product.hs.code', 'HS Name (CN)',
+                                         ondelete='restrict', copy=False)
     hs_name = fields.Char(string='HS Name', related='product_hs_code_id.name',
                           readonly=True)
     hs_code = fields.Char(string='HS Code',

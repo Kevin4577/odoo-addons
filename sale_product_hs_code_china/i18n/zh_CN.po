@@ -34,7 +34,7 @@ msgstr "海关编码"
 #: model:ir.model.fields,field_description:sale_product_hs_code_china.field_product_product_hs_cn_name
 #: model:ir.model.fields,field_description:sale_product_hs_code_china.field_product_template_hs_cn_name
 msgid "HS Name (CN)"
-msgstr "英文名称 (CN)"
+msgstr "中文名称 (CN)"
 
 #. module: sale_product_hs_code_china
 #: model:ir.model.fields,field_description:sale_product_hs_code_china.field_product_hs_code_tax_id
@@ -42,5 +42,5 @@ msgstr "英文名称 (CN)"
 #: model:ir.model.fields,field_description:sale_product_hs_code_china.field_product_template_tax_code
 #: model:ir.ui.view,arch_db:sale_product_hs_code_china.view_product_hs_code_filter_inherit
 msgid "Rebate Rate"
-msgstr "退税率"
+msgstr "海关退税率"
 
