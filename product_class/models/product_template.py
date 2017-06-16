@@ -104,9 +104,10 @@ class ProductTemplate(models.Model):
                     product.product_line_id.code + \
                     product.product_class_id.code + \
                     product.product_family_id.code
-                seq_cnt = seq_obj.search([('prefix', '=', prefix)], count=True)
+                seq_cnt = seq_obj.sudo().search([('prefix', '=', prefix)],
+                                                count=True)
                 if seq_cnt < 1:
-                    seq_obj.create({
+                    seq_obj.sudo().create({
                         'name': product.product_stage_id.name + '-' +
                         product.product_line_id.name + '-' +
                         product.product_class_id.name + '-' +
