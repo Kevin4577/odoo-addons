@@ -15,8 +15,7 @@ class ProductStage(models.Model):
     code = fields.Char('Code', copy=False, help='Stage Code')
     line_ids = fields.Many2many(comodel_name='product.line',
                                 string='Available Line',
-                                help='Related Line',
-                                ondelete='restrict')
+                                help='Related Line')
 
     _sql_constraints = [('code_check', 'CHECK(length(code) < 2)',
                          _('The code length of the stage must be 1.')),

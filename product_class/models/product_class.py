@@ -15,12 +15,10 @@ class ProductClass(models.Model):
     code = fields.Char('Code', copy=False, help='Class Code')
     line_ids = fields.Many2many(comodel_name='product.line',
                                 string='Available Line',
-                                help='Related Line',
-                                ondelete='restrict')
+                                help='Related Line')
     family_ids = fields.Many2many(comodel_name='product.family',
                                   string='Available Family',
-                                  help='Related Family',
-                                  ondelete='restrict')
+                                  help='Related Family')
 
     _sql_constraints = [('code_check', 'CHECK(length(code) < 2)',
                          _('The code length of the class must be 1.')),

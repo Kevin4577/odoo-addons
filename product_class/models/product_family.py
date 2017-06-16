@@ -15,8 +15,7 @@ class ProductFamily(models.Model):
     code = fields.Char('Code', copy=False, help='Family Code')
     class_ids = fields.Many2many(comodel_name='product.class',
                                  string='Available Class',
-                                 help='Related Class',
-                                 ondelete='restrict')
+                                 help='Related Class')
 
     _sql_constraints = [('code_check',
                          'CHECK(length(code) < 3 and length(code) >1)',

@@ -238,28 +238,28 @@ msgid "The code length of the stage must be 1."
 msgstr "产品状态编码长度必须为1位."
 
 #. module: product_class
-#: code:addons/product_class/models/product_class.py:27
+#: code:addons/product_class/models/product_class.py:25
 #: sql_constraint:product.class:0
 #, python-format
 msgid "The code of the class must be unique."
 msgstr "产品中类编码必须唯一."
 
 #. module: product_class
-#: code:addons/product_class/models/product_family.py:25
+#: code:addons/product_class/models/product_family.py:24
 #: sql_constraint:product.family:0
 #, python-format
 msgid "The code of the family must be unique."
 msgstr "产品小类编码必须唯一."
 
 #. module: product_class
-#: code:addons/product_class/models/product_line.py:28
+#: code:addons/product_class/models/product_line.py:26
 #: sql_constraint:product.line:0
 #, python-format
 msgid "The code of the line must be unique."
 msgstr "产品大类编码必须唯一."
 
 #. module: product_class
-#: code:addons/product_class/models/product_stage.py:24
+#: code:addons/product_class/models/product_stage.py:23
 #: sql_constraint:product.stage:0
 #, python-format
 msgid "The code of the stage must be unique."
