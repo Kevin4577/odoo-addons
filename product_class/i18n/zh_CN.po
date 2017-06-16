@@ -147,7 +147,7 @@ msgstr "产品分类"
 #: model:ir.ui.menu,name:product_class.menu_product_class_config
 #: model:ir.ui.view,arch_db:product_class.product_template_form_view_inherit
 msgid "Product Class"
-msgstr "产品分类"
+msgstr "产品中类"
 
 #. module: product_class
 #: model:res.groups,name:product_class.group_product_code_manager
@@ -188,7 +188,7 @@ msgstr "产品订货号"
 #: model:ir.model,name:product_class.model_product_stage
 #: model:ir.ui.menu,name:product_class.menu_product_stage_config
 msgid "Product Stage"
-msgstr "产品类型"
+msgstr "产品状态"
 
 #. module: product_class
 #: model:ir.model,name:product_class.model_product_template
@@ -199,7 +199,7 @@ msgstr "产品模板"
 #: model:ir.model.fields,field_description:product_class.field_product_product_product_stage_id
 #: model:ir.model.fields,field_description:product_class.field_product_template_product_stage_id
 msgid "Product stage"
-msgstr "产品类型"
+msgstr "产品状态"
 
 #. module: product_class
 #: model:ir.model.fields,field_description:product_class.field_product_product_rd_drawing_number

@@ -52,8 +52,8 @@ class ProductTemplate(models.Model):
             if (self.product_stage_id.id not in
                     self.product_line_id.stage_ids.ids):
                 self.product_stage_id = False
-                stage_domain = [('id', 'in',
-                                 self.product_line_id.stage_ids.ids)]
+            stage_domain = [('id', 'in',
+                             self.product_line_id.stage_ids.ids)]
             class_domain = [('id', 'in', self.product_line_id.class_ids.ids)]
         return {'domain': {'product_class_id': class_domain,
                            'product_stage_id': stage_domain}}
@@ -68,8 +68,8 @@ class ProductTemplate(models.Model):
             if (self.product_line_id.id
                     not in self.product_class_id.line_ids.ids):
                 self.product_line_id = False
-                line_domain = [('id', 'in',
-                                self.product_class_id.line_ids.ids)]
+            line_domain = [('id', 'in',
+                            self.product_class_id.line_ids.ids)]
             family_domain = [('id', 'in',
                               self.product_class_id.family_ids.ids)]
         return {'domain': {'product_family_id': family_domain,

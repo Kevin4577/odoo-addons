@@ -12,7 +12,7 @@ class ProductClass(models.Model):
 
     name = fields.Char('Name', index=True,
                        help='Class Name')
-    code = fields.Char('Code', help='Class Code')
+    code = fields.Char('Code', copy=False, help='Class Code')
     line_ids = fields.Many2many(comodel_name='product.line',
                                 string='Available Line',
                                 help='Related Line')

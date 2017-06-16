@@ -13,7 +13,7 @@
                 <field name="rd_drawing_number" />
             </field>
             <xpath expr="//page[@name='general_information']" position="inside">
-                <group string="Product Class" col="4">
+                <group string="Product Assortment" col="4">
                     <field name="product_stage_id" options="{'no_open': True}" style="padding: 0px 0px 2px 8px !important;"/>
                     <field name="product_line_id" options="{'no_open': True}"/>
                     <field name="product_class_id" options="{'no_open': True}"/>

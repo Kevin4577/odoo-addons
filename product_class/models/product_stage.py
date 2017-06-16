@@ -12,7 +12,7 @@ class ProductStage(models.Model):
 
     name = fields.Char('Name', index=True,
                        help='Stage Name')
-    code = fields.Char('Code', help='Stage Code')
+    code = fields.Char('Code', copy=False, help='Stage Code')
     line_ids = fields.Many2many(comodel_name='product.line',
                                 string='Available Line',
                                 help='Related Line')
