@@ -28,6 +28,11 @@ class TradingSaleCommercialInvoice(models.Model):
                     package_list =\
                     trading_sale_obj.\
                     get_product_stock_list(stock_picking)
+                data['ship_from'], data['ship_to'], data['ship_by'] =\
+                    [stock_picking.ship_info_id.ship_from.country_id.name,
+                     stock_picking.ship_info_id.ship_to.country_id.name,
+                     stock_picking.ship_info_id.ship_by
+                     ] if stock_picking.custom_check else [False, False, False]
             else:
                 raise ValidationError(_('Please check whether this stock '
                                         'picking was generated from sale'
