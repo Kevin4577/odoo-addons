@@ -21,7 +21,7 @@ class ProductLine(models.Model):
                                  help='Related Class')
 
     _sql_constraints = [('code_check', 'CHECK(length(code) < 2)',
-                         _('The code length of the line must be 1.'))]
-
-    _sql_constraints = [('code_uniq', 'UNIQUE(code)',
-                         _('The code of the line must be unique.'))]
+                         _('The code length of the line must be 1.')),
+                        ('code_uniq', 'UNIQUE(code)',
+                         _('The code of the line must be unique.'))
+                        ]

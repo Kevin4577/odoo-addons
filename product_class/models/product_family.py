@@ -19,7 +19,7 @@ class ProductFamily(models.Model):
 
     _sql_constraints = [('code_check',
                          'CHECK(length(code) < 3 and length(code) >1)',
-                         _('The code length of the family must be 2.'))]
-
-    _sql_constraints = [('code_uniq', 'UNIQUE(code)',
-                         _('The code of the family must be unique.'))]
+                         _('The code length of the family must be 2.')),
+                        ('code_uniq', 'UNIQUE(code)',
+                         _('The code of the family must be unique.'))
+                        ]

@@ -18,7 +18,7 @@ class ProductStage(models.Model):
                                 help='Related Line')
 
     _sql_constraints = [('code_check', 'CHECK(length(code) < 2)',
-                         _('The code length of the stage must be 1.'))]
-
-    _sql_constraints = [('code_uniq', 'UNIQUE(code)',
-                         _('The code of the stage must be unique.'))]
+                         _('The code length of the stage must be 1.')),
+                        ('code_uniq', 'UNIQUE(code)',
+                         _('The code of the stage must be unique.'))
+                        ]

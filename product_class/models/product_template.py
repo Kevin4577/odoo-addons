@@ -39,6 +39,9 @@ class ProductTemplate(models.Model):
         """To return domain of product line."""
         domain = []
         if self.product_stage_id:
+            if (self.product_line_id.id not in
+                    self.product_stage_id.line_ids.ids):
+                self.product_line_id = False
             domain = [('id', 'in', self.product_stage_id.line_ids.ids)]
         return {'domain': {'product_line_id': domain}}
 
@@ -52,6 +55,9 @@ class ProductTemplate(models.Model):
             if (self.product_stage_id.id not in
                     self.product_line_id.stage_ids.ids):
                 self.product_stage_id = False
+            if (self.product_class_id.id not in
+                    self.product_line_id.class_ids.ids):
+                self.product_class_id = False
             stage_domain = [('id', 'in',
                              self.product_line_id.stage_ids.ids)]
             class_domain = [('id', 'in', self.product_line_id.class_ids.ids)]
@@ -68,6 +74,9 @@ class ProductTemplate(models.Model):
             if (self.product_line_id.id
                     not in self.product_class_id.line_ids.ids):
                 self.product_line_id = False
+            if (self.product_family_id.id not in
+                    self.product_class_id.family_ids.ids):
+                self.product_family_id = False
             line_domain = [('id', 'in',
                             self.product_class_id.line_ids.ids)]
             family_domain = [('id', 'in',
