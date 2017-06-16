@@ -10,8 +10,7 @@ LINES_PER_SHEET = 8
 ATTRIBUTE_NUM_PER_LINE = 9
 ATTRIBUTE_PER_LINE = ['${data.line%d.index}', '${data.line%d.hs_code.hs_code}',
                       '${data.line%d.hs_code.name}', '${data.line%d.qty}',
-                      '${objects.ship_info_id.ship_to.country_id.name}',
-                      '${objects.ship_info_id.ship_from.country_id.name}',
+                      '${data.ship_to}', '${data.ship_from}',
                       '${data.line%d.unit_price}', '${data.line%d.total}',
                       '${data.line%d.pricelist}',
                       '${data.line%d.hs_code.cn_name}',
@@ -72,6 +71,11 @@ class TradingSaleCustomDeclaration(models.Model):
                 package_qty, total_package_gw, package_meas = \
                     trading_sale_obj.get_package_sum(stock_picking)
                 data['gw_sum'] = gw_sum_witout_package + total_package_gw
+                data['ship_from'], data['ship_to'], data['ship_by'] =\
+                    [stock_picking.ship_info_id.ship_from.country_id.name,
+                     stock_picking.ship_info_id.ship_to.country_id.name,
+                     stock_picking.ship_info_id.ship_by
+                     ] if stock_picking.custom_check else[False, False, False]
             else:
                 raise ValidationError(_('Please check whether this stock '
                                         'picking was generated from'
