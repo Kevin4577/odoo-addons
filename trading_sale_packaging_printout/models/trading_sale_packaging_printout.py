@@ -41,6 +41,11 @@ class TradingSalePackagingPrintout(models.Model):
                     gw_sum_witout_package + data['total_package_gw']
                 data['meas_sum'] =\
                     meas_sum_witout_package + data['total_package_meas']
+                data['ship_from'], data['ship_to'], data['ship_by'] =\
+                    [picking.ship_info_id.ship_from.country_id.name,
+                     picking.ship_info_id.ship_to.country_id.name,
+                     picking.ship_info_id.ship_by
+                     ] if picking.custom_check else [False, False, False]
             else:
                 raise ValidationError(_('Please check whether this stock '
                                         'picking was generated from sale '

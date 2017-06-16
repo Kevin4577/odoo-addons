@@ -30,5 +30,5 @@ msgstr "请确认你的单据状态."
 #. module: trading_sale_packaging_printout
 #: model:ir.actions.report.xml,name:trading_sale_packaging_printout.trading_sale_packaging_printout_py3o
 msgid "Trading Sale Packaging Printout"
-msgstr "Trading Sale Packaging Printout"
+msgstr "海关装箱报表"
 
