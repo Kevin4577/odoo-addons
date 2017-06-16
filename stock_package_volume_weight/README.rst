@@ -2,22 +2,12 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-================
-Base Sale Export
-================
+============================
+Stock Package Volume Weight
+============================
 
-The new module 'trading_sale' would provide methods for sale report modules
-with the data.
-Those methods would be reused by several modules, in order to improve the maintainability of project modules.
-
-
-Usage
-=====
-
-.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
-   :alt: Try me on Runbot
-   :target: https://runbot.my-odoo.com/runbot/63/10.0
-
+This module extends the Package and Package Types to add extra fields
+related to product conditioning.
 
 Bug Tracker
 ===========
@@ -40,7 +30,7 @@ Contributors
 
 * Eric Caudal <eric.caudal@elico-corp.com>
 * Victor Martin <victor.martin@elico-corp.com>
-* Zhou Hao <zhou.hao@elico-corp.com>
+
 
 Maintainer
 ----------

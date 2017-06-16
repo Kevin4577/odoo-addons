@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="stock_quant_package_form_view" model="ir.ui.view">
+        <field name="name">Stock Quant Package Form</field>
+        <field name="model">stock.quant.package</field>
+        <field name="inherit_id" ref="stock.view_quant_package_form"/>
+        <field name="arch" type="xml">
+            <field name="packaging_id" position="after">
+                <field name="forwarder_no"/>
+            </field>
+            <field name="parent_id" position="after">
+                <field name="volume"/>
+                <field name="weight"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
