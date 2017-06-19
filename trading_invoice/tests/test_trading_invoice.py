@@ -46,12 +46,12 @@ class TestTradingInvoice(common.TransactionCase):
             'confirmation_date': datetime.today().strftime('%Y-%m-%d'),
             'order_line':
             [(0, 0, {
-                 'name': self.product_4.name,
-                 'product_id': self.product_4.id,
-                 'product_uom_qty': 5.0,
-                 'product_uom': self.product_uom_unit.id,
-                 'price_unit': 100.0
-             }),
+                'name': self.product_4.name,
+                'product_id': self.product_4.id,
+                'product_uom_qty': 5.0,
+                'product_uom': self.product_uom_unit.id,
+                'price_unit': 100.0
+            }),
              (0, 0, {
                  'name': self.product_5.name,
                  'product_id': self.product_5.id,
