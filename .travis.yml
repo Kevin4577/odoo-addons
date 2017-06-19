@@ -1,8 +1,7 @@
 # Config file .travis.yml
 
 language: python
-sudo: false
-sudo: false
+sudo: required
 cache: pip
 
 python:
