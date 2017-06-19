@@ -59,9 +59,6 @@ class TestTradingInvoice(common.TransactionCase):
         self.sale_order.picking_ids[0].write({'ship_info_id':
                                               self.shipping_id.id})
         self.sale_order.picking_ids.action_assign()
-#        self.Procurementorder.run_scheduler()
-#        procurement = self.Procurementorder.\
-#            search([('product_id', '=', self.product_4.id)])
         self.sale_order.picking_ids.force_assign()
 
         self.pack1 = self.pack_obj.create({'name': 'PACKINOUTTEST1'})
