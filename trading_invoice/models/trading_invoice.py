@@ -98,14 +98,13 @@ class TradingInvoice(models.Model):
         gw_sum = gw_sum_package + gw_sum_without_package
         product_lines = []
         for order_line in sale_order_lines:
-            product_lines.append({
-                                  'product_id': order_line.product_id,
+            product_lines.append({'product_id': order_line.product_id,
                                   'client_order_ref':
                                   order_line.order_id.client_order_ref,
                                   'product_uom_qty':
                                   order_line.product_uom_qty,
-                                  'qty_delivered': order_line.qty_delivered,
-                                })
+                                  'qty_delivered': order_line.qty_delivered
+                                  })
         sum_qty = 0.0
         sum_qty_delivered = 0.0
         for line in product_lines:
@@ -333,9 +332,7 @@ class TradingInvoice(models.Model):
                                   'price_unit': line.price_unit,
                                   'price_subtotal': line.price_subtotal
                                   })
-        return {
-                'product_lines': product_lines
-                }
+        return {'product_lines': product_lines}
 
     @api.multi
     def get_package_name_per_package_list(self, stock_picking_list):
