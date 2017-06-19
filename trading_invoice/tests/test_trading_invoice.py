@@ -68,7 +68,7 @@ class TestTradingInvoice(common.TransactionCase):
         self.sale_order.picking_ids.action_assign()
         self.sale_order.picking_ids.force_assign()
         self.pack1 = self.pack_obj.create({
-            'name': 'PACKINOUTTEST1'
+            'name': 'Test PACKINOUTTEST'
         })
         self.sale_order.picking_ids.\
             pack_operation_ids[0].result_package_id = self.pack1
@@ -84,7 +84,7 @@ class TestTradingInvoice(common.TransactionCase):
             })
         self.lot1 = self.production_lot_model.create({
             'product_id': self.product_4.id,
-            'name': 'LOT1',
+            'name': 'Test LOT1',
             'volume': 10.0,
             'carton_qty': 5.0
         })
