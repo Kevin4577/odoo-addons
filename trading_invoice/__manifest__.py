@@ -4,9 +4,7 @@
 {
     "name": "Trading Invoice",
     "version": "10.0.1.0.0",
-    "summary": """The new module provide methods for Invoice report modules
-               with the data. Those methods be reused by several modules,
-               in order to improve the maintainability of project modules.""",
+    "summary": """Trading Invoice common methods and information""",
     "author": "Elico Corp",
     "support": "support@elico-corp.com",
     "license": "AGPL-3",
