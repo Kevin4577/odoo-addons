@@ -44,21 +44,20 @@ class TestTradingInvoice(common.TransactionCase):
             'partner_id': self.partner_id.id,
             'pricelist_id': self.pricelist.id,
             'confirmation_date': datetime.today().strftime('%Y-%m-%d'),
-            'order_line':
-            [(0, 0, {
-                'name': self.product_4.name,
-                'product_id': self.product_4.id,
-                'product_uom_qty': 5.0,
-                'product_uom': self.product_uom_unit.id,
-                'price_unit': 100.0
-            }),
-             (0, 0, {
-                 'name': self.product_5.name,
-                 'product_id': self.product_5.id,
-                 'product_uom_qty': 4.0,
-                 'product_uom': self.product_uom_unit.id,
-                 'price_unit': 120.0
-             })]
+            'order_line': [(0, 0, {
+                                   'name': self.product_4.name,
+                                   'product_id': self.product_4.id,
+                                   'product_uom_qty': 5.0,
+                                   'product_uom': self.product_uom_unit.id,
+                                   'price_unit': 100.0
+                                   }),
+                           (0, 0, {
+                                   'name': self.product_5.name,
+                                   'product_id': self.product_5.id,
+                                   'product_uom_qty': 4.0,
+                                   'product_uom': self.product_uom_unit.id,
+                                   'price_unit': 120.0
+                               })]
         })
         self.sale_order.action_confirm()
         self.sale_order.picking_ids.action_confirm()
