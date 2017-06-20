@@ -21,4 +21,4 @@ class ProductClass(models.Model):
                                   help='Related Family')
 
     _sql_constraints = [('code_check', 'CHECK(length(code) < 2)',
-                         _('The code length of the class must be 1.')),]
+                         _('The code length of the class must be 1.')), ]
