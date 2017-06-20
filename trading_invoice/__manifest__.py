@@ -9,10 +9,12 @@
     "support": "support@elico-corp.com",
     "license": "AGPL-3",
     "website": "https://www.elico-corp.com",
-    "depends": ["stock_package_volume_weight",
-                "stock_packaging_lot",
-                "trading_stock_shipping",
-                "sale_product_hs_code_china",
-                ],
+    "depends": [
+        "stock_package_volume_weight",
+        "stock_packaging_lot",
+        "trading_stock_shipping",
+        "sale_product_hs_code_china",
+        "product class",
+    ],
     "installable": True,
 }

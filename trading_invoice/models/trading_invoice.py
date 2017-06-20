@@ -76,10 +76,14 @@ class TradingInvoice(models.Model):
             'sum_product_qty': sum_product_qty,
             'sum_carton_qty': sum_carton_qty,
             'product_lines': product_lines,
-            'location_id': stock_picking_list[0].location_id,
-            'delivery_date': stock_picking_list[0].min_date,
-            'delivery_name': stock_picking_list[0].name,
-            'team_id': stock_picking_list[0].sale_id.team_id,
+            'location_id': stock_picking_list[0].location_id or
+            self.env['stock.location'],
+            'delivery_date': stock_picking_list[0].min_date or
+            self.env['stock.picking'],
+            'delivery_name': stock_picking_list[0].name or
+            self.env['stock.picking'],
+            'team_id': stock_picking_list[0].sale_id.team_id or
+            self.env['crm.team'],
         }
 
     @api.multi
@@ -119,15 +123,21 @@ class TradingInvoice(models.Model):
             'product_lines': product_lines,
             'pallet_sum': pallet_sum,
             'gw_sum': gw_sum,
-            'partner_id': stock_picking_list[0].partner_id,
+            'partner_id': stock_picking_list[0].partner_id or
+            self.env['res.partner'],
             'confirmation_date':
-            stock_picking_list[0].sale_id.confirmation_date,
+            stock_picking_list[0].sale_id.confirmation_date or
+            self.env['sale.order'],
             'min_date': stock_picking_list[0].min_date,
-            'ship_info_id': stock_picking_list[0].ship_info_id,
+            'ship_info_id': stock_picking_list[0].ship_info_id or
+            self.env['shipping'],
             'partner_shipping_id':
-            stock_picking_list[0].sale_id.partner_shipping_id,
-            'payment_term_id': stock_picking_list[0].sale_id.payment_term_id,
-            'package_no': package_list[0].forwarder_no
+            stock_picking_list[0].sale_id.partner_shipping_id or
+            self.env['res.partner'],
+            'payment_term_id': stock_picking_list[0].sale_id.payment_term_id or
+            self.env['account.payment.term'],
+            'package_no': package_list[0].forwarder_no or
+            self.env['stock.quant.package']
         }
 
     @api.multi
@@ -175,7 +185,8 @@ class TradingInvoice(models.Model):
             'sum_qty': sum_qty,
             'pallet_sum': pallet_sum,
             'product_lines': product_lines,
-            'ship_to': stock_picking_list[0].ship_info_id.ship_to,
+            'ship_to': stock_picking_list[0].ship_info_id.ship_to or
+            self.env['res.partner'],
             'sum_gw': sum_gw,
             'sum_meas': sum_meas,
             'print_date': print_date,
@@ -187,12 +198,12 @@ class TradingInvoice(models.Model):
         amount of order line which was used in this account invoice."""
         sale_order_list = account_invoice.invoice_line_ids.\
             mapped('sale_line_ids').mapped('order_id')
+        sale_order_lists = []
         for sale_order in sale_order_list:
             account_invoice_lines_per_same_order = \
                 account_invoice.invoice_line_ids.\
                 filtered(lambda line: sale_order.id in line.sale_line_ids.
                          mapped('order_id').ids)
-            sale_order_lists = []
             sale_order_lists.append({
                 'sale_order_name': sale_order.name,
                 'client_order_ref': sale_order.client_order_ref,
@@ -203,7 +214,8 @@ class TradingInvoice(models.Model):
             for line in sale_order_lists[0].get('invoice_items'):
                 sum_qty += line.quantity
                 sum_amount += line.price_subtotal
-        ship_information = sale_order_list.picking_ids[0].ship_info_id
+        ship_information = sale_order_list.picking_ids[0].ship_info_id or\
+            self.env['shipping']
         return {
             'sale_order_list': sale_order_lists,
             'sum_qty': sum_qty,
@@ -235,6 +247,7 @@ class TradingInvoice(models.Model):
         total_gw = 0.0
         total_nt = 0.0
         total_meas = 0.0
+        package_lists = []
         for package in package_list:
             gw_package = package.weight
             meas_package = package.volume
@@ -249,7 +262,6 @@ class TradingInvoice(models.Model):
                                                              package,
                                                              sale_order_lines)
             sub_list = sub_list or {}
-            package_list = []
             package_list.append({
                 'order_list': sub_list['order_list'] or order_list or False,
                 'pallet_sum': sub_list['pallet_sum'] or pallet_sum,
@@ -263,13 +275,14 @@ class TradingInvoice(models.Model):
             total_nt += sub_list['sum_nt']
             total_meas += sub_list['sum_meas']
         return {
-            'package_list': package_list,
+            'package_list': package_lists,
             'total_gw': total_gw,
             'total_nt': total_nt,
             'total_meas': total_meas,
             'pallet_total': pallet_total,
             'package_total': len(package_list),
-            'ship_info_id': sale_order_list.picking_ids[0].ship_info_id
+            'ship_info_id': sale_order_list.picking_ids[0].ship_info_id or\
+                self.env['shipping'],
         }
 
     @api.multi
@@ -402,7 +415,8 @@ class TradingInvoice(models.Model):
         package_no = stock_picking_list.mapped('pack_operation_product_ids'
                                                ).mapped('result_package_id'
                                                         )[0].forwarder_no
-        partner_shipping_id = stock_picking_list[0].ship_info_id.ship_to
+        partner_shipping_id = stock_picking_list[0].ship_info_id.ship_to or\
+            self.env['res.partner']
         package_type_list = stock_picking_list.\
             mapped('pack_operation_product_ids'
                    ).mapped('result_package_id').mapped('packaging_id')
@@ -415,8 +429,8 @@ class TradingInvoice(models.Model):
             pack_operation_lot_list_per_same_package_type = \
                 pack_operation_lines_per_same_package_type.\
                 mapped('pack_lot_ids')
+            pack_lot_list = []
             for pack_lot in pack_operation_lot_list_per_same_package_type:
-                pack_lot_list = []
                 pack_lot_list.append({
                     'client_order_ref':
                     pack_lot.operation_id.picking_id.sale_id.client_order_ref,
@@ -426,8 +440,7 @@ class TradingInvoice(models.Model):
                     'qty_delivery': pack_lot.qty,
                     'carton_qty': pack_lot.lot_id.carton_qty
                 })
-            package_list = []
-            package_list.append({package_type.name: pack_lot_list, })
+            package_list.append({package_type.name: pack_lot_list})
             return {
                 'package_no': package_no,
                 'partner_shipping_id': partner_shipping_id,
