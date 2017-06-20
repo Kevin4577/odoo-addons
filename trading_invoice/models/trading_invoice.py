@@ -262,7 +262,7 @@ class TradingInvoice(models.Model):
                                                              package,
                                                              sale_order_lines)
             sub_list = sub_list or {}
-            package_list.append({
+            package_lists.append({
                 'order_list': sub_list['order_list'] or order_list or False,
                 'pallet_sum': sub_list['pallet_sum'] or pallet_sum,
                 'sum_gw': sub_list['sum_gw'] or sum_gw + gw_package,
@@ -440,6 +440,7 @@ class TradingInvoice(models.Model):
                     'qty_delivery': pack_lot.qty,
                     'carton_qty': pack_lot.lot_id.carton_qty
                 })
+            package_list = []
             package_list.append({package_type.name: pack_lot_list})
             return {
                 'package_no': package_no,
