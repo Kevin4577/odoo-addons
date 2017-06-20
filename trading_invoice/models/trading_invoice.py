@@ -243,69 +243,25 @@ class TradingInvoice(models.Model):
             sum_gw = 0.0
             sum_nt = 0.0
             sum_meas = 0.0
-            for sale_order in sale_order_list:
-                pack_operation_list_per_same_sale_order =\
-                    sale_order_lines.\
-                    filtered(lambda line: line.order_id.id == sale_order.id).\
-                    mapped('procurement_ids').mapped('move_ids').\
-                    mapped('linked_move_operation_ids').\
-                    mapped('operation_id').\
-                    filtered(lambda operation:
-                             operation.result_package_id.id == package.id)
-                pack_operation_lot_list_per_same_sale_order =\
-                    pack_operation_list_per_same_sale_order.\
-                    mapped('pack_lot_ids')
-                order_lines = []
-                for pack_operation_lot in\
-                        pack_operation_lot_list_per_same_sale_order:
-                    order_lines.append({
-                        'carton_no': pack_operation_lot.lot_id.carton_no,
-                        'customer_product_code':
-                        pack_operation_lot.operation_id.product_id.
-                        customer_product_code,
-                        'qty': pack_operation_lot.qty,
-                        'gross_by_carton':
-                        pack_operation_lot.lot_id.gross_by_carton,
-                        'net_by_carton':
-                        pack_operation_lot.lot_id.net_by_carton,
-                        'carton_qty': pack_operation_lot.lot_id.carton_qty,
-                        'gross_weight': pack_operation_lot.lot_id.gross_weight,
-                        'net_weight': pack_operation_lot.lot_id.net_weight,
-                        'volume': pack_operation_lot.lot_id.volume,
-                        'volume_per_carton': pack_operation_lot.lot_id.volume /
-                        pack_operation_lot.lot_id.carton_qty,
-                    })
-                pallet_sum_per_same_sale_order = 0.0
-                sum_gw_per_same_sale_order = 0.0
-                sum_nt_per_same_sale_order = 0.0
-                sum_meas_per_same_sale_order = 0.0
-                for line in order_lines:
-                    pallet_sum_per_same_sale_order += line['carton_qty']
-                    sum_gw_per_same_sale_order += line['gross_weight']
-                    sum_nt_per_same_sale_order += line['net_weight']
-                    sum_meas_per_same_sale_order += line['volume']
-                order_list.append({
-                    'name': sale_order.name,
-                    'client_order_ref': sale_order.client_order_ref,
-                    'lines': order_lines,
-                })
-                pallet_sum += pallet_sum_per_same_sale_order
-                sum_gw += sum_gw_per_same_sale_order
-                sum_nt += sum_nt_per_same_sale_order
-                sum_meas += sum_meas_per_same_sale_order
+            if sale_order_list:
+                sub_list = self.\
+                    get_detail_lot_list_per_invoice_sub_list(sale_order_list,
+                                                             package,
+                                                             sale_order_lines)
+            sub_list = sub_list or {}
             package_list = []
             package_list.append({
-                'order_list': order_list,
-                'pallet_sum': pallet_sum,
-                'sum_gw': sum_gw + gw_package,
-                'sum_nt': sum_nt,
-                'sum_meas': sum_meas + meas_package,
+                'order_list': sub_list['order_list'] or order_list or False,
+                'pallet_sum': sub_list['pallet_sum'] or pallet_sum,
+                'sum_gw': sub_list['sum_gw'] or sum_gw + gw_package,
+                'sum_nt': sub_list['sum_nt'] or sum_nt,
+                'sum_meas': sub_list['sum_meas'] or sum_meas + meas_package,
                 'package_qty': 1,
             })
-            pallet_total += pallet_sum
-            total_gw += sum_gw
-            total_nt += sum_nt
-            total_meas += sum_meas
+            pallet_total += sub_list['pallet_sum']
+            total_gw += sub_list['sum_gw']
+            total_nt += sub_list['sum_nt']
+            total_meas += sub_list['sum_meas']
         return {
             'package_list': package_list,
             'total_gw': total_gw,
@@ -315,6 +271,81 @@ class TradingInvoice(models.Model):
             'package_total': len(package_list),
             'ship_info_id': sale_order_list.picking_ids[0].ship_info_id
         }
+
+    @api.multi
+    def get_detail_lot_list_per_invoice_sub_list(self, sale_order_list,
+                                                 package, sale_order_lines):
+        order_list = []
+        pallet_sum = 0.0
+        sum_gw = 0.0
+        sum_nt = 0.0
+        sum_meas = 0.0
+        for sale_order in sale_order_list:
+            pack_operation_list_per_same_sale_order =\
+                sale_order_lines.\
+                filtered(lambda line: line.order_id.id == sale_order.id).\
+                mapped('procurement_ids').mapped('move_ids').\
+                mapped('linked_move_operation_ids').\
+                mapped('operation_id').\
+                filtered(lambda operation:
+                         operation.result_package_id.id == package.id)
+            pack_operation_lot_list_per_same_sale_order =\
+                pack_operation_list_per_same_sale_order.\
+                mapped('pack_lot_ids')
+            if pack_operation_lot_list_per_same_sale_order:
+                order_lines = self.\
+                    get_detail_lot_list_per_invoice_sub(
+                        pack_operation_lot_list_per_same_sale_order)
+            order_lines = order_lines or []
+            pallet_sum_per_same_sale_order = 0.0
+            sum_gw_per_same_sale_order = 0.0
+            sum_nt_per_same_sale_order = 0.0
+            sum_meas_per_same_sale_order = 0.0
+            for line in order_lines:
+                pallet_sum_per_same_sale_order += line['carton_qty']
+                sum_gw_per_same_sale_order += line['gross_weight']
+                sum_nt_per_same_sale_order += line['net_weight']
+                sum_meas_per_same_sale_order += line['volume']
+            order_list.append({
+                'name': sale_order.name,
+                'client_order_ref': sale_order.client_order_ref,
+                'lines': order_lines,
+            })
+            pallet_sum += pallet_sum_per_same_sale_order
+            sum_gw += sum_gw_per_same_sale_order
+            sum_nt += sum_nt_per_same_sale_order
+            sum_meas += sum_meas_per_same_sale_order
+        return {
+            'order_list': order_list,
+            'pallet_sum': pallet_sum,
+            'sum_gw': sum_gw,
+            'sum_nt': sum_nt,
+            'sum_meas': sum_meas
+        }
+
+    @api.multi
+    def get_detail_lot_list_per_invoice_sub(self,
+                                            operation_lot_list_sale_order):
+        order_lines = []
+        for pack_operation_lot in operation_lot_list_sale_order:
+            order_lines.append({
+                'carton_no': pack_operation_lot.lot_id.carton_no,
+                'customer_product_code':
+                pack_operation_lot.operation_id.product_id.
+                customer_product_code,
+                'qty': pack_operation_lot.qty,
+                'gross_by_carton':
+                pack_operation_lot.lot_id.gross_by_carton,
+                'net_by_carton':
+                pack_operation_lot.lot_id.net_by_carton,
+                'carton_qty': pack_operation_lot.lot_id.carton_qty,
+                'gross_weight': pack_operation_lot.lot_id.gross_weight,
+                'net_weight': pack_operation_lot.lot_id.net_weight,
+                'volume': pack_operation_lot.lot_id.volume,
+                'volume_per_carton': pack_operation_lot.lot_id.volume /
+                pack_operation_lot.lot_id.carton_qty,
+            })
+        return order_lines
 
     @api.multi
     def get_invoice_lines_per_invoice(self, account_invoice):
