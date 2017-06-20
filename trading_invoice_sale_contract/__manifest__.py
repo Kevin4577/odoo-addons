@@ -5,11 +5,10 @@
 {
     'name': 'Trading Invoice Sale Contract',
     'version': '10.0.1.0.0',
-    'category': 'Stock',
+    'category': 'Accounting',
     'summary': """The new module 'trading_invoice_sale_contract' generate
-    the xls or ods report from ods template file. This report show each product
-    information inside sale order, which was required to delivery to the
-    customer with the invoice.""",
+    the xls or ods report from ods template file with each product
+    information inside sale order""",
     'author': "Elico Corp",
     "support": "support@elico-corp.com",
     'website': 'https://www.elico-corp.com',
