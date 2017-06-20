@@ -14,7 +14,7 @@
         "stock_packaging_lot",
         "trading_stock_shipping",
         "sale_product_hs_code_china",
-#        "product class",
+        "product class",
     ],
     "installable": True,
 }
