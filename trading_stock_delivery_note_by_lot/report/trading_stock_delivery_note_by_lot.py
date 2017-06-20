@@ -7,8 +7,8 @@ from odoo.exceptions import ValidationError
 
 
 @py3o_report.py3o_report_extender(
-        report_xml_id='trading_stock_delivery_note_by_lot.'
-        'trading_stock_delivery_note_by_lot_py3o')
+    report_xml_id='trading_stock_delivery_note_by_lot.'
+    'trading_stock_delivery_note_by_lot_py3o')
 def render_report_with_data(report_xml_id, ctx):
     """This function get the data from sale order of specific stock
     picking, and sum the carton quantity and weight, in order to render the
