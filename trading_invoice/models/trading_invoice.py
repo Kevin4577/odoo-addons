@@ -281,8 +281,8 @@ class TradingInvoice(models.Model):
             'total_meas': total_meas,
             'pallet_total': pallet_total,
             'package_total': len(package_list),
-            'ship_info_id': sale_order_list.picking_ids[0].ship_info_id or\
-                self.env['shipping'],
+            'ship_info_id': sale_order_list.picking_ids[0].ship_info_id or
+            self.env['shipping'],
         }
 
     @api.multi
