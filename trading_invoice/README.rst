@@ -7,9 +7,8 @@ Trading Invoice
 ================
 
 The new module provide methods for Invoice report modules with the data.
-Those methods be reused by several modules,in order to improve the
+Those methods be reused by several modules,in order to improve the,
 maintainability of project modules.
-
 
 Bug Tracker
 ===========
@@ -32,7 +31,6 @@ Contributors
 
 * Eric Caudal <eric.caudal@elico-corp.com>
 * Victor Martin <victor.martin@elico-corp.com>
-
 
 Maintainer
 ----------
