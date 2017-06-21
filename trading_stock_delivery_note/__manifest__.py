@@ -7,8 +7,8 @@
     'version': '10.0.1.0.0',
     'category': 'Stock',
     'summary': """The new module 'trading_stock_delivery_note'
-    generate the xls or ods report from ods template file,
-    This report show the order quantity and the delivery quantity of each lines
+    generate the xls or ods printout from ods template file which shows the
+    order quantity and the delivery quantity of each lines
     inside sale order.""",
     'author': "Elico Corp",
     "support": "support@elico-corp.com",
