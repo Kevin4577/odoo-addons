@@ -6,9 +6,8 @@
     'name': 'Trading Invoice Proforma Invoice',
     'version': '10.0.1.0.0',
     'category': 'Accounting',
-    'summary': """The new module 'trading_invoice_proforma_invoice' generate
-    the xls or ods report from ods template file with each order lines of
-    product inside account invoice.""",
+    'summary': """xls or ods report from ods template file with each
+    order lines of product inside account invoice.""",
     'author': "Elico Corp",
     "support": "support@elico-corp.com",
     'website': 'https://www.elico-corp.com',
