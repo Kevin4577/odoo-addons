@@ -6,8 +6,7 @@
     'name': 'Trading Stock Delivery Note',
     'version': '10.0.1.0.0',
     'category': 'Stock',
-    'summary': """The new module 'trading_stock_delivery_note'
-    generate the xls or ods printout from ods template file which shows the
+    'summary': """xls or ods printout from ods template file which shows the
     order quantity and the delivery quantity of each lines
     inside sale order.""",
     'author': "Elico Corp",
