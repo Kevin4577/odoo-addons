@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     "name": "Trading Stock Delivery Note By lot",
-    "summary": """This module generate Trading Stock Delivery Note By Lot for
+    "summary": """This module generates Trading Stock Delivery Note By Lot for
                multi-delivery orders""",
     "version": "10.0.1.0.0",
     "author": "Elico Corp",
