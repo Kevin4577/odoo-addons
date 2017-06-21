@@ -17,6 +17,8 @@ class TradingInvoice(models.Model):
         order_lines = stock_picking.move_lines.mapped('procurement_id'
                                                       ).mapped('sale_line_id')
         product_lines = []
+        sum_qty = 0.0
+        sum_amount = 0.0
         for index, line in enumerate(order_lines):
             product_lines.append({
                 'index': index,
@@ -27,11 +29,8 @@ class TradingInvoice(models.Model):
                 'qty': line.product_uom_qty,
                 'price_total': line.price_total,
             })
-        sum_qty = 0.0
-        sum_amount = 0.0
-        for line in product_lines:
-            sum_qty += line['qty']
-            sum_amount += line['price_total']
+            sum_qty += line.product_uom_qty
+            sum_amount += line.price_total
         return {
             'sum_qty': sum_qty,
             'sum_amount': sum_amount,
@@ -44,6 +43,8 @@ class TradingInvoice(models.Model):
         which was group by client order reference of sale order for each
         of them."""
         product_lines = []
+        sum_product_qty = 0.0
+        sum_carton_qty = 0
         sale_order_obj = self.env['sale.order']
         sale_order_list = sale_order_obj.\
             browse(list(set(stock_picking_list.mapped('sale_id').ids)))
@@ -67,11 +68,8 @@ class TradingInvoice(models.Model):
                         operation_lot_line.lot_id.carton_qty,
                         'track_order': '',
                     })
-        sum_product_qty = 0.0
-        sum_carton_qty = 0.0
-        for line in product_lines:
-            sum_product_qty += line['qty']
-            sum_carton_qty += line['carton_qty']
+                    sum_product_qty += operation_lot_line.qty
+                    sum_carton_qty += operation_lot_line.lot_id.carton_qty
         return {
             'sum_product_qty': sum_product_qty,
             'sum_carton_qty': sum_carton_qty,
@@ -105,6 +103,8 @@ class TradingInvoice(models.Model):
         gw_sum_package = sum([package.weight for package in package_list])
         gw_sum = gw_sum_package + gw_sum_without_package
         product_lines = []
+        sum_qty = 0.0
+        sum_qty_delivered = 0.0
         for order_line in sale_order_lines:
             product_lines.append({
                 'product_id': order_line.product_id,
@@ -112,11 +112,8 @@ class TradingInvoice(models.Model):
                 'product_uom_qty': order_line.product_uom_qty,
                 'qty_delivered': order_line.qty_delivered
             })
-        sum_qty = 0.0
-        sum_qty_delivered = 0.0
-        for line in product_lines:
-            sum_qty += line['product_uom_qty']
-            sum_qty_delivered += line['qty_delivered']
+            sum_qty += order_line.product_uom_qty
+            sum_qty_delivered += order_line.qty_delivered
         return {
             'sum_qty': sum_qty,
             'sum_qty_delivered': sum_qty_delivered,
@@ -149,6 +146,11 @@ class TradingInvoice(models.Model):
         sale_order_list = sale_order_obj.\
             browse(list(set(stock_picking_list.mapped('sale_id').ids)))
         product_lines = []
+        sum_qty = 0.0
+        pallet_sum = 0.0
+        sum_gw = 0.0
+        sum_meas = 0.0
+        print_date = datetime.today().strftime('%Y-%m-%d')
         for sale_order in sale_order_list:
             for sale_order in sale_order_list:
                 client_order_ref = sale_order.client_order_ref
@@ -171,16 +173,10 @@ class TradingInvoice(models.Model):
                             'gw_lot': operation_lot_line.lot_id.gross_weight,
                             'means_lot': operation_lot_line.lot_id.volume,
                         })
-        sum_qty = 0.0
-        pallet_sum = 0.0
-        sum_gw = 0.0
-        sum_meas = 0.0
-        print_date = datetime.today().strftime('%Y-%m-%d')
-        for line in product_lines:
-            sum_qty += line['qty']
-            pallet_sum += line['carton_qty']
-            sum_gw += line['gw_lot']
-            sum_meas += line['means_lot']
+                        sum_qty += operation_lot_line.qty
+                        pallet_sum += operation_lot_line.lot_id.carton_qty
+                        sum_gw += operation_lot_line.lot_id.gross_weight
+                        sum_meas += operation_lot_line.lot_id.volume
         return {
             'sum_qty': sum_qty,
             'pallet_sum': pallet_sum,
@@ -196,9 +192,11 @@ class TradingInvoice(models.Model):
     def get_order_lines_per_invoice(self, account_invoice):
         """This function returns the sum of quantity, unit price, and
         amount of order line which was used in this account invoice."""
+        sale_order_lists = []
+        sum_qty = 0.0
+        sum_amount = 0.0
         sale_order_list = account_invoice.invoice_line_ids.\
             mapped('sale_line_ids').mapped('order_id')
-        sale_order_lists = []
         for sale_order in sale_order_list:
             account_invoice_lines_per_same_order = \
                 account_invoice.invoice_line_ids.\
@@ -209,8 +207,6 @@ class TradingInvoice(models.Model):
                 'client_order_ref': sale_order.client_order_ref,
                 'invoice_items': account_invoice_lines_per_same_order,
             })
-            sum_qty = 0.0
-            sum_amount = 0.0
             for line in sale_order_lists[0].get('invoice_items'):
                 sum_qty += line.quantity
                 sum_amount += line.price_subtotal
@@ -365,6 +361,8 @@ class TradingInvoice(models.Model):
         """This function returns the sum of quantity, unit price, and amount
         of invoice lines which was used in this account invoice."""
         product_lines = []
+        sum_qty = 0.0
+        sum_amount = 0.0
         for index, line in enumerate(account_invoice.invoice_line_ids):
             product_lines.append({
                 'index': index,
@@ -373,8 +371,12 @@ class TradingInvoice(models.Model):
                 'price_unit': line.price_unit,
                 'price_subtotal': line.price_subtotal
             })
+            sum_qty += line.quantity
+            sum_amount += line.price_subtotal
         return {
-            'product_lines': product_lines
+            'product_lines': product_lines,
+            'sum_qty': sum_qty,
+            'sum_amount': sum_amount
         }
 
     @api.multi
