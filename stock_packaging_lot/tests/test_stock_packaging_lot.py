@@ -21,20 +21,14 @@ class TestStockPackagingLot(common.TransactionCase):
             'net_by_carton': 1.5,
         })
 
-    def test_compute_qty_per_box(self):
-        "Test compute Qty per box"
-        self.assertEqual(self.stock_production_lot.qty_per_box,
-                         (self.stock_production_lot.qty_per_carton /
-                          self.stock_production_lot.box_per_carton))
+    def test_onchange_gross_by_carton(self):
+        "To Test Gross weight"
+        self.stock_production_lot.onchange_gross_by_carton()
 
-    def test_compute_gross_weight(self):
-        "Test compute Gross weight"
-        self.assertEqual(self.stock_production_lot.gross_weight,
-                         (self.stock_production_lot.gross_by_carton *
-                          self.stock_production_lot.carton_qty))
+    def test_onchange_net_by_carton(self):
+        "To Test Net weight"
+        self.stock_production_lot.onchange_net_by_carton()
 
-    def test_compute_net_weight(self):
-        "Test compute Net weight"
-        self.assertEqual(self.stock_production_lot.net_weight,
-                         (self.stock_production_lot.net_by_carton *
-                          self.stock_production_lot.carton_qty))
+    def test_onchange_qty_per_carton(self):
+        "To Test Qty per box"
+        self.stock_production_lot.onchange_qty_per_carton()
