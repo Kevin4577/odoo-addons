@@ -2,19 +2,19 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-====================
-Sale Product HS Code
-====================
+==============
+Stock Shipping
+==============
 
-This module creates the master data models for HS code necessary for custom reports.
+The new module 'Trading Stock Shipping' would allow user to maintain the
+shipping detail about:
 
+* Source Location
+* Destination Location
+* Shipping Type
 
 Usage
 =====
-
-.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
-   :alt: Try me on Runbot
-   :target: https://runbot.my-odoo.com/runbot/63/10.0
 
 
 Bug Tracker

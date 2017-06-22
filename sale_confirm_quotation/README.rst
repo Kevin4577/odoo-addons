@@ -2,19 +2,16 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-====================
-Sale Product HS Code
-====================
+======================
+Sale Confirm Quotation
+======================
 
-This module creates the master data models for HS code necessary for custom reports.
-
+This module extends sale module by adding an additional confirmation for
+quotation. Will check whether customer has or not internal reference number.
+On the order lines will check if product has their internal reference.
 
 Usage
 =====
-
-.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
-   :alt: Try me on Runbot
-   :target: https://runbot.my-odoo.com/runbot/63/10.0
 
 
 Bug Tracker

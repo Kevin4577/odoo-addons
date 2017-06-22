@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_line_data_1" model="product.line">
+        <field name="name">lineA</field>
+        <field name="code">2</field>
+        <field name="stage_ids" eval="[(4, ref('product_class.product_stage_data_1'))]"/>
+    </record>
+
+</odoo>

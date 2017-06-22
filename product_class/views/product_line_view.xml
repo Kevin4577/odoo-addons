@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_line_tree_view" model="ir.ui.view">
+        <field name="name">product.line.tree</field>
+        <field name="model">product.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="code"/>
+                <field name="stage_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="product_line_form_view" model="ir.ui.view">
+        <field name="name">product.line.form</field>
+        <field name="model">product.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group colspan="6" col="6">
+                        <field name="name" required="1"/>
+                        <field name="code" required="1"/>
+                        <field name="stage_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="product_line_search_view" model="ir.ui.view">
+        <field name="name">product.line.search</field>
+        <field name="model">product.line</field>
+        <field name="arch" type="xml">
+            <search >
+                <field name="name" />
+                <field name="code"/>
+                <field name="stage_ids"/>
+                <group expand="0" string="Group By" name="groupby">
+                    <filter string="Name" domain="[]"
+                        context="{'group_by':'name'}" />
+                    <filter string="Code" domain="[]"
+                        context="{'group_by':'code'}" />
+                    <filter string="Available Stage" domain="[]"
+                            context="{'group_by':'stage_ids'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_product_line_form" model="ir.actions.act_window">
+        <field name="name">Product Line</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="product_line_tree_view"/>
+        <field name="search_view_id" ref="product_line_search_view"/>
+    </record>
+
+    <menuitem id="menu_product_line_config"
+              action="action_product_line_form"
+              parent="product_class.menu_product_assortment_config"
+              sequence="2" />
+
+</odoo>

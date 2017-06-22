@@ -2,11 +2,12 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-====================
-Sale Product HS Code
-====================
+==========================
+Sale Product HS Code China
+==========================
 
-This module creates the master data models for HS code necessary for custom reports.
+This module extend sale_product_hs_code to add Chinese name on HS code model
+adapts the module with the necessary translations to Chinese language.
 
 
 Usage

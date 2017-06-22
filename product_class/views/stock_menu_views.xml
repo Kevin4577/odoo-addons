@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_product_assortment_config"
+              name="Product Assortment"
+              parent="stock.menu_stock_inventory_control" sequence="13"
+              groups="product_class.group_product_code_user"/>
+
+</odoo>
