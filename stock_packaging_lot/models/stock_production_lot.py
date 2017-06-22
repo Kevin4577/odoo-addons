@@ -29,6 +29,7 @@ class StockProductionLot(models.Model):
         Box per carton"""
         if self.qty_per_carton and self.box_per_carton:
             self.qty_per_box = self.qty_per_carton / (self.box_per_carton or 1)
+        return {}
 
     carton_no = fields.Char('Carton No')
     carton_qty = fields.Integer('Carton Qty')
