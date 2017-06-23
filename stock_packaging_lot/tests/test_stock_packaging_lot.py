@@ -38,16 +38,17 @@ class TestStockPackagingLot(TestStockCommon):
             'location_dest_id': self.customer_location})
 
         pack = self.StockPackObj.create({
-                'product_id': self.productA.id,
-                'product_qty': 1,
-                'product_uom_id': self.productA.uom_id.id,
-                'location_id': self.supplier_location,
-                'location_dest_id': self.stock_location,
-                'picking_id': picking_out.id})
-        self.pack_operation_lot = self.pack_operation_lot_obj.\
-            create({'operation_id': pack.id,
-                    'lot_id': self.stock_production_lot.id,
-                    'qty': 1.0})
+            'product_id': self.productA.id,
+            'product_qty': 1,
+            'product_uom_id': self.productA.uom_id.id,
+            'location_id': self.supplier_location,
+            'location_dest_id': self.stock_location,
+            'picking_id': picking_out.id})
+        self.pack_operation_lot = self.pack_operation_lot_obj.create({
+            'operation_id': pack.id,
+            'lot_id': self.stock_production_lot.id,
+            'qty': 1.0,
+        })
         picking_out.action_confirm()
         picking_out.action_assign()
         picking_out.do_transfer()
