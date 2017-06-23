@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <record id="stock_picking_form_view_inherit" model="ir.ui.view">
         <field name="name">product.template.only.form.inherit</field>
         <field name="model">stock.picking</field>
@@ -10,7 +11,11 @@
                 <field name="custom_check"
                        attrs="{'invisible': [('sale_id', '=', False)],
                                'required': [('sale_id', '=', True)]}"/>
+                <field name="ship_info_id"
+                       attrs="{'invisible': ['|', ('sale_id', '=', False), ('custom_check', '=', False)],
+                               'required': [('sale_id', '=', True), ('custom_check', '=', True)]}"/>
             </field>
         </field>
     </record>
+
 </odoo>

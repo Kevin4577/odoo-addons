@@ -67,8 +67,8 @@
 
     <menuitem id="menu_product_hs_code"
               action="product_hs_code_action_form"
-              parent="sale.prod_config_main"
-              sequence="3"
-              groups="sales_team.group_sale_manager"/>
+              parent="sales_team.menu_sales"
+              sequence="14"
+              groups="sale_product_hs_code.group_hs_code_manager"/>
 
 </odoo>

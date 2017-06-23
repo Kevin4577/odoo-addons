@@ -11,15 +11,16 @@ class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     product_stage_id = fields.Many2one('product.stage',
-                                       'Product stage',
+                                       'Product Stage', ondelete='restrict',
                                        help='Product Stage', index=True)
     product_line_id = fields.Many2one('product.line', 'Product Line',
+                                      ondelete='restrict',
                                       help='Product Line', index=True)
     product_class_id = fields.Many2one('product.class',
-                                       'Product Class',
+                                       'Product Class', ondelete='restrict',
                                        help='Product Class', index=True)
     product_family_id = fields.Many2one('product.family',
-                                        'Product Family',
+                                        'Product Family', ondelete='restrict',
                                         help='Product Family', index=True)
     customer_product_code = fields.Char('Customer Product Code',
                                         help='Customer Product Code')
@@ -38,40 +39,61 @@ class ProductTemplate(models.Model):
         """To return domain of product line."""
         domain = []
         if self.product_stage_id:
-            domain = [('stage_id', '=', self.product_stage_id.id)]
+            if (self.product_line_id.id not in
+                    self.product_stage_id.line_ids.ids):
+                self.product_line_id = False
+            domain = [('id', 'in', self.product_stage_id.line_ids.ids)]
         return {'domain': {'product_line_id': domain}}
 
     @api.onchange('product_line_id')
     def onchange_line(self):
         """To set product stage based on product line and return domain
         of product class."""
-        domain = []
-        product_stage_id = False
+        class_domain = []
+        stage_domain = []
         if self.product_line_id:
-            product_stage_id = self.product_line_id.stage_id.id
-            domain = [('line_id', '=', self.product_line_id.id)]
-        self.product_stage_id = product_stage_id
-        return {'domain': {'product_class_id': domain}}
+            if (self.product_stage_id.id not in
+                    self.product_line_id.stage_ids.ids):
+                self.product_stage_id = False
+            if (self.product_class_id.id not in
+                    self.product_line_id.class_ids.ids):
+                self.product_class_id = False
+            stage_domain = [('id', 'in',
+                             self.product_line_id.stage_ids.ids)]
+            class_domain = [('id', 'in', self.product_line_id.class_ids.ids)]
+        return {'domain': {'product_class_id': class_domain,
+                           'product_stage_id': stage_domain}}
 
     @api.onchange('product_class_id')
     def onchange_class(self):
         """To set product line based on product class and return domain
         of product family."""
-        domain = []
-        product_line_id = False
+        line_domain = []
+        family_domain = []
         if self.product_class_id:
-            product_line_id = self.product_class_id.line_id.id
-            domain = [('class_id', '=', self.product_class_id.id)]
-        self.product_line_id = product_line_id
-        return {'domain': {'product_family_id': domain}}
+            if (self.product_line_id.id
+                    not in self.product_class_id.line_ids.ids):
+                self.product_line_id = False
+            if (self.product_family_id.id not in
+                    self.product_class_id.family_ids.ids):
+                self.product_family_id = False
+            line_domain = [('id', 'in',
+                            self.product_class_id.line_ids.ids)]
+            family_domain = [('id', 'in',
+                              self.product_class_id.family_ids.ids)]
+        return {'domain': {'product_family_id': family_domain,
+                           'product_line_id': line_domain}}
 
     @api.onchange('product_family_id')
     def onchange_family(self):
         """To set product class based on product family."""
-        product_class_id = False
+        domain = []
         if self.product_family_id:
-            product_class_id = self.product_family_id.class_id.id
-        self.product_class_id = product_class_id
+            if (self.product_class_id.id
+                    not in self.product_family_id.class_ids.ids):
+                self.product_class_id = False
+            domain = [('id', 'in', self.product_family_id.class_ids.ids)]
+        return {'domain': {'product_class_id': domain}}
 
     @api.multi
     def generate_product_code(self):
@@ -91,9 +113,10 @@ class ProductTemplate(models.Model):
                     product.product_line_id.code + \
                     product.product_class_id.code + \
                     product.product_family_id.code
-                seq_cnt = seq_obj.search([('prefix', '=', prefix)], count=True)
+                seq_cnt = seq_obj.sudo().search([('prefix', '=', prefix)],
+                                                count=True)
                 if seq_cnt < 1:
-                    seq_obj.create({
+                    seq_obj.sudo().create({
                         'name': product.product_stage_id.name + '-' +
                         product.product_line_id.name + '-' +
                         product.product_class_id.name + '-' +

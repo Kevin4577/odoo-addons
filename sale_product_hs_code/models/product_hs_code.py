@@ -11,7 +11,7 @@ class ProductHsCode(models.Model):
     _description = "Product HS Code"
     _rec_name = 'name'
 
-    hs_code = fields.Char('HS Code')
+    hs_code = fields.Char('HS Code', copy=False)
     name = fields.Char('Name')
     uom_id = fields.Many2one('product.uom', 'Unit of Measure')
     description = fields.Text('Additional Description')

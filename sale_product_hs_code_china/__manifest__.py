@@ -7,6 +7,7 @@
     'version': '10.0.1.0.0',
     'category': 'Sales',
     'summary': """This module specifies HS Code per product for China.""",
+    "support": "support@elico-corp.com",
     'author': "Elico Corp",
     'website': 'www.elico-corp.com',
     'license': 'AGPL-3',

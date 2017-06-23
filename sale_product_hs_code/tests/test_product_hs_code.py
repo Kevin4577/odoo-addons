@@ -19,6 +19,7 @@ class TestProductHSCode(common.TransactionCase):
     def test_check_hs_code(self):
         "Test product code based on sequence"
         with self.assertRaises(ValidationError):
-            self.prod_hs_code2 = self.prod_hs_code.copy({
-                'hs_code': 'HSCode1'
+            self.prod_hs_code2 = self.prod_hs_code.create({
+                'hs_code': 'HSCode1',
+                'name': 'HSCode1',
             })

@@ -1,4 +1,4 @@
-# Translation of Odoo Server.
+Translation of Odoo Server.
 # This file contains the translation of the following modules:
 #	* trading_stock
 #
@@ -15,7 +15,4 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: trading_stock_shipping
-#: model:ir.model.fields,field_description:trading_stock.field_stock_picking_custom_check
-msgid "Custom Check"
-msgstr "需要报关"
+
