@@ -16,6 +16,7 @@
     ],
     'data': [
         'views/stock_production_lot_views.xml',
+        'views/stock_pack_operation_views.xml',
     ],
     'installable': True,
     'auto_install': False,

@@ -32,3 +32,7 @@ class TestStockPackagingLot(common.TransactionCase):
     def test_onchange_qty_per_carton(self):
         "To Test Qty per box"
         self.stock_production_lot.onchange_qty_per_carton()
+
+    def test_onchange_volume_by_carton(self):
+        "To Test Qty per box"
+        self.stock_production_lot.onchange_volume_by_carton()

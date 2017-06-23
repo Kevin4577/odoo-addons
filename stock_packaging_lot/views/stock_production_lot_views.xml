@@ -12,6 +12,7 @@
                 <field name="qty_per_carton"/>
                 <field name="gross_by_carton"/>
                 <field name="net_by_carton"/>
+                <field name="volume_by_carton"/>
             </field>
             <xpath expr="//group[@name='main_group']" position="inside">
                 <group>
