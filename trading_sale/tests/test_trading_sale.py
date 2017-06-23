@@ -12,6 +12,7 @@ class TestTradingSale(common.TransactionCase):
         product_product = self.env['product.product']
         self.product_uom = self.env.ref('product.product_uom_unit')
         self.partner = self.env.ref('base.res_partner_1')
+        self.partner.write({'ref': 'test_reference'})
         self.trading_sale = self.env['trading.sale']
         self.product_hs = product_hs_code.create({
             'hs_code': 'Test HS Code',
@@ -22,7 +23,8 @@ class TestTradingSale(common.TransactionCase):
         })
         self.product1 = product_product.create({
             'name': 'Test Product',
-            'product_hs_code_id': self.product_hs.id
+            'product_hs_code_id': self.product_hs.id,
+            'default_code': 'Test Default Code'
         })
         self.so = self.env['sale.order'].create({
             'partner_id': self.partner.id,
