@@ -16,6 +16,9 @@
         'stock_package_volume_weight',
         'stock_packaging_lot'
     ],
+    'data': [
+        'security/ir.model.access.csv'
+    ],
     'installable': True,
     'auto_install': False,
 }
