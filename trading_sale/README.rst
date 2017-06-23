@@ -2,13 +2,14 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-================
-Base Sale Export
-================
+============
+Trading Sale
+============
 
-The new module 'trading_sale' would provide methods for sale report modules
+The new module 'trading_sale' will provide base methods for sale report modules
 with the data.
-Those methods would be reused by several modules, in order to improve the maintainability of project modules.
+Those methods will be reused by several modules, in order to improve the
+maintainability of project modules.
 
 
 Usage
