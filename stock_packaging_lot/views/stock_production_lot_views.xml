@@ -22,7 +22,7 @@
                     <field name="net_weight"/>
                     <field name="volume"/>
                     <field name="carton_size"/>
-                    <field name="shipping_marks"/>
+                    <field name="shipping_mark"/>
                 </group>
             </xpath>
         </field>

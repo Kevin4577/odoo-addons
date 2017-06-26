@@ -76,8 +76,8 @@ msgid "Qty per Carton"
 msgstr "每箱数量"
 
 #. module: stock_packaging_lot
-#: model:ir.model.fields,field_description:stock_packaging_lot.field_stock_pack_operation_lot_shipping_marks
-#: model:ir.model.fields,field_description:stock_packaging_lot.field_stock_production_lot_shipping_marks
+#: model:ir.model.fields,field_description:stock_packaging_lot.field_stock_pack_operation_lot_shipping_mark
+#: model:ir.model.fields,field_description:stock_packaging_lot.field_stock_production_lot_shipping_mark
 msgid "Shipping Marks"
 msgstr "唛头"
 

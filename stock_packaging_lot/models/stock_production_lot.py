@@ -52,7 +52,7 @@ class StockProductionLot(models.Model):
     net_weight = fields.Float('Net Weight')
     volume = fields.Float('Volume')
     carton_size = fields.Char('Carton Size')
-    shipping_marks = fields.Text('Shipping Marks')
+    shipping_mark = fields.Text('Shipping Marks')
 
 
 class StockPackOperationLot(models.Model):
@@ -109,7 +109,7 @@ class StockPackOperationLot(models.Model):
     net_weight = fields.Float('Net Weight')
     volume = fields.Float('Volume')
     carton_size = fields.Char('Carton Size')
-    shipping_marks = fields.Text('Shipping Marks')
+    shipping_mark = fields.Text('Shipping Marks')
 
     @api.onchange('lot_id')
     def onchange_lot_id(self):
@@ -128,5 +128,5 @@ class StockPackOperationLot(models.Model):
             self.net_weight = self.lot_id.net_weight
             self.volume = self.lot_id.volume
             self.carton_size = self.lot_id.carton_size
-            self.shipping_marks = self.lot_id.shipping_marks
+            self.shipping_mark = self.lot_id.shipping_mark
         return {}
