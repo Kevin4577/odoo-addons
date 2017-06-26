@@ -3,6 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo.tests import common
 from odoo.exceptions import ValidationError
+from odoo.addons.trading_sale_packaging_printout.models.\
+    trading_sale_packaging_printout import change_ctx
 
 
 class TestTradingSalePackagingPrintout(common.TransactionCase):
@@ -16,6 +18,10 @@ class TestTradingSalePackagingPrintout(common.TransactionCase):
         self.product_uom_unit = self.env.ref('product.product_uom_unit')
         self.product_4 = self.env.ref('product.product_product_4')
         self.ir_actions_report_xml = self.env['ir.actions.report.xml']
+        self.report_xml_id = self.env.ref(
+            'trading_sale_packaging_printout.'
+            'trading_sale_packaging_printout_py3o'
+        )
 
         self.tax = self.env['account.tax'].\
             create({'name': 'Expense 10%',
@@ -50,17 +56,14 @@ class TestTradingSalePackagingPrintout(common.TransactionCase):
     def test_render_report(self):
         with self.assertRaises(ValidationError):
             for pick in self.sale_order.picking_ids:
-                self.ir_actions_report_xml.\
-                    render_report(pick.ids, 'package_volume_weight', {})
+                change_ctx(self.report_xml_id, {'objects': pick, 'data': {}})
         for pick in self.sale_order.picking_ids:
             pick.force_assign()
             pick.pack_operation_product_ids.qty_done = 3.0
             pick.put_in_pack()
             pick.action_done()
-            self.ir_actions_report_xml.\
-                render_report(pick.ids, 'package_volume_weight', {})
+            change_ctx(self.report_xml_id, {'objects': pick, 'data': {}})
         with self.assertRaises(ValidationError):
             for pick in self.sale_order.picking_ids:
                 pick.sale_id = False
-                self.ir_actions_report_xml.\
-                    render_report(pick.ids, 'package_volume_weight', {})
+                change_ctx(self.report_xml_id, {'objects': pick, 'data': {}})
