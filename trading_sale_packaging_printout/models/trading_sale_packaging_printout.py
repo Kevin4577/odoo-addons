@@ -11,12 +11,12 @@ from odoo.addons.report_py3o.models import py3o_report
     report_xml_id='trading_sale_packaging_printout.'
     'trading_sale_packaging_printout_py3o')
 def change_ctx(report_xml_id, ctx):
-    data = {}
     """This function would get the package information,
         lot and other data from stock operation of the specific stock
         picking(s), and sum the package quantity,
         grow weight and meas of those package,
         in order to render the ods template """
+    data = {}
     picking = ctx['objects']
     trading_sale_obj = picking.env['trading.sale']
     available_picking_state = ['assigned', 'partially_available',
