@@ -3,6 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo.tests import common
 from odoo.exceptions import ValidationError
+from odoo.addons.trading_sale_commercial_invoice.report.\
+    trading_sale_commercial_invoice import change_ctx
 
 
 class TestCommercialInvoiceReport(common.TransactionCase):
@@ -18,6 +20,10 @@ class TestCommercialInvoiceReport(common.TransactionCase):
         self.product_uom_unit = self.env.ref('product.product_uom_unit')
         self.product_4 = self.env.ref('product.product_product_4')
         self.product_5 = self.env.ref('product.product_product_5')
+        self.report_xml_id = self.env.ref(
+            'trading_sale_commercial_invoice.'
+            'trading_sale_commercial_invoice_py3o'
+        )
 
         self.tax = self.env['account.tax'].\
             create({'name': 'Expense 10%',
@@ -56,14 +62,10 @@ class TestCommercialInvoiceReport(common.TransactionCase):
                     })
         self.sale_order.action_confirm()
         for pick_id in self.sale_order.picking_ids:
-            self.ir_actions_report_xml_model.\
-                render_report(pick_id.ids, 'trading_sale_commercial_invoice',
-                              {})
+            change_ctx(self.report_xml_id, {'objects': pick_id, 'data': {}})
 
     def test_get_product_sale_list(self):
         with self.assertRaises(ValidationError):
             for pick_id in self.sale_order.picking_ids:
                 pick_id.sale_id = False
-                self.ir_actions_report_xml_model.\
-                    render_report(pick_id.ids,
-                                  'trading_sale_commercial_invoice', {})
+                change_ctx(self.report_xml_id, {'objects': pick_id})
