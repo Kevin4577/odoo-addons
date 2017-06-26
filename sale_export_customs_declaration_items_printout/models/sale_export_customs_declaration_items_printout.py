@@ -11,9 +11,9 @@ from odoo.addons.report_py3o.models import py3o_report
     report_xml_id='sale_export_customs_declaration_items_printout.'
     'sale_export_customs_declaration_items_printout_py3o')
 def change_ctx(report_xml_id, ctx):
-    data = {}
     """This function would get customs declaration items of the
        specific stock picking(s), in order to render the ods template."""
+    data = {}
     picking_id = ctx['objects']
     trading_sale_obj = picking_id.env['trading.sale']
     if picking_id and picking_id.sale_id:
