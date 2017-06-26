@@ -36,7 +36,7 @@ class TestCommercialInvoiceReport(common.TransactionCase):
 
         self.product_4.write({'product_hs_code_id': self.product_hs_code.id})
         self.product_5.write({'product_hs_code_id': self.product_hs_code.id})
-
+        self.partner_id.write({'ref': 'test_ref'})
         self.sale_order = self.sale_order_model.\
             create({'partner_id': self.partner_id.id,
                     'pricelist_id': self.pricelist.id,
