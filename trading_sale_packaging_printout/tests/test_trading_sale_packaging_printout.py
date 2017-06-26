@@ -23,6 +23,7 @@ class TestTradingSalePackagingPrintout(common.TransactionCase):
             'trading_sale_packaging_printout_py3o'
         )
 
+        self.partner_id.write({'ref': 'test_ref'})
         self.tax = self.env['account.tax'].\
             create({'name': 'Expense 10%',
                     'amount': 10,
