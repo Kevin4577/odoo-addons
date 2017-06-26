@@ -22,14 +22,13 @@ class TradingSale(models.Model):
         hs_code_list = self.env['product.hs.code'].browse(hs_code_ids)
         hs_lines = []
         for index, hs_code in enumerate(hs_code_list):
-            if not hs_code.ids:
-                continue
-            hs_lines.append({
-                            'index': index,
-                            'cn_name': hs_code.cn_name,
-                            'hs_code': hs_code.hs_code,
-                            'note': hs_code.note,
-                            })
+            if hs_code.ids:
+                hs_lines.append({
+                                'index': index,
+                                'cn_name': hs_code.cn_name,
+                                'hs_code': hs_code.hs_code,
+                                'note': hs_code.note,
+                                })
         return hs_lines
 
     @api.multi
@@ -44,31 +43,31 @@ class TradingSale(models.Model):
         production_lines = []
         for index, hs_code in enumerate(hs_code_list):
             production_dict = {}
-            if not hs_code:
-                continue
-            order_lines_with_same_hs_code =\
-                filter(lambda line: line.product_id.product_hs_code_id.id ==
-                       hs_code.id, so.order_line)
-            qty_with_same_hs_code =\
-                sum([line.product_uom_qty for line in
-                     order_lines_with_same_hs_code])
-            total_price_with_same_hs_code =\
-                sum([line.price_total for line in
-                     order_lines_with_same_hs_code])
-            if qty_with_same_hs_code != 0:
-                unit_price_with_same_hs_code =\
-                    total_price_with_same_hs_code / qty_with_same_hs_code
+            if hs_code:
+                order_lines_with_same_hs_code =\
+                    filter(lambda line:
+                           line.product_id.product_hs_code_id.id ==
+                           hs_code.id, so.order_line)
+                qty_with_same_hs_code =\
+                    sum([line.product_uom_qty for line in
+                         order_lines_with_same_hs_code])
+                total_price_with_same_hs_code =\
+                    sum([line.price_total for line in
+                         order_lines_with_same_hs_code])
+                if qty_with_same_hs_code != 0:
+                    unit_price_with_same_hs_code =\
+                        total_price_with_same_hs_code / qty_with_same_hs_code
+                    production_dict.update({
+                        'unit_price': unit_price_with_same_hs_code
+                    })
                 production_dict.update({
-                    'unit_price': unit_price_with_same_hs_code
+                    'hs_code': hs_code,
+                    'qty': str(qty_with_same_hs_code) + PRODUCT_STANDARD_UNIT,
+                    'total': total_price_with_same_hs_code,
+                    'pricelist': product_pricelist_name,
+                    'index': index
                 })
-            production_dict.update({
-                'hs_code': hs_code,
-                'qty': str(qty_with_same_hs_code) + PRODUCT_STANDARD_UNIT,
-                'total': total_price_with_same_hs_code,
-                'pricelist': product_pricelist_name,
-                'index': index
-            })
-            production_lines.append(production_dict)
+                production_lines.append(production_dict)
         return production_lines
 
     @api.multi
@@ -88,32 +87,33 @@ class TradingSale(models.Model):
         sum_amount = 0
         for hs_code in hs_code_list:
             production_dict = {}
-            if not hs_code:
-                continue
-            order_lines_with_same_hs_code =\
-                filter(lambda line: line.product_id.product_hs_code_id.id ==
-                       hs_code.id, so.order_line)
-            qty_with_same_hs_code = sum([line.product_uom_qty for line in
-                                         order_lines_with_same_hs_code])
-            total_price_with_same_hs_code =\
-                sum([line.price_total for line in
-                     order_lines_with_same_hs_code])
-            if qty_with_same_hs_code != 0:
-                unit_price_with_same_hs_code =\
-                    total_price_with_same_hs_code / qty_with_same_hs_code
+            if hs_code:
+                order_lines_with_same_hs_code =\
+                    filter(lambda line:
+                           line.product_id.product_hs_code_id.id ==
+                           hs_code.id, so.order_line)
+                qty_with_same_hs_code = sum([line.product_uom_qty for line in
+                                             order_lines_with_same_hs_code])
+                total_price_with_same_hs_code =\
+                    sum([line.price_total for line in
+                         order_lines_with_same_hs_code])
+                if qty_with_same_hs_code != 0:
+                    unit_price_with_same_hs_code =\
+                        total_price_with_same_hs_code / qty_with_same_hs_code
+                    production_dict.update({
+                        'unit_price': '@' + product_pricelist_name +
+                                      str(unit_price_with_same_hs_code)
+                    })
                 production_dict.update({
-                    'unit_price': '@' + product_pricelist_name +
-                                  str(unit_price_with_same_hs_code)
+                    'hs_code': hs_code,
+                    'qty': str(qty_with_same_hs_code) + PRODUCT_STANDARD_UNIT,
+                    'total':
+                        product_pricelist_name + product_pricelist_sample +
+                    str(total_price_with_same_hs_code)
                 })
-            production_dict.update({
-                'hs_code': hs_code,
-                'qty': str(qty_with_same_hs_code) + PRODUCT_STANDARD_UNIT,
-                'total': product_pricelist_name + product_pricelist_sample +
-                str(total_price_with_same_hs_code)
-            })
-            production_lines.append(production_dict)
-            sum_qty += qty_with_same_hs_code
-            sum_amount += total_price_with_same_hs_code
+                production_lines.append(production_dict)
+                sum_qty += qty_with_same_hs_code
+                sum_amount += total_price_with_same_hs_code
         return sum_qty, sum_amount, production_lines
 
     @api.multi
@@ -132,32 +132,34 @@ class TradingSale(models.Model):
         sum_net_weight = 0
         sum_volume = 0
         for hs_code in hs_code_list:
-            if not hs_code.ids:
-                continue
-            operation_lines_with_same_hs_code =\
-                filter(lambda line: line.product_id.product_hs_code_id.id ==
-                       hs_code.id, sp.pack_operation_product_ids)
-            operation_lot_ids = [lot_ids.pack_lot_ids for lot_ids in
-                                 operation_lines_with_same_hs_code]
-            prod_lot_ids = [operation_id.lot_id for operation_id in
-                            operation_lot_ids]
-            for pack_lot in prod_lot_ids:
-                carton_quantity_with_same_hs_code = sum([pack_lot.carton_qty])
-                total_gross_weight_with_same_hs_code =\
-                    sum([pack_lot.gross_weight])
-                total_net_weight_with_same_hs_code = sum([pack_lot.net_weight])
-                total_volume_with_same_hs_code = sum([pack_lot.volume])
-                production_lines.append({
-                    'hs_code': hs_code,
-                    'qty_ctn': carton_quantity_with_same_hs_code,
-                    'total_gw': total_gross_weight_with_same_hs_code,
-                    'total_nw': total_net_weight_with_same_hs_code,
-                    'total_meas': total_volume_with_same_hs_code
-                })
-                sum_carton_quantity += carton_quantity_with_same_hs_code
-                sum_gross_weight += total_gross_weight_with_same_hs_code
-                sum_net_weight += total_net_weight_with_same_hs_code
-                sum_volume += total_volume_with_same_hs_code
+            if hs_code.ids:
+                operation_lines_with_same_hs_code = filter(
+                    lambda line:
+                    line.product_id.product_hs_code_id.id == hs_code.id,
+                    sp.pack_operation_product_ids)
+                operation_lot_ids = [lot_ids.pack_lot_ids for lot_ids in
+                                     operation_lines_with_same_hs_code]
+                prod_lot_ids = [operation_id.lot_id for operation_id in
+                                operation_lot_ids]
+                for pack_lot in prod_lot_ids:
+                    carton_quantity_with_same_hs_code = sum(
+                        [pack_lot.carton_qty])
+                    total_gross_weight_with_same_hs_code =\
+                        sum([pack_lot.gross_weight])
+                    total_net_weight_with_same_hs_code = sum(
+                        [pack_lot.net_weight])
+                    total_volume_with_same_hs_code = sum([pack_lot.volume])
+                    production_lines.append({
+                        'hs_code': hs_code,
+                        'qty_ctn': carton_quantity_with_same_hs_code,
+                        'total_gw': total_gross_weight_with_same_hs_code,
+                        'total_nw': total_net_weight_with_same_hs_code,
+                        'total_meas': total_volume_with_same_hs_code
+                    })
+                    sum_carton_quantity += carton_quantity_with_same_hs_code
+                    sum_gross_weight += total_gross_weight_with_same_hs_code
+                    sum_net_weight += total_net_weight_with_same_hs_code
+                    sum_volume += total_volume_with_same_hs_code
         return sum_carton_quantity, sum_gross_weight, sum_net_weight, \
             sum_volume, production_lines
 
