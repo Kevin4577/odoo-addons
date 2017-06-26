@@ -3,6 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo.tests import common
 from odoo.exceptions import ValidationError
+from odoo.addons.trading_sale_custom_declaration.models. \
+    trading_sale_custom_declaration import change_ctx
 
 
 class TestTradingSaleCustomDeclaration(common.TransactionCase):
@@ -18,6 +20,10 @@ class TestTradingSaleCustomDeclaration(common.TransactionCase):
         self.product_uom_unit = self.env.ref('product.product_uom_unit')
         self.product_4 = self.env.ref('product.product_product_4')
         self.product_5 = self.env.ref('product.product_product_5')
+        self.report_xml_id = self.env.ref(
+            'trading_sale_custom_declaration.'
+            'trading_sale_custom_declaration_py3o'
+        )
 
         self.tax = self.env['account.tax'].\
             create({'name': 'Expense 10%',
@@ -36,6 +42,7 @@ class TestTradingSaleCustomDeclaration(common.TransactionCase):
 
         self.product_4.write({'product_hs_code_id': self.product_hs_code.id})
         self.product_5.write({'product_hs_code_id': self.product_hs_code.id})
+        self.partner_id.write({'ref': 'test_ref'})
 
         self.sale_order = self.sale_order_model.\
             create({'partner_id': self.partner_id.id,
@@ -56,13 +63,8 @@ class TestTradingSaleCustomDeclaration(common.TransactionCase):
             pick.pack_operation_product_ids.qty_done = 3.0
             pick.put_in_pack()
             pick.action_done()
-            self.ir_actions_report_xml_model.\
-                render_report(pick.ids,
-                              'trading_sale_custom_declaration', {})
+            change_ctx(self.report_xml_id, {'objects': pick, 'data': {}})
         with self.assertRaises(ValidationError):
             for pick in self.sale_order.picking_ids:
                 pick.sale_id = False
-                self.ir_actions_report_xml_model.\
-                    render_report(pick.ids,
-                                  'trading_sale_custom_declaration',
-                                  {})
+                change_ctx(self.report_xml_id, {'objects': pick, 'data': {}})
