@@ -9,11 +9,12 @@
     'summary': """Sale export customs declaration items printout for each
     sale orders (report_py3o).""",
     'author': "Elico Corp",
+    "support": "support@elico-corp.com",
     'website': 'www.elico-corp.com',
     'license': 'AGPL-3',
     'depends': [
         'report_py3o',
-        'base_sale_export'
+        'trading_sale'
     ],
     'demo': [
         'demo/sale_export_customs_declaration_items_printout.xml'

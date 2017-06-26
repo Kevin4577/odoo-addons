@@ -3,12 +3,14 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo.tests import common
 from odoo.exceptions import ValidationError
+from odoo.addons.sale_export_customs_declaration_items_printout.models. \
+    sale_export_customs_declaration_items_printout import change_ctx
 
 
 class TestSaleExportCustomsDeclarationItemsPrintout(common.TransactionCase):
     def setUp(self):
         super(TestSaleExportCustomsDeclarationItemsPrintout, self).setUp()
-        self.base_sale_export_model = self.env['base.sale.export']
+        self.base_sale_export_model = self.env['trading.sale']
         self.stock_picking_model = self.env['stock.picking']
         self.sale_order_model = self.env['sale.order']
         self.product_hs_code_model = self.env['product.hs.code']
@@ -18,6 +20,10 @@ class TestSaleExportCustomsDeclarationItemsPrintout(common.TransactionCase):
         self.product_4 = self.env.ref('product.product_product_4')
         self.product_5 = self.env.ref('product.product_product_5')
         self.ir_actions_report_xml = self.env['ir.actions.report.xml']
+        self.report_xml_id = self.env.ref(
+            'sale_export_customs_declaration_items_printout.'
+            'sale_export_customs_declaration_items_printout_py3o'
+        )
         self.tax = self.env['account.tax'].\
             create({'name': 'Expense 10%',
                     'amount': 10,
@@ -35,6 +41,7 @@ class TestSaleExportCustomsDeclarationItemsPrintout(common.TransactionCase):
 
         self.product_4.write({'product_hs_code_id': self.product_hs_code.id})
         self.product_5.write({'product_hs_code_id': self.product_hs_code.id})
+        self.partner_id.write({'ref': 'test_ref'})
         self.sale_order = self.sale_order_model.create({
             'partner_id': self.partner_id.id,
             'pricelist_id': self.pricelist.id,
@@ -53,12 +60,9 @@ class TestSaleExportCustomsDeclarationItemsPrintout(common.TransactionCase):
             pick.pack_operation_product_ids.qty_done = 3.0
             pick.put_in_pack()
             pick.action_done()
-            self.ir_actions_report_xml.\
-                render_report(pick.ids,
-                              "sale_export_customs_declaration_items", {})
+            change_ctx(self.report_xml_id, {'objects': pick, 'data': {}})
         with self.assertRaises(ValidationError):
             for pick in self.sale_order.picking_ids:
                 pick.sale_id = False
-                self.ir_actions_report_xml.\
-                    render_report(pick.ids,
-                                  'sale_export_customs_declaration_items', {})
+                change_ctx(self.report_xml_id,
+                           {'objects': pick, 'data': {}})
