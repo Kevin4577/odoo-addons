@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # © 2017 Elico Corp (https://www.elico-corp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import api, models, _
+from odoo import _
 from odoo.exceptions import ValidationError
 from odoo.addons.report_py3o.models import py3o_report
 
