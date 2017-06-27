@@ -10,7 +10,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 try:
-    from ezodf import opendoc
+    import ezodf
 except (ImportError, IOError) as err:
     _logger.debug(err)
 
@@ -24,62 +24,114 @@ class IrActionsReportXml(models.Model):
 
 
 class ReportPy3oMultisheet(models.Model):
-    "Report Py3o Multisheet"
     _name = 'report.py3o.multisheet'
     _description = 'Report Py3o Multisheet'
 
-    @api.model
-    def create_new_template(self, head_end_line, lines_per_sheet,
-                            total_line_num, attribute_num_per_line,
-                            attribute_per_line, template_new_path,
-                            template_base_path):
-        """This function would generate the new template from base one. It
-        would duplicate the head and footer of first sheet into new sheets,
-        and make the body could be customized by user.
-        The whole template should be rendered with the selected delivery
-        order data. 'Attribute per line' should be the list of several fields
-        of each stock move lines of this delivery order. 4,5 should be the
-        index of attribute_per_line to store fields, which would get data from
-        delivery order, not from the specific move line. 9 should be the index
-        of attribute_per_line, which should start with the second line of
-        template.
-        attribute_per_line : store fields in list
-        total_line_num: product list(lines),
-        template_base_path: ODS template file path,
-        template_new_path: generate the related path of template_base_path
+    def open_base_template(self, template_base_path):
+        """This function would open the base template ods file
         """
-        lines_per_line = int(math.ceil(len(attribute_per_line
-                                           ) / float(attribute_num_per_line)))
-        add_sheet_num = int(math.floor(total_line_num / lines_per_sheet))
-        doc = opendoc(template_base_path)
-        sheets = doc.sheets
-        sheet = sheets[0]
-        for index in range(add_sheet_num):
-            sheet_new = copy.deepcopy(sheet)
-            sheets.append(sheet_new)
-        for sheet_index, sheet in enumerate(sheets):
-            # Append the new sheet
-            sheet.insert_rows(index=head_end_line,
-                              count=lines_per_sheet * lines_per_line)
-            for row in range(0, lines_per_sheet * lines_per_line,
-                             lines_per_line):
-                for attr_index, attr in enumerate(attribute_per_line):
-                    if (sheet_index * lines_per_sheet + row /
-                            lines_per_line < total_line_num):
-                        # Duplicate the header
-                        if attr_index < 4 or 5 < attr_index < 9:
-                            sheet[row + head_end_line, attr_index].set_value((
-                                attr % (sheet_index * lines_per_sheet + row /
-                                        lines_per_line)))
-                        # Copy the attribute name
-                        if attr_index in [4, 5]:
-                            sheet[row + head_end_line, attr_index].\
-                                set_value(attr)
-                        # Copy the attribute's value
-                        if attr_index >= 9:
-                            sheet[row + head_end_line + 1,
-                                  attr_index + 2 - attribute_num_per_line
-                                  ].set_value((attr %
-                                               (sheet_index * lines_per_sheet +
-                                                row / lines_per_line)))
+        return ezodf.opendoc(template_base_path)
+
+    def save_new_template(self, template_new_path, doc):
+        """This function would generate the new template ods file
+        """
         doc.saveas(template_new_path)
+        return True
+
+    def multi_sheet_per_template(
+            self,
+            sheets,
+            sheet_lines_data,
+    ):
+        """This function would generate the new template from base one. It
+        would duplicate the head and footer of first sheet or duplicate with
+        the empty sheet with specific sheet name.
+        sheets: sheets of template ods
+        sheet_lines_data:
+        {
+        'Sheet name':{
+                    'name': 'Sheet name',
+                    'lines': 'Lines number per sheet',
+                    'duplicate': True if need to duplicate head and
+                                 foot of base sheet,
+                    'head_end_line': The number of the line header
+                                     ending
+        }
+        """
+        sheet = sheets[0]
+        sheet_list = [value for key, value in sheet_lines_data.items()]
+        sheet_list.sort(key=lambda x: x['sequence'])
+        for value in sheet_list:
+            sheet_new = copy.deepcopy(
+                sheet) if value['duplicate'] \
+                else ezodf.Table[value['name']]
+            sheet_new.name = value['name']
+            sheets.append(sheet_new)
+        del sheets[0]
+        return sheets
+
+    def multi_lines_per_sheet(self, sheets, sheet_lines_data):
+        """This function would insert lines into each sheets
+        sheet_lines_data:
+        {
+        'Sheet name':{
+                    'name': 'Sheet name',
+                    'lines': 'Lines number per sheet',
+                    'duplicate': True if need to duplicate head and
+                                 foot of base sheet,
+                    'head_end_line': The number of the line header
+                                     ending
+                    },
+        }
+        """
+        for sheet in sheets:
+            # Append the new sheet
+            lines_per_sheet = \
+                sheet_lines_data[sheet.name].get('lines', 1)
+            head_end_line = \
+                sheet_lines_data[sheet.name].get('head_end_line', 1)
+            sheet.insert_rows(index=head_end_line,
+                              count=lines_per_sheet)
+        return sheets
+
+    def multi_attribute_per_line(
+            self,
+            sheets,
+            sheet_lines_data,
+            attribute_per_line,
+            attribute_num_per_line,
+    ):
+        """This function would insert multi-attribute into lines per sheets.
+        attribute_per_line: attribute list each lines
+        attribute_num_per_line: the number of attributes each lines
+        sheet_lines_data:
+        {
+        'Sheet name':{
+                    'name': 'Sheet name',
+                    'lines': 'Lines number per sheet',
+                    'duplicate': True if need to duplicate head and
+                                 foot of base sheet,
+                    'head_end_line': The number of the line header
+                                     ending
+                    },
+        }
+        """
+        lines_per_line = int(math.ceil(
+            len(attribute_per_line) / float(attribute_num_per_line)))
+        total_lines_num = 0
+        for index_sheet, sheet in enumerate(sheets):
+            total_lines_per_sheet = sheet_lines_data[sheet.name]['lines']
+            lines_per_sheet = total_lines_per_sheet / lines_per_line
+            head_end_line = sheet_lines_data[sheet.name]['head_end_line']
+            for row in range(0, total_lines_per_sheet, lines_per_line):
+                for index_attribute, attr in enumerate(attribute_per_line):
+                    index_row = \
+                        total_lines_num + row / lines_per_line
+                    sheet[row +
+                          head_end_line +
+                          index_attribute /
+                          attribute_num_per_line, index_attribute %
+                          attribute_num_per_line].set_value((attr %
+                                                             (index_row)))
+            total_lines_num += lines_per_sheet
+        return sheets
