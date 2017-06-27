@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo.tests import common
 from odoo.exceptions import ValidationError
-from odoo.addons.trading_sale_custom_declaration.models. \
+from odoo.addons.trading_sale_custom_declaration.report. \
     trading_sale_custom_declaration import change_ctx
 
 

@@ -12,7 +12,7 @@
     "website": "https://www.elico-corp.com",
     "depends": [
         "trading_sale",
-        "report_py3o_multisheet",
+        "report_py3o_multisheet_custome_lines",
     ],
     "data": [
         "report/trading_sale_custom_declaration.xml",
