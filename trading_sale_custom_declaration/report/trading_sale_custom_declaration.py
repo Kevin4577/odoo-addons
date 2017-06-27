@@ -43,10 +43,12 @@ def _update_base_template(
         doc
     )
 
+
 def _get_related_path(filename):
     """This function would generate the related path of template"""
     if filename:
-      return os.path.dirname(os.path.dirname(__file__)) + '/' + filename
+        return os.path.dirname(os.path.dirname(__file__)) + '/' + filename
+
 
 @py3o_report.py3o_report_extender(
     report_xml_id='trading_sale_custom_declaration.'
