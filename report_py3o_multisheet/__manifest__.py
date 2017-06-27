@@ -17,5 +17,8 @@
     "depends": [
         "report_py3o",
     ],
+    'data': [
+        'security/ir.model.access.csv',
+    ],
     "installable": True,
 }
