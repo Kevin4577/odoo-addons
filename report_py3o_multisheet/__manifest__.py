@@ -4,7 +4,7 @@
 {
     "name": "Report Py3o Multisheet",
     "summary": """The new module 'report_py3o_multisheet' modify the
-    template required by 'report_py3o' module. It help to add multi-sheet 
+    template required by 'report_py3o' module. It help to add multi-sheet
     into the template""",
     "version": "10.0.1.0.0",
     "author": "Elico Corp",
