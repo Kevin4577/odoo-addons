@@ -30,12 +30,12 @@ class ReportPy3oMultisheet(models.Model):
     _description = 'Report Py3o Multisheet'
 
     def open_base_template(self, template_base_path):
-        """This function would open the base template ods file
+        """This function open the base template ods file
         """
         return ezodf.opendoc(template_base_path)
 
     def save_new_template(self, template_new_path, doc):
-        """This function would generate the new template ods file
+        """This function generate the new template ods file
         """
         doc.saveas(template_new_path)
         return True
@@ -45,8 +45,8 @@ class ReportPy3oMultisheet(models.Model):
             sheets,
             sheet_lines_data,
     ):
-        """This function would generate the new template from base one. It
-        would duplicate the head and footer of first sheet or duplicate with
+        """This function generate the new template from base one. It
+        duplicate the head and footer of first sheet or duplicate with
         the empty sheet with specific sheet name.
         sheets: sheets of template ods
         sheet_lines_data:
@@ -73,7 +73,7 @@ class ReportPy3oMultisheet(models.Model):
         return sheets
 
     def multi_lines_per_sheet(self, sheets, sheet_lines_data):
-        """This function would insert lines into each sheets
+        """This function insert lines into each sheets
         sheet_lines_data:
         {
         'Sheet name':{
@@ -103,7 +103,7 @@ class ReportPy3oMultisheet(models.Model):
             attribute_per_line,
             attribute_num_per_line,
     ):
-        """This function would insert multi-attribute into lines per sheets.
+        """This function insert multi-attribute into lines per sheets.
         attribute_per_line: attribute list each lines
         attribute_num_per_line: the number of attributes each lines
         sheet_lines_data:

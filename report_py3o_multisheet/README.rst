@@ -6,9 +6,9 @@
 Report Py3o Multisheet
 =======================
 
-The new module 'report_py3o_multisheet' would modify the template required by 'report_py3o' module.
-It would help to add multi-sheet into the template. Each sheets would repeat the same head and footer
-part of first sheet. The body would be customized with specified list.
+The new module 'report_py3o_multisheet' modify the template required by 'report_py3o' module.
+It help to add multi-sheet into the template. Each sheets repeat the same head and footer
+part of first sheet. The body be customized with specified list.
 
 Installation
 ============

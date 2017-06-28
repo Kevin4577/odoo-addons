@@ -3,9 +3,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     "name": "Report Py3o Multisheet",
-    "summary": """The new module 'report_py3o_multisheet' would modify the
-        template required by 'report_py3o' module. It would help to add
-        multi-sheet into the template""",
+    "summary": """The new module 'report_py3o_multisheet' modify the
+    template required by 'report_py3o' module. It help to add multi-sheet 
+    into the template""",
     "version": "10.0.1.0.0",
     "author": "Elico Corp",
     "support": "support@elico-corp.com",
