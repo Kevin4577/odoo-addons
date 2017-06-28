@@ -18,9 +18,11 @@ except (ImportError, IOError) as err:
 class IrActionsReportXml(models.Model):
     _inherit = 'ir.actions.report.xml'
 
-    py3o_template_fallback_base = fields.\
-        Char(size=128, help='If the user does not provide a template'
-             ' this one will be used.')
+    py3o_template_fallback_base = fields.Char(
+        size=128,
+        help='If the user does not provide a template '
+             'this one will be used.'
+    )
 
 
 class ReportPy3oMultisheet(models.Model):
