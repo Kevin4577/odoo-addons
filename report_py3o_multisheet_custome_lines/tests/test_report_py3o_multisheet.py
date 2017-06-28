@@ -17,21 +17,21 @@ class TestReportPy3oMultisheet(common.TransactionCase):
                 'name': 'Sheet1',
                 'lines': 16,
                 'duplicate': True,
-                'head_end_line': 14,
+                'head_end_line': 20,
                 'sequence': 1
             },
             'Sheet2': {
                 'name': 'Sheet2',
                 'lines': 16,
                 'duplicate': True,
-                'head_end_line': 14,
+                'head_end_line': 20,
                 'sequence': 2
             },
             'Sheet3': {
                 'name': 'Sheet3',
                 'lines': 4,
                 'duplicate': True,
-                'head_end_line': 14,
+                'head_end_line': 20,
                 'sequence': 3
             }
         }
@@ -41,8 +41,8 @@ class TestReportPy3oMultisheet(common.TransactionCase):
             '${data.line%d.hs_code.hs_code}',
             '${data.line%d.hs_code.name}',
             '${data.line%d.qty}',
-            '${objects.ship_info_id.ship_to.country_id.name}',
-            '${objects.ship_info_id.ship_from.country_id.name}',
+            '${data.ship_to}',
+            '${data.ship_from}',
             '${data.line%d.unit_price}',
             '${data.line%d.total}',
             '${data.line%d.pricelist}',
