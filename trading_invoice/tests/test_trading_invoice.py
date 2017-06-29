@@ -23,14 +23,17 @@ class TestTradingInvoice(common.TransactionCase):
         self.product_4 = self.env.ref('product.product_product_4')
         self.product_4.write({
             'invoice_policy': 'order',
-            'customer_product_code': 'Test'
+            'customer_product_code': 'Test',
+            'default_code': 'Test Default Code'
         })
         self.product_5 = self.env.ref('product.product_product_5')
         self.product_5.write({
             'invoice_policy': 'order',
-            'customer_product_code': 'Test'
+            'customer_product_code': 'Test',
+            'default_code': 'Test Default Code 2'
         })
         self.partner_id = self.env.ref('base.res_partner_2')
+        self.partner_id.write({'ref': 'test_reference'})
         self.partner3_id = self.env.ref('base.res_partner_3')
         self.pricelist = self.env.ref('product.list0')
         self.shipping_model = self.env['shipping']
@@ -91,7 +94,9 @@ class TestTradingInvoice(common.TransactionCase):
         self.pack_operation_lot_model.create({
             'operation_id': pack_opt.id,
             'lot_id': self.lot1.id,
-            'qty': 5.0
+            'qty': 5.0,
+            'volume': 10.0,
+            'carton_qty': 5.0,
         })
         self.sale_order.picking_ids.do_new_transfer()
         self.sale_advance_payment_inv_model.with_context({
