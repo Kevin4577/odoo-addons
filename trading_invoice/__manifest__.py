@@ -16,5 +16,8 @@
         "sale_product_hs_code_china",
         "product_class",
     ],
+    'data': [
+        'security/ir.model.access.csv'
+    ],
     "installable": True,
 }
