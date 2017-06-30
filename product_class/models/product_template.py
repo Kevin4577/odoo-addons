@@ -31,7 +31,7 @@ class ProductTemplate(models.Model):
     rd_drawing_number = fields.Char('R&D Drawing Number',
                                     help='R&D Drawing Number')
     location_default_id = fields.Many2one('stock.location',
-                                          'Stock Location',
+                                          'Default Stock Location',
                                           help='Default stock location of '
                                           'product.')
 
