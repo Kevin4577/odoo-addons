@@ -41,7 +41,8 @@ class StockPicking(models.Model):
         to each stock operation lines."""
         res = super(StockPicking, self)._prepare_pack_ops(quants, forced_qties)
         for pack_operation_value in res:
-            for pack_lot_value in pack_operation_value['pack_lot_ids']:
+            for pack_lot_value in pack_operation_value.get(
+                    'pack_lot_ids', []):
                 for element in pack_lot_value:
                     if isinstance(element, dict) and element['lot_id']:
                         lot = self.env['stock.production.lot'].\
