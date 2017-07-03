@@ -279,3 +279,9 @@ msgstr "产品编码必须唯一."
 msgid "The name of the product must be unique."
 msgstr "产品名称必须唯一."
 
+#. module: product_class
+#: model:ir.model.fields,field_description:product_class.field_product_product_location_default_id
+#: model:ir.model.fields,field_description:product_class.field_product_template_location_default_id
+msgid "Stock Location"
+msgstr "默认位置"
+
