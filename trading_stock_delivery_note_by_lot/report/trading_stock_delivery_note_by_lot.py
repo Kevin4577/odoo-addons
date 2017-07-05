@@ -18,7 +18,8 @@ def render_report_with_data(report_xml_id, ctx):
         raise ValidationError(_('Please check whether all delivery '
                                 'orders period belong to one customer'))
     base_invoice_export_obj = stock_picking_list.env['trading.invoice']
-    if stock_picking_list.sale_id:
+    if stock_picking_list.filtered(lambda stock_picking:
+                                   stock_picking.sale_id):
         ctx.update(base_invoice_export_obj.
                    get_product_lot_list_per_sale_order(stock_picking_list))
     else:
