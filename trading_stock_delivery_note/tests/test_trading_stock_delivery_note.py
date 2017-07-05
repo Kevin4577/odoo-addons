@@ -16,6 +16,7 @@ class TestTradingStockDeliveryNote(common.TransactionCase):
                                           'trading_stock_delivery_note_py3o')
         self.ir_actions_report_xml_model = self.env['ir.actions.report.xml']
         self.sale_order_model = self.env['sale.order']
+        self.pack_obj = self.env['stock.quant.package']
         self.partner_id = self.env.ref('base.res_partner_2')
         self.partner_id.write({'ref': 'test_reference'})
         self.partner1_id = self.env.ref('base.res_partner_1')
@@ -69,6 +70,14 @@ class TestTradingStockDeliveryNote(common.TransactionCase):
                      ]
                     })
         self.sale_order.action_confirm()
+        self.sale_order.picking_ids.action_confirm()
+        self.sale_order.picking_ids.action_assign()
+        self.sale_order.picking_ids.force_assign()
+        self.pack1 = self.pack_obj.create({
+            'name': 'Test PACKINOUTTEST'
+        })
+        self.sale_order.picking_ids.\
+            pack_operation_ids[0].result_package_id = self.pack1
 
     def test_render_template_with_data(self):
         "To Test render_template_with_data method."
