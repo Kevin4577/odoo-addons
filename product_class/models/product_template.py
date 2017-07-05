@@ -30,6 +30,10 @@ class ProductTemplate(models.Model):
                                   help='R&D Product Code')
     rd_drawing_number = fields.Char('R&D Drawing Number',
                                     help='R&D Drawing Number')
+    location_default_id = fields.Many2one('stock.location',
+                                          'Default Stock Location',
+                                          help='Default stock location of '
+                                          'product.')
 
     _sql_constraints = [('name_uniq', 'UNIQUE(name)',
                          _('The name of the product must be unique.'))]
