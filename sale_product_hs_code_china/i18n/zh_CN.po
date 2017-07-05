@@ -44,3 +44,11 @@ msgstr "中文名称 (CN)"
 msgid "Rebate Rate"
 msgstr "海关退税率"
 
+#. module: sale_product_hs_code_china
+#: model:ir.model.fields,field_description:sale_product_hs_code_china.field_product_hs_code_english_uom_id
+#: model:ir.model.fields,field_description:sale_product_hs_code_china.field_product_product_hs_code_english_uom
+#: model:ir.model.fields,field_description:sale_product_hs_code_china.field_product_template_hs_code_english_uom
+#: model:ir.ui.view,arch_db:sale_product_hs_code_china.view_product_hs_code_filter_inherit
+msgid "English HS UoM"
+msgstr "英文单位"
+

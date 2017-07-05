@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_pack_operation_lot_lot_form_inherit" model="ir.ui.view">
+        <field name="name">stock.pack.operation.lots.form.inherit</field>
+        <field name="model">stock.pack.operation.lot</field>
+        <field name="inherit_id" ref="stock.view_pack_operation_lot_lot_form" />
+        <field name="arch" type="xml">
+            <field name="lot_id" position="after">
+                <field name="carton_no"/>
+                <field name="carton_qty"/>
+                <field name="qty_per_carton"/>
+                <field name="gross_by_carton"/>
+                <field name="net_by_carton"/>
+                <field name="volume_by_carton"/>
+                <field name="box_per_carton"/>
+                <field name="qty_per_box"/>
+                <field name="gross_weight"/>
+                <field name="net_weight"/>
+                <field name="volume"/>
+                <field name="carton_size"/>
+                <field name="shipping_mark"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_pack_operation_lot_form_inherit" model="ir.ui.view">
+        <field name="name">stock.pack.operation.lots.form.inherit</field>
+        <field name="model">stock.pack.operation</field>
+        <field name="inherit_id" ref="stock.view_pack_operation_lot_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='pack_lot_ids']/tree/field[@name='lot_id']" position="after">
+                <field name="carton_no"/>
+                <field name="carton_qty"/>
+                <field name="qty_per_carton"/>
+                <field name="gross_by_carton"/>
+                <field name="net_by_carton"/>
+                <field name="volume_by_carton"/>
+                <field name="box_per_carton"/>
+                <field name="qty_per_box"/>
+                <field name="gross_weight"/>
+                <field name="net_weight"/>
+                <field name="volume"/>
+                <field name="carton_size"/>
+                <field name="shipping_mark"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
