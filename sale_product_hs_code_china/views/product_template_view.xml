@@ -9,6 +9,9 @@
             <field name="hs_code" position="after">
                 <field name="hs_cn_name"/>
             </field>
+            <field name="hs_code_uom" position="after">
+                <field name="hs_code_english_uom"/>
+            </field>
             <field name="hs_name" position="after">
                 <field name="tax_code"/>
             </field>

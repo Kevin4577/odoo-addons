@@ -12,14 +12,11 @@ class ProductFamily(models.Model):
 
     name = fields.Char('Name', index=True,
                        help='Family Name')
-    code = fields.Char('Code', copy=False, help='Family Code')
+    code = fields.Char('Code', help='Family Code')
     class_ids = fields.Many2many(comodel_name='product.class',
                                  string='Available Class',
                                  help='Related Class')
 
     _sql_constraints = [('code_check',
                          'CHECK(length(code) < 3 and length(code) >1)',
-                         _('The code length of the family must be 2.')),
-                        ('code_uniq', 'UNIQUE(code)',
-                         _('The code of the family must be unique.'))
-                        ]
+                         _('The code length of the family must be 2.')), ]
