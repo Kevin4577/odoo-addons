@@ -16,6 +16,11 @@ class ProductTemplate(models.Model):
                                related='product_hs_code_id.tax_id',
                                help='Tax Rebate Rate',
                                readonly=True)
+    hs_code_english_uom = fields.Many2one('product.uom', 'English HS UoM',
+                                          related='product_hs_code_id.'
+                                          'english_uom_id',
+                                          help='English Unit of Measure.',
+                                          readonly=True)
 
     @api.model
     def fields_view_get(self, view_id=None, view_type='form',

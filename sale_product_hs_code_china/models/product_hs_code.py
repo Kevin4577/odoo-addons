@@ -12,3 +12,5 @@ class ProductHsCode(models.Model):
     cn_name = fields.Char('Name (CN)', help='Chinese Name')
     tax_id = fields.Many2one('account.tax', 'Rebate Rate',
                              help='Tax Rebate Rate')
+    english_uom_id = fields.Many2one('product.uom', 'English HS UoM',
+                                     help='English Unit of Measure.')
