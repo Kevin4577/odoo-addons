@@ -17,11 +17,15 @@ class TestTradingStockDeliveryNote(common.TransactionCase):
         self.ir_actions_report_xml_model = self.env['ir.actions.report.xml']
         self.sale_order_model = self.env['sale.order']
         self.partner_id = self.env.ref('base.res_partner_2')
+        self.partner_id.write({'ref': 'test_reference'})
         self.partner1_id = self.env.ref('base.res_partner_1')
+        self.partner1_id.write({'ref': 'test_reference_1'})
         self.pricelist = self.env.ref('product.list0')
         self.product_uom_unit = self.env.ref('product.product_uom_unit')
         self.product_4 = self.env.ref('product.product_product_4')
+        self.product_4.write({'default_code': 'Test Default Code'})
         self.product_5 = self.env.ref('product.product_product_5')
+        self.product_5.write({'default_code': 'Test Default Code1'})
         self.picking_type_out = self.ref('stock.picking_type_out')
         self.location_stock = self.env.ref('stock.stock_location_stock')
         self.loc_customers = self.env.ref('stock.stock_location_customers')
