@@ -17,8 +17,12 @@ def render_template_with_data(report_xml_id, ctx):
     if len(stock_picking_list.mapped('partner_id').ids) > 1:
         raise ValidationError(_('Please check whether all delivery orders'
                                 ' belong to one customer.'))
+    if stock_picking_list.filtered(lambda stock_picking:
+                                   stock_picking.state != 'done'):
+        raise ValidationError(_('Please check the state of stock picking.'))
     base_invoice_export_obj = stock_picking_list.env['trading.invoice']
-    if stock_picking_list.sale_id:
+    if stock_picking_list.filtered(lambda stock_picking:
+                                   stock_picking.sale_id):
         ctx.update(base_invoice_export_obj.get_product_order_list_with_qty
                    (stock_picking_list))
     else:

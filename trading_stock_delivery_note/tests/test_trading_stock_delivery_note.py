@@ -79,19 +79,25 @@ class TestTradingStockDeliveryNote(common.TransactionCase):
         self.sale_order.picking_ids.\
             pack_operation_ids[0].result_package_id = self.pack1
 
-    def test_render_template_with_data(self):
-        "To Test render_template_with_data method."
-        for pick in self.sale_order.picking_ids:
-            render_template_with_data(self.report_xml_id, {'objects': pick})
-        with self.assertRaises(ValidationError):
-            for pick in self.sale_order.picking_ids:
-                pick.sale_id = False
-                render_template_with_data(self.report_xml_id,
-                                          {'objects': pick})
-
     def test_check_picking_in_partner(self):
         "To Test render_template_with_data method."
         pickings = self.picking + self.picking_1
         with self.assertRaises(ValidationError):
             render_template_with_data(self.report_xml_id,
                                       {'objects': pickings})
+
+    def test_render_template_with_data(self):
+        "To Test render_template_with_data method."
+        with self.assertRaises(ValidationError):
+            for pick in self.sale_order.picking_ids:
+                if pick.state != 'done':
+                    render_template_with_data(self.report_xml_id,
+                                              {'objects': pick})
+        for pick in self.sale_order.picking_ids:
+            pick.do_transfer()
+            render_template_with_data(self.report_xml_id, {'objects': pick})
+        with self.assertRaises(ValidationError):
+            for pick in self.sale_order.picking_ids:
+                pick.sale_id = False
+                render_template_with_data(self.report_xml_id,
+                                          {'objects': pick})

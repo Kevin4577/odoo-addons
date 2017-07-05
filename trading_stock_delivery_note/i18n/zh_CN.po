@@ -1,0 +1,40 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* trading_stock_delivery_note
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-05 12:11+0000\n"
+"PO-Revision-Date: 2017-07-05 12:11+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: trading_stock_delivery_note
+#: code:addons/trading_stock_delivery_note/models/trading_stock_delivery_note.py:22
+#, python-format
+msgid "Please check the state of stock picking."
+msgstr "请查看发货单状态."
+
+#. module: trading_stock_delivery_note
+#: code:addons/trading_stock_delivery_note/models/trading_stock_delivery_note.py:18
+#, python-format
+msgid "Please check whether all delivery orders belong to one customer."
+msgstr "Please check whether all delivery orders belong to one customer."
+
+#. module: trading_stock_delivery_note
+#: code:addons/trading_stock_delivery_note/models/trading_stock_delivery_note.py:29
+#, python-format
+msgid "Please check whether this stock picking was generated from sale order."
+msgstr "请查看是否此发货单由销售单生成."
+
+#. module: trading_stock_delivery_note
+#: model:ir.actions.report.xml,name:trading_stock_delivery_note.trading_stock_delivery_note_py3o
+msgid "Trading Stock Delivery Note"
+msgstr "Trading Stock Delivery Note"
+
