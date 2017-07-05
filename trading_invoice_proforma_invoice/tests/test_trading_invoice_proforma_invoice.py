@@ -17,9 +17,11 @@ class TestTradingInvoiceProformaInvoice(common.TransactionCase):
                                           'invoice_py3o')
         self.sale_order_model = self.env['sale.order']
         self.partner_id = self.env.ref('base.res_partner_2')
+        self.partner_id.write({'ref': 'test_reference'})
         self.pricelist = self.env.ref('product.list0')
         self.product_uom_unit = self.env.ref('product.product_uom_unit')
         self.product_4 = self.env.ref('product.product_product_4')
+        self.product_4.write({'default_code': 'Test Default Code'})
         self.ir_actions_report_xml = self.env['ir.actions.report.xml']
         self.sale_advance_payment_inv_model =\
             self.env['sale.advance.payment.inv']
