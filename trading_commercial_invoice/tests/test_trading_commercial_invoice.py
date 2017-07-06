@@ -55,6 +55,16 @@ class TestTradingCommercialInvoice(common.TransactionCase):
         })
         payment.with_context(context).create_invoices()
 
+    def test_invoice_delivery_order(self):
+        with self.assertRaises(ValidationError):
+            for invoice in self.sale_order.invoice_ids:
+                sale_order_list = invoice.invoice_line_ids.\
+                    mapped('sale_line_ids').mapped('order_id')
+                sale_order_list.picking_ids = False
+                if not sale_order_list.picking_ids:
+                    render_template_with_data(self.report_xml_id,
+                                              {'objects': invoice})
+
     def test_render_template_with_data(self):
         "To Test render_template_with_data method."
         for invoice in self.sale_order.invoice_ids:
