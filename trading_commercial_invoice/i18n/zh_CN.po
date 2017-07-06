@@ -19,8 +19,7 @@ msgstr ""
 #: code:addons/trading_commercial_invoice/models/trading_commercial_invoice.py:27
 #, python-format
 msgid "Please check whether this account invoice was generated from sale order."
-msgstr "
-请检查此发票由销售单生成."
+msgstr "请检查此发票由销售单生成。"
 
 #. module: trading_commercial_invoice
 #: code:addons/trading_commercial_invoice/models/trading_commercial_invoice.py:20
