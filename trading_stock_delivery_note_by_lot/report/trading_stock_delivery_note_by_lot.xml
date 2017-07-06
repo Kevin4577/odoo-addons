@@ -14,6 +14,7 @@
         <field name="py3o_filetype">ods</field>
         <field name="py3o_server_id" ref="local_py3o_server"/>
         <field name="module">trading_stock_delivery_note_by_lot</field>
+        <field eval="True" name="py3o_multi_in_one"/>
         <field name="py3o_template_fallback">report/outbound_order_template.ods</field>
     </record>
 
