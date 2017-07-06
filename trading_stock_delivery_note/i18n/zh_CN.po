@@ -25,7 +25,7 @@ msgstr "请查看发货单状态."
 #: code:addons/trading_stock_delivery_note/models/trading_stock_delivery_note.py:18
 #, python-format
 msgid "Please check whether all delivery orders belong to one customer."
-msgstr "Please check whether all delivery orders belong to one customer."
+msgstr "请查看是否所有发货单属于同一客户。"
 
 #. module: trading_stock_delivery_note
 #: code:addons/trading_stock_delivery_note/models/trading_stock_delivery_note.py:29
@@ -36,5 +36,5 @@ msgstr "请查看是否此发货单由销售单生成."
 #. module: trading_stock_delivery_note
 #: model:ir.actions.report.xml,name:trading_stock_delivery_note.trading_stock_delivery_note_py3o
 msgid "Trading Stock Delivery Note"
-msgstr "Trading Stock Delivery Note"
+msgstr "发货通知单"
 
