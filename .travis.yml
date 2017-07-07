@@ -15,12 +15,12 @@ addons:
       - python-simplejson
       - python-serial
       - python-yaml
-      - default-jre
-      - ure
-      - libreoffice
-      - libreoffice-writer
-      - libreoffice-core
-      - libreoffice-common
+      - default-jre # provides base java runtime environment
+      - ure # provides base java runtime environment
+      - libreoffice # provides base libreoffice installation
+      - libreoffice-writer # provides base libreoffice writer
+      - libreoffice-core # provides base libreoffice core
+      - libreoffice-common # provides base libreoffice common font library
 
 env:
   global:
