@@ -1,0 +1,34 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* trading_stock_delivery_note_by_lot
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-06 09:47+0000\n"
+"PO-Revision-Date: 2017-07-06 09:47+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: trading_stock_delivery_note_by_lot
+#: code:addons/trading_stock_delivery_note_by_lot/report/trading_stock_delivery_note_by_lot.py:18
+#, python-format
+msgid "Please check whether all delivery orders period belong to one customer"
+msgstr "请查看是否所选发货单属于同一客户。"
+
+#. module: trading_stock_delivery_note_by_lot
+#: code:addons/trading_stock_delivery_note_by_lot/report/trading_stock_delivery_note_by_lot.py:26
+#, python-format
+msgid "Please check whether this stock picking was generated from sale order."
+msgstr "请检查是否发货单由销售单生成。"
+
+#. module: trading_stock_delivery_note_by_lot
+#: model:ir.actions.report.xml,name:trading_stock_delivery_note_by_lot.trading_stock_delivery_note_by_lot_py3o
+msgid "Trading Stock Delivery Note By Lot"
+msgstr "出库单"
+
