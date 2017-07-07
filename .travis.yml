@@ -17,6 +17,7 @@ addons:
       - python-yaml
       - default-jre
       - ure
+      - libreoffice
       - libreoffice-writer
       - libreoffice-core
       - libreoffice-common
