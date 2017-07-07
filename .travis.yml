@@ -15,6 +15,11 @@ addons:
       - python-simplejson
       - python-serial
       - python-yaml
+      - default-jre
+      - ure
+      - libreoffice-writer
+      - libreoffice-core
+      - libreoffice-common
 
 env:
   global:
@@ -29,7 +34,6 @@ virtualenv:
   system_site_packages: true
 
 install:
-  - apt-get -y -q install default-jre ure libreoffice libreoffice-writer libreoffice-core libreoffice-common && apt-get -q -y remove libreoffice-gnome
   - pip install ezodf==0.3.2
   - git clone --depth=1 https://github.com/Elico-Corp/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
