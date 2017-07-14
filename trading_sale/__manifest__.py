@@ -17,7 +17,8 @@
         'stock_packaging_lot'
     ],
     'data': [
-        'security/ir.model.access.csv'
+        'security/ir.model.access.csv',
+        'views/sale_view.xml',
     ],
     'installable': True,
     'auto_install': False,
