@@ -12,7 +12,7 @@ class SaleOrder(models.Model):
     """Data model of Sale Order."""
     _inherit = 'sale.order'
 
-    @api.depends('invoice_ids.residual')
+    @api.multi
     def _compute_payment_rate(self):
         """This function calculate payment rate with the paid amount of all
         invoices related to this order, and the total amount of them."""
@@ -21,14 +21,14 @@ class SaleOrder(models.Model):
                                 invoice in rec.invoice_ids])
             sum_amount = sum([invoice.amount_total for
                               invoice in rec.invoice_ids])
+            payment_rate = 0
             if sum_amount > 0:
-                rec.payment_rate = sum_residual / sum_amount
-            else:
-                rec.payment_rate = 0
+                payment_rate = 1 - sum_residual / sum_amount
+            rec.payment_rate = payment_rate
 
     payment_rate = fields.Float(compute='_compute_payment_rate',
                                 string='Payment Rate',
-                                store=True, readonly=True,
+                                readonly=True,
                                 help='The payment rate of sale order should be'
                                 ' calculated with the paid amount of all'
                                 ' invoices related to this order, and the'
@@ -50,7 +50,7 @@ class SaleOrderLine(models.Model):
             write_date = datetime.datetime.\
                 strptime(line.write_date, DEFAULT_SERVER_DATETIME_FORMAT).\
                 date()
-            self.last_update_year = write_date.year
+            line.last_update_year = write_date.year
 
     @api.multi
     def _search_last_update_year(self, operator, value):
@@ -71,10 +71,10 @@ class SaleOrderLine(models.Model):
                 and line.product_id.product_line_id and\
                     line.product_id.product_class_id and\
                     line.product_id.product_family_id:
-                product_class = line.product_id.product_stage_id.cn_name\
-                    + '-' + line.product_id.product_line_id.cn_name + '-' +\
-                    line.product_id.product_class_id.cn_name + '-' +\
-                    line.product_id.product_family_id.cn_name
+                product_class = line.product_id.product_stage_id.name\
+                    + '-' + line.product_id.product_line_id.name + '-' +\
+                    line.product_id.product_class_id.name + '-' +\
+                    line.product_id.product_family_id.name
             line.update({'product_class': product_class})
 
     @api.depends('qty_delivered', 'discount', 'price_unit')
@@ -135,7 +135,7 @@ class SaleOrderLine(models.Model):
                          line.order_id.payment_rate})
 
     last_update_year = fields.Char(compute='_compute_last_update_year',
-                                   string='Last Update Year',
+                                   string='Last Update Year', store=True,
                                    search='_search_last_update_year',
                                    help='The field provides filter to each'
                                    ' sale order line, and make sure they'

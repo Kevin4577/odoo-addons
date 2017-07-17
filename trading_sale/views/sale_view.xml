@@ -48,6 +48,8 @@
                             context="{'group_by':'order_partner_id'}" />
                     <filter string="Last Update Year" domain="[]"
                             context="{'group_by':'last_update_year'}" />
+                    <filter string="Current Year" name='current_year'
+                            domain="[('last_update_year','=', datetime.datetime.now().strftime('%Y'))]" />
                 </group>
             </search>
         </field>
@@ -61,7 +63,7 @@
         <field name="view_mode">tree</field>
         <field name="view_id" ref="view_order_fulfillment_line_tree"/>
         <field name="search_view_id" ref="view_order_fulfillment_line_filter"/>
-        <field name="context">{'group_by_order_id':1}</field>
+        <field name="context">{'group_by_order_id':1, 'search_default_current_year': 1}</field>
     </record>
 
     <menuitem id="menu_report_sale_order_fulfillment"
