@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # © 2017 Elico Corp (https://www.elico-corp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import fields, models
+from odoo import fields, models, api
 
 import math
 import copy
@@ -137,3 +137,46 @@ class ReportPy3oMultisheet(models.Model):
                                                              (index_row)))
             total_lines_num += lines_per_sheet
         return sheets
+
+    @api.model
+    def template_sheet_with_custom_line(
+            self,
+            head_end_line,
+            lines_per_sheet,
+            attribute_per_line,
+            summary_line,
+            template_new_path,
+            template_base_path
+    ):
+        """This function generate the new template from base one.
+        It duplicate the header and footer of first sheet into new sheets,
+        and make the body could be customized by user."""
+        doc = self.open_base_template(template_base_path)
+        sheets = doc.sheets
+        sheet = sheets[0]
+        for index in range(len(lines_per_sheet) - 1):
+            sheet_new = copy.deepcopy(sheet)
+            sheets.append(sheet_new)
+        for index1, sheet in enumerate(sheets):
+            sheet.name = lines_per_sheet[index1]['name']
+            sheet.insert_rows(index=head_end_line,
+                              count=lines_per_sheet[index1]['lines_number'])
+            for row in range(lines_per_sheet[index1]['lines_number']):
+                for index2, attr in enumerate(attribute_per_line):
+                    sheet[row + head_end_line, index2].set_value((attr % (
+                    index1 * lines_per_sheet[index1 - 1][
+                        'lines_number'] + row)))
+            for index, attr in enumerate(summary_line):
+                sheet[lines_per_sheet[index1]['lines_number']
+                      + head_end_line, index].set_value(
+                    (attr % (lines_per_sheet[index1]['name']))
+                ) if attr else False
+            sheet.insert_rows(
+                index=head_end_line +
+                lines_per_sheet[index1]['lines_number'] + 2,
+                count=len(lines_per_sheet[index1]['list'])
+            )
+            for index, line in enumerate(lines_per_sheet[index1]['list']):
+                sheet[head_end_line + lines_per_sheet[index1][
+                    'lines_number'] + 2 + index, 0].set_value(line)
+        doc.self.save_new_template(template_new_path)
