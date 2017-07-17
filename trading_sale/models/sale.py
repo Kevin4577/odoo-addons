@@ -120,14 +120,14 @@ class SaleOrderLine(models.Model):
             price_invoiced = line.qty_invoiced * price
             line.update({'price_invoiced': price_invoiced})
 
-    @api.depends('order_id.payment_rate', 'price_invoiced')
+    @api.multi
     def _compute_price_to_payment(self):
         """This function calculate to-pay amount of each sale order lines."""
         for line in self:
             line.update({'price_to_payment': line.price_invoiced *
                          (1 - line.order_id.payment_rate)})
 
-    @api.depends('order_id.payment_rate', 'price_invoiced')
+    @api.multi
     def _compute_price_payment(self):
         """This function calculate paid amount of each sale order lines."""
         for line in self:
@@ -203,14 +203,14 @@ class SaleOrderLine(models.Model):
                                      ' invoiced quantity')
     price_to_payment = fields.Monetary(compute='_compute_price_to_payment',
                                        string='Amount to Pay',
-                                       store=True, readonly=True,
+                                       readonly=True,
                                        help='The amount of product plan to be'
                                        ' paid. The expression should be: to '
                                        'payment amount = invoiced amount * '
                                        '(1 - payment rate)')
     price_payment = fields.Monetary(compute='_compute_price_payment',
                                     string='Amount Paid',
-                                    store=True, readonly=True,
+                                    readonly=True,
                                     help='The amount of product already be '
                                     'paid. The expression should be: payment '
                                     'amount = invoiced amount * payment rate')
