@@ -9,10 +9,12 @@ class TestSale(common.TransactionCase):
     def setUp(self):
         super(TestSale, self).setUp()
         self.partner_id = self.env.ref('base.res_partner_2')
+        self.partner_id.write({'ref': 'test_reference'})
         self.pricelist = self.env.ref('product.list0')
         self.sale_order_model = self.env['sale.order']
         self.product_uom_unit = self.env.ref('product.product_uom_unit')
         self.product_4 = self.env.ref('product.product_product_4')
+        self.product_4.write({'default_code': 'Test Default Code'})
         self.product_stage = self.env.ref('product_class.product_stage_data_1')
         self.product_line = self.env.ref('product_class.product_line_data_1')
         self.product_class = self.env.ref('product_class.product_class_data_1')
