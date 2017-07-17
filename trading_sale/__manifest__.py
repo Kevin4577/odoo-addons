@@ -9,6 +9,7 @@
     'summary': """Sales Export trading common methods and information.""",
     'author': "Elico Corp",
     'website': 'https://www.elico-corp.com',
+    "support": "support@elico-corp.com",
     'license': 'AGPL-3',
     'depends': [
         'sale_product_hs_code_china',

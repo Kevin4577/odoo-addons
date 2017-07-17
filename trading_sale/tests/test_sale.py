@@ -8,10 +8,6 @@ class TestSale(common.TransactionCase):
 
     def setUp(self):
         super(TestSale, self).setUp()
-
-        'invoice_ids.residual'
-        'write_date'
-
         self.partner_id = self.env.ref('base.res_partner_2')
         self.pricelist = self.env.ref('product.list0')
         self.sale_order_model = self.env['sale.order']
