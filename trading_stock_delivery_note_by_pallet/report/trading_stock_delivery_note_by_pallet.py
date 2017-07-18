@@ -59,7 +59,7 @@ def render_report_with_data(report_xml_id, data):
             attribute_per_line,
             summary_line,
             template_new_path,
-            template_base_path,
+            template_base_path
         )
         package_list = base_invoice_export_obj.\
             get_pack_lot_list_per_package_type(stock_picking_list)

@@ -166,11 +166,6 @@ class ReportPy3oMultisheet(models.Model):
                     sheet[row + head_end_line, index2].set_value((attr % (
                     index1 * lines_per_sheet[index1 - 1][
                         'lines_number'] + row)))
-            for index, attr in enumerate(summary_line):
-                sheet[lines_per_sheet[index1]['lines_number']
-                      + head_end_line, index].set_value(
-                    (attr % (lines_per_sheet[index1]['name']))
-                ) if attr else False
             sheet.insert_rows(
                 index=head_end_line +
                 lines_per_sheet[index1]['lines_number'] + 2,
@@ -179,4 +174,4 @@ class ReportPy3oMultisheet(models.Model):
             for index, line in enumerate(lines_per_sheet[index1]['list']):
                 sheet[head_end_line + lines_per_sheet[index1][
                     'lines_number'] + 2 + index, 0].set_value(line)
-        doc.self.save_new_template(template_new_path)
+        self.save_new_template(template_new_path, doc)
