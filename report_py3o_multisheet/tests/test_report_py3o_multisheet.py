@@ -18,21 +18,24 @@ class TestReportPy3oMultisheet(common.TransactionCase):
                 'lines': 16,
                 'duplicate': True,
                 'head_end_line': 14,
-                'sequence': 1
+                'sequence': 1,
+                'lines_number': 2
             },
             'Sheet2': {
                 'name': 'Sheet2',
                 'lines': 16,
                 'duplicate': True,
                 'head_end_line': 14,
-                'sequence': 2
+                'sequence': 2,
+                'lines_number': 4
             },
             'Sheet3': {
                 'name': 'Sheet3',
                 'lines': 4,
                 'duplicate': True,
                 'head_end_line': 14,
-                'sequence': 3
+                'sequence': 3,
+                'lines_number': 8
             }
         }
         attribute_num_per_line = 9
@@ -48,8 +51,8 @@ class TestReportPy3oMultisheet(common.TransactionCase):
             '${data.line%d.pricelist}',
             '${data.line%d.hs_code.cn_name}',
             '${data.line%d.hs_code.uom_id.name}', ]
-        new_path = "/tests/customs_declaration_report_template_new.ods"
-        base_path = "/tests/customs_declaration_report_template.ods"
+        new_path = "tests/customs_declaration_report_template_new.ods"
+        base_path = "tests/customs_declaration_report_template.ods"
         template_new_path =\
             os.path.dirname(os.path.dirname(__file__)) + '/' + new_path
         template_base_path =\
@@ -70,3 +73,54 @@ class TestReportPy3oMultisheet(common.TransactionCase):
             template_new_path,
             doc
         )
+
+    def test_render_report_with_data(self):
+        template_new = "tests/delivery_sheet_per_pallet_template_new.ods"
+        template_base = "tests/delivery_sheet_per_pallet_template.ods"
+        template_new_path = \
+            os.path.dirname(
+                os.path.dirname(__file__)) + '/' + template_new
+        template_base_path = \
+            os.path.dirname(os.path.dirname(__file__)) + '/' + template_base
+        head_end_line = 9
+        attribute_per_line = [
+            '${line%d.client_order_ref}',
+            '${line%d.product_id.customer_product_code}',
+            '${line%d.product_id.name}',
+            '${line%d.product_uom}',
+            '${line%d.product_uom_qty}',
+            '${line%d.qty_delivery}',
+            '${line%d.carton_qty}',
+        ]
+        summary_line = [
+            '${%s.sum_qty}',
+            '${%s.sum_qty_delivery}',
+            '${%s.pallet_sum}'
+        ]
+        lines_per_sheet = [
+            {
+                'name': '28ctns',
+                'lines_number': 6,
+                'list':	[
+                    'package1',
+                    'package2',
+                    'package3'
+                ]
+            },
+            {
+                'name': '29ctns',
+                'lines_number': 4,
+                'list':	[
+                    'package3',
+                    'package4'
+                ]
+            }
+        ]
+        self.report_py3o_multisheet_model\
+            .template_sheet_with_custom_line(
+                head_end_line,
+                lines_per_sheet,
+                attribute_per_line,
+                summary_line,
+                template_new_path,
+                template_base_path)
