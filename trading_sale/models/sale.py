@@ -18,7 +18,9 @@ class SaleOrder(models.Model):
         invoices related to this order, and the total amount of them."""
         for rec in self:
             sum_residual = sum([invoice.residual for
-                                invoice in rec.invoice_ids])
+                                invoice in rec.invoice_ids.filtered
+                                (lambda invoice_order: invoice_order.state in
+                                 ['open', 'paid'])])
             sum_amount = sum([invoice.amount_total for
                               invoice in rec.invoice_ids])
             payment_rate = 0

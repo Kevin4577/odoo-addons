@@ -61,6 +61,7 @@
         <field name="res_model">sale.order.line</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree</field>
+        <field name="limit">8</field>
         <field name="view_id" ref="view_order_fulfillment_line_tree"/>
         <field name="search_view_id" ref="view_order_fulfillment_line_filter"/>
         <field name="context">{'group_by_order_id':1, 'search_default_current_year': 1}</field>
