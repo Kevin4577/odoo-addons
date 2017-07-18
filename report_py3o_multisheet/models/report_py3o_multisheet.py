@@ -163,9 +163,10 @@ class ReportPy3oMultisheet(models.Model):
                               count=lines_per_sheet[index1]['lines_number'])
             for row in range(lines_per_sheet[index1]['lines_number']):
                 for index2, attr in enumerate(attribute_per_line):
-                    sheet[row + head_end_line, index2].set_value((attr % (
-                    index1 * lines_per_sheet[index1 - 1][
-                        'lines_number'] + row)))
+                    sheet[row + head_end_line, index2].\
+                        set_value(
+                        (attr % (index1 * lines_per_sheet[index1 - 1][
+                            'lines_number'] + row)))
             sheet.insert_rows(
                 index=head_end_line +
                 lines_per_sheet[index1]['lines_number'] + 2,

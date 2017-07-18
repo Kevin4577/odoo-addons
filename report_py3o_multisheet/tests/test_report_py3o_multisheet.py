@@ -73,22 +73,54 @@ class TestReportPy3oMultisheet(common.TransactionCase):
             template_new_path,
             doc
         )
-        print "Test_sheet_lines_data",Test_sheet_lines_data
-        head_end_line = Test_sheet_lines_data[sheets[0].name].get(
-            'head_end_line', 1)
-        import math
-        lines_per_line = int(math.ceil(
-            len(attribute_per_line) / float(attribute_num_per_line)))
-        total_lines_per_sheet = Test_sheet_lines_data[sheets[0].name]['lines']
-        summary_line = 'Summary line'
-        self.report_py3o_multisheet_model.template_sheet_with_custom_line(
-            head_end_line,
-            Test_sheet_lines_data,
-            attribute_per_line,
-            summary_line,
-            template_new_path,
-            template_base_path
-        )
 
-
-
+    def test_render_report_with_data(self):
+        template_new = "tests/delivery_sheet_per_pallet_template_new.ods"
+        template_base = "tests/delivery_sheet_per_pallet_template.ods"
+        template_new_path = \
+            os.path.dirname(
+                os.path.dirname(__file__)) + '/' + template_new
+        template_base_path = \
+            os.path.dirname(os.path.dirname(__file__)) + '/' + template_base
+        head_end_line = 9
+        attribute_per_line = [
+            '${line%d.client_order_ref}',
+            '${line%d.product_id.customer_product_code}',
+            '${line%d.product_id.name}',
+            '${line%d.product_uom}',
+            '${line%d.product_uom_qty}',
+            '${line%d.qty_delivery}',
+            '${line%d.carton_qty}',
+        ]
+        summary_line = [
+            '${%s.sum_qty}',
+            '${%s.sum_qty_delivery}',
+            '${%s.pallet_sum}'
+        ]
+        lines_per_sheet = [
+            {
+                'name': '28ctns',
+                'lines_number': 6,
+                'list':	[
+                    'package1',
+                    'package2',
+                    'package3'
+                ]
+            },
+            {
+                'name': '29ctns',
+                'lines_number': 4,
+                'list':	[
+                    'package3',
+                    'package4'
+                ]
+            }
+        ]
+        self.report_py3o_multisheet_model\
+            .template_sheet_with_custom_line(
+                head_end_line,
+                lines_per_sheet,
+                attribute_per_line,
+                summary_line,
+                template_new_path,
+                template_base_path)
