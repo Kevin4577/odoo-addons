@@ -438,7 +438,7 @@ class TradingInvoice(models.Model):
                     pack_lot.operation_id.picking_id.sale_id.client_order_ref,
                     'product_id': pack_lot.operation_id.product_id,
                     'product_uom': pack_lot.operation_id.product_uom_id.name,
-                    'product_uom_qty': pack_lot.qty_todo,
+                    'product_uom_qty': pack_lot.qty_todo + pack_lot.qty,
                     'qty_delivery': pack_lot.qty,
                     'carton_qty': pack_lot.lot_id.carton_qty
                 })
