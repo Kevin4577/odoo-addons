@@ -1,0 +1,109 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* trading_sale
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-14 12:47+0000\n"
+"PO-Revision-Date: 2017-07-14 12:47+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_sale_order_line_price_delivery
+msgid "Amount Delivered"
+msgstr "已发货不含税金额"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_sale_order_line_price_invoiced
+msgid "Amount Invoiced"
+msgstr "已开票不含税金额"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_sale_order_line_price_payment
+msgid "Amount Paid"
+msgstr "已收款金额"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_sale_order_line_price_to_delivery
+msgid "Amount to Delivered"
+msgstr "未发货不含税金额"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_sale_order_line_price_to_invoice
+msgid "Amount to Invoice"
+msgstr "已发货未开票不含税金额"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_sale_order_line_price_to_payment
+msgid "Amount to Pay"
+msgstr "已开票未收款金额"
+
+#. module: trading_sale
+#: model:ir.ui.view,arch_db:trading_sale.view_order_fulfillment_line_filter
+msgid "Customer"
+msgstr "客户"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_sale_order_line_customer_order_reference
+msgid "Customer Order Reference"
+msgstr "客户订单号"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_sale_order_line_customer_reference
+msgid "Customer Reference"
+msgstr "客户参照"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_trading_sale_display_name
+msgid "Display Name"
+msgstr "显示名称"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_sale_order_line_last_update_year
+#: model:ir.ui.view,arch_db:trading_sale.view_order_fulfillment_line_filter
+msgid "Last Update Year"
+msgstr "更新年份"
+
+#. module: trading_sale
+#: model:ir.actions.act_window,name:trading_sale.action_sale_order_fulfillment_report
+#: model:ir.ui.menu,name:trading_sale.menu_report_sale_order_fulfillment
+msgid "Order Fulfillment Report"
+msgstr "订单执行报告"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_sale_order_payment_rate
+msgid "Payment Rate"
+msgstr "支付比例"
+
+#. module: trading_sale
+#: model:ir.ui.view,arch_db:trading_sale.view_order_fulfillment_line_filter
+msgid "Product"
+msgstr "产品"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_sale_order_line_product_class
+msgid "Product Class"
+msgstr "产品中类"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_sale_order_line_product_reference
+msgid "Product Reference"
+msgstr "ERP编号"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_sale_order_line_qty_to_delivery
+msgid "Quantity to Delivered"
+msgstr "未发货数量"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_sale_order_line_sale_order_reference
+msgid "Sale Order Reference"
+msgstr "跟单号"
+
