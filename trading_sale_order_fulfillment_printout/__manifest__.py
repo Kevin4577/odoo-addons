@@ -3,23 +3,22 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': 'Trading Sale',
+    'name': 'Trading Sale Order Fulfillment Report',
     'version': '10.0.1.0.0',
-    'category': 'Stock',
-    'summary': """Sales Export trading common methods and information.""",
+    'category': 'Sale',
+    'summary': """xls or ods report from ods template file to
+    generate the trading sale order fulfillment report from
+    sale order line.""",
     'author': "Elico Corp",
     'website': 'https://www.elico-corp.com',
     "support": "support@elico-corp.com",
     'license': 'AGPL-3',
     'depends': [
-        'sale_product_hs_code_china',
-        'trading_stock_shipping',
-        'stock_package_volume_weight',
-        'stock_packaging_lot'
+        'trading_sale',
+        'report_py3o'
     ],
     'data': [
-        'security/ir.model.access.csv',
-        'views/sale_view.xml',
+        'report/trading_sale_order_fulfillment_printout.xml',
     ],
     'installable': True,
     'auto_install': False,
