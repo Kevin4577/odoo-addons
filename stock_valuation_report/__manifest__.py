@@ -5,7 +5,6 @@
     'name': 'Excel report for stock valutaion',
     'version': '10.0.1.0.0',
     "summary": """Stock Valuation Report""",
-    "author": "Elico Corp",
     "support": "support@elico-corp.com",
     'depends': [
         'mrp',
