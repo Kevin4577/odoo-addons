@@ -210,7 +210,18 @@ class TestStockValuation(common.TransactionCase):
                 'location_id': self.stock_valuation.location_id.id,
             })
 
-    def test_50_render_report_with_vendor(self):
+    def test_50_render_report_with_product_package(self):
+        context = self.stock_valuation.prepare_valuation()
+        context['context'].update(uid=self.uid)
+        self.stock_valuation_list = \
+            self.stock_valuation_list_model.with_context(
+                context['context']
+            ).create({
+                'location_id': self.stock_valuation.location_id.id,
+            })
+        self.stock_valuation_list._get_location()
+
+    def test_60_render_report_with_vendor(self):
         self.po = self.env['purchase.order'].create(self.po_vals)
         self.po.button_confirm()
         self.po.order_line.write({'product_qty': 7.0})
