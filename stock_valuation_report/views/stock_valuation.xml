@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_valuation_filter" model="ir.ui.view">
+        <field name="name">stock.valuation.filter</field>
+        <field name="model">stock.valuation</field>
+        <field name="arch" type="xml">
+            <search string="Search Valuation">
+                <field name="name" string="Valuation Reference"/>
+                <field name="date"/>
+                <field name="location_id"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <group expand="0" string="Group By">
+                    <filter string="Inventories Month"
+                            domain="[]"
+                            context="{'group_by':'date'}"
+                            help="Physical Inventories by Month"/>
+                    <filter string="Inventories Location"
+                            domain="[]"
+                            context="{'group_by':'location_id'}"
+                            help="Physical Inventories by Location"/>
+                    <filter string="Company"
+                            domain="[]"
+                            context="{'group_by':'company_id'}"
+                            groups="base.group_multi_company"
+                            help="Company"/>
+                </group>
+            </search>
+
+        </field>
+    </record>
+
+    <record id="view_valuation_tree" model="ir.ui.view">
+        <field name="name">stock.valuation.tree</field>
+        <field name="model">stock.valuation</field>
+        <field name="arch" type="xml">
+            <tree string="Stock Valuation">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="location_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_Valuation_form" model="ir.ui.view">
+        <field name="name">stock.valuation.form</field>
+        <field name="model">stock.valuation</field>
+        <field name="arch" type="xml">
+            <form string="Valuation Adjustment">
+            <header>
+                <button name="prepare_valuation"
+                        string="Start Valuation"
+                        type="object"
+                        class="oe_highlight"/>
+            </header>
+            <sheet>
+                <div class="oe_title">
+                    <label for="name"
+                           class="oe_edit_only"/>
+                    <h1><field name="name"
+                               placeholder="e.g. Monthly Valuation"
+                    /></h1>
+                </div>
+                <group>
+                    <group>
+                        <field name="location_id"
+                               domain="[('usage','not in', ['supplier','production'])]"
+                               groups="stock.group_stock_multi_locations"
+                        />
+                        <field name="include_child_location"/>
+                        <field name="start_date" require="1"/>
+                        <field name="end_date" require="1"/>
+                        <field name="filter_by_product"
+                               string="Product By"
+                               widget='radio'/>
+                        <field name="filter_by_order_type"
+                               string="Order By"
+                               widget='radio'/>
+                    </group>
+                    <group>
+                        <field name="date"/>
+                        <field name="company_id"
+                               groups="base.group_multi_company"
+                               options="{'no_create': True}"/>
+                        <field name="product_id"
+                               domain="[('type','=','product')]"
+                               attrs="{'invisible': [('filter_by_product', 'not in', ('product', 'product_owner'))],
+                                       'required': [('filter_by_product', 'in', ('product', 'product_owner'))]}"
+                               options="{'no_create': True}"/>
+                        <field name="partner_customer_id"
+                               attrs="{'invisible': [('filter_by_order_type', '!=', 'customer')],
+                                       'required': [('filter_by_order_type', '=', 'customer')]}"
+                               domain="[('customer','=', True)]"
+                               options="{'no_create': True}"/>
+                        <field name="partner_supplier_id"
+                               attrs="{'invisible': [('filter_by_order_type', '!=', 'supplier')],
+                                       'required': [('filter_by_order_type', '=', 'supplier')]}"
+                               domain="[('supplier','=', True)]"
+                               options="{'no_create': True}"/>
+                        <field name="involved_mrp_order"
+                               attrs="{'invisible': [('filter_by_order_type', '!=', 'mrp')],
+                                       'required': [('filter_by_order_type', '=', 'mrp')]}"
+                               domain="[('state', 'in', ['progress', 'done'])]"
+                               options="{'no_create': True}"/>
+                        <field name="category_id"
+                               attrs="{'invisible': [('filter_by_product', 'not in','category')],
+                                       'required': [('filter_by_product', 'in', 'category')]}"
+                               options="{'no_create': True}"/>
+                        <field name="lot_id"
+                               attrs="{'invisible': [('filter_by_product', '!=', 'lot')],
+                                       'required': [('filter_by_product', '=', 'lot')]}"
+                               groups="stock.group_production_lot"
+                               options="{'no_create': True}"/>
+                        <field name="package_id"
+                               attrs="{'invisible': [('filter_by_product', '!=', 'pack')],
+                                       'required': [('filter_by_product', '=', 'pack')]}"
+                               groups="stock.group_tracking_lot"
+                               options="{'no_create': True}"/>
+                    </group>
+                </group>
+            </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_valuation_form" model="ir.actions.act_window">
+        <field name="name">Stock Valuation</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.valuation</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="view_valuation_tree"/>
+        <field name="search_view_id" ref="view_valuation_filter"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to start an valuation.
+          </p>
+        </field>
+    </record>
+    <menuitem action="action_valuation_form"
+              id="menu_action_valuation_form"
+              parent="stock.menu_stock_inventory_control"
+              groups="stock_valuation_report.group_stock_valuation_user"
+              sequence="31"/>
+</odoo>
