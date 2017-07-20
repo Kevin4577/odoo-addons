@@ -87,8 +87,11 @@ class StockValuation(models.Model):
 
     @api.model
     def _selection_filter_by_product(self):
-        """ Get the list of filter allowed according to the options checked
-        in 'Settings\Warehouse'. """
+        """
+            Get the list of filter allowed according to the options checked
+        in 'Settings\Warehouse'. 
+        :return: 
+        """
         res_filter = [
             ('none', _('All products')),
             ('product', _('One product only')),
@@ -101,8 +104,11 @@ class StockValuation(models.Model):
 
     @api.model
     def _selection_filter_by_order_type(self):
-        """ Get the list of filter allowed according to the options checked
-        in 'Settings\Warehouse'. """
+        """
+            Get the list of filter allowed according to the options checked
+        in 'Settings\Warehouse'. 
+        :return: 
+        """
         res_filter = [
             ('none', _('All order types')),
             ('customer', _('One Customer Only')),

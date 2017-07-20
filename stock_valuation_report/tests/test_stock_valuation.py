@@ -11,6 +11,7 @@ class TestStockValuation(common.TransactionCase):
 
     def setUp(self):
         super(TestStockValuation, self).setUp()
+        self.order_point_model = self.env['stock.warehouse.orderpoint']
         self.mrp_order1 = self.env.ref('mrp.mrp_production_1')
         self.mrp_order2 = self.env.ref('mrp.mrp_production_2')
         self.report_xml_id =\
@@ -46,6 +47,11 @@ class TestStockValuation(common.TransactionCase):
             'picking_type_id': self.picking_type_out,
             'location_id': self.location_stock.id,
             'location_dest_id': self.loc_customers.id
+        })
+        self.OrderPoint4 = self.order_point_model.create({
+            'product_id': self.product_4.id,
+            'product_max_qty': 0.0,
+            'product_min_qty': 10.0
         })
         self.stock_valuation = self.stock_valuation_model.create(
             {
