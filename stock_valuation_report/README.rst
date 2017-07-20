@@ -2,12 +2,14 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-================================
-Excel report for stock valuation
-================================
+======================
+Stock Valuation Report
+======================
 
-This module extends the functionality of export to allow you to export excel
-report for stock and Input/Output/Stock valuation during one specific period.
+'Stock Valuation Report' allows users to generate the report with the
+statistic of stock historys for each stock moves. This module extends export
+functionality with MS Excel files format regards stock valuation reports I/O
+within specific period.
 
 Usage
 =====
