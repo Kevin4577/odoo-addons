@@ -184,7 +184,8 @@ class WizardStockValuationList(models.TransientModel):
         elif self._context.get('category_id', False):
             stock_historys = \
                 self._get_product_inventory_from_product_catergory(
-                stock_historys)
+                    stock_historys
+                )
         elif self._context.get('lot_id', False):
             stock_historys = \
                 self._get_product_inventory_from_lot(stock_historys)
@@ -330,7 +331,8 @@ class WizardStockValuationList(models.TransientModel):
         elif self._context.get('category_id', False):
             stock_historys = \
                 self._get_product_inventory_from_product_catergory(
-                stock_historys)
+                    stock_historys
+                )
         elif self._context.get('lot_id', False):
             stock_historys = \
                 self._get_product_inventory_from_lot(stock_historys)
@@ -445,31 +447,6 @@ class WizardStockValuationList(models.TransientModel):
             {'int': user_id})
 
         return {rec[0]: rec[1] for rec in self._cr.fetchall()}
-
-    def _get_product_attributes(self, product):
-        """
-            Get attribute of product to return the dictionary of product with
-            each attributes of products
-        :param product:
-        :return:
-        """
-
-        vals = {}
-
-        vals[product.id] = {
-            'bottom': "",
-            'inside': "",
-            'outside': "",
-        }
-        for attribute_value_id in product.attribute_value_ids:
-            if attribute_value_id.attribute_id and attribute_value_id.name:
-                if attribute_value_id.attribute_id.name == u'bottom':
-                    vals[product.id]['bottom'] = attribute_value_id.name
-                if attribute_value_id.attribute_id.name == u'inside':
-                    vals[product.id]['inside'] = attribute_value_id.name
-                if attribute_value_id.attribute_id.name == u'outside':
-                    vals[product.id]['outside'] = attribute_value_id.name
-        return vals
 
     def _compute_safety_stock_level(
             self,

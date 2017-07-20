@@ -208,8 +208,10 @@ class TestStockValuation(common.TransactionCase):
         self.po = self.env['purchase.order'].create(self.po_vals)
         self.po.button_confirm()
         self.po.order_line.write({'product_qty': 7.0})
+        self.picking = self.po.picking_ids[0]
         self.picking.force_assign()
         self.picking.pack_operation_product_ids.write({'qty_done': 7.0})
+        self.picking.do_new_transfer()
         self.stock_valuation.write({
             'partner_supplier_id': self.partner_id.id
         })
