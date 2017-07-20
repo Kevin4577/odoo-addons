@@ -182,7 +182,8 @@ class WizardStockValuationList(models.TransientModel):
             stock_historys = \
                 self._get_product_inventory_from_product_id(stock_historys)
         elif self._context.get('category_id', False):
-            stock_historys = self._get_product_inventory_from_product_catergory(
+            stock_historys = \
+                self._get_product_inventory_from_product_catergory(
                 stock_historys)
         elif self._context.get('lot_id', False):
             stock_historys = \
@@ -327,7 +328,8 @@ class WizardStockValuationList(models.TransientModel):
             stock_historys = \
                 self._get_product_inventory_from_product_id(stock_historys)
         elif self._context.get('category_id', False):
-            stock_historys = self._get_product_inventory_from_product_catergory(
+            stock_historys = \
+                self._get_product_inventory_from_product_catergory(
                 stock_historys)
         elif self._context.get('lot_id', False):
             stock_historys = \
@@ -414,10 +416,10 @@ class WizardStockValuationList(models.TransientModel):
         """
         user_id = self._context['uid']
 
-        self._cr.execute("""
-            select t.origin, s.name
-            FROM
-            (
+        self._cr.execute(
+            """select t.origin, s.name
+               FROM
+               (
                 select move.origin, sale_order.name
                 FROM stock_move as move
                 LEFT JOIN
@@ -431,16 +433,16 @@ class WizardStockValuationList(models.TransientModel):
                         sale_order.name || ':' in purchase_order.origin) > 0
                 GROUP BY
                     move.origin,sale_order.name
-            ) as t
-            LEFT JOIN
-                sale_order as s
-            ON
-                t.name = s.name or t.origin = s.name
-            JOIN res_users u
-                on u.id = %s
-            GROUP BY
-                t.origin, s.name;
-        """ % user_id)
+                ) as t
+                LEFT JOIN
+                    sale_order as s
+                ON
+                    t.name = s.name or t.origin = s.name
+                JOIN res_users u
+                    on u.id = %(int)s
+                GROUP BY
+                    t.origin, s.name;""",
+            {'int': user_id})
 
         return {rec[0]: rec[1] for rec in self._cr.fetchall()}
 
@@ -492,7 +494,8 @@ class WizardStockValuationList(models.TransientModel):
         )
         if safe_inventory_amount:
             if product.cost_method == 'real':
-                safety_stock_level = safe_inventory_amount * price_unit_on_quant
+                safety_stock_level = \
+                    safe_inventory_amount * price_unit_on_quant
             else:
                 safety_stock_level = \
                     safe_inventory_amount * product.get_history_price(
