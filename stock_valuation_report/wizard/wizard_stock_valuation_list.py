@@ -671,7 +671,7 @@ class WizardStockValuationList(models.TransientModel):
         default=_get_location
     )
 
-    @api.one
+    @api.model
     def export(self):
         return {'type': 'ir.actions.act_window_close'}
 
