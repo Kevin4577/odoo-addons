@@ -110,11 +110,11 @@ class ReportStockValuationProduction(ReportXlsx):
 
     def _update_table_info_addition_value(self, val, line):
         """
-            This function should be extended to add more value of each row 
+            This function should be extended to add more value of each row
             inside table of report.
-        :param val: 
-        :param line: 
-        :return: 
+        :param val:
+        :param line:
+        :return:
         """
         return {}
 

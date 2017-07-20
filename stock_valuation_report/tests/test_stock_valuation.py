@@ -6,6 +6,7 @@ import odoo
 from datetime import datetime
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
+
 class TestStockValuation(common.TransactionCase):
 
     def setUp(self):
@@ -18,7 +19,8 @@ class TestStockValuation(common.TransactionCase):
         self.ir_actions_report_xml_model = self.env['ir.actions.report.xml']
         self.sale_order_model = self.env['sale.order']
         self.stock_valuation_model = self.env['stock.valuation']
-        self.stock_valuation_list_model = self.env['wizard.stock.valuation.list']
+        self.stock_valuation_list_model = \
+            self.env['wizard.stock.valuation.list']
         self.partner_id = self.env.ref('base.res_partner_2')
         self.partner_id.write({'ref': 'test_reference'})
         self.product_id_1 = self.env.ref('product.product_product_8')
@@ -145,7 +147,7 @@ class TestStockValuation(common.TransactionCase):
             self.stock_valuation_list_model.with_context(
                 context['context']
             ).create({
-            'location_id': self.stock_valuation.location_id.id,
+                'location_id': self.stock_valuation.location_id.id,
             })
         datas = self.stock_valuation_list.xlsx_export()
         self.dataB = datas['datas']
@@ -172,7 +174,7 @@ class TestStockValuation(common.TransactionCase):
             self.stock_valuation_list_model.with_context(
                 context['context']
             ).create({
-            'location_id': self.stock_valuation.location_id.id,
+                'location_id': self.stock_valuation.location_id.id,
             })
 
     def test_30_render_report_with_product_lot(self):
