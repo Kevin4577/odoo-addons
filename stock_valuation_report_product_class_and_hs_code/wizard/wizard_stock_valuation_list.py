@@ -9,10 +9,10 @@ from odoo.tools.translate import _
 class WizardStockValuationList(models.TransientModel):
     _inherit = 'wizard.stock.valuation.list'
 
-    def _get_product_inventory_from_product_class(self, stock_historys):
+    def _get_product_inventory_from_product_class(self, stock_history):
         """
             Filter the stock history with selected product class from context
-        :param stock_historys:
+        :param stock_history:
         :return:
         """
 
@@ -20,7 +20,7 @@ class WizardStockValuationList(models.TransientModel):
                 and self._context.get('product_line_id', False) \
                 and self._context.get('product_class_id', False) \
                 and self._context.get('product_family_id', False):
-            stock_historys_new = stock_historys.filtered(
+            stock_history_new = stock_history.filtered(
                 lambda r:
                 r.product_id.product_stage_id.id == self._context.get(
                     'product_stage_id')
@@ -31,28 +31,28 @@ class WizardStockValuationList(models.TransientModel):
                 and r.product_id.product_family_id.id == self._context.get(
                     'product_family_id')
             )
-            return stock_historys_new
+            return stock_history_new
         else:
-            return stock_historys
+            return stock_history
 
-    def _get_product_inventory_from_hs_code(self, stock_historys):
+    def _get_product_inventory_from_hs_code(self, stock_history):
         """
             Filter the stock history with selected hs code from context
-        :param stock_historys:
+        :param stock_history:
         :return:
         """
 
         if self._context.get('hs_code', False):
-            stock_historys_new = stock_historys.filtered(
+            stock_history_new = stock_history.filtered(
                 lambda r:
                 r.product_id.product_hs_code_id.id == self._context.get(
                     'hs_code')
             )
-            return stock_historys_new
+            return stock_history_new
         else:
-            return stock_historys
+            return stock_history
 
-    def _get_product_inventory_additonal_filter(self, stock_historys):
+    def _get_product_inventory_additonal_filter(self, stock_history):
         """
             This function could be inherited to filter stock history
             list by additional options.
@@ -61,15 +61,15 @@ class WizardStockValuationList(models.TransientModel):
                 and self._context.get('product_line_id', False) \
                 and self._context.get('product_class_id', False) \
                 and self._context.get('product_family_id', False):
-            stock_historys = \
-                self._get_product_inventory_from_product_class(stock_historys)
+            stock_history = \
+                self._get_product_inventory_from_product_class(stock_history)
 
         if self._context.get('hs_code', False):
-            stock_historys = \
-                self._get_product_inventory_from_hs_code(stock_historys)
+            stock_history = \
+                self._get_product_inventory_from_hs_code(stock_history)
 
         return super(WizardStockValuationList, self).\
-            _get_product_inventory_additonal_filter(stock_historys)
+            _get_product_inventory_additonal_filter(stock_history)
 
     def _get_stock_valuation_line_additional_value(self, product):
         """
