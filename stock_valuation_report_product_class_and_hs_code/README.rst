@@ -7,7 +7,7 @@ Stock Valuation Report With Product Class and HS Code
 =====================================================
 
 'Stock Valuation Report Product Class and HS Code' allows users to generate
-the report with the statistic of stock historys for each stock moves, include
+the report with the statistic of stock history for each stock moves, include
 information about product class and hs code for each product.
 This module extends export functionality with MS Excel files format regards
 stock valuation reports I/O within specific period, and inherit the standard
@@ -17,17 +17,23 @@ product.
 Usage
 =====
 
+.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
+   :alt: Try me on Runbot
+   :target: https://runbot.my-odoo.com/runbot/63/10.0
+
 To use this module, you need to:
 
 #. Go to 'Inventory' module
-#. Click the 'Stock Report' menu item on the left side of the screen
+#. Click the 'Stock Valuation' menu item on the left side of the screen
 
+.. figure:: ../stock_valuation_report_product_class_and_hs_code/static/img/stock_valuation_form.png
+   :width: 900 px
 
 Bug Tracker
 ===========
 
 Bugs are tracked on `GitHub Issues
-<https://github.com/Elico-Corp/cable-odoo/issues>`_. In case of trouble, please
+<https://github.com/Elico-Corp/yugong-odoo/issues>`_. In case of trouble, please
 check there if your issue has already been reported. If you spotted it first,
 help us smash it by providing detailed and welcomed feedback.
 

@@ -42,7 +42,7 @@ class StockValuation(models.Model):
         string='Filter By Product Class',
         required=True,
         default='none',
-        help="If you do the valuation, you can choose 'All Product Class' for "
+        help="You can choose 'All Product Class' for "
              "Any combination of product class of product, 'Manual Selection "
              "of Product Class' for specific combination of product class."
     )
@@ -52,7 +52,7 @@ class StockValuation(models.Model):
         string='Filter By HS Code',
         required=True,
         default='none',
-        help="If you do the valuation, you can choose 'All HS Code' for any HS"
+        help="You can choose 'All HS Code' for any HS"
              "code of product 'one HS Code' for hs code of product."
     )
 
