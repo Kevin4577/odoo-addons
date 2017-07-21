@@ -166,47 +166,43 @@ class StockValuation(models.Model):
         string='Filter By Product',
         required=True,
         default='none',
-        help="If you do an entire inventory, you can choose 'All Products' "
-             "and it will prefill the inventory with the current stock.  If "
-             "you only do some products (e.g. Cycle Counting) you can choose "
-             "'Manual Selection of Products' and the system won't propose "
-             "anything.  You can also let the system propose for a single "
-             "product / lot /... "
+        help="If you do an entire valuation, you can choose 'All Products' "
+             "and it will prefill the valuation with the current stock.You "
+             "can also let the system propose for a single product / lot /... "
     )
     filter_by_order_type = fields.Selection(
         selection='_selection_filter_by_order_type',
         string='Filter By Order Type',
         required=True,
         default='none',
-        help="If you do an entire inventory, you can choose 'All Products' "
-             "and it will prefill the inventory with the current stock.  "
-             "If you only do some products (e.g. Cycle Counting) you can "
-             "choose 'Manual Selection of Products' and the system won't "
-             "propose anything.  You can also let the system propose for "
-             "a single product / lot /... "
+        help="If you do an entire valuation of order type, you can choose "
+             "'All Order Type' You can also let the system propose for a "
+             "customer / vendor /... "
     )
     product_id = fields.Many2one(
         'product.product',
         'Product',
-        help="Specify Product to focus your inventory on a particular Product."
+        help="Filter a specific product to focus your inventory on a "
+             "particular Product."
     )
     package_id = fields.Many2one(
         'stock.quant.package',
         'Package',
-        help="Specify Pack to focus your inventory on a particular Pack."
+        help="Filter a specific package to focus your inventory on a "
+             "particular Pack."
     )
     lot_id = fields.Many2one(
         'stock.production.lot',
         'Lot/Serial Number',
         copy=False,
-        help="Specify Lot/Serial Number to focus your inventory on a "
-             "particular Lot/Serial Number."
+        help="Filter a specific Lot/Serial Number to focus your inventory on "
+             "a particular Lot/Serial Number."
     )
     category_id = fields.Many2one(
         'product.category',
         'Product Category',
-        help="Specify Product Category to focus your inventory on a particular"
-             "Category."
+        help="Filter a specific Product Category to focus your inventory on "
+             "a particular Category."
     )
     partner_customer_id = fields.Many2one(
         'res.partner',
