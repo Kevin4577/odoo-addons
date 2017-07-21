@@ -388,7 +388,7 @@ class TradingInvoice(models.Model):
             mapped('pack_operation_product_ids'
                    ).mapped('result_package_id').mapped('packaging_id').ids
         package_type_list = product_packaging_object.\
-            browse(list(set(package_type_ids)))
+            browse(sorted(package_type_ids))
         package_list = []
         for package_type in package_type_list:
             pack_operation_lines_per_same_package_type = \
@@ -414,14 +414,18 @@ class TradingInvoice(models.Model):
     def get_pack_lot_list_per_package_type(self, stock_picking_list):
         """This function returns package type names and package name of each
         package type, which is used in stock picking list"""
+        product_packaging_object = self.env['product.packaging']
         package_no = stock_picking_list.mapped('pack_operation_product_ids'
                                                ).mapped('result_package_id'
                                                         )[0].forwarder_no
         partner_shipping_id = stock_picking_list[0].ship_info_id.ship_to or\
             self.env['res.partner']
-        package_type_list = stock_picking_list.\
+        package_type_ids = stock_picking_list.\
             mapped('pack_operation_product_ids'
-                   ).mapped('result_package_id').mapped('packaging_id')
+                   ).mapped('result_package_id').mapped('packaging_id').ids
+        package_type_list = \
+            product_packaging_object.browse(sorted(package_type_ids))
+        package_list = []
         for package_type in package_type_list:
             pack_operation_lines_per_same_package_type = \
                 stock_picking_list.mapped('pack_operation_product_ids').\
@@ -442,10 +446,9 @@ class TradingInvoice(models.Model):
                     'qty_delivery': pack_lot.qty,
                     'carton_qty': pack_lot.lot_id.carton_qty
                 })
-            package_list = []
             package_list.append({package_type.name: pack_lot_list})
-            return {
-                'package_no': package_no,
-                'partner_shipping_id': partner_shipping_id,
-                'package_list': package_list
-            }
+        return {
+            'package_no': package_no,
+            'partner_shipping_id': partner_shipping_id,
+            'package_list': package_list
+        }
