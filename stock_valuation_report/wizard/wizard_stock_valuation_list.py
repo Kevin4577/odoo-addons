@@ -64,7 +64,8 @@ class WizardStockValuationList(models.TransientModel):
             for stock_history_line in stock_history:
                 if stock_history_line.move_id.lot_ids:
                     if self._context.get(
-                            'lot_id') in stock_history_line.move_id.lot_ids.ids:
+                            'lot_id'
+                    ) in stock_history_line.move_id.lot_ids.ids:
                         stock_history_ids.append(stock_history_line.id)
             stock_history_new = stock_history.browse(stock_history_ids)
             return stock_history_new
@@ -83,7 +84,8 @@ class WizardStockValuationList(models.TransientModel):
             for stock_history_line in stock_history:
                 if stock_history_line.move_id.linked_move_operation_ids:
                     package_list = \
-                        stock_history_line.move_id.linked_move_operation_ids.mapped(
+                        stock_history_line.move_id.\
+                        linked_move_operation_ids.mapped(
                             'operation_id'
                         ).mapped('result_package_id')
                     if package_list and self._context.get(
@@ -107,7 +109,8 @@ class WizardStockValuationList(models.TransientModel):
                 if stock_history_line.move_id.picking_id:
                     if stock_history_line.move_id.picking_id. \
                             picking_type_id.code == 'outgoing':
-                        if stock_history_line.move_id.picking_id.partner_id.id == \
+                        if stock_history_line.move_id.\
+                                picking_id.partner_id.id == \
                                 self._context.get('partner_customer_id'):
                             stock_history_ids.append(stock_history_line.id)
             stock_history_new = stock_history.browse(stock_history_ids)
@@ -128,7 +131,8 @@ class WizardStockValuationList(models.TransientModel):
                 if stock_history_line.move_id.picking_id:
                     if stock_history_line.move_id.picking_id. \
                             picking_type_id.code == 'incoming':
-                        if stock_history_line.move_id.picking_id.partner_id.id == \
+                        if stock_history_line.\
+                                move_id.picking_id.partner_id.id == \
                                 self._context.get('partner_vendor_id'):
                             stock_history_ids.append(stock_history_line.id)
             stock_history_new = stock_history.browse(stock_history_ids)
@@ -398,7 +402,8 @@ class WizardStockValuationList(models.TransientModel):
                     "out_inventory_value": 0,
                     "product": stock_history_line.product_id,
                     "location": stock_history_line.location_id,
-                    "price_unit_on_quant": stock_history_line.price_unit_on_quant,
+                    "price_unit_on_quant":
+                        stock_history_line.price_unit_on_quant,
                     "company": stock_history_line.company_id,
                 }
 
