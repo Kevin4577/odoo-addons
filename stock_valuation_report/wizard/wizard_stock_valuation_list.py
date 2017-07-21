@@ -21,157 +21,157 @@ class WizardStockValuationList(models.TransientModel):
 
         return location
 
-    def _get_product_inventory_from_product_id(self, stock_historys):
+    def _get_product_inventory_from_product_id(self, stock_history):
         """
             Filter the stock history with selected product id from context
-        :param stock_historys:
+        :param stock_history:
         :return:
         """
 
         if self._context.get('product_id', False):
-            stock_historys_new = stock_historys.filtered(
+            stock_history_new = stock_history.filtered(
                 lambda r: r.product_id.id == self._context.get(
                     'product_id')
             )
-            return stock_historys_new
+            return stock_history_new
         else:
-            return stock_historys
+            return stock_history
 
-    def _get_product_inventory_from_product_catergory(self, stock_historys):
+    def _get_product_inventory_from_product_catergory(self, stock_history):
         """
             Filter the stock history with selected product id from context
-        :param stock_historys:
+        :param stock_history:
         :return:
         """
 
         if self._context.get('category_id', False):
-            stock_historys_new = stock_historys.filtered(
+            stock_history_new = stock_history.filtered(
                 lambda r: r.product_categ_id.id ==
                 self._context.get('category_id'))
-            return stock_historys_new
+            return stock_history_new
         else:
-            return stock_historys
+            return stock_history
 
-    def _get_product_inventory_from_lot(self, stock_historys):
+    def _get_product_inventory_from_lot(self, stock_history):
         """
             Filter the stock history with selected product id from context
-        :param stock_historys:
+        :param stock_history:
         :return:
         """
 
         if self._context.get('lot_id', False):
             stock_history_ids = []
-            for stock_history in stock_historys:
-                if stock_history.move_id.lot_ids:
+            for stock_history_line in stock_history:
+                if stock_history_line.move_id.lot_ids:
                     if self._context.get(
-                            'lot_id') in stock_history.move_id.lot_ids.ids:
-                        stock_history_ids.append(stock_history.id)
-            stock_historys_new = stock_historys.browse(stock_history_ids)
-            return stock_historys_new
+                            'lot_id') in stock_history_line.move_id.lot_ids.ids:
+                        stock_history_ids.append(stock_history_line.id)
+            stock_history_new = stock_history.browse(stock_history_ids)
+            return stock_history_new
         else:
-            return stock_historys
+            return stock_history
 
-    def _get_product_inventory_from_package(self, stock_historys):
+    def _get_product_inventory_from_package(self, stock_history):
         """
             Filter the stock history with selected product id from context
-        :param stock_historys:
+        :param stock_history:
         :return:
         """
 
         if self._context.get('package_id', False):
             stock_history_ids = []
-            for stock_history in stock_historys:
-                if stock_history.move_id.linked_move_operation_ids:
+            for stock_history_line in stock_history:
+                if stock_history_line.move_id.linked_move_operation_ids:
                     package_list = \
-                        stock_history.move_id.linked_move_operation_ids.mapped(
+                        stock_history_line.move_id.linked_move_operation_ids.mapped(
                             'operation_id'
                         ).mapped('result_package_id')
                     if package_list and self._context.get(
                             'package_id') in package_list.ids:
-                        stock_history_ids.append(stock_history.id)
-            stock_historys_new = stock_historys.browse(stock_history_ids)
-            return stock_historys_new
+                        stock_history_ids.append(stock_history_line.id)
+            stock_history_new = stock_history.browse(stock_history_ids)
+            return stock_history_new
         else:
-            return stock_historys
+            return stock_history
 
-    def _get_product_inventory_from_partner_customer_id(self, stock_historys):
+    def _get_product_inventory_from_partner_customer_id(self, stock_history):
         """
             Filter the stock history with the selected customer id from context
-        :param stock_historys:
+        :param stock_history:
         :return:
         """
 
         if self._context.get('partner_customer_id', False):
             stock_history_ids = []
-            for stock_history in stock_historys:
-                if stock_history.move_id.picking_id:
-                    if stock_history.move_id.picking_id. \
+            for stock_history_line in stock_history:
+                if stock_history_line.move_id.picking_id:
+                    if stock_history_line.move_id.picking_id. \
                             picking_type_id.code == 'outgoing':
-                        if stock_history.move_id.picking_id.partner_id.id == \
+                        if stock_history_line.move_id.picking_id.partner_id.id == \
                                 self._context.get('partner_customer_id'):
-                            stock_history_ids.append(stock_history.id)
-            stock_historys_new = stock_historys.browse(stock_history_ids)
-            return stock_historys_new
+                            stock_history_ids.append(stock_history_line.id)
+            stock_history_new = stock_history.browse(stock_history_ids)
+            return stock_history_new
         else:
-            return stock_historys
+            return stock_history
 
-    def _get_product_inventory_from_partner_vendor_id(self, stock_historys):
+    def _get_product_inventory_from_partner_vendor_id(self, stock_history):
         """
             Filter the stock history with the selected vendor id from context
-        :param stock_historys:
+        :param stock_history:
         :return:
         """
 
         if self._context.get('partner_vendor_id', False):
             stock_history_ids = []
-            for stock_history in stock_historys:
-                if stock_history.move_id.picking_id:
-                    if stock_history.move_id.picking_id. \
+            for stock_history_line in stock_history:
+                if stock_history_line.move_id.picking_id:
+                    if stock_history_line.move_id.picking_id. \
                             picking_type_id.code == 'incoming':
-                        if stock_history.move_id.picking_id.partner_id.id == \
+                        if stock_history_line.move_id.picking_id.partner_id.id == \
                                 self._context.get('partner_vendor_id'):
-                            stock_history_ids.append(stock_history.id)
-            stock_historys_new = stock_historys.browse(stock_history_ids)
-            return stock_historys_new
+                            stock_history_ids.append(stock_history_line.id)
+            stock_history_new = stock_history.browse(stock_history_ids)
+            return stock_history_new
         else:
-            return stock_historys
+            return stock_history
 
-    def _get_product_inventory_from_mrp(self, stock_historys):
+    def _get_product_inventory_from_mrp(self, stock_history):
         """
             Filter the stock history with the selected vendor id from context
-        :param stock_historys:
+        :param stock_history:
         :return:
         """
 
         if self._context.get('involved_mrp_order', False):
             stock_history_ids = []
-            for stock_history in stock_historys:
+            for stock_history_line in stock_history:
                 manufacture_order = \
-                    stock_history.move_id.raw_material_production_id or \
-                    stock_history.move_id.production_id
+                    stock_history_line.move_id.raw_material_production_id or \
+                    stock_history_line.move_id.production_id
                 if manufacture_order and manufacture_order.id == \
                         self._context.get('involved_mrp_order'):
-                    stock_history_ids.append(stock_history.id)
-            stock_historys_new = stock_historys.browse(stock_history_ids)
-            return stock_historys_new
+                    stock_history_ids.append(stock_history_line.id)
+            stock_history_new = stock_history.browse(stock_history_ids)
+            return stock_history_new
         else:
-            return stock_historys
+            return stock_history
 
     def _get_sale_name_from_source(self, origin_and_sales_name, source):
         return origin_and_sales_name.get(source) or ""
 
-    def _get_product_inventory_additonal_filter(self, stock_historys):
+    def _get_product_inventory_additonal_filter(self, stock_history):
         """
             This function could be inherited to filter stock history
             list by additional options.
         """
-        return stock_historys
+        return stock_history
 
-    def _get_product_inventory(self, stock_historys, origin_and_sales_name):
+    def _get_product_inventory(self, stock_history, origin_and_sales_name):
         """
             Get stock history record list, include the filter of shipno,
             product, vendor, customer, location.
-        :param stock_historys:
+        :param stock_history:
         :param origin_and_sales_name:
         :return:
         """
@@ -179,39 +179,39 @@ class WizardStockValuationList(models.TransientModel):
         products = {}
 
         if self._context.get('product_id', False):
-            stock_historys = \
-                self._get_product_inventory_from_product_id(stock_historys)
+            stock_history = \
+                self._get_product_inventory_from_product_id(stock_history)
         elif self._context.get('category_id', False):
-            stock_historys = \
+            stock_history = \
                 self._get_product_inventory_from_product_catergory(
-                    stock_historys
+                    stock_history
                 )
         elif self._context.get('lot_id', False):
-            stock_historys = \
-                self._get_product_inventory_from_lot(stock_historys)
+            stock_history = \
+                self._get_product_inventory_from_lot(stock_history)
         elif self._context.get('package_id', False):
-            stock_historys = \
-                self._get_product_inventory_from_package(stock_historys)
+            stock_history = \
+                self._get_product_inventory_from_package(stock_history)
         if self._context.get('partner_customer_id', False):
-            stock_historys = \
+            stock_history = \
                 self._get_product_inventory_from_partner_customer_id(
-                    stock_historys
+                    stock_history
                 )
         elif self._context.get('partner_vendor_id', False):
-            stock_historys = \
+            stock_history = \
                 self._get_product_inventory_from_partner_vendor_id(
-                    stock_historys
+                    stock_history
                 )
         elif self._context.get('involved_mrp_order', False):
-            stock_historys = \
+            stock_history = \
                 self._get_product_inventory_from_mrp(
-                    stock_historys
+                    stock_history
                 )
 
-        stock_historys = \
-            self._get_product_inventory_additonal_filter(stock_historys)
+        stock_history = \
+            self._get_product_inventory_additonal_filter(stock_history)
 
-        for stock_history in stock_historys:
+        for stock_history in stock_history:
             sale_name = self._get_sale_name_from_source(
                 origin_and_sales_name, stock_history.source)
             key = str(stock_history.product_id.id) + ":" + sale_name
@@ -265,9 +265,9 @@ class WizardStockValuationList(models.TransientModel):
             domain.append(
                 ('location_id', '=', location_id)
             )
-        stock_historys = self.env['stock.history'].search(domain)
+        stock_history = self.env['stock.history'].search(domain)
         return self._get_product_inventory(
-            stock_historys, origin_and_sales_name)
+            stock_history, origin_and_sales_name)
 
     def _get_product_inventory_at_end_date(self, origin_and_sales_name):
         """
@@ -293,9 +293,9 @@ class WizardStockValuationList(models.TransientModel):
             domain.append(
                 ('location_id', '=', location_id)
             )
-        stock_historys = self.env['stock.history'].search(domain)
+        stock_history = self.env['stock.history'].search(domain)
         return self._get_product_inventory(
-            stock_historys, origin_and_sales_name)
+            stock_history, origin_and_sales_name)
 
     def _get_product_inventory_between_date(self, origin_and_sales_name):
         """
@@ -323,50 +323,50 @@ class WizardStockValuationList(models.TransientModel):
             domain.append(
                 ('location_id', '=', location_id)
             )
-        stock_historys = self.env['stock.history'].search(domain)
+        stock_history = self.env['stock.history'].search(domain)
         products = {}
         if self._context.get('product_id', False):
-            stock_historys = \
-                self._get_product_inventory_from_product_id(stock_historys)
+            stock_history = \
+                self._get_product_inventory_from_product_id(stock_history)
         elif self._context.get('category_id', False):
-            stock_historys = \
+            stock_history = \
                 self._get_product_inventory_from_product_catergory(
-                    stock_historys
+                    stock_history
                 )
         elif self._context.get('lot_id', False):
-            stock_historys = \
-                self._get_product_inventory_from_lot(stock_historys)
+            stock_history = \
+                self._get_product_inventory_from_lot(stock_history)
         elif self._context.get('package_id', False):
-            stock_historys = \
-                self._get_product_inventory_from_package(stock_historys)
+            stock_history = \
+                self._get_product_inventory_from_package(stock_history)
 
         if self._context.get('partner_customer_id', False):
-            stock_historys = \
+            stock_history = \
                 self._get_product_inventory_from_partner_customer_id(
-                    stock_historys
+                    stock_history
                 )
         elif self._context.get('partner_vendor_id', False):
-            stock_historys = \
+            stock_history = \
                 self._get_product_inventory_from_partner_vendor_id(
-                    stock_historys
+                    stock_history
                 )
         elif self._context.get('involved_mrp_order', False):
-            stock_historys = \
+            stock_history = \
                 self._get_product_inventory_from_mrp(
-                    stock_historys
+                    stock_history
                 )
 
-        stock_historys = \
-            self._get_product_inventory_additonal_filter(stock_historys)
+        stock_history = \
+            self._get_product_inventory_additonal_filter(stock_history)
 
-        for stock_history in stock_historys:
+        for stock_history_line in stock_history:
             sale_name = self._get_sale_name_from_source(
-                origin_and_sales_name, stock_history.source)
+                origin_and_sales_name, stock_history_line.source)
 
-            key = str(stock_history.product_id.id) + ":" + sale_name
+            key = str(stock_history_line.product_id.id) + ":" + sale_name
 
-            quantity = stock_history.quantity
-            value = stock_history.inventory_value
+            quantity = stock_history_line.quantity
+            value = stock_history_line.inventory_value
 
             if key in products.keys():
                 if quantity > 0:
@@ -374,21 +374,21 @@ class WizardStockValuationList(models.TransientModel):
                         products[key]["in_quantity"] + quantity
                     products[key]["in_inventory_value"] = \
                         products[key]["in_inventory_value"] + value
-                    products[key]["location"] = stock_history.location_id
+                    products[key]["location"] = stock_history_line.location_id
                     products[key][
                         "price_unit_on_quant"] = \
-                        stock_history.price_unit_on_quant
-                    products[key]["company"] = stock_history.company_id
+                        stock_history_line.price_unit_on_quant
+                    products[key]["company"] = stock_history_line.company_id
                 else:
                     products[key]["out_quantity"] = \
                         products[key]["out_quantity"] + quantity
                     products[key]["out_inventory_value"] = \
                         products[key]["out_inventory_value"] + value
-                    products[key]["location"] = stock_history.location_id
+                    products[key]["location"] = stock_history_line.location_id
                     products[key][
                         "price_unit_on_quant"] = \
-                        stock_history.price_unit_on_quant
-                    products[key]["company"] = stock_history.company_id
+                        stock_history_line.price_unit_on_quant
+                    products[key]["company"] = stock_history_line.company_id
 
             else:
                 products[key] = {
@@ -396,10 +396,10 @@ class WizardStockValuationList(models.TransientModel):
                     "in_inventory_value": 0,
                     "out_quantity": 0,
                     "out_inventory_value": 0,
-                    "product": stock_history.product_id,
-                    "location": stock_history.location_id,
-                    "price_unit_on_quant": stock_history.price_unit_on_quant,
-                    "company": stock_history.company_id,
+                    "product": stock_history_line.product_id,
+                    "location": stock_history_line.location_id,
+                    "price_unit_on_quant": stock_history_line.price_unit_on_quant,
+                    "company": stock_history_line.company_id,
                 }
 
                 if quantity > 0:
