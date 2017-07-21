@@ -4,6 +4,7 @@
 {
     'name': 'Stock Valutaion Report With Product Class and HS code',
     'version': '10.0.1.0.0',
+    'category': 'Stock',
     "summary": """Stock Valutaion Report With Product Class and HS code""",
     "support": "support@elico-corp.com",
     'depends': [
