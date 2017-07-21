@@ -760,7 +760,7 @@ class WizardStockValuationLine(models.TransientModel):
         'Below Safety Stock?',
         readonly=True,
         default="",
-        help='Whether current inventory balance was in the safety stock level.'
+        help='Whether current inventory balance was below safety stock level.'
     )
     location_name = fields.Char(
         'Location',
