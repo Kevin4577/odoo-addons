@@ -23,12 +23,12 @@ class WizardStockValuationList(models.TransientModel):
             stock_history_new = stock_history.filtered(
                 lambda r:
                 r.product_id.product_stage_id.id == self._context.get(
-                    'product_stage_id')
-                and r.product_id.product_line_id.id == self._context.get(
-                    'product_line_id')
-                and r.product_id.product_class_id.id == self._context.get(
-                    'product_class_id')
-                and r.product_id.product_family_id.id == self._context.get(
+                    'product_stage_id') and
+                r.product_id.product_line_id.id == self._context.get(
+                    'product_line_id') and
+                r.product_id.product_class_id.id == self._context.get(
+                    'product_class_id') and
+                r.product_id.product_family_id.id == self._context.get(
                     'product_family_id')
             )
             return stock_history_new
