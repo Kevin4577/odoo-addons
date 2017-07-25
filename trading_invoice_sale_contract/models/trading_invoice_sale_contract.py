@@ -15,8 +15,4 @@ def render_template_with_data(report_xml_id, ctx):
      template with necessary data."""
     sale_order = ctx['objects']
     base_invoice_export_obj = sale_order.env['trading.invoice']
-    if sale_order:
-        ctx.update(base_invoice_export_obj.get_order_lines(sale_order))
-    else:
-        raise ValidationError(_('Please check whether this stock picking was'
-                                ' generated from sale order.'))
+    ctx.update(base_invoice_export_obj.get_order_lines(sale_order))

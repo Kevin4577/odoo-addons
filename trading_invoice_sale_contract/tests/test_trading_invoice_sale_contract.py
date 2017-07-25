@@ -49,6 +49,3 @@ class TestTradingInvoiceSaleContract(common.TransactionCase):
         render_template_with_data(
             self.report_xml_id, {
                 'objects': self.sale_order})
-        with self.assertRaises(ValidationError):
-            render_template_with_data(self.report_xml_id,
-                                      {'objects': self.sale_order})
