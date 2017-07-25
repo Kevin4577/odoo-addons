@@ -13,10 +13,10 @@ def render_template_with_data(report_xml_id, ctx):
     """This function get the data from sale order of specific stock picking,
      and sum the product quantity and price, in order to render the ods
      template with necessary data."""
-    stock_picking = ctx['objects']
-    base_invoice_export_obj = stock_picking.env['trading.invoice']
-    if stock_picking.sale_id:
-        ctx.update(base_invoice_export_obj.get_order_lines(stock_picking))
+    sale_order = ctx['objects']
+    base_invoice_export_obj = sale_order.env['trading.invoice']
+    if sale_order:
+        ctx.update(base_invoice_export_obj.get_order_lines(sale_order))
     else:
         raise ValidationError(_('Please check whether this stock picking was'
                                 ' generated from sale order.'))

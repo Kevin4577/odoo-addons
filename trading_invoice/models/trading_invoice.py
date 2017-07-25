@@ -11,11 +11,10 @@ class TradingInvoice(models.Model):
     _description = "Trading Invoice"
 
     @api.multi
-    def get_order_lines(self, stock_picking):
+    def get_order_lines(self, sale_order):
         """This function get the product information of each order lines
         inside sale order."""
-        order_lines = stock_picking.move_lines.mapped('procurement_id'
-                                                      ).mapped('sale_line_id')
+        order_lines = sale_order.order_line
         product_lines = []
         sum_qty = 0.0
         sum_amount = 0.0
