@@ -5,7 +5,6 @@
 from odoo.addons.trading_invoice_sale_contract.models.\
     trading_invoice_sale_contract import render_template_with_data
 from odoo.tests import common
-from odoo.exceptions import ValidationError
 
 
 class TestTradingInvoiceSaleContract(common.TransactionCase):
