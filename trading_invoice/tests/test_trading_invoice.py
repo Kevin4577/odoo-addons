@@ -109,7 +109,7 @@ class TestTradingInvoice(common.TransactionCase):
 
     def test_get_order_lines(self):
         self.lines = self.trading_invoice_model.\
-            get_order_lines(self.sale_order.picking_ids)
+            get_order_lines(self.sale_order)
         qty = 0.0
         for order in self.sale_order.order_line:
             qty += order.product_uom_qty
