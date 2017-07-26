@@ -356,26 +356,27 @@ class TradingInvoice(models.Model):
         return order_lines
 
     @api.multi
-    def get_invoice_lines_per_invoice(self, account_invoice):
+    def get_invoice_lines_per_invoice(self, sale_order):
         """This function returns the sum of quantity, unit price, and amount
         of invoice lines which was used in this account invoice."""
+        order_lines = sale_order.order_line
         product_lines = []
         sum_qty = 0.0
         sum_amount = 0.0
-        for index, line in enumerate(account_invoice.invoice_line_ids):
+        for index, line in enumerate(order_lines):
             product_lines.append({
                 'index': index,
                 'product_id': line.product_id,
-                'qty': line.quantity,
                 'price_unit': line.price_unit,
-                'price_subtotal': line.price_subtotal
+                'qty': line.product_uom_qty,
+                'price_subtotal': line.price_subtotal,
             })
-            sum_qty += line.quantity
-            sum_amount += line.price_subtotal
+            sum_qty += line.product_uom_qty
+            sum_amount += line.price_total
         return {
-            'product_lines': product_lines,
             'sum_qty': sum_qty,
-            'sum_amount': sum_amount
+            'sum_amount': sum_amount,
+            'product_lines': product_lines,
         }
 
     @api.multi

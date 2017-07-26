@@ -58,11 +58,11 @@ class TestTradingInvoiceProformaInvoice(common.TransactionCase):
 
     def test_render_template_with_data(self):
         "To Test render_template_with_data method."
-        for invoice in self.sale_order.invoice_ids:
-            render_template_with_data(self.report_xml_id,
-                                      {'objects': invoice})
+        render_template_with_data(
+            self.report_xml_id, {
+                'objects': self.sale_order})
         with self.assertRaises(ValidationError):
-            for invoice in self.sale_order.invoice_ids:
-                invoice.invoice_line_ids = False
-                render_template_with_data(self.report_xml_id,
-                                          {'objects': invoice})
+            sale_order = self.sale_order.order_line
+            sale_order.order_line = False
+            render_template_with_data(self.report_xml_id,
+                                      {'objects': sale_order})

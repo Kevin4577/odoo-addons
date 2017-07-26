@@ -8,7 +8,7 @@
     <record id="trading_invoice_proforma_invoice_py3o" model="ir.actions.report.xml">
         <field name="name">Trading Invoice Proforma Invoice</field>
         <field name="type">ir.actions.report.xml</field>
-        <field name="model">account.invoice</field>
+        <field name="model">sale.order</field>
         <field name="report_name">Trading Invoice Proforma Invoice</field>
         <field name="report_type">py3o</field>
         <field name="py3o_filetype">ods</field>
@@ -20,7 +20,7 @@
     <record id="trading_invoice_proforma_invoice_py3o_print_action" model="ir.values">
         <field eval="'action'" name="key" />
         <field eval="'client_print_multi'" name="key2" />
-        <field name="model">account.invoice</field>
+        <field name="model">sale.order</field>
         <field name="name">Trading Invoice Proforma Invoice</field>
         <field eval="'ir.actions.report.xml,'+str(trading_invoice_proforma_invoice_py3o)" name="value"/>
     </record>

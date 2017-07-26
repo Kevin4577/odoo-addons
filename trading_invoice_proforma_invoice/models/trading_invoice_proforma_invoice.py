@@ -14,11 +14,11 @@ def render_template_with_data(report_xml_id, ctx):
     """This function get the data from sale order of account invoice,
     and sum the invoice quantity, unit price, and amount, in order to render
     the ods template with necessary data."""
-    account_invoice = ctx['objects']
-    base_invoice_export_obj = account_invoice.env['trading.invoice']
-    if account_invoice.invoice_line_ids:
+    sale_order = ctx['objects']
+    base_invoice_export_obj = sale_order.env['trading.invoice']
+    if sale_order.order_line:
         ctx.update(base_invoice_export_obj.get_invoice_lines_per_invoice
-                   (account_invoice))
+                   (sale_order))
     else:
         raise ValidationError(_('Please check whether this account invoice '
                                 'was generated from sale order.'))

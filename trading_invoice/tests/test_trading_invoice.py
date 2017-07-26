@@ -162,7 +162,7 @@ class TestTradingInvoice(common.TransactionCase):
 
     def test_get_invoice_lines_per_invoice(self):
         self.invoice_lines = self.trading_invoice_model.\
-            get_invoice_lines_per_invoice(self.sale_order.invoice_ids)
+            get_invoice_lines_per_invoice(self.sale_order)
         self.assertEqual(self.invoice_lines['product_lines'][0]['price_unit'],
                          self.sale_order.order_line[0]['price_unit'])
         self.assertEqual(self.invoice_lines['product_lines'][0]
