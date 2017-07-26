@@ -5,7 +5,6 @@
 from odoo.addons.trading_invoice_sale_contract.models.\
     trading_invoice_sale_contract import render_template_with_data
 from odoo.tests import common
-from odoo.exceptions import ValidationError
 
 
 class TestTradingInvoiceSaleContract(common.TransactionCase):
@@ -46,10 +45,6 @@ class TestTradingInvoiceSaleContract(common.TransactionCase):
 
     def test_render_template_with_data(self):
         "To Test render_template_with_data method."
-        for pick in self.sale_order.picking_ids:
-            render_template_with_data(self.report_xml_id, {'objects': pick})
-        with self.assertRaises(ValidationError):
-            for pick in self.sale_order.picking_ids:
-                pick.sale_id = False
-                render_template_with_data(self.report_xml_id,
-                                          {'objects': pick})
+        render_template_with_data(
+            self.report_xml_id, {
+                'objects': self.sale_order})
