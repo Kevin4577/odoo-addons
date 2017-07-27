@@ -17,17 +17,15 @@ class TradingSale(models.Model):
     def get_product_hs_code_list(self, so):
         """This function would filter reporting element of hs
         code for each order lines."""
-        hs_code_ids = list(set([product.product_hs_code_id.id for product
-                                in so.order_line.mapped('product_id')]))
-        hs_code_list = self.env['product.hs.code'].browse(hs_code_ids)
+        product_list = so.order_line.mapped('product_id')
         hs_lines = []
-        for index, hs_code in enumerate(hs_code_list):
-            if hs_code.ids:
+        for index, product in enumerate(product_list):
+            if product.ids:
                 hs_lines.append({
                                 'index': index,
-                                'cn_name': hs_code.cn_name,
-                                'hs_code': hs_code.hs_code,
-                                'note': hs_code.note,
+                                'cn_name': product.product_hs_code_id.cn_name,
+                                'hs_code': product.product_hs_code_id.hs_code,
+                                'note': product.hs_code_note,
                                 })
         return hs_lines
 
