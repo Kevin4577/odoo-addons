@@ -43,17 +43,17 @@ class TradingVendor(common.TransactionCase):
                                    'seller_ids': [(0, 0, seller_vals_1)]})
 
         po_vals_1 = {
-                'partner_id': self.partner_id.id,
-                'order_line': [
-                    (0, 0, {
-                        'name': self.product_id_1.name,
-                        'product_id': self.product_id_1.id,
-                        'product_qty': 5.0,
-                        'product_uom': self.product_id_1.uom_po_id.id,
-                        'price_unit': 500.0,
-                        'date_planned': datetime.today().
-                        strftime(DEFAULT_SERVER_DATETIME_FORMAT),
-                    })],
+            'partner_id': self.partner_id.id,
+            'order_line': [
+                (0, 0, {
+                    'name': self.product_id_1.name,
+                    'product_id': self.product_id_1.id,
+                    'product_qty': 5.0,
+                    'product_uom': self.product_id_1.uom_po_id.id,
+                    'price_unit': 500.0,
+                    'date_planned': datetime.today().
+                    strftime(DEFAULT_SERVER_DATETIME_FORMAT),
+                })],
         }
         self.po_1 = self.PurchaseOrder.create(po_vals_1)
         self.po_list = [self.po, self.po_1]
