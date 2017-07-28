@@ -45,3 +45,18 @@ class TestPurchase(common.TransactionCase):
         self.picking.force_assign()
         self.picking.pack_operation_product_ids.write({'qty_done': 5.0})
         self.picking.do_new_transfer()
+        # Create return picking
+        StockReturnPicking = self.env['stock.return.picking']
+        default_data =\
+            StockReturnPicking.with_context(active_ids=self.picking.ids,
+                                            active_id=self.picking.ids[0]).default_get(['move_dest_exists', 'original_location_id', 'product_return_moves', 'parent_location_id', 'location_id'])
+        return_wiz = StockReturnPicking.\
+            with_context(active_ids=self.picking.ids,
+                         active_id=self.picking.ids[0]).create(default_data)
+        return_wiz.product_return_moves.quantity = 2.0
+        res = return_wiz.create_returns()
+        return_pick = self.env['stock.picking'].browse(res['res_id'])
+        # Validate picking
+        return_pick.force_assign()
+        return_pick.pack_operation_product_ids.write({'qty_done': 2})
+        return_pick.do_new_transfer()
