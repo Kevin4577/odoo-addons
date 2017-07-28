@@ -6,8 +6,9 @@
 Trading Vendor
 ==============
 
-The new module 'trading_vendor' inherit the 'purchase.order.line' model to add vendor
-product code for each purchase order lines.
+The new module 'trading_vendor' would provide methods for purchase order report
+modules. Those methods would be reused by several modules to printout the report
+with py3o engine, in order to improve the maintainability of project modules.
 
 
 Usage

@@ -18,12 +18,10 @@ class TradingVendor(common.TransactionCase):
         self.partner_id = self.env.ref('base.res_partner_1')
         self.partner_id_2 = self.env.ref('base.res_partner_2')
         self.trading_vendor_obj = self.env['trading.vendor']
+        seller_vals = {'name': self.partner_id.id, 'min_qty': 1,
+                       'price': 500, 'product_code': 'test'}
         (self.product_id_1).write({'purchase_method': 'purchase',
-                                   'seller_ids': [(0, 0,
-                                                   {'name': self.partner_id.id,
-                                                    'min_qty': 1,
-                                                    'price': 500,
-                                                    'product_code': 'test'})]})
+                                   'seller_ids': [(0, 0, seller_vals)]})
 
         po_vals = {
             'partner_id': self.partner_id.id,
@@ -39,12 +37,10 @@ class TradingVendor(common.TransactionCase):
                 })],
         }
         self.po = self.PurchaseOrder.create(po_vals)
+        seller_vals_1 = {'name': self.partner_id_2.id, 'min_qty': 1,
+                         'price': 500, 'product_code': 'test'}
         (self.product_id_1).write({'purchase_method': 'purchase',
-                                   'seller_ids': [(0, 0,
-                                               {'name': self.partner_id_2.id,
-                                                'min_qty': 1,
-                                                'price': 500,
-                                                'product_code': 'test'})]})
+                                   'seller_ids': [(0, 0, seller_vals_1)]})
 
         po_vals_1 = {
                 'partner_id': self.partner_id.id,
@@ -73,7 +69,7 @@ class TradingVendor(common.TransactionCase):
     def test_get_purchase_order_company_contact(self):
         """Test purchase order company contact method"""
         self.trading_vendor_obj.get_purchase_order_company_contact(self.po)
- 
+
     def test_get_purchase_order_total_quantity_and_price(self):
         """Test purchase order total quantity and price method"""
         self.trading_vendor_obj.\

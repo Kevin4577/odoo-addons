@@ -42,9 +42,9 @@ class TradingVendor(models.Model):
         """This function return the total quantity and total price of
         purchase order."""
         total_quantity = sum([po_line.product_qty for po_line in
-                                             purchase_order.order_line])
+                              purchase_order.order_line])
         total_price = sum([po_line.price_total for po_line in
-                                             purchase_order.order_line])
+                           purchase_order.order_line])
         return total_quantity, total_price
 
     def get_purchase_order_list_total_quantity_and_price(self,

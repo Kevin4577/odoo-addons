@@ -19,7 +19,7 @@ class PurchaseOrderLine(models.Model):
             if line.product_id and line.partner_id:
                 vendor_product_code = ''
                 product_supplierinfo = supplierinfo_obj.\
-                    search([('product_id','=', line.product_id.id),
+                    search([('product_id', '=', line.product_id.id),
                             ('name', '=', line.partner_id.id)])
                 if product_supplierinfo:
                     vendor_product_code = product_supplierinfo[0].product_code
