@@ -47,9 +47,16 @@ class TestPurchase(common.TransactionCase):
         self.picking.do_new_transfer()
         # Create return picking
         StockReturnPicking = self.env['stock.return.picking']
-        default_data =\
-            StockReturnPicking.with_context(active_ids=self.picking.ids,
-                                            active_id=self.picking.ids[0]).default_get(['move_dest_exists', 'original_location_id', 'product_return_moves', 'parent_location_id', 'location_id'])
+        default_data = StockReturnPicking.with_context(
+            active_ids=self.picking.ids,
+            active_id=self.picking.ids[0]).default_get(
+            [
+                'move_dest_exists',
+                'original_location_id',
+                'product_return_moves',
+                'parent_location_id',
+                'location_id'
+            ])
         return_wiz = StockReturnPicking.\
             with_context(active_ids=self.picking.ids,
                          active_id=self.picking.ids[0]).create(default_data)
