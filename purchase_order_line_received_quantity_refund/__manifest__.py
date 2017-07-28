@@ -16,7 +16,7 @@
         'purchase',
     ],
     'data': [
-         'views/purchase_view.xml',
+        'views/purchase_view.xml',
     ],
     'installable': True,
 }
