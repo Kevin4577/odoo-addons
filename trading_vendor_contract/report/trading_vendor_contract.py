@@ -27,8 +27,6 @@ def render_report_with_data(report_xml_id, data):
         get_purchase_order_list_total_quantity_and_price(purchase_order_list)
     data.update(vendor_contact_person)
     data.update(company_contact_person)
-    data.update({
-                 'qty_total': qty_total,
+    data.update({'qty_total': qty_total,
                  'price_total': price_total,
-                 'object': purchase_order_list[0],
-                })
+                 'object': purchase_order_list[0]})
