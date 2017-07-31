@@ -15,6 +15,7 @@ class TestPurchase(common.TransactionCase):
         self.supplierinfo_obj = self.env['product.supplierinfo']
         self.PurchaseOrder = self.env['purchase.order']
         self.product_id_1 = self.env.ref('product.product_product_8')
+        self.product_uom = self.env.ref('product.product_uom_dozen')
         self.partner_id = self.env.ref('base.res_partner_1')
         self.partner_id_2 = self.env.ref('base.res_partner_2')
         (self.product_id_1).write({'purchase_method': 'purchase',
@@ -49,6 +50,14 @@ class TestPurchase(common.TransactionCase):
         for line in self.po.order_line:
             self.po.button_confirm()
             line.product_id.type = 'service'
+            line._compute_qty_received_returned()
+
+    def test_product_uom_picking_transfer(self):
+        "Test compute_qty_received_returned method based on product_uom."
+        for line in self.po.order_line:
+            self.po.button_confirm()
+            for move in line.move_ids:
+                move.product_uom = self.product_uom.id
             line._compute_qty_received_returned()
 
     def test_picking_transfer(self):
