@@ -39,7 +39,19 @@ class TestPurchase(common.TransactionCase):
         }
         self.po = self.PurchaseOrder.create(po_vals)
 
+    def test_purchse_draft_state(self):
+        "Test compute_qty_received_returned method based on draft state."
+        for line in self.po.order_line:
+            line._compute_qty_received_returned()
+
+    def test_service_type_product(self):
+        "Test compute_qty_received_returned method based on service product."
+        self.product_id_1.write({'type': 'service'})
+        for line in self.po.order_line:
+            line._compute_qty_received_returned()
+
     def test_picking_transfer(self):
+        "Test compute_qty_received_returned method."
         self.po.button_confirm()
         self.picking = self.po.picking_ids[0]
         self.picking.force_assign()
