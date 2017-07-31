@@ -34,6 +34,8 @@ class ProductTemplate(models.Model):
                                           'Default Stock Location',
                                           help='Default stock location of '
                                           'product.')
+    default_stored_area = fields.Char('Default Stored Area',
+                                      help='Default Stored Area')
 
     _sql_constraints = [('name_uniq', 'UNIQUE(name)',
                          _('The name of the product must be unique.'))]
