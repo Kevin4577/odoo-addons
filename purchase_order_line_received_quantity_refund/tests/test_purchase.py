@@ -46,8 +46,9 @@ class TestPurchase(common.TransactionCase):
 
     def test_service_type_product(self):
         "Test compute_qty_received_returned method based on service product."
-        self.product_id_1.write({'type': 'service'})
         for line in self.po.order_line:
+            self.po.button_confirm()
+            line.product_id.type = 'service'
             line._compute_qty_received_returned()
 
     def test_picking_transfer(self):
