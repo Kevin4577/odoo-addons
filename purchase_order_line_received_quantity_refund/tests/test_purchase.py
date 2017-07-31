@@ -67,3 +67,5 @@ class TestPurchase(common.TransactionCase):
         return_pick.force_assign()
         return_pick.pack_operation_product_ids.write({'qty_done': 2})
         return_pick.do_new_transfer()
+        for line in self.po.order_line:
+            line._compute_qty_received_returned()
