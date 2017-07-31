@@ -91,3 +91,12 @@ class TradingVendor(common.TransactionCase):
             }).create({'pick_id':
                        self.po.order_line[0].move_ids[0].picking_id.id
                        }).process()
+        self.assertEqual(self.po.order_line[0].move_ids[0].picking_id.state,
+                         "done")
+        self.line_date = datetime.strptime(
+            self.po.order_line[0].date_received,
+            DEFAULT_SERVER_DATETIME_FORMAT).date()
+        self.picking_date = datetime.strptime(
+            self.po.order_line[0].move_ids[0].picking_id.date,
+            DEFAULT_SERVER_DATETIME_FORMAT).date()
+        self.assertEqual(self.line_date, self.picking_date)

@@ -6,8 +6,7 @@
     'name': 'Trading Vendor',
     'version': '10.0.1.0.0',
     'category': 'Purchase',
-    'summary': """This module to add vendor product code for each purchase
-    order lines..""",
+    'summary': """Common methods and fields for vendor trading printouts""",
     "support": "support@elico-corp.com",
     'author': "Elico Corp",
     'website': 'www.elico-corp.com',
