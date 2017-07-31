@@ -1,0 +1,107 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* trading_vendor
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-31 05:14+0000\n"
+"PO-Revision-Date: 2017-07-31 05:14+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: trading_vendor
+#: model:ir.model.fields,field_description:trading_vendor.field_purchase_order_line_vendor_product_code
+msgid "Vendor Product Code"
+msgstr "供应商产品代码"
+
+#. module: trading_vendor
+#: model:ir.model.fields,help:trading_vendor.field_purchase_order_line_customer_product_code
+msgid "Customer product code of product of purchase order line."
+msgstr "Customer product code of product of purchase order line."
+
+#. module: trading_vendor
+#: model:ir.model.fields,help:trading_vendor.field_purchase_order_line_date_received
+msgid "Final receive date of stock move."
+msgstr "Final receive date of stock move."
+
+#. module: trading_vendor
+#: model:ir.model.fields,help:trading_vendor.field_purchase_order_line_product_reference
+msgid "Internal Reference of product of purchase order line."
+msgstr "Internal Reference of product of purchase order line."
+
+#. module: trading_vendor
+#: model:ir.model.fields,help:trading_vendor.field_purchase_order_line_vendor_reference
+msgid "Internal Reference of vendor of purchase order."
+msgstr "Internal Reference of vendor of purchase order."
+
+#. module: trading_vendor
+#: model:ir.model.fields,field_description:trading_vendor.field_purchase_order_line_day_order
+msgid "Order Day"
+msgstr "下单日份"
+
+#. module: trading_vendor
+#: model:ir.model.fields,field_description:trading_vendor.field_purchase_order_line_month_order
+msgid "Order Month"
+msgstr "下单月份"
+
+#. module: trading_vendor
+#: model:ir.model.fields,help:trading_vendor.field_purchase_order_line_purchase_order_reference
+msgid "Order Reference of purchase order."
+msgstr "Order Reference of purchase order."
+
+#. module: trading_vendor
+#: model:ir.model.fields,field_description:trading_vendor.field_purchase_order_line_product_reference
+msgid "Product Reference"
+msgstr "ERP编号"
+
+#. module: trading_vendor
+#: model:ir.model,name:trading_vendor.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "采购订单行"
+
+#. module: trading_vendor
+#: model:ir.model.fields,field_description:trading_vendor.field_purchase_order_line_purchase_order_reference
+msgid "Purchase Order Reference"
+msgstr "跟单号码"
+
+#. module: trading_vendor
+#: model:ir.model.fields,field_description:trading_vendor.field_purchase_order_line_date_received
+msgid "Received Date"
+msgstr "实际到货日期"
+
+#. module: trading_vendor
+#: model:ir.model.fields,help:trading_vendor.field_purchase_order_line_vendor_order_reference
+msgid "Source document of vendor order reference of purchase order."
+msgstr "Source document of vendor order reference of purchase order."
+
+#. module: trading_vendor
+#: model:ir.model.fields,help:trading_vendor.field_purchase_order_line_day_order
+msgid "The order day could be computed from the day of order date."
+msgstr "The order day could be computed from the day of order date."
+
+#. module: trading_vendor
+#: model:ir.model.fields,help:trading_vendor.field_purchase_order_line_month_order
+msgid "The order month could be computed from the month of order date."
+msgstr "The order month could be computed from the month of order date."
+
+#. module: trading_vendor
+#: model:ir.model.fields,field_description:trading_vendor.field_purchase_order_line_vendor_order_reference
+msgid "Vendor Order Reference"
+msgstr "客人订单号"
+
+#. module: trading_vendor
+#: model:ir.model.fields,field_description:trading_vendor.field_purchase_order_line_customer_product_code
+msgid "Vendor Product Code"
+msgstr "客人产品编号"
+
+#. module: trading_vendor
+#: model:ir.model.fields,field_description:trading_vendor.field_purchase_order_line_vendor_reference
+msgid "Vendor Reference"
+msgstr "供应厂商编号"
+
