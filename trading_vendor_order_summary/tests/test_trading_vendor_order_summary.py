@@ -17,7 +17,10 @@ class TradingVendor(common.TransactionCase):
             self.env.ref('stock.route_warehouse0_mto').id
         self.partner_18 = self.env.ref('base.res_partner_18')
         self.partner_id = self.env.ref('base.res_partner_1')
+        self.partner_18.write({'ref': 'Test Reference'})
+        self.partner_id.write({'ref': 'Test Reference 1'})
         self.product_icecream = self.env.ref('stock.product_icecream')
+        self.product_icecream.write({'default_code': 'Test Default Code'})
         self.product_uom_kgm = self.env.ref('product.product_uom_kgm')
         seller_vals = {'name': self.partner_id.id, 'min_qty': 1,
                        'price': 500, 'product_code': 'Test'}
