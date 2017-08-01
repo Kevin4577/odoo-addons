@@ -40,18 +40,6 @@ class TestPurchase(common.TransactionCase):
         }
         self.po = self.PurchaseOrder.create(po_vals)
 
-    def test_purchse_draft_state(self):
-        "Test compute_qty_received_returned method based on draft state."
-        for line in self.po.order_line:
-            line._compute_qty_received_returned()
-
-    def test_service_type_product(self):
-        "Test compute_qty_received_returned method based on service product."
-        for line in self.po.order_line:
-            self.po.button_confirm()
-            line.product_id.type = 'service'
-            line._compute_qty_received_returned()
-
     def test_product_uom_picking_transfer(self):
         "Test compute_qty_received_returned method based on product_uom."
         self.po.button_confirm()
@@ -84,7 +72,7 @@ class TestPurchase(common.TransactionCase):
         return_pick.pack_operation_product_ids.write({'qty_done': 2})
         return_pick.do_new_transfer()
         for line in self.po.order_line:
-            line._compute_qty_received_returned()
+            line._compute_qty_received()
 
     def test_picking_transfer(self):
         "Test compute_qty_received_returned method."
@@ -116,4 +104,4 @@ class TestPurchase(common.TransactionCase):
         return_pick.pack_operation_product_ids.write({'qty_done': 2})
         return_pick.do_new_transfer()
         for line in self.po.order_line:
-            line._compute_qty_received_returned()
+            line._compute_qty_received()
