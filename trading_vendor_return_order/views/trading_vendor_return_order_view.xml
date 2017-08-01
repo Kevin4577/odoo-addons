@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_purchase_return_order" model="ir.actions.act_window">
+        <field name="name">stock picking</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.picking</field>
+        <field name="context">{'group_by':'returned_purchase_id'}</field>
+        <field name="domain">[('returned_purchase_id','!=','False')]</field>
+    </record>
+
+    <menuitem id="menu_action_report_purchase_return_order"
+              name="Purchase Return Order"
+              action="action_report_purchase_return_order"
+              parent="purchase.menu_purchase_control"
+              sequence="30"/>
+
+</odoo>
