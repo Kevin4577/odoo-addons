@@ -9,7 +9,7 @@
     'summary': """This module to add vendor product code for each purchase
     order lines. """,
     'support': 'support@elico-corp.com',
-    'author': 'Elico corp',
+    'author': 'Elico Corp',
     'website': 'www.elico-corp.com',
     'license': 'AGPL-3',
     'depends': [

@@ -3,7 +3,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
-import datetime
 
 
 class PurchaseOrderLine(models.Model):
@@ -16,10 +15,11 @@ class PurchaseOrderLine(models.Model):
         for line in self:
             qty_delivery = False
             if line.procurement_ids:
-                qty_delivery = sum(line.procurement_ids.mapped('move_dest_id').\
-                    filtered(lambda move: move.state not in ('cancel')).\
-                    mapped('procurement_id').mapped('sale_line_id').\
-                    mapped('product_uom_qty'))
+                qty_delivery =\
+                    sum(line.procurement_ids.mapped('move_dest_id').
+                        filtered(lambda move: move.state not in ('cancel')).
+                        mapped('procurement_id').mapped('sale_line_id').
+                        mapped('product_uom_qty'))
             line.qty_delivered = qty_delivery
 
     @api.depends('procurement_ids.move_dest_id.state')
@@ -30,9 +30,9 @@ class PurchaseOrderLine(models.Model):
             qty_canceled = False
             if line.procurement_ids:
                 qty_canceled =\
-                    sum(line.procurement_ids.mapped('move_dest_id').\
-                    filtered(lambda move: move.state in ('cancel')).\
-                    mapped('product_qty'))
+                    sum(line.procurement_ids.mapped('move_dest_id').
+                        filtered(lambda move: move.state in ('cancel')).
+                        mapped('product_qty'))
             line.qty_canceled = qty_canceled
 
     def _compute_date_sale(self):
