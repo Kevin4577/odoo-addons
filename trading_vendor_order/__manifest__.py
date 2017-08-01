@@ -6,7 +6,7 @@
     'name': 'Trading Vendor Order',
     'version': '10.0.1.0.0',
     'category': 'Purchase',
-    'summary': """xls or ods report from ods template file to generate the
+    'summary': """XLS, ODS report from ods template file to generate the
     purchase order report based on price list RMB, and list product, vendor
     product code, price unit, and total amount of each purchase order
     lines.""",
