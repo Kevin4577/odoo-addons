@@ -7,8 +7,8 @@ Trading Vendor Contract
 =======================
 
 The new module 'trading_vendor_contract' allows user to generate the purchase order report
-based on price list USD, and list product, vendor product code, price unit, and total amount
-of each purchase order lines.
+based on price list selected by customer, and list product, vendor product code, price unit,
+and total amountof each purchase order lines.
 
 
 Usage
