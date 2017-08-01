@@ -12,10 +12,12 @@ class TradingVendor(models.Model):
     @api.multi
     def get_partner_contact(self, partner):
         """This function return the contact person information of partner."""
+        contact_name = ''
+        contact_email = ''
         if partner.child_ids:
             contact_name = partner.child_ids[0].name
             contact_email = partner.child_ids[0].email
-            return contact_name, contact_email
+        return contact_name, contact_email
 
     @api.multi
     def get_purchase_order_vendor_contact(self, purchase_order):
