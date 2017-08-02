@@ -23,7 +23,7 @@
     </record>
 
     <record id="action_incoming_products_report" model="ir.actions.act_window">
-        <field name="name">Incoming Products Report</field>
+        <field name="name">Incoming Products Purchase Order</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">stock.move</field>
         <field name="view_type">form</field>
