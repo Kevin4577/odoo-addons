@@ -55,12 +55,12 @@ class PurchaseOrderLine(models.Model):
     def _compute_date_received(self):
         """This function will compute final received date of related
         stock move."""
+        move_obj = self.env['stock.move']
         for line in self:
-            date_received = ''
-            for move_id in line.move_ids:
-                if move_id.state == "done":
-                    date_received = move_id.date
-            line.date_received = date_received
+            move = move_obj.search([('id', 'in', line.move_ids.ids),
+                                    ('state', '=', 'done')], order='date desc',
+                                   limit=1)
+            line.date_received = move.date
 
     vendor_product_code = fields.Char(
         'Vendor Product Code',
