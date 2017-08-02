@@ -24,7 +24,8 @@ def render_report_with_data(report_xml_id, data):
     to render the ods template with necessary data."""
     account_invoice = data['objects']
     trading_vendor_obj = account_invoice.env['trading.vendor']
-    contact_name, contact_email = trading_vendor_obj.get_partner_contact(account_invoice.partner_id)
+    contact_name, contact_email =\
+        trading_vendor_obj.get_partner_contact(account_invoice.partner_id)
     bank_name, bank_account = get_partner_bank(account_invoice.partner_id)
     data.update({
         'company_contact_name': contact_name,

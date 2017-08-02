@@ -12,7 +12,6 @@ class StockPicking(models.Model):
         """This function will compute sum of product quantity of each invoice
         lines. The total quantity of product in account invoice should be
         computed anytime without being stored in database."""
-        qty_total = 0.0
         for line in self.invoice_line_ids:
             self.qty_total += line.quantity
 

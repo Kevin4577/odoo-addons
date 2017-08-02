@@ -3,8 +3,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo.tests import common
-from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
-from datetime import datetime
 from odoo.addons.trading_vendor_bill_request.models.\
     trading_vendor_bill_request import render_report_with_data
 
@@ -18,7 +16,7 @@ class TestTradingVendorBillRequest(common.TransactionCase):
                          'trading_vendor_bill_request_py3o')
         self.account_invoice_model = self.env['account.invoice']
         self.invoice_line_model = self.env['account.invoice.line']
-        self.tax_model =self.env['account.tax']
+        self.tax_model = self.env['account.tax']
         self.account_model = self.env['account.account']
         self.account_type_expenses =\
             self.env.ref('account.data_account_type_expenses')
@@ -26,9 +24,6 @@ class TestTradingVendorBillRequest(common.TransactionCase):
             self.env.ref('account.data_account_type_receivable')
         self.invoice_line_account = self.account_model.\
             search([('user_type_id', '=', self.account_type_expenses.id)],
-                   limit=1).id
-        invoice_account = self.account_model.\
-            search([('user_type_id', '=', self.account_type_receivable.id)],
                    limit=1).id
         self.partner = self.env.ref('base.res_partner_2')
         self.product = self.env.ref('product.product_product_4')
