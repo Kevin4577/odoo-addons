@@ -6,7 +6,8 @@
     'name': 'Trading Vendor Incoming Products Printout',
     'version': '10.0.1.0.0',
     'category': 'Purchase',
-    'summary': """The new module 'trading_vendor_incoming_products_printout'
+    'summary': 'Trading Vendor Incoming Products Printout',
+    'description': """The new module 'trading_vendor_incoming_products_printout'
     inherit the model 'stock.move', and add necessary fields for each stock
     move of related incoming products for each purchase lines. It allows user
     to generate incoming products report for all products, which was still
