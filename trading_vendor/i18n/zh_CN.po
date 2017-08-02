@@ -104,4 +104,3 @@ msgstr "客人产品编号"
 #: model:ir.model.fields,field_description:trading_vendor.field_purchase_order_line_vendor_reference
 msgid "Vendor Reference"
 msgstr "供应厂商编号"
-
