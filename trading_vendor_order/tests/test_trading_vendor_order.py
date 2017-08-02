@@ -14,8 +14,8 @@ class TestTradingVendorOrder(common.TransactionCase):
 
     def setUp(self):
         super(TestTradingVendorOrder, self).setUp()
-        self.report_xml_id = self.env.ref('trading_vendor_contract.'
-                                          'trading_vendor_contract_py3o')
+        self.report_xml_id = self.env.ref('trading_vendor_order.'
+                                          'trading_vendor_order_py3o')
         self.supplierinfo_obj = self.env['product.supplierinfo']
         self.PurchaseOrder = self.env['purchase.order']
         self.product_id_1 = self.env.ref('product.product_product_8')
