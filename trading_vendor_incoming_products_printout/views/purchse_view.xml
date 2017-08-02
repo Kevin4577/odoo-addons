@@ -9,7 +9,7 @@
                 <field name="date_order" />
                 <field name="customer_reference"/>
                 <field name="customer_order_reference" />
-                <field name="purchase_order_reference" />
+                <field name="purchase_order_number" />
                 <field name="product_reference"/>
                 <field name="customer_product_code" />
                 <field name="product_id" />

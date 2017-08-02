@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 # © 2017 Elico corp (www.elico-corp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import fields, models, api
+from odoo import fields, models
 import odoo.addons.decimal_precision as dp
 
 
 class StockMove(models.Model):
     """Stock Move"""
-    inherit = "stock.move"
+    _inherit = 'stock.move'
     _description = "Stock Move"
 
     date_order = fields.Datetime(related='purchase_line_id.order_id.'
