@@ -15,7 +15,6 @@ class StockPicking(models.Model):
         qty_total = 0.0
         for line in self.invoice_line_ids:
             self.qty_total += line.quantity
-            print "\n\n--self.qty_total---", self.qty_total
 
     qty_total = fields.Float(
         'Product Total Quantity',

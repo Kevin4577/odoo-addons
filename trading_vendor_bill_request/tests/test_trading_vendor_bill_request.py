@@ -20,7 +20,6 @@ class TestTradingVendorBillRequest(common.TransactionCase):
         self.invoice_line_model = self.env['account.invoice.line']
         self.tax_model =self.env['account.tax']
         self.account_model = self.env['account.account']
-        self.AccountJournal = self.env['account.journal']
         self.account_type_expenses =\
             self.env.ref('account.data_account_type_expenses')
         self.account_type_receivable =\
@@ -40,11 +39,10 @@ class TestTradingVendorBillRequest(common.TransactionCase):
         })
         self.invoice = self.account_invoice_model.create({
             'partner_id': self.partner.id,
-#            'account_id': invoice_account,
         })
         self.invoice_line_model.create({
             'product_id': self.product.id,
-            'quantity': 11.0,
+            'quantity': 1.0,
             'price_unit': 100.0,
             'invoice_id': self.invoice.id,
             'name': 'product that cost 100',
@@ -52,11 +50,9 @@ class TestTradingVendorBillRequest(common.TransactionCase):
             'invoice_line_tax_ids': [(6, 0, [self.tax.id])],
         })
         self.invoice.action_invoice_open()
-        print "\n\n-------self.invoice ----",self.invoice, self.invoice.amount_total
-        self.journal = self.AccountJournal.search([('type', '=', 'bank'), ('company_id', '=', self.invoice.company_id.id)], limit=1)
-        self.invoice.pay_and_reconcile(self.journal, self.invoice.amount_total)
 
     def test_report_method(self):
         """Test Report method"""
+        self.invoice._compute_qty_total()
         render_report_with_data(self.report_xml_id,
                                 {'objects': self.invoice})
