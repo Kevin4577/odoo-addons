@@ -43,7 +43,7 @@ class PurchaseOrderLine(models.Model):
                 date_sale = line.procurement_ids.mapped('move_dest_id').\
                     filtered(lambda move: move.state not in ('cancel')).\
                     mapped('procurement_id').mapped('sale_line_id').\
-                    mapped('order_id').mapped('date_order')
+                    mapped('order_id').date_order
             line.date_sale = date_sale
 
     @api.depends('currency_id', 'price_subtotal')

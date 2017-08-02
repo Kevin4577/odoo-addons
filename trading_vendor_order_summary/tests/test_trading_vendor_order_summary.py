@@ -51,5 +51,6 @@ class TradingVendor(common.TransactionCase):
         for line in self.p_order.purchase_id.order_line:
             qty += line.qty_delivered
             line._compute_price_subtotal_company()
+            line._compute_date_sale()
         self.assertEqual(line.qty_delivered,
                          self.sale_order.order_line.product_uom_qty)
