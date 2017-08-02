@@ -1,0 +1,37 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* trading_vendor_bill_request
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-02 09:42+0000\n"
+"PO-Revision-Date: 2017-08-02 09:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: trading_vendor_bill_request
+#: model:ir.model,name:trading_vendor_bill_request.model_account_invoice
+msgid "Invoice"
+msgstr "发票"
+
+#. module: trading_vendor_bill_request
+#: model:ir.model.fields,field_description:trading_vendor_bill_request.field_account_invoice_qty_total
+msgid "Product Total Quantity"
+msgstr "Product Total Quantity"
+
+#. module: trading_vendor_bill_request
+#: model:ir.model.fields,help:trading_vendor_bill_request.field_account_invoice_qty_total
+msgid "The product total quantity could be computed from the sum of product quantity of each invoice lines."
+msgstr "The product total quantity could be computed from the sum of product quantity of each invoice lines."
+
+#. module: trading_vendor_bill_request
+#: model:ir.actions.report.xml,name:trading_vendor_bill_request.trading_vendor_bill_request_py3o
+msgid "Trading Vendor Bill Request"
+msgstr "开票通知"
+
