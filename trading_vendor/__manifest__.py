@@ -13,7 +13,8 @@
     'license': 'AGPL-3',
     'depends': [
         'purchase',
-        'product_class'
+        'product_class',
+        'purchase_order_line_received_quantity_refund',
     ],
     'data': [
         'security/ir.model.access.csv',
