@@ -21,7 +21,8 @@ class TestTradingVendorReturnOrder(common.TransactionCase):
         self.product_id_1 = self.env.ref('product.product_product_8')
         self.product_uom = self.env.ref('product.product_uom_dozen')
         self.partner_id = self.env.ref('base.res_partner_1')
-        self.partner_id_2 = self.env.ref('base.res_partner_2')
+        self.partner_id.write({'ref': 'Test Reference'})
+        self.product_id_1.write({'default_code': 'Test Default Code'})
         self.product_id_1.write({
             'purchase_method': 'purchase',
             'seller_ids': [(0, 0, {'name': self.partner_id.id,
@@ -32,14 +33,14 @@ class TestTradingVendorReturnOrder(common.TransactionCase):
         po_vals = {
             'partner_id': self.partner_id.id,
             'order_line': [(0, 0, {
-                    'name': self.product_id_1.name,
-                    'product_id': self.product_id_1.id,
-                    'product_qty': 5.0,
-                    'product_uom': self.product_id_1.uom_po_id.id,
-                    'price_unit': 500.0,
-                    'date_planned': datetime.today().
-                    strftime(DEFAULT_SERVER_DATETIME_FORMAT),
-                })],
+                'name': self.product_id_1.name,
+                'product_id': self.product_id_1.id,
+                'product_qty': 5.0,
+                'product_uom': self.product_id_1.uom_po_id.id,
+                'price_unit': 500.0,
+                'date_planned': datetime.today().
+                strftime(DEFAULT_SERVER_DATETIME_FORMAT),
+            })],
         }
         self.po = self.PurchaseOrder.create(po_vals)
         self.po.button_confirm()
