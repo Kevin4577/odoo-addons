@@ -5,8 +5,8 @@
 from odoo.tests import common
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 from datetime import datetime
-from odoo.addons.trading_vendor_contract.report.\
-    trading_vendor_contract import render_report_with_data
+from odoo.addons.trading_vendor_order.report.\
+    trading_vendor_order import render_report_with_data
 from odoo.exceptions import ValidationError
 
 
