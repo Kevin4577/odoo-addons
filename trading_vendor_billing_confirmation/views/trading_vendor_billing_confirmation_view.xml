@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+     <record id="view_billing_confirmation_purchase_order_tree" model="ir.ui.view">
+        <field name="name">account_invoice_line</field>
+        <field name="model">account.invoice.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="vendor_reference" />
+                <field name="vendor_order"/>
+                <field name="customer_reference" />
+                <field name="vendor_order_reference" />
+                <field name="purchase_order_reference"/>
+                <field name="customer_product_code" />
+                <field name="product_id" />
+                <field name="qty_order"/>
+                <field name="price_unit" />
+                <field name="price_subtotal_order" />
+                <field name="company_id"/>
+                <field name="state_sale" />
+                <field name="hs_cn_name" />
+                <field name="quantity"/>
+                <field name="uom_id" />
+                <field name="price_subtotal"/>
+                <field name="partner_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_vendor_billing_confirmation_filter" model="ir.ui.view">
+        <field name="name">account_invoice_line</field>
+        <field name="model">account.invoice.line</field>
+        <field name="arch" type="xml">
+            <search >
+                <field name="product_id" />
+                <field name="partner_id" />
+                <filter string="Purchase Order" domain="[]"
+                        context="{'group_by':'purchase_id'}" />
+                <filter string="Product" domain="[]"
+                        context="{'group_by':'product_id'}" />
+                <filter string="vendor" domain="[]"
+                        context="{'group_by':'partner_id'}" />
+            </search>
+        </field>
+    </record>
+
+    <record id="action_billing_confirmation_report" model="ir.actions.act_window">
+        <field name="name">account invoice line</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">account.invoice.line</field>
+        <field name="domain">[('purchase_line_id','!=','False')]</field>
+    </record>
+
+    <menuitem id="menu_report_purchase_order_billing_confirmation"
+              name="Purchase Order Billing Confirmation"
+              action="action_billing_confirmation_report"
+              parent="purchase.menu_purchase_control"
+              sequence="14"/>
+
+</odoo>
