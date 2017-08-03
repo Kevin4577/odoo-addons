@@ -5,6 +5,9 @@
 from odoo import _
 from odoo.exceptions import ValidationError
 from odoo.addons.report_py3o.models import py3o_report
+from odoo.tools import DEFAULT_SERVER_DATE_FORMAT,\
+    DEFAULT_SERVER_DATETIME_FORMAT
+from datetime import datetime
 
 
 @py3o_report.py3o_report_extender(
@@ -25,8 +28,13 @@ def render_report_with_data(report_xml_id, data):
         get_purchase_order_company_contact(purchase_order_list[0])
     qty_total, price_total = trading_vendor_obj.\
         get_purchase_order_list_total_quantity_and_price(purchase_order_list)
+    date_order = datetime.\
+        strftime(datetime.strptime(purchase_order_list[0].date_order,
+                                   DEFAULT_SERVER_DATETIME_FORMAT),
+                 DEFAULT_SERVER_DATE_FORMAT)
     data.update(vendor_contact_person)
     data.update(company_contact_person)
     data.update({'qty_total': qty_total,
                  'price_total': price_total,
-                 'object': purchase_order_list[0]})
+                 'object': purchase_order_list[0],
+                 'date_order': date_order})
