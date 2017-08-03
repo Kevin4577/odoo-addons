@@ -1,0 +1,64 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* trading_vendor_delay_rate_summary
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-03 13:09+0000\n"
+"PO-Revision-Date: 2017-08-03 13:09+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: trading_vendor_delay_rate_summary
+#: model:ir.model.fields,field_description:trading_vendor_delay_rate_summary.field_purchase_order_line_is_delayed
+msgid "Order Delayed?"
+msgstr "延期"
+
+#. module: trading_vendor_delay_rate_summary
+#: model:ir.ui.view,arch_db:trading_vendor_delay_rate_summary.view_purchase_order_delay_rate_summary_filter
+msgid "Order Month"
+msgstr "下单月份"
+
+#. module: trading_vendor_delay_rate_summary
+#: model:ir.model.fields,field_description:trading_vendor_delay_rate_summary.field_purchase_order_line_year_order
+#: model:ir.ui.view,arch_db:trading_vendor_delay_rate_summary.view_purchase_order_delay_rate_summary_filter
+msgid "Order Year"
+msgstr "下单年份"
+
+#. module: trading_vendor_delay_rate_summary
+#: model:ir.ui.view,arch_db:trading_vendor_delay_rate_summary.view_purchase_order_delay_rate_summary_filter
+msgid "Product"
+msgstr "产品名称"
+
+#. module: trading_vendor_delay_rate_summary
+#: model:ir.ui.view,arch_db:trading_vendor_delay_rate_summary.view_purchase_order_delay_rate_summary_filter
+msgid "Purchase Order"
+msgstr "采购订单"
+
+#. module: trading_vendor_delay_rate_summary
+#: model:ir.model.fields,field_description:trading_vendor_delay_rate_summary.field_purchase_order_line_sale_person
+msgid "Salesperson"
+msgstr "业务员"
+
+#. module: trading_vendor_delay_rate_summary
+#: model:ir.actions.report.xml,name:trading_vendor_delay_rate_summary.trading_vendor_delay_rate_summary_py3o
+msgid "Trading Vendor Delay Rate Summary"
+msgstr "供应商延迟率明细"
+
+#. module: trading_vendor_delay_rate_summary
+#: model:ir.actions.act_window,name:trading_vendor_delay_rate_summary.action_delay_rate_summary
+#: model:ir.ui.menu,name:trading_vendor_delay_rate_summary.menu_report_delay_rate_summary
+msgid "Vendor Delay Rate Summary"
+msgstr "供应商延迟率明细"
+
+#. module: trading_vendor_delay_rate_summary
+#: model:ir.ui.view,arch_db:trading_vendor_delay_rate_summary.view_purchase_order_delay_rate_summary_filter
+msgid "vendor"
+msgstr "供应商"
+
