@@ -62,7 +62,7 @@ class PurchaseOrderLine(models.Model):
             if 'done' in state_list and len(state_list) == 1:
                 move = move_obj.search([('id', 'in', line.move_ids.ids)],
                                        order='date desc', limit=1)
-                date_received = move.date
+                data_received = move.date
             line.date_received = date_received
 
     vendor_product_code = fields.Char(
