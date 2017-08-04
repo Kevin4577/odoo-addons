@@ -1,0 +1,104 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* trading_vendor_order_summary
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-31 12:16+0000\n"
+"PO-Revision-Date: 2017-07-31 12:16+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: trading_vendor_order_summary
+#: model:ir.model.fields,field_description:trading_vendor_order_summary.field_purchase_order_line_qty_canceled
+msgid "Canceled Quantity"
+msgstr "取消数量"
+
+#. module: trading_vendor_order_summary
+#: model:ir.model.fields,help:trading_vendor_order_summary.field_purchase_order_line_qty_canceled
+msgid "Canceled quantity of product during the stock move of\n"
+"            related sale order."
+msgstr "Canceled quantity of product during the stock move of\n"
+"            related sale order."
+
+#. module: trading_vendor_order_summary
+#: model:ir.model.fields,field_description:trading_vendor_order_summary.field_purchase_order_line_currency_rate
+msgid "Currency Rate"
+msgstr "汇率"
+
+#. module: trading_vendor_order_summary
+#: model:ir.model.fields,help:trading_vendor_order_summary.field_purchase_order_line_currency_rate
+msgid "Currency Rate between other currency and company currency ."
+msgstr "Currency Rate between other currency and company currency ."
+
+#. module: trading_vendor_order_summary
+#: model:ir.model.fields,field_description:trading_vendor_order_summary.field_purchase_order_line_qty_delivered
+msgid "Delivery Quantity"
+msgstr "已出货数量"
+
+#. module: trading_vendor_order_summary
+#: model:ir.model.fields,help:trading_vendor_order_summary.field_purchase_order_line_qty_delivered
+msgid "Delivery Quantity of related sale order."
+msgstr "Delivery Quantity of related sale order."
+
+#. module: trading_vendor_order_summary
+#: model:ir.model.fields,help:trading_vendor_order_summary.field_purchase_order_line_date_sale
+msgid "Order Date of related sale order."
+msgstr "Order Date of related sale order."
+
+#. module: trading_vendor_order_summary
+#: model:ir.ui.view,arch_db:trading_vendor_order_summary.view_purchase_order_summary_filter
+msgid "Product"
+msgstr "产品"
+
+#. module: trading_vendor_order_summary
+#: model:ir.ui.view,arch_db:trading_vendor_order_summary.view_purchase_order_summary_filter
+msgid "Purchase Order"
+msgstr "采购订单"
+
+#. module: trading_vendor_order_summary
+#: model:ir.model,name:trading_vendor_order_summary.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "采购订单行"
+
+#. module: trading_vendor_order_summary
+#: model:ir.ui.menu,name:trading_vendor_order_summary.menu_report_ourchase_order_summary
+msgid "Purchase Order Summary"
+msgstr "订单汇总表"
+
+#. module: trading_vendor_order_summary
+#: model:ir.model.fields,field_description:trading_vendor_order_summary.field_purchase_order_line_date_sale
+msgid "Sale Date"
+msgstr "业务跟单交期"
+
+#. module: trading_vendor_order_summary
+#: model:ir.model.fields,field_description:trading_vendor_order_summary.field_purchase_order_line_price_subtotal_company
+msgid "Total Price Company"
+msgstr "折合人民币金额"
+
+#. module: trading_vendor_order_summary
+#: model:ir.model.fields,help:trading_vendor_order_summary.field_purchase_order_line_price_subtotal_company
+msgid "Total price converted to the current company currency."
+msgstr "Total price converted to the current company currency."
+
+#. module: trading_vendor_order_summary
+#: model:ir.actions.report.xml,name:trading_vendor_order_summary.trading_vendor_order_summary_py3o
+msgid "Trading Vendor Order Summary"
+msgstr "Trading Vendor Order Summary"
+
+#. module: trading_vendor_order_summary
+#: model:ir.actions.act_window,name:trading_vendor_order_summary.action_purchase_order_summary
+msgid "purchase.purchase_report"
+msgstr "purchase.purchase_report"
+
+#. module: trading_vendor_order_summary
+#: model:ir.ui.view,arch_db:trading_vendor_order_summary.view_purchase_order_summary_filter
+msgid "vendor"
+msgstr "供应商"
+
