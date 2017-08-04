@@ -15,7 +15,8 @@ class AccountInvoiceLine(models.Model):
         for line in self:
             if line.purchase_line_id:
                 if line.purchase_line_id.procurement_ids:
-                    if line.purchase_line_id.procurement_ids.move_dest_id.state == 'done':
+                    if line.purchase_line_id.procurement_ids.move_dest_id.\
+                            state == 'done':
                         line.state_sale = 'done'
                     else:
                         line.state_sale = 'waiting'
