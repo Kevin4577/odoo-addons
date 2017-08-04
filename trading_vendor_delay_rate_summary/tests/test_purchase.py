@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo.tests import common
 from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from dateutil.relativedelta import relativedelta
 from datetime import datetime
 
 
@@ -54,6 +55,13 @@ class TestPurchaseOrderLine(common.TransactionCase):
         (self.product_id_1).write({'purchase_method': 'purchase',
                                    'seller_ids': [(0, 0, seller_vals)]})
 
+        self.date_after = datetime.\
+            strptime(datetime.today().strftime(DEFAULT_SERVER_DATETIME_FORMAT),
+                     DEFAULT_SERVER_DATETIME_FORMAT) + relativedelta(days=1)
+        self.date_before = datetime.\
+            strptime(datetime.today().strftime(DEFAULT_SERVER_DATETIME_FORMAT),
+                     DEFAULT_SERVER_DATETIME_FORMAT) - relativedelta(days=1)
+
         po_vals = {
             'partner_id': self.partner_id.id,
             'order_line': [
@@ -68,6 +76,25 @@ class TestPurchaseOrderLine(common.TransactionCase):
                 })],
         }
         self.po = self.PurchaseOrder.create(po_vals)
+        self.po.button_confirm()
+        self.po.action_view_picking()
+        self.po.order_line[0].move_ids[0].picking_id.do_new_transfer()
+        self.env['stock.immediate.transfer'].with_context({
+            'active_id': self.po.order_line[0].move_ids[0].picking_id.id,
+            'active_ids': self.po.order_line[0].move_ids[0].picking_id.ids,
+            'active_model': 'stock.picking',
+            }).create({'pick_id':
+                       self.po.order_line[0].move_ids[0].picking_id.id
+                       }).process()
+        self.assertEqual(self.po.order_line[0].move_ids[0].picking_id.state,
+                         "done")
+        self.line_date = datetime.strptime(
+            self.po.order_line[0].date_received,
+            DEFAULT_SERVER_DATETIME_FORMAT).date()
+        self.picking_date = datetime.strptime(
+            self.po.order_line[0].move_ids[0].picking_id.date,
+            DEFAULT_SERVER_DATETIME_FORMAT).date()
+        self.assertEqual(self.line_date, self.picking_date)
 
     def test_compute_method(self):
         """Test compute method"""
@@ -77,6 +104,13 @@ class TestPurchaseOrderLine(common.TransactionCase):
     def test_compute_is_delayed(self):
         """Test compute_is_delayed method"""
         for po_line in self.po.order_line:
+            po_line.date_received = self.date_after
+            po_line._compute_is_delayed()
+
+    def test_compute_is_delayed_date(self):
+        """Test compute_is_delayed method"""
+        for po_line in self.po.order_line:
+            po_line.date_received = self.date_before
             po_line._compute_is_delayed()
 
     def test_compute_year_order(self):
