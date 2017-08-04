@@ -12,6 +12,7 @@
                 <field name="hs_code" />
                 <field name="hs_name" />
                 <field name="hs_code_uom" />
+                <field name="hs_code_note" />
             </div>
         </field>
     </record>
