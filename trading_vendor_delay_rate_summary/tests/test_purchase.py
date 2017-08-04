@@ -106,6 +106,7 @@ class TestPurchaseOrderLine(common.TransactionCase):
         for po_line in self.po.order_line:
             po_line.date_received = self.date_after
             po_line._compute_is_delayed()
+            po_line._search_year_order('=', po_line.order_id.date_order)
 
     def test_compute_is_delayed_date(self):
         """Test compute_is_delayed method"""
