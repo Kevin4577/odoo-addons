@@ -55,6 +55,6 @@ class TestTradingVendorBillingConfirmation(common.TransactionCase):
             'type': 'in_invoice',
         })
         self.invoice.purchase_order_change()
-        self.assertEqual(self.invoice.invoice_line_ids.state_sale,
-                         self.invoice.invoice_line_ids.purchase_line_id.
+        self.assertEqual(self.invoice.invoice_line_ids[3].state_sale,
+                         self.invoice.invoice_line_ids[3].purchase_line_id.
                          procurement_ids.move_dest_id.state)
