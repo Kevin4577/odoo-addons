@@ -6,10 +6,25 @@
 Trading Vendor Order Summary
 =============================
 
-The new module 'trading_vendor_order_summary' inherit the 'purchase.order.line' model, and add delivery quantity,
-cancel quantity, actual delivery quantity, total price converted to company currency into each purchase order lines.
-User could check those purchase order lines, which was generated from sale order, in tree view. It allows user to
-generate the purchase order summary report, which was generated from procurement rule of related sale order.
+The new module 'trading_vendor_order_summary' inherit the 'purchase.order.line' model, and adds:
+
+* delivery quantity,
+* cancel quantity,
+* actual delivery quantity,
+* total price converted to company currency into each purchase order lines.
+
+Additional features:
+
+* User could check those purchase order lines, which were generated from sale order, in tree view. 
+* It allows as well the user to generate the purchase order summary report, which was generated
+from procurement rule of related sale order.
+
+Usage
+=====
+
+.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
+   :alt: Try me on Runbot
+   :target: https://runbot.my-odoo.com/runbot/63/10.0
 
 Bug Tracker
 ===========
