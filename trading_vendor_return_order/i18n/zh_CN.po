@@ -1,0 +1,47 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* trading_vendor_return_order
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-01 12:42+0000\n"
+"PO-Revision-Date: 2017-08-01 12:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: trading_vendor_return_order
+#: model:ir.ui.menu,name:trading_vendor_return_order.menu_action_report_purchase_return_order
+msgid "Purchase Return Order"
+msgstr "采购退货单"
+
+#. module: trading_vendor_return_order
+#: model:ir.model.fields,field_description:trading_vendor_return_order.field_stock_picking_returned_purchase_id
+msgid "Return Purchase Order"
+msgstr " 采购退货单"
+
+#. module: trading_vendor_return_order
+#: model:ir.model.fields,help:trading_vendor_return_order.field_stock_picking_returned_purchase_id
+msgid "The related purchase order of current return stock picking order"
+msgstr "The related purchase order of current return stock picking order"
+
+#. module: trading_vendor_return_order
+#: model:ir.actions.report.xml,name:trading_vendor_return_order.trading_vendor_return_order_py3o
+msgid "Trading Vendor Return Order"
+msgstr "采购退货单"
+
+#. module: trading_vendor_return_order
+#: model:ir.model,name:trading_vendor_return_order.model_stock_picking
+msgid "Transfer"
+msgstr "调拨"
+
+#. module: trading_vendor_return_order
+#: model:ir.actions.act_window,name:trading_vendor_return_order.action_report_purchase_return_order
+msgid "stock picking"
+msgstr "stock picking"
+
