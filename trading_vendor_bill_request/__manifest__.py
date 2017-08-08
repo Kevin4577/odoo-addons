@@ -6,8 +6,8 @@
     'name': 'Trading Vendor Bill Request',
     'version': '10.0.1.0.0',
     'category': 'purchase',
-    'summary': """This module to add vendor product code and details for each
-    purchase order lines.""",
+    'summary': """Fields to compute total quantity of invoiced products
+               usefull for purchase bill request and list the product.""",
     'support': 'support@elico-corp.com',
     'author': 'Elico Corp',
     'website': 'www.elico-corp.com',
