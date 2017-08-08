@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--# -*- coding: utf-8 -*- -->
+<!--# © 2017 Elico Corp (www.elico-corp.com).-->
+<!--# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).-->
+<odoo>
+    <record id="view_Valuation_form_inherit" model="ir.ui.view">
+        <field name="name">stock.valuation.form</field>
+        <field name="model">stock.valuation</field>
+        <field name="inherit_id" ref="stock_valuation_report.view_Valuation_form" />
+        <field name="arch" type="xml">
+            <field name="filter_by_order_type" position="after">
+                <field name="filter_by_product_class"
+                               string="Product Class By"
+                               widget='radio'/>
+                <field name="filter_by_hs_code"
+                               string="HS Code By"
+                               widget='radio'/>
+            </field>
+            <field name="package_id" position="after">
+                <field name="product_stage_id"
+                               attrs="{'invisible': [('filter_by_product_class', '!=', 'product_class')],
+                                       'required': [('filter_by_product_class', '=', 'product_class')]}"
+                               groups="product_class.group_product_code_user"
+                               options="{'no_create': True}"/>
+                <field name="product_line_id"
+                               attrs="{'invisible': [('filter_by_product_class', '!=', 'product_class')],
+                                       'required': [('filter_by_product_class', '=', 'product_class')],
+                                       'readonly': [('product_stage_id', '=', False)]}"
+                               groups="product_class.group_product_code_user"
+                               options="{'no_create': True}"/>
+                <field name="product_class_id"
+                               attrs="{'invisible': [('filter_by_product_class', '!=', 'product_class')],
+                                       'required': [('filter_by_product_class', '=', 'product_class')],
+                                       'readonly': [('product_line_id', '=', False)]}"
+                               groups="product_class.group_product_code_user"
+                               options="{'no_create': True}"/>
+                <field name="product_family_id"
+                               attrs="{'invisible': [('filter_by_product_class', '!=', 'product_class')],
+                                       'required': [('filter_by_product_class', '=', 'product_class')],
+                                       'readonly': [('product_class_id', '=', False)]}"
+                               groups="product_class.group_product_code_user"
+                               options="{'no_create': True}"/>
+                <field name="product_hs_code_id"
+                               attrs="{'invisible': [('filter_by_hs_code', '!=', 'hs_code')],
+                                       'required': [('filter_by_hs_code', '=', 'hs_code')]}"
+                               groups="sale_product_hs_code.group_hs_code_user"
+                               options="{'no_create': True}"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

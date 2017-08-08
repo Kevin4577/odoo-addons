@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_hs_code_1" model="product.hs.code">
+        <field name="hs_code">test_code</field>
+        <field name="name">TEST</field>
+        <field name="cn_name">TEST_CN</field>
+        <field name="uom_id" ref="product.product_uom_unit"/>
+        <field name="description">TEST</field>
+        <field name="note">TEST</field>
+        <field name="english_uom_id" ref="product.product_uom_unit"/>
+    </record>
+</odoo>

@@ -1,0 +1,220 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* stock_valuation_report_product_class_and_hs_code
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-24 03:21+0000\n"
+"PO-Revision-Date: 2017-07-24 03:21+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: code:addons/stock_valuation_report_product_class_and_hs_code/models/stock_valuation.py:34
+#, python-format
+msgid "All HS Code"
+msgstr "所有海关编码"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: code:addons/stock_valuation_report_product_class_and_hs_code/models/stock_valuation.py:19
+#, python-format
+msgid "All Product Class"
+msgstr "所有产品分类"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: code:addons/stock_valuation_report_product_class_and_hs_code/wizard/wizard_stock_valuation_list.py:125
+#, python-format
+msgid "Below Safety Stock"
+msgstr "是否在安全库存以内"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: code:addons/stock_valuation_report_product_class_and_hs_code/wizard/wizard_stock_valuation_list.py:113
+#, python-format
+msgid "Default Code"
+msgstr "ERP编码"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: model:ir.model.fields,field_description:stock_valuation_report_product_class_and_hs_code.field_stock_valuation_filter_by_hs_code
+msgid "Filter By HS Code"
+msgstr "海关编码过滤"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: model:ir.model.fields,field_description:stock_valuation_report_product_class_and_hs_code.field_stock_valuation_filter_by_product_class
+msgid "Filter By Product Class"
+msgstr "产品分类过滤"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: code:addons/stock_valuation_report_product_class_and_hs_code/wizard/wizard_stock_valuation_list.py:112
+#: model:ir.model.fields,field_description:stock_valuation_report_product_class_and_hs_code.field_stock_valuation_product_hs_code_id
+#, python-format
+msgid "HS Code"
+msgstr "海关编码"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: model:ir.ui.view,arch_db:stock_valuation_report_product_class_and_hs_code.view_Valuation_form_inherit
+msgid "HS Code By"
+msgstr "海关编码盘点"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: model:ir.model.fields,field_description:stock_valuation_report_product_class_and_hs_code.field_wizard_stock_valuation_line_product_hs_code_name
+#: model:ir.model.fields,help:stock_valuation_report_product_class_and_hs_code.field_wizard_stock_valuation_line_product_hs_code_name
+msgid "HS Code Name"
+msgstr "海关编码"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: code:addons/stock_valuation_report_product_class_and_hs_code/wizard/wizard_stock_valuation_list.py:121
+#, python-format
+msgid "Incoming Inventory Balance"
+msgstr "本期收入"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: code:addons/stock_valuation_report_product_class_and_hs_code/wizard/wizard_stock_valuation_list.py:123
+#, python-format
+msgid "Inventory Balance Before End Date"
+msgstr "本期结存"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: code:addons/stock_valuation_report_product_class_and_hs_code/wizard/wizard_stock_valuation_list.py:120
+#, python-format
+msgid "Inventory Balance Before Start Date"
+msgstr "上期结存"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: code:addons/stock_valuation_report_product_class_and_hs_code/wizard/wizard_stock_valuation_list.py:126
+#, python-format
+msgid "Location Name"
+msgstr "库位"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: code:addons/stock_valuation_report_product_class_and_hs_code/models/stock_valuation.py:23
+#, python-format
+msgid "Manual selection of product class"
+msgstr "手动选择产品分类"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: code:addons/stock_valuation_report_product_class_and_hs_code/models/stock_valuation.py:37
+#, python-format
+msgid "One HS code only"
+msgstr "仅一个海关编码"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: code:addons/stock_valuation_report_product_class_and_hs_code/wizard/wizard_stock_valuation_list.py:122
+#, python-format
+msgid "Outgoing Inventory Balance"
+msgstr "本期支出"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: code:addons/stock_valuation_report_product_class_and_hs_code/wizard/wizard_stock_valuation_list.py:117
+#: model:ir.model.fields,field_description:stock_valuation_report_product_class_and_hs_code.field_stock_valuation_product_class_id
+#: model:ir.model.fields,help:stock_valuation_report_product_class_and_hs_code.field_stock_valuation_product_class_id
+#, python-format
+msgid "Product Class"
+msgstr "产品中类"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: model:ir.ui.view,arch_db:stock_valuation_report_product_class_and_hs_code.view_Valuation_form_inherit
+msgid "Product Class By"
+msgstr "产品分类盘点"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: model:ir.model.fields,field_description:stock_valuation_report_product_class_and_hs_code.field_wizard_stock_valuation_line_product_class_name
+#: model:ir.model.fields,help:stock_valuation_report_product_class_and_hs_code.field_wizard_stock_valuation_line_product_class_name
+msgid "Product Class Name"
+msgstr "产品中类"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: code:addons/stock_valuation_report_product_class_and_hs_code/wizard/wizard_stock_valuation_list.py:118
+#: model:ir.model.fields,field_description:stock_valuation_report_product_class_and_hs_code.field_stock_valuation_product_family_id
+#: model:ir.model.fields,help:stock_valuation_report_product_class_and_hs_code.field_stock_valuation_product_family_id
+#, python-format
+msgid "Product Family"
+msgstr "产品小类"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: model:ir.model.fields,field_description:stock_valuation_report_product_class_and_hs_code.field_wizard_stock_valuation_line_product_family_name
+#: model:ir.model.fields,help:stock_valuation_report_product_class_and_hs_code.field_wizard_stock_valuation_line_product_family_name
+msgid "Product Family Name"
+msgstr "产品小类"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: code:addons/stock_valuation_report_product_class_and_hs_code/wizard/wizard_stock_valuation_list.py:116
+#: model:ir.model.fields,field_description:stock_valuation_report_product_class_and_hs_code.field_stock_valuation_product_line_id
+#: model:ir.model.fields,help:stock_valuation_report_product_class_and_hs_code.field_stock_valuation_product_line_id
+#, python-format
+msgid "Product Line"
+msgstr "产品大类"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: model:ir.model.fields,field_description:stock_valuation_report_product_class_and_hs_code.field_wizard_stock_valuation_line_product_line_name
+#: model:ir.model.fields,help:stock_valuation_report_product_class_and_hs_code.field_wizard_stock_valuation_line_product_line_name
+msgid "Product Line Name"
+msgstr "产品大类"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: code:addons/stock_valuation_report_product_class_and_hs_code/wizard/wizard_stock_valuation_list.py:114
+#, python-format
+msgid "Product Name"
+msgstr "产品"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: code:addons/stock_valuation_report_product_class_and_hs_code/wizard/wizard_stock_valuation_list.py:115
+#: model:ir.model.fields,field_description:stock_valuation_report_product_class_and_hs_code.field_stock_valuation_product_stage_id
+#: model:ir.model.fields,help:stock_valuation_report_product_class_and_hs_code.field_stock_valuation_product_stage_id
+#, python-format
+msgid "Product Stage"
+msgstr "产品状态"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: model:ir.model.fields,field_description:stock_valuation_report_product_class_and_hs_code.field_wizard_stock_valuation_line_product_stage_name
+#: model:ir.model.fields,help:stock_valuation_report_product_class_and_hs_code.field_wizard_stock_valuation_line_product_stage_name
+msgid "Product Stage Name"
+msgstr "产品状态"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: code:addons/stock_valuation_report_product_class_and_hs_code/wizard/wizard_stock_valuation_list.py:124
+#, python-format
+msgid "Safety Stock Level"
+msgstr "安全库存"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: model:ir.actions.report.xml,name:stock_valuation_report_product_class_and_hs_code.report_stock_valuation_inherit
+msgid "Stock Valuation Report"
+msgstr "进销存金额报表"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: code:addons/stock_valuation_report_product_class_and_hs_code/wizard/wizard_stock_valuation_list.py:119
+#, python-format
+msgid "Unit of Measure"
+msgstr "单位"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: model:ir.model.fields,help:stock_valuation_report_product_class_and_hs_code.field_stock_valuation_filter_by_hs_code
+msgid "You can choose 'All HS Code' for any HScode of product 'one HS Code' for hs code of product."
+msgstr "You can choose 'All HS Code' for any HScode of product 'one HS Code' for hs code of product."
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: model:ir.model.fields,help:stock_valuation_report_product_class_and_hs_code.field_stock_valuation_filter_by_product_class
+msgid "You can choose 'All Product Class' for Any combination of product class of product, 'Manual Selection of Product Class' for specific combination of product class."
+msgstr "You can choose 'All Product Class' for Any combination of product class of product, 'Manual Selection of Product Class' for specific combination of product class."
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: model:ir.model,name:stock_valuation_report_product_class_and_hs_code.model_stock_valuation
+msgid "stock.valuation"
+msgstr "stock.valuation"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: model:ir.model,name:stock_valuation_report_product_class_and_hs_code.model_wizard_stock_valuation_line
+msgid "wizard.stock.valuation.line"
+msgstr "wizard.stock.valuation.line"
+
+#. module: stock_valuation_report_product_class_and_hs_code
+#: model:ir.model,name:stock_valuation_report_product_class_and_hs_code.model_wizard_stock_valuation_list
+msgid "wizard.stock.valuation.list"
+msgstr "wizard.stock.valuation.list"
+
