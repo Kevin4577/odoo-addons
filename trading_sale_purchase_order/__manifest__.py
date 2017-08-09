@@ -16,8 +16,8 @@
         'trading_sale',
         'report_py3o',
     ],
-    'demo': [
-        'demo/trading_sale_purchase_order.xml',
+    'data': [
+        'report/trading_sale_purchase_order.xml',
     ],
     'installable': True,
     'auto_install': False,
