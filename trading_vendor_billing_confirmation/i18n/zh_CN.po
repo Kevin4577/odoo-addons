@@ -1,0 +1,148 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* trading_vendor_billing_confirmation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-03 12:39+0000\n"
+"PO-Revision-Date: 2017-08-03 12:39+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.model.fields,field_description:trading_vendor_billing_confirmation.field_account_invoice_line_customer_product_code
+msgid "Customer Product Code"
+msgstr "客户产品编码"
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.model.fields,field_description:trading_vendor_billing_confirmation.field_account_invoice_line_customer_reference
+msgid "Customer Reference"
+msgstr "客户单号"
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.model.fields,help:trading_vendor_billing_confirmation.field_account_invoice_line_customer_reference
+msgid "Internal Reference of customer of purchase order."
+msgstr "Internal Reference of customer of purchase order."
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.model.fields,help:trading_vendor_billing_confirmation.field_account_invoice_line_vendor_reference
+msgid "Internal Reference of vendor of purchase order."
+msgstr "Internal Reference of vendor of purchase order."
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.model,name:trading_vendor_billing_confirmation.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "发票行"
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.model.fields,help:trading_vendor_billing_confirmation.field_account_invoice_line_vendor_order
+msgid "Name of vendor of purchase order."
+msgstr "Name of vendor of purchase order."
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.model.fields,field_description:trading_vendor_billing_confirmation.field_account_invoice_line_qty_order
+msgid "Order Quantity"
+msgstr "订单数量"
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.model.fields,field_description:trading_vendor_billing_confirmation.field_account_invoice_line_vendor_order
+msgid "Order Vendor"
+msgstr "供应商名称"
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.ui.view,arch_db:trading_vendor_billing_confirmation.view_vendor_billing_confirmation_filter
+msgid "Product"
+msgstr "产品"
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.model.fields,field_description:trading_vendor_billing_confirmation.field_account_invoice_line_hs_cn_name
+msgid "Product HS Code CN Name"
+msgstr " 开票品名"
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.ui.view,arch_db:trading_vendor_billing_confirmation.view_vendor_billing_confirmation_filter
+msgid "Purchase Order"
+msgstr "采购订单"
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.ui.menu,name:trading_vendor_billing_confirmation.menu_report_purchase_order_billing_confirmation
+msgid "Purchase Order Billing Confirmation"
+msgstr "开票信息确认单"
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.model.fields,field_description:trading_vendor_billing_confirmation.field_account_invoice_line_purchase_order_reference
+msgid "Purchase Order Reference"
+msgstr "跟单号码"
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.model.fields,field_description:trading_vendor_billing_confirmation.field_account_invoice_line_state_sale
+msgid "Sale Order State"
+msgstr "出运发票号"
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.model.fields,help:trading_vendor_billing_confirmation.field_account_invoice_line_vendor_order_reference
+msgid "Source document of vendor order reference of purchase order."
+msgstr "Source document of vendor order reference of purchase order."
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.model.fields,help:trading_vendor_billing_confirmation.field_account_invoice_line_customer_product_code
+msgid "The customer product code of specific product."
+msgstr "The customer product code of specific product."
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.model.fields,help:trading_vendor_billing_confirmation.field_account_invoice_line_qty_order
+msgid "The original product quantity of related purchase order line."
+msgstr "The original product quantity of related purchase order line."
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.model.fields,help:trading_vendor_billing_confirmation.field_account_invoice_line_purchase_order_reference
+msgid "The purchase order number of related purchase order."
+msgstr "The purchase order number of related purchase order."
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.model.fields,help:trading_vendor_billing_confirmation.field_account_invoice_line_hs_cn_name
+#: model:ir.model.fields,help:trading_vendor_billing_confirmation.field_account_invoice_line_state_sale
+msgid "The state of stock move of related sale order."
+msgstr "The state of stock move of related sale order."
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.model.fields,help:trading_vendor_billing_confirmation.field_account_invoice_line_price_subtotal_order
+msgid "The total amount of related purchase order line."
+msgstr "The total amount of related purchase order line."
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.model.fields,field_description:trading_vendor_billing_confirmation.field_account_invoice_line_price_subtotal_order
+msgid "Total Price Order"
+msgstr " 金额"
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.actions.report.xml,name:trading_vendor_billing_confirmation.trading_vendor_billing_confirmation_py3o
+msgid "Trading Vendor Billing Confirmation"
+msgstr "开票信息确认单"
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.model.fields,field_description:trading_vendor_billing_confirmation.field_account_invoice_line_vendor_order_reference
+msgid "Vendor Order Reference"
+msgstr "客人订单号"
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.model.fields,field_description:trading_vendor_billing_confirmation.field_account_invoice_line_vendor_reference
+msgid "Vendor Reference"
+msgstr "供应厂商编号"
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.actions.act_window,name:trading_vendor_billing_confirmation.action_billing_confirmation_report
+msgid "account invoice line"
+msgstr "account invoice line"
+
+#. module: trading_vendor_billing_confirmation
+#: model:ir.ui.view,arch_db:trading_vendor_billing_confirmation.view_vendor_billing_confirmation_filter
+msgid "vendor"
+msgstr "供应商"
+
