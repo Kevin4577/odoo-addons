@@ -137,7 +137,8 @@ class TradingSale(models.Model):
                         line.product_id.product_hs_code_id.id == hs_code.id)
                 prod_lot_ids = \
                     operation_lines_with_same_hs_code.\
-                    pack_lot_ids.mapped('lot_id')
+                    mapped('pack_lot_ids').\
+                    mapped('lot_id')
                 for pack_lot in prod_lot_ids:
                     carton_quantity_with_same_hs_code = sum(
                         [pack_lot.carton_qty])
