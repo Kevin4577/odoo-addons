@@ -138,9 +138,3 @@ class TestTradingSale(common.TransactionCase):
         quantity, gross weight, and volume of packages which was used in
         this stock picking."""
         self.trading_sale.get_package_sum(self.so.picking_ids)
-        self.so.action_confirm()
-        for picking in self.so.picking_ids:
-            picking.pack_operation_product_ids.qty_done = 3.0
-            # Put in a pack
-            picking.put_in_pack()
-            self.trading_sale.get_package_sum(picking)
