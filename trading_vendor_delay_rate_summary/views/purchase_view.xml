@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_purchase_order_delay_rate_summary_tree" model="ir.ui.view">
+        <field name="name">view.purchase.order.delay.rate.summary.tree</field>
+        <field name="model">purchase.order.line</field>
+        <field name="arch" type="xml">
+            <tree create="false" delete="false" edit="false">
+                <field name="vendor_reference" />
+                <field name="purchase_order_reference"/>
+                <field name="product_reference" />
+                <field name="customer_product_code" />
+                <field name="product_id"/>
+                <field name="product_qty" />
+                <field name="date_planned" />
+                <field name="date_received"/>
+                <field name="write_uid" />
+                <field name="is_delayed" />
+                <field name="sale_person"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_purchase_order_delay_rate_summary_filter" model="ir.ui.view">
+        <field name="name">view.order.fulfillment.line.filter</field>
+        <field name="model">purchase.order.line</field>
+        <field name="arch" type="xml">
+            <search >
+                <field name="product_id" />
+                <field name="partner_id" />
+                <field name="year_order" />
+                <field name="month_order" />
+                <group expand="0" string="Group By" name="groupby">
+                    <filter string="Purchase Order" domain="[]"
+                            context="{'group_by':'order_id'}" />
+                    <filter string="Order Year" domain="[]"
+                            context="{'group_by':'year_order'}" />
+                    <filter string="Order Month" domain="[]"
+                            context="{'group_by':'month_order'}" />
+                    <filter string="Product" domain="[]"
+                            context="{'group_by':'product_id'}" />
+                    <filter string="vendor" domain="[]"
+                            context="{'group_by':'partner_id'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_delay_rate_summary" model="ir.actions.act_window">
+        <field name="name">Vendor Delay Rate Summary</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.order.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_purchase_order_delay_rate_summary_tree"/>
+        <field name="search_view_id" ref="view_purchase_order_delay_rate_summary_filter"/>
+        <field name="context">{'group_by_year_order':1, 'group_by_month_order':1, 'group_by_order_id':1}</field>
+    </record>
+
+    <menuitem id="menu_report_delay_rate_summary"
+              name="Vendor Delay Rate Summary"
+              action="action_delay_rate_summary"
+              parent="purchase.menu_purchase_control"
+              sequence="15"/>
+
+</odoo>
