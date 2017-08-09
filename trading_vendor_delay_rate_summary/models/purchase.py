@@ -59,8 +59,8 @@ class PurchaseOrderLine(models.Model):
     is_delayed = fields.Char(compute='_compute_is_delayed',
                              string='Order Delayed?',
                              store=True, readonly=True,
-                             help='Whether related stock moves had been done'
-                             ' before planned date?')
+                             help='Whether the related stock moves are delayed'
+                             ' compared with planned date')
     year_order = fields.Char(compute='_compute_year_order',
                              string='Order Year',
                              search='_search_year_order',
