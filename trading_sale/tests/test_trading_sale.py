@@ -74,7 +74,7 @@ class TestTradingSale(common.TransactionCase):
                 'packaging_id': self.packaging_id.id
             })
         self.lot1 = self.production_lot_model.create({
-            'product_id': self.product_4.id,
+            'product_id': self.product1.id,
             'name': 'Test LOT1',
             'volume': 10.0,
             'carton_qty': 5.0
