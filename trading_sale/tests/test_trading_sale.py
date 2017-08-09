@@ -80,7 +80,7 @@ class TestTradingSale(common.TransactionCase):
             'carton_qty': 5.0
         })
         pack_opt = self.pack_operation_model. \
-            search([('picking_id', '=', self.sale_order.picking_ids[0].id)],
+            search([('picking_id', '=', self.so.picking_ids[0].id)],
                    limit=1)
         self.pack_operation_lot_model.create({
             'operation_id': pack_opt.id,
