@@ -131,14 +131,13 @@ class TradingSale(models.Model):
         sum_volume = 0
         for hs_code in hs_code_list:
             if hs_code.ids:
-                operation_lines_with_same_hs_code = filter(
-                    lambda line:
-                    line.product_id.product_hs_code_id.id == hs_code.id,
-                    sp.pack_operation_product_ids)
-                operation_lot_ids = [lot_ids.pack_lot_ids for lot_ids in
-                                     operation_lines_with_same_hs_code]
-                prod_lot_ids = [operation_id.lot_id for operation_id in
-                                operation_lot_ids]
+                operation_lines_with_same_hs_code = \
+                    sp.pack_operation_product_ids.filtered(
+                        lambda line:
+                        line.product_id.product_hs_code_id.id == hs_code.id)
+                prod_lot_ids = \
+                    operation_lines_with_same_hs_code.\
+                    pack_lot_ids.mapped('lot_id')
                 for pack_lot in prod_lot_ids:
                     carton_quantity_with_same_hs_code = sum(
                         [pack_lot.carton_qty])
