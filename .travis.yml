@@ -11,7 +11,6 @@ addons:
   apt:
     packages:
       - expect-dev  # provides unbuffer utility
-      - python-lxml  # because pip installation is slow
       - python-simplejson
       - python-serial
       - python-yaml
@@ -36,6 +35,7 @@ virtualenv:
 
 install:
   - pip install ezodf==0.3.2
+  - pip install lxml # install lxml with pip to fix the error no module named lxml
   - git clone --depth=1 https://github.com/Elico-Corp/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
