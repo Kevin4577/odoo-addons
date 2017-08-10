@@ -25,7 +25,22 @@ class TestSale(common.TransactionCase):
                               'product_line_id': self.product_line.id,
                               'product_class_id': self.product_class.id,
                               'product_family_id': self.product_family.id})
-
+        self.env['account.journal'].create(
+            {
+                'name': 'Test',
+                'type': 'sale',
+                'code': 'BNK11',
+                'company_id': self.env.user.company_id.id
+            }
+        )
+        self.env['account.journal'].create(
+            {
+                'name': 'Test',
+                'type': 'sale',
+                'code': 'BNK12',
+                'company_id': self.partner_id.company_id.id
+            }
+        )
         self.sale_order = self.sale_order_model.\
             create({'partner_id': self.partner_id.id,
                     'pricelist_id': self.pricelist.id,

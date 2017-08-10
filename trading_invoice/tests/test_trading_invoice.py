@@ -43,6 +43,22 @@ class TestTradingInvoice(common.TransactionCase):
             'ship_to': self.partner3_id.id,
             'ship_by': 'Test Ship By',
         })
+        self.env['account.journal'].create(
+            {
+                'name': 'Test',
+                'type': 'sale',
+                'code': 'BNK11',
+                'company_id': self.env.user.company_id.id
+            }
+        )
+        self.env['account.journal'].create(
+            {
+                'name': 'Test',
+                'type': 'sale',
+                'code': 'BNK12',
+                'company_id': self.partner_id.company_id.id
+            }
+        )
         self.sale_order = self.sale_order_model.create({
             'partner_id': self.partner_id.id,
             'pricelist_id': self.pricelist.id,
