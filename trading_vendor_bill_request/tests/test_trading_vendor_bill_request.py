@@ -18,6 +18,12 @@ class TestTradingVendorBillRequest(common.TransactionCase):
         self.invoice_line_model = self.env['account.invoice.line']
         self.tax_model = self.env['account.tax']
         self.account_model = self.env['account.account']
+        IrModelData = self.env['ir.model.data']
+        user_type_id = IrModelData.xmlid_to_res_id(
+            'account.data_account_type_revenue')
+        self.account_rev_id = self.account_model.create(
+            {'code': 'X2020', 'name': 'Sales - Test Sales Account',
+             'user_type_id': user_type_id, 'reconcile': True})
         self.account_type_expenses =\
             self.env.ref('account.data_account_type_expenses')
         self.account_type_receivable =\
@@ -32,6 +38,12 @@ class TestTradingVendorBillRequest(common.TransactionCase):
             'amount': 10.0,
             'amount_type': 'fixed',
         })
+        self.partner_id.write(
+            {
+                'property_account_receivable_id': self.account_rev_id.id,
+                'property_account_payable_id': self.account_rev_id.id
+            }
+        )
         self.invoice = self.account_invoice_model.create({
             'partner_id': self.partner.id,
         })

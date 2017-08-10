@@ -48,6 +48,19 @@ class TestTradingVendorBillingConfirmation(common.TransactionCase):
 
     def test_compute_method(self):
         """Test Compute method"""
+        self.account_model = self.env['account.account']
+        IrModelData = self.env['ir.model.data']
+        user_type_id = IrModelData.xmlid_to_res_id(
+            'account.data_account_type_revenue')
+        self.account_rev_id = self.account_model.create(
+            {'code': 'X2020', 'name': 'Sales - Test Sales Account',
+             'user_type_id': user_type_id, 'reconcile': True})
+        self.partner_id.write(
+            {
+                'property_account_receivable_id': self.account_rev_id.id,
+                'property_account_payable_id': self.account_rev_id.id
+            }
+        )
         self.invoice = self.account_invoice.create({
             'partner_id': self.partner_id.id,
             'purchase_id': self.p_order.purchase_id.id,

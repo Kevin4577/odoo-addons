@@ -11,6 +11,9 @@ class TestTradingInvoice(common.TransactionCase):
         super(TestTradingInvoice, self).setUp()
         self.trading_invoice_model = self.env['trading.invoice']
         self.sale_order_model = self.env['sale.order']
+        IrModelData = self.env['ir.model.data']
+        self.account_obj = self.env['account.account']
+        self.advance_product = self.env.ref('sale.advance_product_0')
         self.sale_advance_payment_inv_model =\
             self.env['sale.advance.payment.inv']
         self.pack_obj = self.env['stock.quant.package']
@@ -20,17 +23,24 @@ class TestTradingInvoice(common.TransactionCase):
         self.pack_operation_model = self.env['stock.pack.operation']
         self.pack_operation_lot_model = self.env['stock.pack.operation.lot']
         self.product_uom_unit = self.env.ref('product.product_uom_unit')
+        user_type_id = IrModelData.xmlid_to_res_id(
+            'account.data_account_type_revenue')
+        self.account_rev_id = self.account_obj.create(
+            {'code': 'X2020', 'name': 'Sales - Test Sales Account',
+             'user_type_id': user_type_id, 'reconcile': True})
         self.product_4 = self.env.ref('product.product_product_4')
         self.product_4.write({
             'invoice_policy': 'order',
             'customer_product_code': 'Test',
-            'default_code': 'Test Default Code'
+            'default_code': 'Test Default Code',
+            'property_account_income_id': self.account_rev_id.id,
         })
         self.product_5 = self.env.ref('product.product_product_5')
         self.product_5.write({
             'invoice_policy': 'order',
             'customer_product_code': 'Test',
-            'default_code': 'Test Default Code 2'
+            'default_code': 'Test Default Code 2',
+            'property_account_income_id': self.account_rev_id.id,
         })
         self.partner_id = self.env.ref('base.res_partner_2')
         self.partner_id.write({'ref': 'test_reference'})
@@ -77,6 +87,9 @@ class TestTradingInvoice(common.TransactionCase):
                                    })]
         })
         self.sale_order.action_confirm()
+        self.advance_product.write(
+            {'property_account_income_id': self.account_rev_id.id, }
+        )
         self.sale_order.picking_ids.action_confirm()
         self.sale_order.picking_ids[0].write({
             'ship_info_id': self.shipping_id.id
@@ -120,7 +133,8 @@ class TestTradingInvoice(common.TransactionCase):
             'active_ids': self.sale_order.ids,
             'active_model': 'sale.order',
         }).create({
-            'advance_payment_method': 'delivered'
+            'advance_payment_method': 'delivered',
+            'product_id': self.advance_product.id,
         }).create_invoices()
 
     def test_get_order_lines(self):

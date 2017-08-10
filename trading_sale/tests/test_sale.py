@@ -12,6 +12,8 @@ class TestSale(common.TransactionCase):
         self.partner_id.write({'ref': 'test_reference'})
         self.pricelist = self.env.ref('product.list0')
         self.sale_order_model = self.env['sale.order']
+        IrModelData = self.env['ir.model.data']
+        self.account_obj = self.env['account.account']
         self.product_uom_unit = self.env.ref('product.product_uom_unit')
         self.product_4 = self.env.ref('product.product_product_4')
         self.product_4.write({'default_code': 'Test Default Code'})
@@ -20,11 +22,18 @@ class TestSale(common.TransactionCase):
         self.product_class = self.env.ref('product_class.product_class_data_1')
         self.product_family = self.env.ref('product_class.'
                                            'product_family_data_1')
+        user_type_id = IrModelData.xmlid_to_res_id(
+            'account.data_account_type_revenue')
+        self.account_rev_id = self.account_obj.create(
+            {'code': 'X2020', 'name': 'Sales - Test Sales Account',
+             'user_type_id': user_type_id, 'reconcile': True})
 
         self.product_4.write({'product_stage_id': self.product_stage.id,
                               'product_line_id': self.product_line.id,
                               'product_class_id': self.product_class.id,
-                              'product_family_id': self.product_family.id})
+                              'product_family_id': self.product_family.id,
+                              'property_account_income_id':
+                                  self.account_rev_id.id})
         self.env['account.journal'].create(
             {
                 'name': 'Test',
