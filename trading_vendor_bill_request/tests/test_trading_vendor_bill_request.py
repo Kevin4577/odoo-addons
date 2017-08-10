@@ -38,7 +38,7 @@ class TestTradingVendorBillRequest(common.TransactionCase):
             'amount': 10.0,
             'amount_type': 'fixed',
         })
-        self.partner_id.write(
+        self.partner.write(
             {
                 'property_account_receivable_id': self.account_rev_id.id,
                 'property_account_payable_id': self.account_rev_id.id
