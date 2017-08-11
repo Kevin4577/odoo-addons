@@ -130,3 +130,17 @@ class TestReportPy3oMultisheet(common.TransactionCase):
         tmp_folder_name = \
             self.report_py3o_multisheet_model._get_tmp_folder()
         self.report_py3o_multisheet_model._create_tmp_folder(tmp_folder_name)
+        os.system('touch ' + tmp_folder_name + '/report/res_user.odt')
+        demo_report_action = self.env.ref('report_py3o.res_users_report_py3o')
+        demo_report_action.write(
+            {
+                'py3o_template_fallback': 'report/res_user.odt',
+                'py3o_template_fallback_base': 'report/res_user.odt',
+            }
+        )
+        demo_report_py3o = self.report_py3o_model.create(
+            {'ir_actions_report_xml_id': demo_report_action.id}
+        )
+        template_new = demo_report_action.py3o_template_fallback
+        demo_report_py3o._get_template_from_path(
+            tmp_folder_name + template_new)

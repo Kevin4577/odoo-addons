@@ -33,4 +33,4 @@ class Py3oReport(models.TransientModel):
         if self._is_valid_template_filename(flbk_filename):
             with open(flbk_filename, 'r') as tmpl:
                 return tmpl.read()
-        return None
+        return res
