@@ -60,18 +60,22 @@ def change_ctx(report_xml_id, ctx):
         with necessary data."""
     picking = ctx['objects']
     data = {}
-    template_new = \
-        picking.env.ref('trading_sale_custom_declaration.'
-                        'trading_sale_custom_declaration_py3o'
-                        ).py3o_template_fallback
-    template_new_path = _get_related_path(template_new)
-    template_base = \
-        picking.env.ref('trading_sale_custom_declaration.'
-                        'trading_sale_custom_declaration_py3o'
-                        ).py3o_template_fallback_base
+    current_report = picking.env.ref('trading_sale_custom_declaration.'
+                                     'trading_sale_custom_declaration_py3o'
+                                     )
+    py3o_multi_sheet_obj = picking.env['report.py3o.multisheet']
+
+    template_new = current_report.py3o_template_fallback_base
+    tmp_folder_name = py3o_multi_sheet_obj._get_tmp_folder()
+    py3o_multi_sheet_obj._create_tmp_folder(tmp_folder_name)
+    template_new_path = tmp_folder_name + template_new
+    current_report.write({
+        'py3o_template_fallback': template_new_path
+    })
+
+    template_base = current_report.py3o_template_fallback_base
     template_base_path = _get_related_path(template_base)
     trading_sale_obj = picking.env['trading.sale']
-    py3o_multi_sheet_obj = picking.env['report.py3o.multisheet']
     if picking.sale_id:
         data['so'] = picking.sale_id
         data['pallet_sum'], gw_sum_witout_package, data['nw_sum'], \

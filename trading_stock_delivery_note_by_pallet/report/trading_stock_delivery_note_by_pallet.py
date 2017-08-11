@@ -25,14 +25,19 @@ def render_report_with_data(report_xml_id, data):
                                 'orders period belong to one customer'))
     base_invoice_export_obj = stock_picking_list.env['trading.invoice']
     py3o_multi_sheet_obj = stock_picking_list.env['report.py3o.multisheet']
-    template_new = stock_picking_list.env.ref(
+    current_report = stock_picking_list.env.ref(
         'trading_stock_delivery_note_by_pallet.'
-        'trading_stock_delivery_note_by_pallet_py3o').py3o_template_fallback
-    template_new_path = _get_related_path(template_new)
-    template_base = stock_picking_list.env.ref(
-        'trading_stock_delivery_note_by_pallet.'
-        'trading_stock_delivery_note_by_pallet_py3o').\
-        py3o_template_fallback_base
+        'trading_stock_delivery_note_by_pallet_py3o')
+
+    template_new = current_report.py3o_template_fallback_base
+    tmp_folder_name = py3o_multi_sheet_obj._get_tmp_folder()
+    py3o_multi_sheet_obj._create_tmp_folder(tmp_folder_name)
+    template_new_path = tmp_folder_name + template_new
+    current_report.write({
+        'py3o_template_fallback': template_new_path
+    })
+
+    template_base = current_report.py3o_template_fallback_base
     template_base_path = _get_related_path(template_base)
     head_end_line = 9
     attribute_per_line = [

@@ -2,6 +2,7 @@
 # © 2017 Elico Corp (https://www.elico-corp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import api, models
+import os
 
 
 class Py3oReport(models.TransientModel):
@@ -21,3 +22,15 @@ class Py3oReport(models.TransientModel):
             data,
             save_in_attachment)
         return res
+
+    @api.multi
+    def _get_template_from_path(self, tmpl_name):
+        res = super(Py3oReport, self)._get_template_from_path(
+            tmpl_name)
+        flbk_filename = None
+        if res is None and tmpl_name.startswith('/tmp'):
+            flbk_filename = os.path.realpath(tmpl_name)
+        if self._is_valid_template_filename(flbk_filename):
+            with open(flbk_filename, 'r') as tmpl:
+                return tmpl.read()
+        return None

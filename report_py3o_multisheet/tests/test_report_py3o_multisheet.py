@@ -10,6 +10,7 @@ class TestReportPy3oMultisheet(common.TransactionCase):
     def setUp(self):
         super(TestReportPy3oMultisheet, self).setUp()
         self.report_py3o_multisheet_model = self.env['report.py3o.multisheet']
+        self.report_py3o_model = self.env['py3o.report']
 
     def test_create_new_template(self):
         Test_sheet_lines_data = {
@@ -101,7 +102,7 @@ class TestReportPy3oMultisheet(common.TransactionCase):
             {
                 'name': '28ctns',
                 'lines_number': 6,
-                'list':	[
+                'list': [
                     'package1',
                     'package2',
                     'package3'
@@ -110,7 +111,7 @@ class TestReportPy3oMultisheet(common.TransactionCase):
             {
                 'name': '29ctns',
                 'lines_number': 4,
-                'list':	[
+                'list': [
                     'package3',
                     'package4'
                 ]
@@ -124,3 +125,8 @@ class TestReportPy3oMultisheet(common.TransactionCase):
                 summary_line,
                 template_new_path,
                 template_base_path)
+
+    def test_create_new_tmp_folder(self):
+        tmp_folder_name = \
+            self.report_py3o_multisheet_model._get_tmp_folder()
+        self.report_py3o_multisheet_model._create_tmp_folder(tmp_folder_name)
