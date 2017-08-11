@@ -6,6 +6,9 @@ from odoo import fields, models, api
 import math
 import copy
 import logging
+import time
+import random
+import os
 
 _logger = logging.getLogger(__name__)
 
@@ -28,6 +31,16 @@ class IrActionsReportXml(models.Model):
 class ReportPy3oMultisheet(models.Model):
     _name = 'report.py3o.multisheet'
     _description = 'Report Py3o Multisheet'
+
+    def _get_tmp_folder(self):
+        tmp_folder_name = '/tmp/template_multisheet/' + \
+                          str(int(time.time())) + \
+                          str(int(1000 + random.random() * 1000)) + '/'
+        return tmp_folder_name
+
+    def _create_tmp_folder(self, tmp_folder_name):
+        cmd = 'mkdir -p ' + tmp_folder_name + '/report/'
+        os.system(cmd)
 
     def open_base_template(self, template_base_path):
         """This function open the base template ods file
