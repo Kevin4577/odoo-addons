@@ -13,7 +13,7 @@
         <field name="py3o_filetype">ods</field>
         <field name="py3o_server_id" ref="local_py3o_server"/>
         <field name="module">sale_export_customs_declaration_items_printout</field>
-        <field name="py3o_template_fallback">demo/sale_reporting_elements_template.ods</field>
+        <field name="py3o_template_fallback">report/sale_reporting_elements_template.ods</field>
     </record>
 
     <record id="sale_export_customs_declaration_items_printout_py3o_print_action" model="ir.values">
