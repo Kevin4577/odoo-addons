@@ -35,6 +35,7 @@
         <field name="arch" type="xml">
             <field name="route_ids" position="after">
                 <field name="location_default_id" options="{'no_create': True, 'no_open': True}"/>
+                <field name="default_storage_area"/>
             </field>
         </field>
     </record>
