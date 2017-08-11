@@ -16,8 +16,8 @@
         'report_py3o',
         'trading_sale'
     ],
-    'demo': [
-        'demo/sale_export_customs_declaration_items_printout.xml'
+    'data': [
+        'report/sale_export_customs_declaration_items_printout.xml'
     ],
     'installable': True,
     'auto_install': False,

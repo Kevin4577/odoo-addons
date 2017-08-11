@@ -16,8 +16,8 @@
         'report_py3o',
         'trading_sale',
     ],
-    'demo': [
-        'demo/trading_sale_packaging_printout.xml',
+    'data': [
+        'report/trading_sale_packaging_printout.xml',
     ],
     'installable': True,
     'auto_install': False,
