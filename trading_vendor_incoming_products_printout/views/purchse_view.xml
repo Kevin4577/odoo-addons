@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_incoming_products_purchase_order_tree" model="ir.ui.view">
+        <field name="name">view.incoming.products.purchase.order.tree</field>
+        <field name="model">stock.move</field>
+        <field name="arch" type="xml">
+            <tree create="false" delete="false" edit="false">
+                <field name="date_order" />
+                <field name="customer_reference"/>
+                <field name="customer_order_reference" />
+                <field name="purchase_order_number" />
+                <field name="product_reference"/>
+                <field name="customer_product_code" />
+                <field name="product_id" />
+                <field name="qty_order"/>
+                <field name="qty_received" />
+                <field name="product_uom_qty" />
+                <field name="date_expected"/>
+                <field name="state" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_incoming_products_report" model="ir.actions.act_window">
+        <field name="name">Incoming Products Purchase Order</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.move</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[('picking_id.picking_type_id.code','=','incoming'),('location_dest_id.usage','=','internal'),('purchase_line_id','!=',False)]</field>
+        <field name="view_id" ref="view_incoming_products_purchase_order_tree"/>
+        <field name="search_view_id" ref="stock.view_move_search"/>
+        <field name="context">{'product_receive':True, 'search_default_future': True}</field>
+    </record>
+
+    <menuitem id="menu_report_incoming_products_purchase_order"
+              name="Incoming Products Purchase Order"
+              action="action_incoming_products_report"
+              parent="purchase.menu_purchase_control"
+              sequence="12"/>
+
+</odoo>

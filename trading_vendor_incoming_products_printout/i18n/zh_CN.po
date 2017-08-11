@@ -1,0 +1,68 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* trading_vendor_incoming_products_printout
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-02 13:32+0000\n"
+"PO-Revision-Date: 2017-08-02 13:32+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: trading_vendor_incoming_products_printout
+#: model:ir.model.fields,field_description:trading_vendor_incoming_products_printout.field_stock_move_qty_received
+msgid "Actual Received Quantity"
+msgstr "实际来货数量"
+
+#. module: trading_vendor_incoming_products_printout
+#: model:ir.model.fields,field_description:trading_vendor_incoming_products_printout.field_stock_move_customer_order_reference
+msgid "Customer Order Number"
+msgstr "客人订单号"
+
+#. module: trading_vendor_incoming_products_printout
+#: model:ir.model.fields,field_description:trading_vendor_incoming_products_printout.field_stock_move_customer_product_code
+msgid "Customer Product Code"
+msgstr "客人产品编号"
+
+#. module: trading_vendor_incoming_products_printout
+#: model:ir.model.fields,field_description:trading_vendor_incoming_products_printout.field_stock_move_customer_reference
+msgid "Customer Reference"
+msgstr "供应厂商编号"
+
+#. module: trading_vendor_incoming_products_printout
+#: model:ir.model.fields,field_description:trading_vendor_incoming_products_printout.field_stock_move_date_order
+msgid "Date Order"
+msgstr "日期"
+
+#. module: trading_vendor_incoming_products_printout
+#: model:ir.ui.menu,name:trading_vendor_incoming_products_printout.menu_report_incoming_products_purchase_order
+#: model:ir.actions.act_window,name:trading_vendor_incoming_products_printout.action_incoming_products_report
+msgid "Incoming Products Purchase Order"
+msgstr "采购未出货清单"
+
+#. module: trading_vendor_incoming_products_printout
+#: model:ir.model.fields,field_description:trading_vendor_incoming_products_printout.field_stock_move_qty_order
+msgid "Order Quantity"
+msgstr "合同采购数量"
+
+#. module: trading_vendor_incoming_products_printout
+#: model:ir.model.fields,field_description:trading_vendor_incoming_products_printout.field_stock_move_product_reference
+msgid "Product Reference"
+msgstr "ERP编号"
+
+#. module: trading_vendor_incoming_products_printout
+#: model:ir.model.fields,field_description:trading_vendor_incoming_products_printout.field_stock_move_purchase_order_number
+msgid "Purchase Order Number"
+msgstr "跟单号码"
+
+#. module: trading_vendor_incoming_products_printout
+#: model:ir.actions.report.xml,name:trading_vendor_incoming_products_printout.trading_vendor_incoming_products_printout_py3o
+msgid "Trading Vendor Incoming Products"
+msgstr "未出货清单"
+

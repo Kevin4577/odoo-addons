@@ -4,6 +4,12 @@
         <record id="base.res_partner_1" model="res.partner">
             <field name="ref">Asus Ref</field>
         </record>
+        <record id="base.res_partner_2" model="res.partner">
+             <field name="ref">Asus Ref 2</field>
+        </record>
+        <record id="base.res_partner_3" model="res.partner">
+             <field name="ref">Asus Ref 3</field>
+        </record>
         <record id="product.product_product_1" model="product.product">
             <field name="default_code">GAP</field>
         </record>

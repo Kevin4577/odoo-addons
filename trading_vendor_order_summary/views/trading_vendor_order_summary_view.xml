@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_purchase_order_summary_tree" model="ir.ui.view">
+        <field name="name">purchase.order.line.tree</field>
+        <field name="model">purchase.order.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date_order" />
+                <field name="month_order"/>
+                <field name="day_order" />
+                <field name="vendor_reference" />
+                <field name="partner_id"/>
+                <field name="vendor_order_reference" />
+                <field name="purchase_order_reference" />
+                <field name="product_reference"/>
+                <field name="customer_product_code" />
+                <field name="product_id" />
+                <field name="product_qty"/>
+                <field name="qty_received" />
+                <field name="qty_delivered" />
+                <field name="qty_canceled"/>
+                <field name="date_planned" />
+                <field name="date_received"/>
+                <field name="date_sale" />
+                <field name="currency_id" />
+                <field name="price_unit"/>
+                <field name="price_subtotal" />
+                <field name="price_subtotal_company" />
+                <field name="currency_rate"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_purchase_order_summary_filter" model="ir.ui.view">
+        <field name="name">purchase.order.line.search</field>
+        <field name="model">purchase.order.line</field>
+        <field name="arch" type="xml">
+            <search >
+                <field name="product_id" />
+                <field name="partner_id" />
+                <filter string="Purchase Order" domain="[]"
+                        context="{'group_by':'order_id'}" />
+                <filter string="Product" domain="[]"
+                        context="{'group_by':'product_id'}" />
+                <filter string="vendor" domain="[]"
+                        context="{'group_by':'partner_id'}" />
+            </search>
+        </field>
+    </record>
+
+    <record id="action_purchase_order_summary" model="ir.actions.act_window">
+        <field name="name">purchase.purchase_report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.order.line</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{'group_by':'order_id'}</field>
+        <field name="view_id" ref="view_purchase_order_summary_tree"/>
+        <field name="search_view_id" ref="view_purchase_order_summary_filter"/>
+    </record>
+
+    <menuitem id="menu_report_ourchase_order_summary"
+              name="Purchase Order Summary"
+              action="action_purchase_order_summary"
+              parent="purchase.purchase_report"
+              sequence="2"/>
+
+</odoo>
