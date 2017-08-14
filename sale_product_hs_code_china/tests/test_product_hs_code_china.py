@@ -13,7 +13,7 @@ class TestProductHSCodeChina(common.TransactionCase):
         self.prod_hs_code_obj = self.env['product.hs.code']
         self.prod_hs_code = self.prod_hs_code_obj.create({
             'hs_code': 'HSCode1',
-            'name': 'Test1',
+            'cn_name': 'Test1',
         })
         self.prod_temp_obj = self.env['product.template']
         self.hs_manager = self.env.ref('sale_product_hs_code.'
@@ -30,7 +30,7 @@ class TestProductHSCodeChina(common.TransactionCase):
         with self.assertRaises(ValidationError):
             self.prod_hs_code2 = self.prod_hs_code.create({
                 'hs_code': 'HSCode1',
-                'name': 'HSCode1',
+                'cn_name': 'Test1',
             })
 
     def test_fields_view_get(self):
