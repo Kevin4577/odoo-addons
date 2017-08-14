@@ -33,8 +33,6 @@ class TestProductHSCodeChina(common.TransactionCase):
                 'cn_name': 'Test1',
             })
 
-    def test_fields_view_get(self):
+    def test_name_get(self):
         """Test fields view get method for invisible hs name"""
-        self.prod_temp_obj.fields_view_get(view_id=self.tree_view_id,
-                                           view_type='tree')
-        self.prod_temp_obj.fields_view_get(view_id=self.view_id)
+        self.prod_hs_code.name_get()
