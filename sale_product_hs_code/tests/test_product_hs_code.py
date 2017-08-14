@@ -3,7 +3,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo.tests import common
-from odoo.exceptions import ValidationError
 
 
 class TestProductHSCode(common.TransactionCase):
@@ -21,14 +20,6 @@ class TestProductHSCode(common.TransactionCase):
             'default_code': 'Test Default Code',
             'product_hs_code_id': self.prod_hs_code.id
         })
-
-    def test_check_hs_code(self):
-        "Test product code based on sequence"
-        with self.assertRaises(ValidationError):
-            self.prod_hs_code2 = self.prod_hs_code.create({
-                'hs_code': 'HSCode1',
-                'name': 'HSCode1',
-            })
 
     def test_product_onchange(self):
         "Test product onchange function"
