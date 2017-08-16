@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-24 03:21+0000\n"
-"PO-Revision-Date: 2017-07-24 03:21+0000\n"
+"POT-Creation-Date: 2017-08-16 07:44+0000\n"
+"PO-Revision-Date: 2017-08-16 07:44+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -70,19 +70,19 @@ msgstr "海关编码"
 #. module: stock_valuation_report_product_class_and_hs_code
 #: code:addons/stock_valuation_report_product_class_and_hs_code/wizard/wizard_stock_valuation_list.py:121
 #, python-format
-msgid "Incoming Inventory Balance"
+msgid "Incoming Inventory Quantity"
 msgstr "本期收入"
 
 #. module: stock_valuation_report_product_class_and_hs_code
 #: code:addons/stock_valuation_report_product_class_and_hs_code/wizard/wizard_stock_valuation_list.py:123
 #, python-format
-msgid "Inventory Balance Before End Date"
+msgid "Inventory Quantity Before End Date"
 msgstr "本期结存"
 
 #. module: stock_valuation_report_product_class_and_hs_code
 #: code:addons/stock_valuation_report_product_class_and_hs_code/wizard/wizard_stock_valuation_list.py:120
 #, python-format
-msgid "Inventory Balance Before Start Date"
+msgid "Inventory Quantity Before Start Date"
 msgstr "上期结存"
 
 #. module: stock_valuation_report_product_class_and_hs_code
@@ -106,7 +106,7 @@ msgstr "仅一个海关编码"
 #. module: stock_valuation_report_product_class_and_hs_code
 #: code:addons/stock_valuation_report_product_class_and_hs_code/wizard/wizard_stock_valuation_list.py:122
 #, python-format
-msgid "Outgoing Inventory Balance"
+msgid "Outgoing Inventory Quantity"
 msgstr "本期支出"
 
 #. module: stock_valuation_report_product_class_and_hs_code
@@ -179,7 +179,7 @@ msgstr "产品状态"
 #. module: stock_valuation_report_product_class_and_hs_code
 #: code:addons/stock_valuation_report_product_class_and_hs_code/wizard/wizard_stock_valuation_list.py:124
 #, python-format
-msgid "Safety Stock Level"
+msgid "Safety Stock Quantity"
 msgstr "安全库存"
 
 #. module: stock_valuation_report_product_class_and_hs_code
