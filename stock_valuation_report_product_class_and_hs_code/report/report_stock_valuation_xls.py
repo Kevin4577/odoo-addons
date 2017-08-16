@@ -28,11 +28,11 @@ class ReportStockValuationProductionInherit(ReportStockValuationProduction):
                 "5": line.product_class_name,
                 "6": line.product_family_name,
                 "7": line.uom_name,
-                "8": line.inventory_balance_before_start_date,
-                "9": line.incoming_inventory_balance,
-                "10": line.outgoing_inventory_balance,
-                "11": line.inventory_balance_before_end_date,
-                "12": line.safety_stock_level,
+                "8": line.inventory_quantity_before_start_date,
+                "9": line.incoming_inventory_quantity,
+                "10": line.outgoing_inventory_quantity,
+                "11": line.inventory_quantity_before_end_date,
+                "12": line.safety_stock_quantity,
                 "13": line.below_safety_stock,
                 "14": line.location_name
             }

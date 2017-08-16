@@ -117,11 +117,11 @@ class WizardStockValuationList(models.TransientModel):
             5: _("Product Class"),
             6: _("Product Family"),
             7: _("Unit of Measure"),
-            8: _("Inventory Balance Before Start Date"),
-            9: _("Incoming Inventory Balance"),
-            10: _("Outgoing Inventory Balance"),
-            11: _("Inventory Balance Before End Date"),
-            12: _("Safety Stock Level"),
+            8: _("Inventory Quantity Before Start Date"),
+            9: _("Incoming Inventory Quantity"),
+            10: _("Outgoing Inventory Quantity"),
+            11: _("Inventory Quantity Before End Date"),
+            12: _("Safety Stock Quantity"),
             13: _("Below Safety Stock"),
             14: _("Location Name")
         })
