@@ -47,7 +47,7 @@ msgstr "是否安全库存内？"
 #. module: stock_valuation_report
 #: model:ir.actions.act_window,help:stock_valuation_report.action_valuation_form
 msgid "Click to start an valuation."
-msgstr "点击开始收发存统计."
+msgstr "点击开始收发存数量."
 
 #. module: stock_valuation_report
 #: model:ir.model.fields,field_description:stock_valuation_report.field_stock_valuation_company_id
@@ -426,7 +426,7 @@ msgstr "安全库存."
 #. module: stock_valuation_report
 #: model:ir.ui.view,arch_db:stock_valuation_report.view_valuation_filter
 msgid "Search Valuation"
-msgstr "收发存统计"
+msgstr "收发存数量"
 
 #. module: stock_valuation_report
 #: model:ir.model.fields,help:stock_valuation_report.field_stock_valuation_partner_customer_id
@@ -446,7 +446,7 @@ msgstr "开始日期"
 #. module: stock_valuation_report
 #: model:ir.ui.view,arch_db:stock_valuation_report.view_Valuation_form
 msgid "Start Valuation"
-msgstr "开始收发存统计"
+msgstr "开始收发存数量"
 
 #. module: stock_valuation_report
 #: model:ir.model.fields,help:stock_valuation_report.field_stock_valuation_start_date
@@ -463,13 +463,13 @@ msgstr "库位"
 #: model:ir.ui.menu,name:stock_valuation_report.menu_action_valuation_form
 #: model:ir.ui.view,arch_db:stock_valuation_report.view_valuation_tree
 msgid "Stock Valuation"
-msgstr "收发存统计"
+msgstr "收发存数量"
 
 #. module: stock_valuation_report
 #: code:addons/stock_valuation_report/models/stock_valuation.py:271
 #, python-format
 msgid "Stock Valuation List"
-msgstr "收发存统计列表"
+msgstr "收发存数量列表"
 
 #. module: stock_valuation_report
 #: model:res.groups,name:stock_valuation_report.group_stock_valuation_manager
@@ -489,13 +489,13 @@ msgstr "收发存用户"
 #. module: stock_valuation_report
 #: model:ir.model.fields,field_description:stock_valuation_report.field_wizard_stock_valuation_list_stock_valuation_lines
 msgid "Stock Valuation lines"
-msgstr "收发存统计列表行"
+msgstr "收发存数量列表行"
 
 #. module: stock_valuation_report
 #: model:ir.model.fields,field_description:stock_valuation_report.field_wizard_stock_valuation_line_stock_valuation_list_id
 #: model:ir.model.fields,help:stock_valuation_report.field_wizard_stock_valuation_line_stock_valuation_list_id
 msgid "Stock Valuation list"
-msgstr "收发存统计列表"
+msgstr "收发存数量列表"
 
 #. module: stock_valuation_report
 #: model:ir.model.fields,help:stock_valuation_report.field_wizard_stock_valuation_line_location_name
@@ -528,7 +528,7 @@ msgstr "计量单位"
 #. module: stock_valuation_report
 #: model:ir.ui.view,arch_db:stock_valuation_report.view_Valuation_form
 msgid "Valuation Adjustment"
-msgstr "收发存统计"
+msgstr "收发存数量"
 
 #. module: stock_valuation_report
 #: model:ir.model.fields,field_description:stock_valuation_report.field_stock_valuation_name
@@ -555,7 +555,7 @@ msgstr "You must define a warehouse for the company: %s."
 #. module: stock_valuation_report
 #: model:ir.ui.view,arch_db:stock_valuation_report.view_Valuation_form
 msgid "e.g. Monthly Valuation"
-msgstr "e.g. 每月收发存统计"
+msgstr "e.g. 每月收发存数量"
 
 #. module: stock_valuation_report
 #: model:ir.model,name:stock_valuation_report.model_stock_valuation
