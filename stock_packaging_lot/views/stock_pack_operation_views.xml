@@ -20,6 +20,7 @@
                 <field name="volume"/>
                 <field name="carton_size"/>
                 <field name="shipping_mark"/>
+                <field name="mix_loading"/>
             </field>
         </field>
     </record>
@@ -43,6 +44,7 @@
                 <field name="volume"/>
                 <field name="carton_size"/>
                 <field name="shipping_mark"/>
+                <field name="mix_loading"/>
             </xpath>
         </field>
     </record>

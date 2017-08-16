@@ -23,6 +23,7 @@
                     <field name="volume"/>
                     <field name="carton_size"/>
                     <field name="shipping_mark"/>
+                    <field name="mix_loading"/>
                 </group>
             </xpath>
         </field>

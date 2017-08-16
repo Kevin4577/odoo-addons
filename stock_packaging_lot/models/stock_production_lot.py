@@ -41,18 +41,19 @@ class StockProductionLot(models.Model):
         return {}
 
     carton_no = fields.Char('Carton No')
-    carton_qty = fields.Integer('Carton Qty')
-    qty_per_carton = fields.Integer('Qty per Carton')
-    gross_by_carton = fields.Float('Gross by Carton')
-    volume_by_carton = fields.Float('Volume by carton')
-    net_by_carton = fields.Float('Net by Carton')
-    box_per_carton = fields.Integer('Box per Carton')
-    qty_per_box = fields.Integer('Qty per Box')
-    gross_weight = fields.Float('Gross Weight')
-    net_weight = fields.Float('Net Weight')
-    volume = fields.Float('Volume')
+    carton_qty = fields.Float('Carton Qty', digits=(16, 6))
+    qty_per_carton = fields.Float('Qty per Carton', digits=(16, 6))
+    gross_by_carton = fields.Float('Gross by Carton', digits=(16, 6))
+    volume_by_carton = fields.Float('Volume by carton', digits=(16, 6))
+    net_by_carton = fields.Float('Net by Carton', digits=(16, 6))
+    box_per_carton = fields.Float('Box per Carton', digits=(16, 6))
+    qty_per_box = fields.Float('Qty per Box', digits=(16, 6))
+    gross_weight = fields.Float('Gross Weight', digits=(16, 6))
+    net_weight = fields.Float('Net Weight', digits=(16, 6))
+    volume = fields.Float('Volume', digits=(16, 6))
     carton_size = fields.Char('Carton Size')
     shipping_mark = fields.Text('Shipping Marks')
+    mix_loading = fields.Boolean('Mix Loading?')
 
 
 class StockPackOperationLot(models.Model):
@@ -98,18 +99,19 @@ class StockPackOperationLot(models.Model):
         return {}
 
     carton_no = fields.Char('Carton No')
-    carton_qty = fields.Integer('Carton Qty')
-    qty_per_carton = fields.Integer('Qty per Carton')
-    gross_by_carton = fields.Float('Gross by Carton')
-    volume_by_carton = fields.Float('Volume by carton')
-    net_by_carton = fields.Float('Net by Carton')
-    box_per_carton = fields.Integer('Box per Carton')
-    qty_per_box = fields.Integer('Qty per Box')
-    gross_weight = fields.Float('Gross Weight')
-    net_weight = fields.Float('Net Weight')
-    volume = fields.Float('Volume')
+    carton_qty = fields.Float('Carton Qty', digits=(16, 6))
+    qty_per_carton = fields.Float('Qty per Carton', digits=(16, 6))
+    gross_by_carton = fields.Float('Gross by Carton', digits=(16, 6))
+    volume_by_carton = fields.Float('Volume by carton', digits=(16, 6))
+    net_by_carton = fields.Float('Net by Carton', digits=(16, 6))
+    box_per_carton = fields.Float('Box per Carton', digits=(16, 6))
+    qty_per_box = fields.Float('Qty per Box', digits=(16, 6))
+    gross_weight = fields.Float('Gross Weight', digits=(16, 6))
+    net_weight = fields.Float('Net Weight', digits=(16, 6))
+    volume = fields.Float('Volume', digits=(16, 6))
     carton_size = fields.Char('Carton Size')
     shipping_mark = fields.Text('Shipping Marks')
+    mix_loading = fields.Boolean('Mix Loading?')
 
     @api.onchange('lot_id')
     def onchange_lot_id(self):
@@ -129,4 +131,5 @@ class StockPackOperationLot(models.Model):
             self.volume = self.lot_id.volume
             self.carton_size = self.lot_id.carton_size
             self.shipping_mark = self.lot_id.shipping_mark
+            self.mix_loading = self.lot_id.mix_loading
         return {}

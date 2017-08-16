@@ -31,7 +31,8 @@ class StockPicking(models.Model):
                     'net_weight': pack_operation_lot.net_weight,
                     'volume': pack_operation_lot.volume,
                     'carton_size': pack_operation_lot.carton_size,
-                    'shipping_mark': pack_operation_lot.shipping_mark})
+                    'shipping_mark': pack_operation_lot.shipping_mark,
+                    'mix_loading': pack_operation_lot.mix_loading})
         return res
 
     def _prepare_pack_ops(self, quants, forced_qties):
@@ -60,5 +61,6 @@ class StockPicking(models.Model):
                             'net_weight': lot.net_weight,
                             'volume': lot.volume,
                             'carton_size': lot.carton_size,
-                            'shipping_mark': lot.shipping_mark})
+                            'shipping_mark': lot.shipping_mark,
+                            'mix_loading': lot.mix_loading})
         return res
