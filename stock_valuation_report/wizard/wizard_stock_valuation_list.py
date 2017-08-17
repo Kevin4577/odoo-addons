@@ -742,25 +742,11 @@ class WizardStockValuationLine(models.TransientModel):
         help='Inventory quantity before start date.'
     )
 
-    inventory_balance_before_start_date = fields.Float(
-        'Inventory Balance Before Start Date',
-        readonly=True,
-        default=0,
-        help='Total inventory balance before start date.'
-    )
-
     incoming_inventory_quantity = fields.Float(
         'Incoming Inventory Quantity',
         readonly=True,
         default=0,
         help='Incoming Inventory Quantity.'
-    )
-
-    incoming_inventory_balance = fields.Float(
-        'Incoming Inventory Balance',
-        readonly=True,
-        default=0,
-        help='Incoming inventory balance between start date and end date.'
     )
 
     outgoing_inventory_quantity = fields.Float(
@@ -770,25 +756,11 @@ class WizardStockValuationLine(models.TransientModel):
         help='Outgoing Inventory quantity.'
     )
 
-    outgoing_inventory_balance = fields.Float(
-        'Outgoing Inventory Balance',
-        readonly=True,
-        default=0,
-        help='Outgoing inventory balance between start date and end date.'
-    )
-
     inventory_quantity_before_end_date = fields.Float(
         'Inventory Quantity Before End Date',
         readonly=True,
         default=0,
         help='Inventory Quantity before end date.'
-    )
-
-    inventory_balance_before_end_date = fields.Float(
-        'Inventory Balance Before End Date',
-        readonly=True,
-        default=0,
-        help='Inventory balance before end date.'
     )
 
     safety_stock_quantity = fields.Float(
