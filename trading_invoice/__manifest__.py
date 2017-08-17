@@ -15,6 +15,7 @@
         "trading_stock_shipping",
         "sale_product_hs_code_china",
         "product_class",
+        "account_invoice_customer_reference",
     ],
     'data': [
         'security/ir.model.access.csv'
