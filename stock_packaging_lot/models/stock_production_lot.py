@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
+import odoo.addons.decimal_precision as dp
 
 
 class StockProductionLot(models.Model):
@@ -41,16 +42,36 @@ class StockProductionLot(models.Model):
         return {}
 
     carton_no = fields.Char('Carton No')
-    carton_qty = fields.Float('Carton Qty', digits=(16, 6))
-    qty_per_carton = fields.Float('Qty per Carton', digits=(16, 6))
-    gross_by_carton = fields.Float('Gross by Carton', digits=(16, 6))
-    volume_by_carton = fields.Float('Volume by carton', digits=(16, 6))
-    net_by_carton = fields.Float('Net by Carton', digits=(16, 6))
-    box_per_carton = fields.Float('Box per Carton', digits=(16, 6))
-    qty_per_box = fields.Float('Qty per Box', digits=(16, 6))
-    gross_weight = fields.Float('Gross Weight', digits=(16, 6))
-    net_weight = fields.Float('Net Weight', digits=(16, 6))
-    volume = fields.Float('Volume', digits=(16, 6))
+    carton_qty = fields.Float(
+        'Carton Qty',
+        digits=dp.get_precision('Case Quantity'))
+    qty_per_carton = fields.Float(
+        'Qty per Carton',
+        digits=dp.get_precision('Case Quantity'))
+    gross_by_carton = fields.Float(
+        'Gross by Carton',
+        digits=dp.get_precision('Case Weight'))
+    volume_by_carton = fields.Float(
+        'Volume by carton',
+        digits=dp.get_precision('Case Volume'))
+    net_by_carton = fields.Float(
+        'Net by Carton',
+        digits=dp.get_precision('Case Weight'))
+    box_per_carton = fields.Float(
+        'Box per Carton',
+        digits=dp.get_precision('Case Quantity'))
+    qty_per_box = fields.Float(
+        'Qty per Box',
+        digits=dp.get_precision('Case Quantity'))
+    gross_weight = fields.Float(
+        'Gross Weight',
+        digits=dp.get_precision('Case Weight'))
+    net_weight = fields.Float(
+        'Net Weight',
+        digits=dp.get_precision('Case Weight'))
+    volume = fields.Float(
+        'Volume',
+        digits=dp.get_precision('Case Volume'))
     carton_size = fields.Char('Carton Size')
     shipping_mark = fields.Text('Shipping Marks')
     mixed_loading = fields.Boolean('Mixed Loading?')
@@ -99,16 +120,36 @@ class StockPackOperationLot(models.Model):
         return {}
 
     carton_no = fields.Char('Carton No')
-    carton_qty = fields.Float('Carton Qty', digits=(16, 6))
-    qty_per_carton = fields.Float('Qty per Carton', digits=(16, 6))
-    gross_by_carton = fields.Float('Gross by Carton', digits=(16, 6))
-    volume_by_carton = fields.Float('Volume by carton', digits=(16, 6))
-    net_by_carton = fields.Float('Net by Carton', digits=(16, 6))
-    box_per_carton = fields.Float('Box per Carton', digits=(16, 6))
-    qty_per_box = fields.Float('Qty per Box', digits=(16, 6))
-    gross_weight = fields.Float('Gross Weight', digits=(16, 6))
-    net_weight = fields.Float('Net Weight', digits=(16, 6))
-    volume = fields.Float('Volume', digits=(16, 6))
+    carton_qty = fields.Float(
+        'Carton Qty',
+        digits=dp.get_precision('Case Quantity'))
+    qty_per_carton = fields.Float(
+        'Qty per Carton',
+        digits=dp.get_precision('Case Quantity'))
+    gross_by_carton = fields.Float(
+        'Gross by Carton',
+        digits=dp.get_precision('Case Weight'))
+    volume_by_carton = fields.Float(
+        'Volume by carton',
+        digits=dp.get_precision('Case Volume'))
+    net_by_carton = fields.Float(
+        'Net by Carton',
+        digits=dp.get_precision('Case Weight'))
+    box_per_carton = fields.Float(
+        'Box per Carton',
+        digits=dp.get_precision('Case Quantity'))
+    qty_per_box = fields.Float(
+        'Qty per Box',
+        digits=dp.get_precision('Case Quantity'))
+    gross_weight = fields.Float(
+        'Gross Weight',
+        digits=dp.get_precision('Case Weight'))
+    net_weight = fields.Float(
+        'Net Weight',
+        digits=dp.get_precision('Case Weight'))
+    volume = fields.Float(
+        'Volume',
+        digits=dp.get_precision('Case Volume'))
     carton_size = fields.Char('Carton Size')
     shipping_mark = fields.Text('Shipping Marks')
     mixed_loading = fields.Boolean('Mixed Loading?')
