@@ -53,7 +53,7 @@ class StockProductionLot(models.Model):
     volume = fields.Float('Volume', digits=(16, 6))
     carton_size = fields.Char('Carton Size')
     shipping_mark = fields.Text('Shipping Marks')
-    mix_loading = fields.Boolean('Mix Loading?')
+    mixed_loading = fields.Boolean('Mixed Loading?')
 
 
 class StockPackOperationLot(models.Model):
@@ -111,7 +111,7 @@ class StockPackOperationLot(models.Model):
     volume = fields.Float('Volume', digits=(16, 6))
     carton_size = fields.Char('Carton Size')
     shipping_mark = fields.Text('Shipping Marks')
-    mix_loading = fields.Boolean('Mix Loading?')
+    mixed_loading = fields.Boolean('Mixed Loading?')
 
     @api.onchange('lot_id')
     def onchange_lot_id(self):
@@ -131,5 +131,5 @@ class StockPackOperationLot(models.Model):
             self.volume = self.lot_id.volume
             self.carton_size = self.lot_id.carton_size
             self.shipping_mark = self.lot_id.shipping_mark
-            self.mix_loading = self.lot_id.mix_loading
+            self.mixed_loading = self.lot_id.mixed_loading
         return {}
