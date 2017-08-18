@@ -13,10 +13,9 @@
     'license': 'AGPL-3',
     'depends': [
         'sale_product_hs_code_china',
-        'trading_stock_shipping',
         'stock_package_volume_weight',
         'stock_packaging_lot',
-        'account_invoice_customer_reference',
+        'stock_picking_invoice_reference',
     ],
     'data': [
         'security/ir.model.access.csv',

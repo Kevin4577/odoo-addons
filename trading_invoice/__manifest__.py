@@ -12,10 +12,9 @@
     "depends": [
         "stock_package_volume_weight",
         "stock_packaging_lot",
-        "trading_stock_shipping",
         "sale_product_hs_code_china",
         "product_class",
-        "account_invoice_customer_reference",
+        "stock_picking_invoice_reference",
     ],
     'data': [
         'security/ir.model.access.csv'
