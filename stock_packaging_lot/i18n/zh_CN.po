@@ -65,7 +65,7 @@ msgstr "打包作业的批次/序列号码"
 #: model:ir.model.fields,field_description:stock_packaging_lot.field_stock_pack_operation_lot_mixed_loading
 #: model:ir.model.fields,field_description:stock_packaging_lot.field_stock_production_lot_mixed_loading
 msgid "Mixed Loading?"
-msgstr "Mixed Loading?"
+msgstr "是否混装?"
 
 #. module: stock_packaging_lot
 #: model:ir.model.fields,field_description:stock_packaging_lot.field_stock_pack_operation_lot_net_weight
