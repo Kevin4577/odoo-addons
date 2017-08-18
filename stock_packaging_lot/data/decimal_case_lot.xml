@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record forcecreate="True" id="decimal_case_quantity" model="decimal.precision">
+            <field name="name">Case Quantity</field>
+            <field name="digits">6</field>
+        </record>
+        <record forcecreate="True" id="decimal_case_weight" model="decimal.precision">
+            <field name="name">Case Weight</field>
+            <field name="digits">6</field>
+        </record>
+        <record forcecreate="True" id="decimal_case_volume" model="decimal.precision">
+            <field name="name">Case Volume</field>
+            <field name="digits">6</field>
+        </record>
+    </data>
+</odoo>

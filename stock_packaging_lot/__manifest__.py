@@ -15,6 +15,7 @@
         'stock',
     ],
     'data': [
+        'data/decimal_case_lot.xml',
         'views/stock_production_lot_views.xml',
         'views/stock_pack_operation_views.xml',
     ],
