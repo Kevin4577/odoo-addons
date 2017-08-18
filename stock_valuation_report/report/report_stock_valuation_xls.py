@@ -134,11 +134,11 @@ class ReportStockValuationProduction(ReportXlsx):
                 "0": line.default_code,
                 "1": line.product_name,
                 "2": line.uom_name,
-                "3": line.inventory_balance_before_start_date,
-                "4": line.incoming_inventory_balance,
-                "5": line.outgoing_inventory_balance,
-                "6": line.inventory_balance_before_end_date,
-                "7": line.safety_stock_level,
+                "3": line.inventory_quantity_before_start_date,
+                "4": line.incoming_inventory_quantity,
+                "5": line.outgoing_inventory_quantity,
+                "6": line.inventory_quantity_before_end_date,
+                "7": line.safety_stock_quantity,
                 "8": line.below_safety_stock,
                 "9": line.location_name
             }

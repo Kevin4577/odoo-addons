@@ -14,11 +14,11 @@
                             <field name='default_code'/>
                             <field name='product_name'/>
                             <field name='uom_name'/>
-                            <field name='inventory_balance_before_start_date'/>
-                            <field name='incoming_inventory_balance'/>
-                            <field name='outgoing_inventory_balance'/>
-                            <field name='inventory_balance_before_end_date'/>
-                            <field name='safety_stock_level'/>
+                            <field name='inventory_quantity_before_start_date'/>
+                            <field name='incoming_inventory_quantity'/>
+                            <field name='outgoing_inventory_quantity'/>
+                            <field name='inventory_quantity_before_end_date'/>
+                            <field name='safety_stock_quantity'/>
                             <field name='below_safety_stock'/>
                             <field name='location_name'/>
                         </tree>

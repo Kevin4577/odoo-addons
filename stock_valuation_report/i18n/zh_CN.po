@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-20 07:08+0000\n"
-"PO-Revision-Date: 2017-07-20 07:08+0000\n"
+"POT-Creation-Date: 2017-08-16 07:41+0000\n"
+"PO-Revision-Date: 2017-08-16 07:41+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,22 +16,28 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_valuation_report
-#: code:addons/stock_valuation_report/models/stock_valuation.py:99
+#: code:addons/stock_valuation_report/models/stock_valuation.py:102
 #, python-format
 msgid "A Pack"
 msgstr "包裹"
 
 #. module: stock_valuation_report
-#: code:addons/stock_valuation_report/models/stock_valuation.py:107
+#: code:addons/stock_valuation_report/models/stock_valuation.py:113
 #, python-format
 msgid "All order types"
 msgstr "任意定向"
 
 #. module: stock_valuation_report
-#: code:addons/stock_valuation_report/models/stock_valuation.py:93
+#: code:addons/stock_valuation_report/models/stock_valuation.py:96
 #, python-format
 msgid "All products"
 msgstr "所有产品"
+
+#. module: stock_valuation_report
+#: code:addons/stock_valuation_report/wizard/wizard_stock_valuation_list.py:652
+#, python-format
+msgid "Below Safety Stock"
+msgstr "是否安全库存内？"
 
 #. module: stock_valuation_report
 #: model:ir.model.fields,field_description:stock_valuation_report.field_wizard_stock_valuation_line_below_safety_stock
@@ -39,15 +45,9 @@ msgid "Below Safety Stock?"
 msgstr "是否安全库存内？"
 
 #. module: stock_valuation_report
-#: code:addons/stock_valuation_report/wizard/wizard_stock_valuation_list.py:664
-#, python-format
-msgid "Below Safety Stock"
-msgstr "是否安全库存内？"
-
-#. module: stock_valuation_report
 #: model:ir.actions.act_window,help:stock_valuation_report.action_valuation_form
 msgid "Click to start an valuation."
-msgstr "点击开始收发存统计."
+msgstr "点击开始收发存数量."
 
 #. module: stock_valuation_report
 #: model:ir.model.fields,field_description:stock_valuation_report.field_stock_valuation_company_id
@@ -90,7 +90,7 @@ msgid "Date"
 msgstr "日期"
 
 #. module: stock_valuation_report
-#: code:addons/stock_valuation_report/wizard/wizard_stock_valuation_list.py:656
+#: code:addons/stock_valuation_report/wizard/wizard_stock_valuation_list.py:644
 #, python-format
 msgid "Default Code"
 msgstr "ERP编码"
@@ -128,6 +128,26 @@ msgid "Filter By Product"
 msgstr "产品过滤"
 
 #. module: stock_valuation_report
+#: model:ir.model.fields,help:stock_valuation_report.field_stock_valuation_lot_id
+msgid "Filter a specific Lot/Serial Number to focus your inventory on a particular Lot/Serial Number."
+msgstr "Filter a specific Lot/Serial Number to focus your inventory on a particular Lot/Serial Number."
+
+#. module: stock_valuation_report
+#: model:ir.model.fields,help:stock_valuation_report.field_stock_valuation_category_id
+msgid "Filter a specific Product Category to focus your inventory on a particular Category."
+msgstr "Filter a specific Product Category to focus your inventory on a particular Category."
+
+#. module: stock_valuation_report
+#: model:ir.model.fields,help:stock_valuation_report.field_stock_valuation_package_id
+msgid "Filter a specific package to focus your inventory on a particular Pack."
+msgstr "Filter a specific package to focus your inventory on a particular Pack."
+
+#. module: stock_valuation_report
+#: model:ir.model.fields,help:stock_valuation_report.field_stock_valuation_product_id
+msgid "Filter a specific product to focus your inventory on a particular Product."
+msgstr "Filter a specific product to focus your inventory on a particular Product."
+
+#. module: stock_valuation_report
 #: model:ir.ui.view,arch_db:stock_valuation_report.view_valuation_filter
 msgid "Group By"
 msgstr "分组"
@@ -137,13 +157,17 @@ msgstr "分组"
 #: model:ir.model.fields,field_description:stock_valuation_report.field_wizard_stock_valuation_line_id
 #: model:ir.model.fields,field_description:stock_valuation_report.field_wizard_stock_valuation_list_id
 msgid "ID"
-msgstr "索引"
+msgstr "ID"
 
 #. module: stock_valuation_report
 #: model:ir.model.fields,help:stock_valuation_report.field_stock_valuation_filter_by_order_type
+msgid "If you do an entire valuation of order type, you can choose 'All Order Type' You can also let the system propose for a customer / vendor /... "
+msgstr "If you do an entire valuation of order type, you can choose 'All Order Type' You can also let the system propose for a customer / vendor /... "
+
+#. module: stock_valuation_report
 #: model:ir.model.fields,help:stock_valuation_report.field_stock_valuation_filter_by_product
-msgid "If you do an entire inventory, you can choose 'All Products' and it will prefill the inventory with the current stock.  If you only do some products (e.g. Cycle Counting) you can choose 'Manual Selection of Products' and the system won't propose anything.  You can also let the system propose for a single product / lot /... "
-msgstr "If you do an entire inventory, you can choose 'All Products' and it will prefill the inventory with the current stock.  If you only do some products (e.g. Cycle Counting) you can choose 'Manual Selection of Products' and the system won't propose anything.  You can also let the system propose for a single product / lot /... "
+msgid "If you do an entire valuation, you can choose 'All Products' and it will prefill the valuation with the current stock.You can also let the system propose for a single product / lot /... "
+msgstr "If you do an entire valuation, you can choose 'All Products' and it will prefill the valuation with the current stock.You can also let the system propose for a single product / lot /... "
 
 #. module: stock_valuation_report
 #: model:ir.model.fields,field_description:stock_valuation_report.field_stock_valuation_include_child_location
@@ -151,11 +175,21 @@ msgid "Include Child Locations"
 msgstr "是否包含子库位"
 
 #. module: stock_valuation_report
-#: code:addons/stock_valuation_report/wizard/wizard_stock_valuation_list.py:660
 #: model:ir.model.fields,field_description:stock_valuation_report.field_wizard_stock_valuation_line_incoming_inventory_balance
-#, python-format
 msgid "Incoming Inventory Balance"
 msgstr "本期收入"
+
+#. module: stock_valuation_report
+#: code:addons/stock_valuation_report/wizard/wizard_stock_valuation_list.py:648
+#: model:ir.model.fields,field_description:stock_valuation_report.field_wizard_stock_valuation_line_incoming_inventory_quantity
+#, python-format
+msgid "Incoming Inventory Quantity"
+msgstr "本期收入"
+
+#. module: stock_valuation_report
+#: model:ir.model.fields,help:stock_valuation_report.field_wizard_stock_valuation_line_incoming_inventory_quantity
+msgid "Incoming Inventory Quantity."
+msgstr "本期收入."
 
 #. module: stock_valuation_report
 #: model:ir.model.fields,help:stock_valuation_report.field_wizard_stock_valuation_line_incoming_inventory_balance
@@ -166,7 +200,7 @@ msgstr "Incoming inventory balance between start date and end date."
 #: model:ir.model.fields,field_description:stock_valuation_report.field_wizard_stock_valuation_line_default_code
 #: model:ir.model.fields,help:stock_valuation_report.field_wizard_stock_valuation_line_default_code
 msgid "Internal Reference"
-msgstr "内部参照"
+msgstr "内部参考"
 
 #. module: stock_valuation_report
 #: model:ir.ui.view,arch_db:stock_valuation_report.view_valuation_filter
@@ -179,23 +213,43 @@ msgid "Inventories Month"
 msgstr "盘点月份"
 
 #. module: stock_valuation_report
-#: code:addons/stock_valuation_report/wizard/wizard_stock_valuation_list.py:662
 #: model:ir.model.fields,field_description:stock_valuation_report.field_wizard_stock_valuation_line_inventory_balance_before_end_date
-#, python-format
 msgid "Inventory Balance Before End Date"
 msgstr "本期结存"
 
 #. module: stock_valuation_report
-#: code:addons/stock_valuation_report/wizard/wizard_stock_valuation_list.py:659
 #: model:ir.model.fields,field_description:stock_valuation_report.field_wizard_stock_valuation_line_inventory_balance_before_start_date
-#, python-format
 msgid "Inventory Balance Before Start Date"
 msgstr "上期结存"
+
+#. module: stock_valuation_report
+#: code:addons/stock_valuation_report/wizard/wizard_stock_valuation_list.py:650
+#: model:ir.model.fields,field_description:stock_valuation_report.field_wizard_stock_valuation_line_inventory_quantity_before_end_date
+#, python-format
+msgid "Inventory Quantity Before End Date"
+msgstr "本期结存"
+
+#. module: stock_valuation_report
+#: code:addons/stock_valuation_report/wizard/wizard_stock_valuation_list.py:647
+#: model:ir.model.fields,field_description:stock_valuation_report.field_wizard_stock_valuation_line_inventory_quantity_before_start_date
+#, python-format
+msgid "Inventory Quantity Before Start Date"
+msgstr "上期结存"
+
+#. module: stock_valuation_report
+#: model:ir.model.fields,help:stock_valuation_report.field_wizard_stock_valuation_line_inventory_quantity_before_end_date
+msgid "Inventory Quantity before end date."
+msgstr "本期结存."
 
 #. module: stock_valuation_report
 #: model:ir.model.fields,help:stock_valuation_report.field_wizard_stock_valuation_line_inventory_balance_before_end_date
 msgid "Inventory balance before end date."
 msgstr "本期结存."
+
+#. module: stock_valuation_report
+#: model:ir.model.fields,help:stock_valuation_report.field_wizard_stock_valuation_line_inventory_quantity_before_start_date
+msgid "Inventory quantity before start date."
+msgstr "上期结存."
 
 #. module: stock_valuation_report
 #: model:ir.model.fields,field_description:stock_valuation_report.field_stock_valuation___last_update
@@ -223,10 +277,10 @@ msgstr "最后更新时间"
 #: model:ir.model.fields,field_description:stock_valuation_report.field_wizard_stock_valuation_line_location_name
 #: model:ir.model.fields,field_description:stock_valuation_report.field_wizard_stock_valuation_list_location_id
 msgid "Location"
-msgstr "地点"
+msgstr "位置"
 
 #. module: stock_valuation_report
-#: code:addons/stock_valuation_report/wizard/wizard_stock_valuation_list.py:665
+#: code:addons/stock_valuation_report/wizard/wizard_stock_valuation_list.py:653
 #, python-format
 msgid "Location Name"
 msgstr "库位名称"
@@ -247,37 +301,37 @@ msgid "Manufacture order"
 msgstr "生产订单"
 
 #. module: stock_valuation_report
-#: code:addons/stock_valuation_report/models/stock_valuation.py:108
+#: code:addons/stock_valuation_report/models/stock_valuation.py:114
 #, python-format
 msgid "One Customer Only"
 msgstr "客户定向"
 
 #. module: stock_valuation_report
-#: code:addons/stock_valuation_report/models/stock_valuation.py:97
+#: code:addons/stock_valuation_report/models/stock_valuation.py:100
 #, python-format
 msgid "One Lot/Serial Number"
 msgstr "一个批次/序列号"
 
 #. module: stock_valuation_report
-#: code:addons/stock_valuation_report/models/stock_valuation.py:110
+#: code:addons/stock_valuation_report/models/stock_valuation.py:116
 #, python-format
 msgid "One MRP Order Only"
 msgstr "生产订单"
 
 #. module: stock_valuation_report
-#: code:addons/stock_valuation_report/models/stock_valuation.py:109
+#: code:addons/stock_valuation_report/models/stock_valuation.py:115
 #, python-format
 msgid "One Supplier Only"
 msgstr "供应商定向"
 
 #. module: stock_valuation_report
-#: code:addons/stock_valuation_report/models/stock_valuation.py:95
+#: code:addons/stock_valuation_report/models/stock_valuation.py:98
 #, python-format
 msgid "One product category"
 msgstr "一个产品类型"
 
 #. module: stock_valuation_report
-#: code:addons/stock_valuation_report/models/stock_valuation.py:94
+#: code:addons/stock_valuation_report/models/stock_valuation.py:97
 #, python-format
 msgid "One product only"
 msgstr "仅一个产品"
@@ -288,11 +342,21 @@ msgid "Order By"
 msgstr "定向盘点"
 
 #. module: stock_valuation_report
-#: code:addons/stock_valuation_report/wizard/wizard_stock_valuation_list.py:661
 #: model:ir.model.fields,field_description:stock_valuation_report.field_wizard_stock_valuation_line_outgoing_inventory_balance
-#, python-format
 msgid "Outgoing Inventory Balance"
 msgstr "本期支出"
+
+#. module: stock_valuation_report
+#: code:addons/stock_valuation_report/wizard/wizard_stock_valuation_list.py:649
+#: model:ir.model.fields,field_description:stock_valuation_report.field_wizard_stock_valuation_line_outgoing_inventory_quantity
+#, python-format
+msgid "Outgoing Inventory Quantity"
+msgstr "本期支出"
+
+#. module: stock_valuation_report
+#: model:ir.model.fields,help:stock_valuation_report.field_wizard_stock_valuation_line_outgoing_inventory_quantity
+msgid "Outgoing Inventory quantity."
+msgstr "本期支出."
 
 #. module: stock_valuation_report
 #: model:ir.model.fields,help:stock_valuation_report.field_wizard_stock_valuation_line_outgoing_inventory_balance
@@ -331,16 +395,14 @@ msgid "Product Category"
 msgstr "产品类别"
 
 #. module: stock_valuation_report
-#: code:addons/stock_valuation_report/wizard/wizard_stock_valuation_list.py:657
+#: code:addons/stock_valuation_report/wizard/wizard_stock_valuation_list.py:645
 #: model:ir.model.fields,field_description:stock_valuation_report.field_wizard_stock_valuation_line_product_name
 #, python-format
 msgid "Product Name"
 msgstr "产品名称"
 
 #. module: stock_valuation_report
-#: code:addons/stock_valuation_report/wizard/wizard_stock_valuation_list.py:663
 #: model:ir.model.fields,field_description:stock_valuation_report.field_wizard_stock_valuation_line_safety_stock_level
-#, python-format
 msgid "Safety Stock Level"
 msgstr "安全库存"
 
@@ -350,9 +412,21 @@ msgid "Safety Stock Level."
 msgstr "安全库存."
 
 #. module: stock_valuation_report
+#: code:addons/stock_valuation_report/wizard/wizard_stock_valuation_list.py:651
+#: model:ir.model.fields,field_description:stock_valuation_report.field_wizard_stock_valuation_line_safety_stock_quantity
+#, python-format
+msgid "Safety Stock Quantity"
+msgstr "安全库存"
+
+#. module: stock_valuation_report
+#: model:ir.model.fields,help:stock_valuation_report.field_wizard_stock_valuation_line_safety_stock_quantity
+msgid "Safety Stock Quantity."
+msgstr "安全库存."
+
+#. module: stock_valuation_report
 #: model:ir.ui.view,arch_db:stock_valuation_report.view_valuation_filter
 msgid "Search Valuation"
-msgstr "收发存统计"
+msgstr "收发存数量"
 
 #. module: stock_valuation_report
 #: model:ir.model.fields,help:stock_valuation_report.field_stock_valuation_partner_customer_id
@@ -360,29 +434,9 @@ msgid "Specify Customer."
 msgstr "客户."
 
 #. module: stock_valuation_report
-#: model:ir.model.fields,help:stock_valuation_report.field_stock_valuation_lot_id
-msgid "Specify Lot/Serial Number to focus your inventory on a particular Lot/Serial Number."
-msgstr "指定批次/序列号使你的存货有一个特定的批次/序列号。"
-
-#. module: stock_valuation_report
-#: model:ir.model.fields,help:stock_valuation_report.field_stock_valuation_package_id
-msgid "Specify Pack to focus your inventory on a particular Pack."
-msgstr "指定包装以作为特定包装来专注于你的库存。"
-
-#. module: stock_valuation_report
-#: model:ir.model.fields,help:stock_valuation_report.field_stock_valuation_category_id
-msgid "Specify Product Category to focus your inventory on a particularCategory."
-msgstr "Specify Product Category to focus your inventory on a particularCategory."
-
-#. module: stock_valuation_report
-#: model:ir.model.fields,help:stock_valuation_report.field_stock_valuation_product_id
-msgid "Specify Product to focus your inventory on a particular Product."
-msgstr "指定产品以作为特殊产品来专注于你的存货。"
-
-#. module: stock_valuation_report
 #: model:ir.model.fields,help:stock_valuation_report.field_stock_valuation_partner_supplier_id
 msgid "Specify Supplier."
-msgstr "Specify Supplier."
+msgstr "供应商."
 
 #. module: stock_valuation_report
 #: model:ir.model.fields,field_description:stock_valuation_report.field_stock_valuation_start_date
@@ -392,7 +446,7 @@ msgstr "开始日期"
 #. module: stock_valuation_report
 #: model:ir.ui.view,arch_db:stock_valuation_report.view_Valuation_form
 msgid "Start Valuation"
-msgstr "开始收发存统计"
+msgstr "开始收发存数量"
 
 #. module: stock_valuation_report
 #: model:ir.model.fields,help:stock_valuation_report.field_stock_valuation_start_date
@@ -409,13 +463,13 @@ msgstr "库位"
 #: model:ir.ui.menu,name:stock_valuation_report.menu_action_valuation_form
 #: model:ir.ui.view,arch_db:stock_valuation_report.view_valuation_tree
 msgid "Stock Valuation"
-msgstr "收发存统计"
+msgstr "收发存数量"
 
 #. module: stock_valuation_report
-#: code:addons/stock_valuation_report/models/stock_valuation.py:269
+#: code:addons/stock_valuation_report/models/stock_valuation.py:271
 #, python-format
 msgid "Stock Valuation List"
-msgstr "收发存统计列表"
+msgstr "收发存数量列表"
 
 #. module: stock_valuation_report
 #: model:res.groups,name:stock_valuation_report.group_stock_valuation_manager
@@ -435,13 +489,13 @@ msgstr "收发存用户"
 #. module: stock_valuation_report
 #: model:ir.model.fields,field_description:stock_valuation_report.field_wizard_stock_valuation_list_stock_valuation_lines
 msgid "Stock Valuation lines"
-msgstr "收发存统计列表行"
+msgstr "收发存数量列表行"
 
 #. module: stock_valuation_report
 #: model:ir.model.fields,field_description:stock_valuation_report.field_wizard_stock_valuation_line_stock_valuation_list_id
 #: model:ir.model.fields,help:stock_valuation_report.field_wizard_stock_valuation_line_stock_valuation_list_id
 msgid "Stock Valuation list"
-msgstr "收发存统计列表"
+msgstr "收发存数量列表"
 
 #. module: stock_valuation_report
 #: model:ir.model.fields,help:stock_valuation_report.field_wizard_stock_valuation_line_location_name
@@ -464,7 +518,7 @@ msgid "Total inventory balance before start date."
 msgstr "Total inventory balance before start date."
 
 #. module: stock_valuation_report
-#: code:addons/stock_valuation_report/wizard/wizard_stock_valuation_list.py:658
+#: code:addons/stock_valuation_report/wizard/wizard_stock_valuation_list.py:646
 #: model:ir.model.fields,field_description:stock_valuation_report.field_wizard_stock_valuation_line_uom_name
 #: model:ir.model.fields,help:stock_valuation_report.field_wizard_stock_valuation_line_uom_name
 #, python-format
@@ -474,7 +528,7 @@ msgstr "计量单位"
 #. module: stock_valuation_report
 #: model:ir.ui.view,arch_db:stock_valuation_report.view_Valuation_form
 msgid "Valuation Adjustment"
-msgstr "收发存统计"
+msgstr "收发存数量"
 
 #. module: stock_valuation_report
 #: model:ir.model.fields,field_description:stock_valuation_report.field_stock_valuation_name
@@ -489,8 +543,8 @@ msgstr "收发存日期."
 
 #. module: stock_valuation_report
 #: model:ir.model.fields,help:stock_valuation_report.field_wizard_stock_valuation_line_below_safety_stock
-msgid "Whether current inventory balance was in the safety stock level."
-msgstr "Whether current inventory balance was in the safety stock level."
+msgid "Whether current inventory balance was below safety stock level."
+msgstr "Whether current inventory balance was below safety stock level."
 
 #. module: stock_valuation_report
 #: code:addons/stock_valuation_report/models/stock_valuation.py:85
@@ -501,7 +555,7 @@ msgstr "You must define a warehouse for the company: %s."
 #. module: stock_valuation_report
 #: model:ir.ui.view,arch_db:stock_valuation_report.view_Valuation_form
 msgid "e.g. Monthly Valuation"
-msgstr "e.g. 每月收发存统计"
+msgstr "e.g. 每月收发存数量"
 
 #. module: stock_valuation_report
 #: model:ir.model,name:stock_valuation_report.model_stock_valuation

@@ -526,6 +526,8 @@ class WizardStockValuationList(models.TransientModel):
         for key, product in lines_before.items():
             if key not in lines.keys() and product["quantity"] != 0:
                 product_id = product['product']
+                safety_stock_quantity = self._get_safe_stock_inventory_amount(
+                    product_id, product['location'].id)
                 safety_stock_level = self._compute_safety_stock_level(
                     product['location'],
                     product_id,
@@ -546,6 +548,7 @@ class WizardStockValuationList(models.TransientModel):
                     "inventory_quantity_before_end_date": product["quantity"],
                     "inventory_balance_before_end_date":
                         product["inventory_value"],
+                    "safety_stock_quantity": safety_stock_quantity,
                     "safety_stock_level": safety_stock_level,
                     "below_safety_stock": 'N' if safety_stock_level > product[
                         "inventory_value"] else 'Y',
@@ -641,11 +644,11 @@ class WizardStockValuationList(models.TransientModel):
             0: _("Default Code"),
             1: _("Product Name"),
             2: _("Unit of Measure"),
-            3: _("Inventory Balance Before Start Date"),
-            4: _("Incoming Inventory Balance"),
-            5: _("Outgoing Inventory Balance"),
-            6: _("Inventory Balance Before End Date"),
-            7: _("Safety Stock Level"),
+            3: _("Inventory Quantity Before Start Date"),
+            4: _("Incoming Inventory Quantity"),
+            5: _("Outgoing Inventory Quantity"),
+            6: _("Inventory Quantity Before End Date"),
+            7: _("Safety Stock Quantity"),
             8: _("Below Safety Stock"),
             9: _("Location Name")
         }
@@ -731,42 +734,56 @@ class WizardStockValuationLine(models.TransientModel):
         default="",
         help='Internal Reference'
     )
-    inventory_balance_before_start_date = fields.Float(
-        'Inventory Balance Before Start Date',
+
+    inventory_quantity_before_start_date = fields.Float(
+        'Inventory Quantity Before Start Date',
         readonly=True,
         default=0,
-        help='Total inventory balance before start date.'
+        help='Inventory quantity before start date.'
     )
-    incoming_inventory_balance = fields.Float(
-        'Incoming Inventory Balance',
+
+    incoming_inventory_quantity = fields.Float(
+        'Incoming Inventory Quantity',
         readonly=True,
         default=0,
-        help='Incoming inventory balance between start date and end date.'
+        help='Incoming Inventory Quantity.'
     )
-    outgoing_inventory_balance = fields.Float(
-        'Outgoing Inventory Balance',
+
+    outgoing_inventory_quantity = fields.Float(
+        'Outgoing Inventory Quantity',
         readonly=True,
         default=0,
-        help='Outgoing inventory balance between start date and end date.'
+        help='Outgoing Inventory quantity.'
     )
-    inventory_balance_before_end_date = fields.Float(
-        'Inventory Balance Before End Date',
+
+    inventory_quantity_before_end_date = fields.Float(
+        'Inventory Quantity Before End Date',
         readonly=True,
         default=0,
-        help='Inventory balance before end date.'
+        help='Inventory Quantity before end date.'
     )
+
+    safety_stock_quantity = fields.Float(
+        'Safety Stock Quantity',
+        readonly=True,
+        default=0,
+        help='Safety Stock Quantity.'
+    )
+
     safety_stock_level = fields.Float(
         'Safety Stock Level',
         readonly=True,
         default=0,
         help='Safety Stock Level.'
     )
+
     below_safety_stock = fields.Char(
         'Below Safety Stock?',
         readonly=True,
         default="",
         help='Whether current inventory balance was below safety stock level.'
     )
+
     location_name = fields.Char(
         'Location',
         readonly=True,
