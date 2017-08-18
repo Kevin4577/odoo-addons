@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-23 07:30+0000\n"
-"PO-Revision-Date: 2017-06-23 07:30+0000\n"
+"POT-Creation-Date: 2017-08-18 03:05+0000\n"
+"PO-Revision-Date: 2017-08-18 03:05+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -43,13 +43,29 @@ msgstr "外箱尺寸"
 #: model:ir.model.fields,field_description:stock_packaging_lot.field_stock_pack_operation_lot_gross_weight
 #: model:ir.model.fields,field_description:stock_packaging_lot.field_stock_production_lot_gross_weight
 msgid "Gross Weight"
-msgstr "毛重小计"
+msgstr "毛重"
 
 #. module: stock_packaging_lot
 #: model:ir.model.fields,field_description:stock_packaging_lot.field_stock_pack_operation_lot_gross_by_carton
 #: model:ir.model.fields,field_description:stock_packaging_lot.field_stock_production_lot_gross_by_carton
 msgid "Gross by Carton"
 msgstr "每箱毛重"
+
+#. module: stock_packaging_lot
+#: model:ir.model,name:stock_packaging_lot.model_stock_production_lot
+msgid "Lot/Serial"
+msgstr "批次/序列号"
+
+#. module: stock_packaging_lot
+#: model:ir.model,name:stock_packaging_lot.model_stock_pack_operation_lot
+msgid "Lot/Serial number for pack ops"
+msgstr "打包作业的批次/序列号码"
+
+#. module: stock_packaging_lot
+#: model:ir.model.fields,field_description:stock_packaging_lot.field_stock_pack_operation_lot_mixed_loading
+#: model:ir.model.fields,field_description:stock_packaging_lot.field_stock_production_lot_mixed_loading
+msgid "Mixed Loading?"
+msgstr "Mixed Loading?"
 
 #. module: stock_packaging_lot
 #: model:ir.model.fields,field_description:stock_packaging_lot.field_stock_pack_operation_lot_net_weight
@@ -80,6 +96,11 @@ msgstr "每箱数量"
 #: model:ir.model.fields,field_description:stock_packaging_lot.field_stock_production_lot_shipping_mark
 msgid "Shipping Marks"
 msgstr "唛头"
+
+#. module: stock_packaging_lot
+#: model:ir.model,name:stock_packaging_lot.model_stock_picking
+msgid "Transfer"
+msgstr "调拨"
 
 #. module: stock_packaging_lot
 #: model:ir.model.fields,field_description:stock_packaging_lot.field_stock_pack_operation_lot_volume
