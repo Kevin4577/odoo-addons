@@ -143,4 +143,5 @@ class TestInvoiceReference(common.TransactionCase):
 
     def test_stock_picking_invoice(self):
         """Test fields view get method for invisible hs name"""
-        self.sale_order.picking_ids[0].invoice_ids.ids
+        self.assertNotEqual(self.sale_order.picking_ids[0].invoice_ids.ids,
+                            False)
