@@ -17,15 +17,15 @@ class StockPicking(models.Model):
     invoice_ids = fields.Many2many(
         "account.invoice",
         'Invoices',
-        compute="_get_invoiced",
+        compute="_compute_invoiced",
         readonly=True,
         copy=False)
 
     @api.multi
-    def _get_invoiced(self):
+    def _compute_invoiced(self):
         """
         Get available invoices of related sale order
-        :return: 
+        :return:
         """
         for order in self:
             invoice_ids = order.sale_id.invoice_ids
