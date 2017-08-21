@@ -106,10 +106,10 @@ class WizardStockValuationList(models.TransientModel):
         if self._context.get('partner_customer_id', False):
             stock_history_ids = []
             for stock_history_line in stock_history:
-                if stock_history_line.move_id.picking_id:
-                    if stock_history_line.move_id.picking_id. \
+                if stock_history_line.sudo().move_id.picking_id:
+                    if stock_history_line.sudo().move_id.picking_id. \
                             picking_type_id.code == 'outgoing':
-                        if stock_history_line.move_id.\
+                        if stock_history_line.sudo().move_id.\
                                 picking_id.partner_id.id == \
                                 self._context.get('partner_customer_id'):
                             stock_history_ids.append(stock_history_line.id)
@@ -128,10 +128,10 @@ class WizardStockValuationList(models.TransientModel):
         if self._context.get('partner_vendor_id', False):
             stock_history_ids = []
             for stock_history_line in stock_history:
-                if stock_history_line.move_id.picking_id:
-                    if stock_history_line.move_id.picking_id. \
+                if stock_history_line.sudo().move_id.picking_id:
+                    if stock_history_line.sudo().move_id.picking_id. \
                             picking_type_id.code == 'incoming':
-                        if stock_history_line.\
+                        if stock_history_line.sudo().\
                                 move_id.picking_id.partner_id.id == \
                                 self._context.get('partner_vendor_id'):
                             stock_history_ids.append(stock_history_line.id)
@@ -151,8 +151,9 @@ class WizardStockValuationList(models.TransientModel):
             stock_history_ids = []
             for stock_history_line in stock_history:
                 manufacture_order = \
-                    stock_history_line.move_id.raw_material_production_id or \
-                    stock_history_line.move_id.production_id
+                    stock_history_line.sudo().\
+                        move_id.raw_material_production_id or \
+                    stock_history_line.sudo().move_id.production_id
                 if manufacture_order and manufacture_order.id == \
                         self._context.get('involved_mrp_order'):
                     stock_history_ids.append(stock_history_line.id)

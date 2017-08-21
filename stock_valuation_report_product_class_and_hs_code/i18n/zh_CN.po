@@ -185,7 +185,7 @@ msgstr "安全库存"
 #. module: stock_valuation_report_product_class_and_hs_code
 #: model:ir.actions.report.xml,name:stock_valuation_report_product_class_and_hs_code.report_stock_valuation_inherit
 msgid "Stock Valuation Report"
-msgstr "进销存金额报表"
+msgstr "收发存统计"
 
 #. module: stock_valuation_report_product_class_and_hs_code
 #: code:addons/stock_valuation_report_product_class_and_hs_code/wizard/wizard_stock_valuation_list.py:119
