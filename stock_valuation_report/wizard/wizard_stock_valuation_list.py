@@ -152,7 +152,7 @@ class WizardStockValuationList(models.TransientModel):
             for stock_history_line in stock_history:
                 manufacture_order = \
                     stock_history_line.sudo().\
-                        move_id.raw_material_production_id or \
+                    move_id.raw_material_production_id or \
                     stock_history_line.sudo().move_id.production_id
                 if manufacture_order and manufacture_order.id == \
                         self._context.get('involved_mrp_order'):
