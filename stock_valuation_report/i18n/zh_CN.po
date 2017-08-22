@@ -479,7 +479,7 @@ msgstr "收发存经理"
 #. module: stock_valuation_report
 #: model:ir.actions.report.xml,name:stock_valuation_report.report_stock_valuation
 msgid "Stock Valuation Report"
-msgstr "进销存金额报表"
+msgstr "收发存统计"
 
 #. module: stock_valuation_report
 #: model:res.groups,name:stock_valuation_report.group_stock_valuation_user
