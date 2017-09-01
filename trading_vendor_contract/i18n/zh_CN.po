@@ -24,5 +24,5 @@ msgstr "请检查是否所有采购单来自一个供应商。"
 #. module: trading_vendor_contract
 #: model:ir.actions.report.xml,name:trading_vendor_contract.trading_vendor_contract_py3o
 msgid "Trading Vendor Contract"
-msgstr "美金订单"
+msgstr "PURCHASE CONTRACT"
 
