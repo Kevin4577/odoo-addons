@@ -6,8 +6,8 @@
 Stock Picking Invoice Reference
 ===============================
 
-The new module 'stock_picking_invoice_reference' specifics the invoice
-reference for each delivery orders.
+The new module 'stock_picking_invoice_reference' specifies the invoice
+reference for each delivery order.
 
 Bug Tracker
 ===========

@@ -6,8 +6,8 @@
     'name': 'Stock Picking Invoice Reference',
     'version': '10.0.1.0.0',
     'category': 'Stock',
-    'summary': """The new module 'stock_picking_invoice_reference' specifics
-    the invoice reference for each delivery orders.""",
+    'summary': """The new module 'stock_picking_invoice_reference' specifies 
+    the invoice reference for each delivery order.""",
     'author': "Elico Corp",
     'website': 'www.elico-corp.com',
     'license': 'AGPL-3',
