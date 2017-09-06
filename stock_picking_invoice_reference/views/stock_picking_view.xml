@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="stock_picking_form_view_inherit_invoice_reference" model="ir.ui.view">
+        <field name="name">product.template.only.form.inherit.invoice.reference</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <field name="location_dest_id" position="after">
+                <field name="invoice_ids" invisible="1"/>
+                <field name="invoice_id"
+                       attrs="{'invisible': [('sale_id', '=', False)],
+                               'required': [('sale_id', '=', True)]}"
+                       options="{'no_create': True}"
+                       domain="[('id', 'in', invoice_ids and invoice_ids[0] and invoice_ids[0][2] or False)]"/>
+            </field>
+        </field>
+    </record>
+</odoo>
