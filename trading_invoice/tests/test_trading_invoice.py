@@ -136,6 +136,12 @@ class TestTradingInvoice(common.TransactionCase):
             'advance_payment_method': 'delivered',
             'product_id': self.advance_product.id,
         }).create_invoices()
+        self.sale_order.picking_ids.write({
+            'invoice_id': self.sale_order.invoice_ids[0].id
+        })
+
+    def test_get_supplier(self):
+        self.trading_invoice_model.get_supplier(self.env.user.company_id)
 
     def test_get_order_lines(self):
         self.lines = self.trading_invoice_model.\
@@ -150,8 +156,8 @@ class TestTradingInvoice(common.TransactionCase):
     def test_get_product_lot_list_per_sale_order(self):
         self.order = self.trading_invoice_model.\
             get_product_lot_list_per_sale_order(self.sale_order.picking_ids)
-        self.assertEqual(self.order['location_id'],
-                         self.sale_order.picking_ids.location_id)
+        self.assertEqual(self.order['warehouse'],
+                         self.sale_order.warehouse_id.name)
         self.assertEqual(self.order['sum_carton_qty'], self.lot1.carton_qty)
 
     def test_get_product_order_list_with_qty(self):
@@ -178,15 +184,18 @@ class TestTradingInvoice(common.TransactionCase):
         self.assertEqual(self.lines_per_invoice['sum_amount'],
                          self.sale_order.amount_total)
         self.assertEqual(self.lines_per_invoice['ship_to'],
-                         self.shipping_id.ship_to)
+                         self.sale_order.invoice_ids.
+                         partner_shipping_id.country_id.name)
+
+    def test_get_date_invoice(self):
+        self.lines_per_invoice = self.trading_invoice_model. \
+            get_date_invoice(self.sale_order.invoice_ids)
 
     def test_get_detail_lot_list_per_invoice(self):
         self.detail_lot_list = self.trading_invoice_model.\
             get_detail_lot_list_per_invoice(self.sale_order.invoice_ids)
         self.assertEqual(self.detail_lot_list['total_meas'],
                          self.lot1.volume)
-        self.assertEqual(self.detail_lot_list['ship_info_id'],
-                         self.shipping_id)
         self.assertEqual(self.detail_lot_list['package_list'][0]['pallet_sum'],
                          self.lot1.carton_qty)
 
@@ -203,12 +212,12 @@ class TestTradingInvoice(common.TransactionCase):
 
     def test_get_package_name_per_package_list(self):
         self.package_list = self.trading_invoice_model.\
-            get_package_name_per_package_list(self.sale_order.picking_ids)
+            get_package_name_per_package_list(self.sale_order.invoice_ids)
         self.assertEqual(self.package_list[0]['list'][0], self.pack1.name)
         self.assertEqual(self.package_list[0]['name'], self.packaging_id.name)
 
     def test_get_pack_lot_list_per_package_type(self):
         self.pack_lot_list = self.trading_invoice_model.\
-            get_pack_lot_list_per_package_type(self.sale_order.picking_ids)
+            get_pack_lot_list_per_package_type(self.sale_order.invoice_ids)
         self.assertEqual(self.pack_lot_list['partner_shipping_id'],
-                         self.shipping_id.ship_to)
+                         self.sale_order.invoice_ids.partner_shipping_id)
