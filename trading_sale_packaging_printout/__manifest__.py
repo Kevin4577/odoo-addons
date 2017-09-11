@@ -5,7 +5,7 @@
 {
     'name': 'Trading Sale Packaging Printout',
     'version': '10.0.1.0.0',
-    'category': 'Stock',
+    'category': 'Accounting',
     'summary': """Trading Sale Packaging Printout for each
     sale orders (report_py3o).""",
     'author': "Elico Corp",
