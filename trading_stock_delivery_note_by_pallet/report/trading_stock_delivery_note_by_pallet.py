@@ -19,13 +19,10 @@ def render_report_with_data(report_xml_id, data):
     """This function get the data from multi stock picking orders,
     and sum the product quantity and lot detail, in order to render the ods
     template with necessary data."""
-    stock_picking_list = data['objects']
-    if len(stock_picking_list.mapped('partner_id').ids) > 1:
-        raise ValidationError(_('Please check whether all delivery '
-                                'orders period belong to one customer'))
-    base_invoice_export_obj = stock_picking_list.env['trading.invoice']
-    py3o_multi_sheet_obj = stock_picking_list.env['report.py3o.multisheet']
-    current_report = stock_picking_list.env.ref(
+    account_invoice = data['objects']
+    base_invoice_export_obj = account_invoice.env['trading.invoice']
+    py3o_multi_sheet_obj = account_invoice.env['report.py3o.multisheet']
+    current_report = account_invoice.env.ref(
         'trading_stock_delivery_note_by_pallet.'
         'trading_stock_delivery_note_by_pallet_py3o')
 
@@ -54,10 +51,15 @@ def render_report_with_data(report_xml_id, data):
         '${%s.sum_qty_delivery}',
         '${%s.pallet_sum}'
     ]
-    if not stock_picking_list.filtered(lambda stock_picking:
-                                       not stock_picking.sale_id):
+    stock_picking_obj = account_invoice.env['stock.picking']
+    stock_picking_list = \
+        stock_picking_obj.search([('invoice_id', '=', account_invoice.id)])
+    if not stock_picking_list:
+        raise ValidationError(_('Please specific delivery orders '
+                                'for this account invoice.'))
+    if account_invoice.invoice_line_ids.mapped('sale_line_ids'):
         lines_per_sheet = base_invoice_export_obj.\
-            get_package_name_per_package_list(stock_picking_list)
+            get_package_name_per_package_list(account_invoice)
         py3o_multi_sheet_obj.template_sheet_with_custom_line(
             head_end_line,
             lines_per_sheet,
@@ -67,7 +69,7 @@ def render_report_with_data(report_xml_id, data):
             template_base_path
         )
         package_list = base_invoice_export_obj.\
-            get_pack_lot_list_per_package_type(stock_picking_list)
+            get_pack_lot_list_per_package_type(account_invoice)
         index2 = 0
         for index1, package in enumerate(package_list['package_list']):
             pack_lot_lines_with_same_type = package[
@@ -80,5 +82,5 @@ def render_report_with_data(report_xml_id, data):
             'package_no': package_list['package_no']
         })
     else:
-        raise ValidationError(_('Please check whether this stock picking '
+        raise ValidationError(_('Please check whether this account invoice '
                                 'was generated from sale order.'))
