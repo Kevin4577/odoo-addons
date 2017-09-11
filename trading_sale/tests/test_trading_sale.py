@@ -151,8 +151,8 @@ class TestTradingSale(common.TransactionCase):
             'invoice_id': self.sale_order.invoice_ids[0].id
         })
 
-    def test_get_supplier(self):
-        self.trading_sale.get_supplier(self.env.user.company_id)
+    def test_get_customer(self):
+        self.trading_sale.get_customer(self.env.user.company_id)
 
     def test_get_product_hs_code_list(self):
         """This function should check the filter reporting element of hs
