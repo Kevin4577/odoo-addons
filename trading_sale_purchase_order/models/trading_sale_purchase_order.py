@@ -24,7 +24,7 @@ def change_ctx(report_xml_id, ctx):
     if picking.sale_id:
         data['so'] = picking.sale_id
         data['sum_qty'], data['sum_amount'], data['product_lines'] =\
-            trading_sale_obj.get_product_sale_list(picking.sale_id)
+            trading_sale_obj.get_product_purchase_list(picking)
         data['date'] = datetime.datetime.\
             strptime(picking.min_date, DEFAULT_SERVER_DATETIME_FORMAT
                      ) - relativedelta(days=30)
