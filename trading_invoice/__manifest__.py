@@ -15,6 +15,7 @@
         "sale_product_hs_code_china",
         "product_class",
         "stock_picking_invoice_reference",
+        "sale_order_dates"
     ],
     'data': [
         'security/ir.model.access.csv'
