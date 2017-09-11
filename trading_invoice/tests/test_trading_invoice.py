@@ -140,8 +140,8 @@ class TestTradingInvoice(common.TransactionCase):
             'invoice_id': self.sale_order.invoice_ids[0].id
         })
 
-    def test_get_supplier(self):
-        self.trading_invoice_model.get_supplier(self.env.user.company_id)
+    def test_get_customer(self):
+        self.trading_invoice_model.get_customer(self.env.user.company_id)
 
     def test_get_order_lines(self):
         self.lines = self.trading_invoice_model.\

@@ -32,7 +32,7 @@ def render_template_with_data(report_xml_id, ctx):
                 ) or False
             }
         )
-        ctx.update(base_invoice_export_obj.get_supplier(ctx['company']))
+        ctx.update(base_invoice_export_obj.get_customer(ctx['company']))
     else:
         raise ValidationError(_('Please check whether this account invoice '
                                 'was generated from sale order.'))

@@ -18,7 +18,7 @@ def render_template_with_data(report_xml_id, ctx):
     if account_invoice.invoice_line_ids:
         ctx.update(base_invoice_export_obj.get_order_lines_per_invoice
                    (account_invoice))
-        ctx.update(base_invoice_export_obj.get_supplier(
+        ctx.update(base_invoice_export_obj.get_customer(
             account_invoice.company_id))
         ctx.update(base_invoice_export_obj.get_date_invoice(account_invoice))
     else:
