@@ -11,25 +11,28 @@ from odoo.addons.report_py3o.models import py3o_report
                   'trading_sale_commercial_invoice_py3o'
 )
 def change_ctx(report_xml_id, ctx):
-    stock_picking = ctx['objects']
-    trading_sale_obj = stock_picking.env['trading.sale']
+    account_invoice = ctx['objects']
+    trading_sale_obj = account_invoice.env['trading.sale']
+    sale_order_lines = account_invoice.invoice_line_ids.mapped('sale_line_ids')
+    sale_order_list = sale_order_lines.mapped('order_id')
+    stock_picking_obj = account_invoice.env['stock.picking']
+    stock_picking_list = \
+        stock_picking_obj.search([('invoice_id', '=', account_invoice.id)])
     data = {}
-    if stock_picking.sale_id:
-        data['so'] = stock_picking.sale_id
+    if not stock_picking_list:
+        raise ValidationError(_('Please specific delivery orders '
+                                'for this account invoice.'))
+    if sale_order_list:
         data['sum_qty'], data['sum_amount'], data['product_lines'] = \
             trading_sale_obj. \
-            get_product_sale_list(stock_picking.sale_id)
+            get_product_sale_list(account_invoice)
         data['pallet_sum'], gross_weight, net_weight, volume, \
             package_list = \
             trading_sale_obj. \
-            get_product_stock_list(stock_picking)
-        data['ship_from'], data['ship_to'], data['ship_by'] = \
-            [stock_picking.ship_info_id.ship_from.country_id.name,
-             stock_picking.ship_info_id.ship_to.country_id.name,
-             stock_picking.ship_info_id.ship_by
-             ] if stock_picking.custom_check else [False, False, False]
+            get_product_stock_list(account_invoice)
+        ctx['data'].update(trading_sale_obj.get_date_invoice(account_invoice))
         ctx['data'].update(data)
     else:
-        raise ValidationError(_('Please check whether this stock '
-                                'picking was generated from sale'
+        raise ValidationError(_('Please check whether this account '
+                                'invoice was generated from sale'
                                 ' order.'))
