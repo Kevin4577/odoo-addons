@@ -17,7 +17,7 @@ class TradingInvoice(models.Model):
     @api.multi
     def get_customer(self, company):
         """
-        This function get the supplier information of sale order
+        This function get the customer information of sale order
         :param sale_order:
         :return:
         """
