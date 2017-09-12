@@ -20,7 +20,7 @@ def change_ctx(report_xml_id, ctx):
         stock_picking_obj.search([('invoice_id', '=', account_invoice.id)])
     data = {}
     if not stock_picking_list:
-        raise ValidationError(_('Please specific delivery orders '
+        raise ValidationError(_('Please specify delivery orders '
                                 'for this account invoice.'))
     if sale_order_list:
         data['sum_qty'], data['sum_amount'], data['product_lines'] = \
