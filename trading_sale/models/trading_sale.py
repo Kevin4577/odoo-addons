@@ -135,10 +135,12 @@ class TradingSale(models.Model):
         return production_lines
 
     @api.multi
-    def get_product_purchase_list(self, sp):
+    def get_product_sale_list_for_purchase(self, sp):
         """This function would filter order lines of sale order group by the
         same hs code of products inside those line. Quantity and price total
-        of lines per hs code would be summed.
+        of lines per hs code would be summed. This report would be provided 
+        for the purchase department to make purchase order base on the sale 
+        order. 
         Unit price = summary of price
         total / summary of quantity"""
         product_pricelist_sample = sp.sale_id.pricelist_id.currency_id.symbol

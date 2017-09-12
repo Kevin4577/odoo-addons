@@ -184,14 +184,14 @@ class TestTradingSale(common.TransactionCase):
         self.sale_order.order_line[0].product_id.product_hs_code_id = False
         self.trading_sale.get_product_sale_list(self.sale_order.invoice_ids)
 
-    def test_get_product_purchase_list(self):
+    def test_get_product_sale_list_for_purchase(self):
         """This function should check the filter order lines of
         sale order group by the same hs code of products inside those line.
         Quantity and price total of lines per hs code would be summed """
-        self.trading_sale.get_product_purchase_list(
+        self.trading_sale.get_product_sale_list_for_purchase(
             self.sale_order.picking_ids)
         self.sale_order.order_line[0].product_id.product_hs_code_id = False
-        self.trading_sale.get_product_purchase_list(
+        self.trading_sale.get_product_sale_list_for_purchase(
             self.sale_order.picking_ids)
 
     def test_get_product_stock_list(self):
