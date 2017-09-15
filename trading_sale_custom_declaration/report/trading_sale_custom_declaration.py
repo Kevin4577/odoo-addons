@@ -8,11 +8,11 @@ import math
 from odoo.addons.report_py3o.models import py3o_report
 
 HEAD_END_LINE = 20
-LINES_PER_SHEET = 8
+LINES_PER_SHEET = 5
 ATTRIBUTE_NUM_PER_LINE = 9
 ATTRIBUTE_PER_LINE = ['${data.line%d.index}', '${data.line%d.hs_code.hs_code}',
                       '${data.line%d.hs_code.name}', '${data.line%d.qty}',
-                      '${data.ship_to}', '${data.ship_from}',
+                      '${data.ship_to}', '',
                       '${data.line%d.unit_price}', '${data.line%d.total}',
                       '${data.line%d.pricelist}',
                       '${data.line%d.hs_code.cn_name}',
@@ -58,12 +58,12 @@ def change_ctx(report_xml_id, ctx):
         sale order of specific stock picking, and sum the product quantity
         and price group by same hs code, in order to render the ods template
         with necessary data."""
-    picking = ctx['objects']
+    account_invoice = ctx['objects']
     data = {}
-    current_report = picking.env.ref('trading_sale_custom_declaration.'
-                                     'trading_sale_custom_declaration_py3o'
-                                     )
-    py3o_multi_sheet_obj = picking.env['report.py3o.multisheet']
+    current_report = account_invoice.env.ref(
+        'trading_sale_custom_declaration.'
+        'trading_sale_custom_declaration_py3o')
+    py3o_multi_sheet_obj = account_invoice.env['report.py3o.multisheet']
 
     template_new = current_report.py3o_template_fallback_base
     tmp_folder_name = py3o_multi_sheet_obj._get_tmp_folder()
@@ -75,14 +75,22 @@ def change_ctx(report_xml_id, ctx):
 
     template_base = current_report.py3o_template_fallback_base
     template_base_path = _get_related_path(template_base)
-    trading_sale_obj = picking.env['trading.sale']
-    if picking.sale_id:
-        data['so'] = picking.sale_id
+    trading_sale_obj = account_invoice.env['trading.sale']
+    sale_order_lines = account_invoice.invoice_line_ids.mapped('sale_line_ids')
+    sale_order_list = sale_order_lines.mapped('order_id')
+    stock_picking_obj = account_invoice.env['stock.picking']
+    stock_picking_list = \
+        stock_picking_obj.search([('invoice_id', '=', account_invoice.id)])
+    if not stock_picking_list:
+        raise ValidationError(_('Please specific delivery orders '
+                                'for this account invoice.'))
+    if sale_order_list:
+        data['incoterms_id'] = account_invoice.incoterms_id
         data['pallet_sum'], gw_sum_witout_package, data['nw_sum'], \
             volume, package_list = \
-            trading_sale_obj.get_product_stock_list(picking)
+            trading_sale_obj.get_product_stock_list(account_invoice)
         product_list = trading_sale_obj.\
-            get_product_sale_list_with_pricelist(picking.sale_id)
+            get_product_sale_list_with_pricelist(account_invoice)
         sheet_lines_data = {}
         lines_per_lines = int(math.ceil(
             len(ATTRIBUTE_PER_LINE) / float(ATTRIBUTE_NUM_PER_LINE
@@ -110,15 +118,13 @@ def change_ctx(report_xml_id, ctx):
             template_new_path
         )
         package_qty, total_package_gw, package_meas = \
-            trading_sale_obj.get_package_sum(picking)
+            trading_sale_obj.get_package_sum(account_invoice)
         data['gw_sum'] = gw_sum_witout_package + total_package_gw
-        data['ship_from'], data['ship_to'], data['ship_by'] =\
-            [picking.ship_info_id.ship_from.country_id.name,
-             picking.ship_info_id.ship_to.country_id.name,
-             picking.ship_info_id.ship_by
-             ] if picking.custom_check else[False, False, False]
+        data['ship_to'] = \
+            account_invoice.partner_shipping_id.country_id and \
+            account_invoice.partner_shipping_id.country_id.name or ''
         ctx['data'].update(data)
     else:
-        raise ValidationError(_('Please check whether this stock '
-                                'picking was generated from'
+        raise ValidationError(_('Please check whether this account '
+                                'invoice was generated from'
                                 ' sale order.'))

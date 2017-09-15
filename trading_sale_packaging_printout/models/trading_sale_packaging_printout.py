@@ -17,32 +17,30 @@ def change_ctx(report_xml_id, ctx):
         grow weight and meas of those package,
         in order to render the ods template """
     data = {}
-    picking = ctx['objects']
-    trading_sale_obj = picking.env['trading.sale']
-    available_picking_state = ['assigned', 'partially_available',
-                               'done']
-    if picking.state not in available_picking_state:
-        raise ValidationError(_('Please first confirm your stock '
-                                'picking state.'))
-    if picking.sale_id:
-        data['so'] = picking.sale_id
+    account_invoice = ctx['objects']
+    trading_sale_obj = account_invoice.env['trading.sale']
+    sale_order_lines = account_invoice.invoice_line_ids.mapped('sale_line_ids')
+    sale_order_list = sale_order_lines.mapped('order_id')
+    stock_picking_obj = account_invoice.env['stock.picking']
+    stock_picking_list = \
+        stock_picking_obj.search([('invoice_id', '=', account_invoice.id)])
+    if not stock_picking_list:
+        raise ValidationError(_('Please specific delivery orders '
+                                'for this account invoice.'))
+    if sale_order_list:
         data['pallet_sum'], gw_sum_witout_package, data['nw_sum'],\
             meas_sum_witout_package, data['product_lines'] =\
-            trading_sale_obj.get_product_stock_list(picking)
+            trading_sale_obj.get_product_stock_list(account_invoice)
         data['qty_package'], data['total_package_gw'],\
             data['total_package_meas'] =\
-            trading_sale_obj.get_package_sum(picking)
+            trading_sale_obj.get_package_sum(account_invoice)
         data['gw_sum'] =\
             gw_sum_witout_package + data['total_package_gw']
         data['meas_sum'] =\
             meas_sum_witout_package + data['total_package_meas']
-        data['ship_from'], data['ship_to'], data['ship_by'] =\
-            [picking.ship_info_id.ship_from.country_id.name,
-             picking.ship_info_id.ship_to.country_id.name,
-             picking.ship_info_id.ship_by
-             ] if picking.custom_check else [False, False, False]
+        ctx['data'].update(trading_sale_obj.get_date_invoice(account_invoice))
         ctx['data'].update(data)
     else:
-        raise ValidationError(_('Please check whether this stock '
-                                'picking was generated from sale '
+        raise ValidationError(_('Please check whether this account '
+                                'invoice was generated from sale '
                                 'order.'))

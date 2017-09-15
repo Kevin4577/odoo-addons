@@ -18,8 +18,8 @@ msgstr ""
 #. module: trading_sale_packaging_printout
 #: code:addons/trading_sale_packaging_printout/models/trading_sale_packaging_printout.py:46
 #, python-format
-msgid "Please check whether this stock picking was generated from sale order."
-msgstr "确认出库单由销售单生成."
+msgid "Please check whether this account invoice was generated from sale order."
+msgstr "确认发票由销售单生成."
 
 #. module: trading_sale_packaging_printout
 #: code:addons/trading_sale_packaging_printout/models/trading_sale_packaging_printout.py:25

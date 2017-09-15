@@ -18,8 +18,8 @@ msgstr ""
 #. module: trading_sale_commercial_invoice
 #: code:addons/trading_sale_commercial_invoice/report/trading_sale_commercial_invoice.py:33
 #, python-format
-msgid "Please check whether this stock picking was generated from sale order."
-msgstr "请检查是否此调拨单是由销售订单生成."
+msgid "Please check whether this account invoice was generated from sale order."
+msgstr "请检查是否此发票是由销售订单生成."
 
 #. module: trading_sale_commercial_invoice
 #: model:ir.actions.report.xml,name:trading_sale_commercial_invoice.trading_sale_commercial_invoice_py3o
