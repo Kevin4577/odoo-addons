@@ -19,6 +19,20 @@ def render_template_with_data(report_xml_id, ctx):
     if sale_order.order_line:
         ctx.update(base_invoice_export_obj.get_invoice_lines_per_invoice
                    (sale_order))
+        ctx.update(
+            {
+                'confirmation_date':
+                    sale_order.confirmation_date and
+                    base_invoice_export_obj.
+                get_date(sale_order.confirmation_date) or False,
+                'requested_date':
+                    sale_order.requested_date and
+                    base_invoice_export_obj.get_date(
+                        sale_order.requested_date
+                ) or False
+            }
+        )
+        ctx.update(base_invoice_export_obj.get_customer(ctx['company']))
     else:
         raise ValidationError(_('Please check whether this account invoice '
                                 'was generated from sale order.'))

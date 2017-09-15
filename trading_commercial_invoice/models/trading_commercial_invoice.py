@@ -14,15 +14,13 @@ def render_template_with_data(report_xml_id, ctx):
     quantity and unit price, in order to render the ods template
     with necessary data."""
     account_invoice = ctx['objects']
-    sale_order_list = account_invoice.invoice_line_ids.\
-        mapped('sale_line_ids').mapped('order_id')
-    if not sale_order_list.picking_ids:
-        raise ValidationError(_('Please create the delivery order for the'
-                                ' related sale order of this invoice.'))
     base_invoice_export_obj = account_invoice.env['trading.invoice']
     if account_invoice.invoice_line_ids:
         ctx.update(base_invoice_export_obj.get_order_lines_per_invoice
                    (account_invoice))
+        ctx.update(base_invoice_export_obj.get_customer(
+            account_invoice.company_id))
+        ctx.update(base_invoice_export_obj.get_date_invoice(account_invoice))
     else:
         raise ValidationError(_('Please check whether this account invoice'
                                 ' was generated from sale order.'))

@@ -24,8 +24,8 @@ msgstr "请检查所有交货单期间是否属于一个客户"
 #. module: trading_stock_delivery_note_by_pallet
 #: code:addons/trading_stock_delivery_note_by_pallet/report/trading_stock_delivery_note_by_pallet.py:78
 #, python-format
-msgid "Please check whether this stock picking was generated from sale order."
-msgstr "请检查发货单是否由销售单生成。"
+msgid "Please check whether this account invoice was generated from sale order."
+msgstr "请检查发票是否由销售单生成。"
 
 #. module: trading_stock_delivery_note_by_pallet
 #: model:ir.actions.report.xml,name:trading_stock_delivery_note_by_pallet.trading_stock_delivery_note_by_pallet_py3o

@@ -15,11 +15,18 @@ def render_template_with_data(report_xml_id, data):
     and net weight, in order to render the ods template with necessary data."""
     account_invoice = data['objects']
     base_invoice_export_obj = account_invoice.env['trading.invoice']
+    stock_picking_obj = account_invoice.env['stock.picking']
+    stock_picking_list = \
+        stock_picking_obj.search([('invoice_id', '=', account_invoice.id)])
+    if not stock_picking_list:
+        raise ValidationError(_('Please specific delivery orders '
+                                'for this account invoice.'))
     if account_invoice and account_invoice.invoice_line_ids:
         data.update(
             base_invoice_export_obj.get_detail_lot_list_per_invoice(
                 account_invoice)
         )
+        data.update(base_invoice_export_obj.get_date_invoice(account_invoice))
     else:
-        raise ValidationError(_('Please check whether this stock picking was'
+        raise ValidationError(_('Please check whether this account invoice was'
                                 ' generated from sale order.'))
