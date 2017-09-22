@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-14 12:47+0000\n"
-"PO-Revision-Date: 2017-07-14 12:47+0000\n"
+"POT-Creation-Date: 2017-09-22 03:53+0000\n"
+"PO-Revision-Date: 2017-09-22 03:53+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -46,6 +46,21 @@ msgid "Amount to Pay"
 msgstr "已开票未收款金额"
 
 #. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_trading_sale_create_uid
+msgid "Created by"
+msgstr "创建人"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_trading_sale_create_date
+msgid "Created on"
+msgstr "创建时间"
+
+#. module: trading_sale
+#: model:ir.ui.view,arch_db:trading_sale.view_order_fulfillment_line_filter
+msgid "Current Year"
+msgstr "当年"
+
+#. module: trading_sale
 #: model:ir.ui.view,arch_db:trading_sale.view_order_fulfillment_line_filter
 msgid "Customer"
 msgstr "客户"
@@ -66,10 +81,35 @@ msgid "Display Name"
 msgstr "显示名称"
 
 #. module: trading_sale
+#: model:ir.ui.view,arch_db:trading_sale.view_order_fulfillment_line_filter
+msgid "Group By"
+msgstr "分组"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_trading_sale_id
+msgid "ID"
+msgstr "ID"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_trading_sale___last_update
+msgid "Last Modified on"
+msgstr "最后修改日"
+
+#. module: trading_sale
 #: model:ir.model.fields,field_description:trading_sale.field_sale_order_line_last_update_year
 #: model:ir.ui.view,arch_db:trading_sale.view_order_fulfillment_line_filter
 msgid "Last Update Year"
 msgstr "更新年份"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_trading_sale_write_uid
+msgid "Last Updated by"
+msgstr "最后更新人"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_trading_sale_write_date
+msgid "Last Updated on"
+msgstr "最后更新时间"
 
 #. module: trading_sale
 #: model:ir.actions.act_window,name:trading_sale.action_sale_order_fulfillment_report
@@ -103,7 +143,26 @@ msgid "Quantity to Delivered"
 msgstr "未发货数量"
 
 #. module: trading_sale
+#: model:ir.ui.view,arch_db:trading_sale.view_order_fulfillment_line_filter
+msgid "Sale Order"
+msgstr "Sale Order"
+
+#. module: trading_sale
 #: model:ir.model.fields,field_description:trading_sale.field_sale_order_line_sale_order_reference
 msgid "Sale Order Reference"
 msgstr "跟单号"
 
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_sale_order_line_sale_team_id
+msgid "Sale Team"
+msgstr "销售团队"
+
+#. module: trading_sale
+#: model:ir.model,name:trading_sale.model_sale_order
+msgid "Sales Order"
+msgstr "销售订单"
+
+#. module: trading_sale
+#: model:ir.model,name:trading_sale.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "销售订单行"

@@ -216,3 +216,7 @@ class SaleOrderLine(models.Model):
                                     help='The amount of product already be '
                                     'paid. The expression should be: payment '
                                     'amount = invoiced amount * payment rate')
+    sale_team_id = fields.Many2one(related='order_id.team_id',
+                                   string='Sale Team',
+                                   readonly=True,
+                                   help='Sale Team of Related Sale Order')

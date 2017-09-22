@@ -27,6 +27,8 @@
                 <field name="price_invoiced" />
                 <field name="price_to_payment"/>
                 <field name="price_payment" />
+                <field name="salesman_id" />
+                <field name="sale_team_id" />
             </tree>
         </field>
     </record>
