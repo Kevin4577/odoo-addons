@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-14 12:47+0000\n"
-"PO-Revision-Date: 2017-07-14 12:47+0000\n"
+"POT-Creation-Date: 2017-09-22 03:53+0000\n"
+"PO-Revision-Date: 2017-09-22 03:53+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -46,6 +46,26 @@ msgid "Amount to Pay"
 msgstr "已开票未收款金额"
 
 #. module: trading_sale
+#: model:ir.model.fields,help:trading_sale.field_sale_order_line_product_class
+msgid "Combination of name of product classes."
+msgstr "Combination of name of product classes."
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_trading_sale_create_uid
+msgid "Created by"
+msgstr "创建人"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_trading_sale_create_date
+msgid "Created on"
+msgstr "创建时间"
+
+#. module: trading_sale
+#: model:ir.ui.view,arch_db:trading_sale.view_order_fulfillment_line_filter
+msgid "Current Year"
+msgstr "当年"
+
+#. module: trading_sale
 #: model:ir.ui.view,arch_db:trading_sale.view_order_fulfillment_line_filter
 msgid "Customer"
 msgstr "客户"
@@ -61,15 +81,55 @@ msgid "Customer Reference"
 msgstr "客户参照"
 
 #. module: trading_sale
+#: model:ir.model.fields,help:trading_sale.field_sale_order_line_customer_order_reference
+msgid "Customer order reference of related sale order."
+msgstr "Customer order reference of related sale order."
+
+#. module: trading_sale
 #: model:ir.model.fields,field_description:trading_sale.field_trading_sale_display_name
 msgid "Display Name"
 msgstr "显示名称"
+
+#. module: trading_sale
+#: model:ir.ui.view,arch_db:trading_sale.view_order_fulfillment_line_filter
+msgid "Group By"
+msgstr "分组"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_trading_sale_id
+msgid "ID"
+msgstr "ID"
+
+#. module: trading_sale
+#: model:ir.model.fields,help:trading_sale.field_sale_order_line_customer_reference
+msgid "Internal reference of customer of related sale order."
+msgstr "Internal reference of customer of related sale order."
+
+#. module: trading_sale
+#: model:ir.model.fields,help:trading_sale.field_sale_order_line_product_reference
+msgid "Internal reference of related product."
+msgstr "Internal reference of related product."
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_trading_sale___last_update
+msgid "Last Modified on"
+msgstr "最后修改日"
 
 #. module: trading_sale
 #: model:ir.model.fields,field_description:trading_sale.field_sale_order_line_last_update_year
 #: model:ir.ui.view,arch_db:trading_sale.view_order_fulfillment_line_filter
 msgid "Last Update Year"
 msgstr "更新年份"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_trading_sale_write_uid
+msgid "Last Updated by"
+msgstr "最后更新人"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_trading_sale_write_date
+msgid "Last Updated on"
+msgstr "最后更新时间"
 
 #. module: trading_sale
 #: model:ir.actions.act_window,name:trading_sale.action_sale_order_fulfillment_report
@@ -103,7 +163,87 @@ msgid "Quantity to Delivered"
 msgstr "未发货数量"
 
 #. module: trading_sale
+#: model:ir.ui.view,arch_db:trading_sale.view_order_fulfillment_line_filter
+msgid "Sale Order"
+msgstr "Sale Order"
+
+#. module: trading_sale
 #: model:ir.model.fields,field_description:trading_sale.field_sale_order_line_sale_order_reference
 msgid "Sale Order Reference"
 msgstr "跟单号"
+
+#. module: trading_sale
+#: model:ir.model.fields,field_description:trading_sale.field_sale_order_line_sale_team_id
+msgid "Sale Team"
+msgstr "销售团队"
+
+#. module: trading_sale
+#: model:ir.model.fields,help:trading_sale.field_sale_order_line_sale_team_id
+msgid "Sale Team of Related Sale Order"
+msgstr "Sale Team of Related Sale Order"
+
+#. module: trading_sale
+#: model:ir.model.fields,help:trading_sale.field_sale_order_line_sale_order_reference
+msgid "Sale order reference of related sale order."
+msgstr "Sale order reference of related sale order."
+
+#. module: trading_sale
+#: model:ir.model,name:trading_sale.model_sale_order
+msgid "Sales Order"
+msgstr "销售订单"
+
+#. module: trading_sale
+#: model:ir.model,name:trading_sale.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "销售订单行"
+
+#. module: trading_sale
+#: model:ir.model.fields,help:trading_sale.field_sale_order_line_price_payment
+msgid "The amount of product already be paid. The expression should be: payment amount = invoiced amount * payment rate"
+msgstr "The amount of product already be paid. The expression should be: payment amount = invoiced amount * payment rate"
+
+#. module: trading_sale
+#: model:ir.model.fields,help:trading_sale.field_sale_order_line_price_to_payment
+msgid "The amount of product plan to be paid. The expression should be: to payment amount = invoiced amount * (1 - payment rate)"
+msgstr "The amount of product plan to be paid. The expression should be: to payment amount = invoiced amount * (1 - payment rate)"
+
+#. module: trading_sale
+#: model:ir.model.fields,help:trading_sale.field_sale_order_line_last_update_year
+msgid "The field provides filter to each sale order line, and make sure they could be searched by last update year."
+msgstr "The field provides filter to each sale order line, and make sure they could be searched by last update year."
+
+#. module: trading_sale
+#: model:ir.model.fields,help:trading_sale.field_sale_order_payment_rate
+msgid "The payment rate of sale order should be calculated with the paid amount of all invoices related to this order, and the total amount of them. The expression should be: payment rate = sum(paid amount of invoice) / sum(total amount of invoice)"
+msgstr "The payment rate of sale order should be calculated with the paid amount of all invoices related to this order, and the total amount of them. The expression should be: payment rate = sum(paid amount of invoice) / sum(total amount of invoice)"
+
+#. module: trading_sale
+#: model:ir.model.fields,help:trading_sale.field_sale_order_line_price_to_delivery
+msgid "The to-delivery amount of product. The expression should be: to delivery amount = unit price of product * to delivery quantity"
+msgstr "The to-delivery amount of product. The expression should be: to delivery amount = unit price of product * to delivery quantity"
+
+#. module: trading_sale
+#: model:ir.model.fields,help:trading_sale.field_sale_order_line_qty_to_delivery
+msgid "The to-delivery quantity of product.The expression should be: to delivery quantity = product quantity - delivered quantity"
+msgstr "The to-delivery quantity of product.The expression should be: to delivery quantity = product quantity - delivered quantity"
+
+#. module: trading_sale
+#: model:ir.model.fields,help:trading_sale.field_sale_order_line_price_invoiced
+msgid "The to-invoice amount of product. The expression should be: invoiced amount = unit price of product * invoiced quantity"
+msgstr "The to-invoice amount of product. The expression should be: invoiced amount = unit price of product * invoiced quantity"
+
+#. module: trading_sale
+#: model:ir.model.fields,help:trading_sale.field_sale_order_line_price_to_invoice
+msgid "The to-invoice amount of product. The expression should be: to invoice amount = unit price of product * to invoice quantity."
+msgstr "The to-invoice amount of product. The expression should be: to invoice amount = unit price of product * to invoice quantity."
+
+#. module: trading_sale
+#: model:ir.model.fields,help:trading_sale.field_sale_order_line_price_delivery
+msgid "The total amount of delivery quantity of product. The expression should be: delivery amount = productdelivery quantity * unit price of product."
+msgstr "The total amount of delivery quantity of product. The expression should be: delivery amount = productdelivery quantity * unit price of product."
+
+#. module: trading_sale
+#: model:ir.model,name:trading_sale.model_trading_sale
+msgid "Trading Sale"
+msgstr "Trading Sale"
 
