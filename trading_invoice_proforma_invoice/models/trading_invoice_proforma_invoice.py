@@ -17,6 +17,7 @@ def render_template_with_data(report_xml_id, ctx):
     sale_order = ctx['objects']
     base_invoice_export_obj = sale_order.env['trading.invoice']
     if sale_order.order_line:
+        lang = sale_order.partner_id.lang
         ctx.update(base_invoice_export_obj.get_invoice_lines_per_invoice
                    (sale_order))
         ctx.update(
@@ -29,10 +30,18 @@ def render_template_with_data(report_xml_id, ctx):
                     sale_order.requested_date and
                     base_invoice_export_obj.get_date(
                         sale_order.requested_date
-                ) or False
+                ) or False,
+                'country_name':
+                    sale_order.with_context(
+                        lang=lang
+                ).partner_id.country_id.name,
+                'shipping_country_name':
+                    sale_order.with_context(
+                        lang=lang
+                ).partner_shipping_id.country_id.name,
             }
         )
-        ctx.update(base_invoice_export_obj.get_customer(ctx['company']))
+        ctx.update(base_invoice_export_obj.get_customer(ctx['company'], lang))
     else:
         raise ValidationError(_('Please check whether this account invoice '
                                 'was generated from sale order.'))

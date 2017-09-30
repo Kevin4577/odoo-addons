@@ -20,6 +20,7 @@ def render_report_with_data(report_xml_id, data):
     and sum the product quantity and lot detail, in order to render the ods
     template with necessary data."""
     account_invoice = data['objects']
+    lang = account_invoice.partner_id.lang
     base_invoice_export_obj = account_invoice.env['trading.invoice']
     py3o_multi_sheet_obj = account_invoice.env['report.py3o.multisheet']
     current_report = account_invoice.env.ref(
@@ -78,7 +79,8 @@ def render_report_with_data(report_xml_id, data):
                 data[('line%d' % index2)] = pack_lot
                 index2 += 1
         data.update({
-            'partner_shipping_id': package_list['partner_shipping_id'],
+            'partner_shipping_id':
+                package_list['partner_shipping_id'].with_context(lang=lang),
             'package_no': package_list['package_no']
         })
     else:

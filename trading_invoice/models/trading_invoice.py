@@ -15,13 +15,13 @@ class TradingInvoice(models.Model):
     _description = "Trading Invoice"
 
     @api.multi
-    def get_customer(self, company):
+    def get_customer(self, company, lang):
         """
         This function get the customer information of sale order
         :param sale_order:
         :return:
         """
-        company_bank_list = company.partner_id.bank_ids
+        company_bank_list = company.partner_id.with_context(lang=lang).bank_ids
         company_main_bank = \
             company_bank_list[0] if company_bank_list else False
         return {
@@ -270,6 +270,7 @@ class TradingInvoice(models.Model):
         sale_order_lists = []
         sum_qty = 0.0
         sum_amount = 0.0
+        lang = account_invoice.partner_id.lang
         invoice_reference = account_invoice.internal_reference
         sale_order_list = account_invoice.invoice_line_ids.\
             mapped('sale_line_ids').mapped('order_id')
@@ -283,12 +284,13 @@ class TradingInvoice(models.Model):
                 invoice_items.append({
                     'product_id':
                         line.product_id.with_context(
-                            lang=account_invoice.partner_id.lang
+                            lang=lang
                         ),
-                    'quantity': line.quantity,
-                    'price_unit': line.currency_id.name + str(line.price_unit),
-                    'price_subtotal':
-                        line.currency_id.symbol + str(line.price_subtotal),
+                    'quantity': int(line.quantity),
+                    'price_unit': '{:.2f}'.format(line.price_unit),
+                    'uom': line.with_context(lang=lang).uom_id.name,
+                    'currency_id': line.currency_id,
+                    'price_subtotal': '{:.2f}'.format(line.price_subtotal),
                 })
             sale_order_lists.append({
                 'sale_order_name': sale_order.name,
@@ -300,9 +302,12 @@ class TradingInvoice(models.Model):
                 sum_amount += line.price_subtotal
         return {
             'sale_order_list': sale_order_lists,
-            'sum_qty': sum_qty,
-            'sum_amount': sum_amount,
-            'ship_to': account_invoice.partner_shipping_id.country_id.name,
+            'sum_qty': int(sum_qty),
+            'sum_amount': '{:.2f}'.format(sum_amount),
+            'ship_to':
+                account_invoice.with_context(
+                    lang=lang
+            ).partner_shipping_id.country_id.name,
             'invoice_reference': invoice_reference
         }
 
@@ -328,6 +333,7 @@ class TradingInvoice(models.Model):
         """This function returns the sum of gross weight, carton quantity,
         and volume of lot list, which was used in delivery order and
         related to this account invoice."""
+        lang = account_invoice.partner_id.lang
         sale_order_obj = self.env['sale.order']
         sale_order_lines = \
             account_invoice.invoice_line_ids.mapped('sale_line_ids')
@@ -364,26 +370,35 @@ class TradingInvoice(models.Model):
             sub_list = sub_list or {}
             package_lists.append({
                 'order_list': sub_list['order_list'] or order_list or False,
-                'pallet_sum': sub_list['pallet_sum'] or pallet_sum,
-                'sum_gw': sub_list['sum_gw'] or sum_gw + gw_package,
-                'sum_nt': sub_list['sum_nt'] or sum_nt,
-                'sum_meas': sub_list['sum_meas'] or sum_meas + meas_package,
+                'pallet_sum': int(sub_list['pallet_sum'] or pallet_sum),
+                'sum_gw':
+                    '{:.2f}'.format(sub_list['sum_gw'] or sum_gw + gw_package),
+                'sum_nt':
+                    '{:.2f}'.format(sub_list['sum_nt'] or sum_nt),
+                'sum_meas':
+                    '{:.3f}'.format(
+                        sub_list['sum_meas'] or sum_meas + meas_package
+                ),
                 'package_qty': 1,
             })
             pallet_total += sub_list['pallet_sum']
-            total_gw += sub_list['sum_gw']
-            total_nt += sub_list['sum_nt']
-            total_meas += sub_list['sum_meas']
+            total_gw += float(sub_list['sum_gw'])
+            total_nt += float(sub_list['sum_nt'])
+            total_meas += float(sub_list['sum_meas'])
         return {
             'package_list': package_lists,
-            'total_gw': total_gw,
-            'total_nt': total_nt,
-            'total_meas': total_meas,
-            'pallet_total': pallet_total,
+            'total_gw': '{:.2f}'.format(total_gw),
+            'total_nt': '{:.2f}'.format(total_nt),
+            'total_meas': '{:.3f}'.format(total_meas),
+            'pallet_total': int(pallet_total),
             'package_total': len(package_list),
             'partner_invoice_id':
-                partner_invoice_id or self.env['res.partner'],
-            'ship_to': account_invoice.partner_shipping_id.country_id.name}
+                partner_invoice_id.with_context(lang=lang) or
+                self.env['res.partner'],
+            'ship_to':
+                account_invoice.partner_shipping_id.with_context(
+                    lang=lang
+            ).country_id.name}
 
     @api.multi
     def get_detail_lot_list_per_invoice_sub_list(self,
@@ -417,9 +432,9 @@ class TradingInvoice(models.Model):
                 sum_meas_per_same_sale_order = 0.0
                 for line in order_lines:
                     pallet_sum_per_same_sale_order += line['carton_qty']
-                    sum_gw_per_same_sale_order += line['gross_weight']
-                    sum_nt_per_same_sale_order += line['net_weight']
-                    sum_meas_per_same_sale_order += line['volume']
+                    sum_gw_per_same_sale_order += float(line['gross_weight'])
+                    sum_nt_per_same_sale_order += float(line['net_weight'])
+                    sum_meas_per_same_sale_order += float(line['volume'])
                 order_list.append({
                     'name': sale_order.name,
                     'client_order_ref': sale_order.client_order_ref,
@@ -447,17 +462,24 @@ class TradingInvoice(models.Model):
                 'customer_product_code':
                 pack_operation_lot.operation_id.product_id.
                 customer_product_code,
-                'qty': pack_operation_lot.qty,
+                'qty':
+                    '{:.2f}'.format(pack_operation_lot.qty),
                 'gross_by_carton':
-                pack_operation_lot.lot_id.gross_by_carton,
+                    '{:.2f}'.format(pack_operation_lot.lot_id.gross_by_carton),
                 'net_by_carton':
-                pack_operation_lot.lot_id.net_by_carton,
-                'carton_qty': pack_operation_lot.lot_id.carton_qty,
-                'gross_weight': pack_operation_lot.lot_id.gross_weight,
-                'net_weight': pack_operation_lot.lot_id.net_weight,
-                'volume': pack_operation_lot.lot_id.volume,
+                    '{:.2f}'.format(pack_operation_lot.lot_id.net_by_carton),
+                'carton_qty': int(pack_operation_lot.lot_id.carton_qty),
+                'gross_weight':
+                    '{:.2f}'.format(pack_operation_lot.lot_id.gross_weight),
+                'net_weight':
+                    '{:.2f}'.format(pack_operation_lot.lot_id.net_weight),
+                'volume':
+                    '{:.3f}'.format(pack_operation_lot.lot_id.volume),
                 'volume_per_carton':
-                    pack_operation_lot.lot_id.volume_by_carton,
+                    '{:.3f}'.format(
+                        pack_operation_lot.lot_id.volume_by_carton),
+                'mixed_loading':
+                    'Y' if pack_operation_lot.lot_id.mixed_loading else '',
             })
         return order_lines
 
@@ -475,9 +497,13 @@ class TradingInvoice(models.Model):
                 'product_id': line.product_id.with_context(
                     lang=sale_order.partner_id.lang
                 ),
-                'price_unit': line.price_unit,
-                'qty': line.product_uom_qty,
-                'price_subtotal': line.price_subtotal,
+                'uom': line.with_context(
+                    lang=sale_order.partner_id.lang
+                ).product_uom.name,
+                'currency_id': line.currency_id,
+                'price_unit': '{:.2f}'.format(line.price_unit),
+                'qty': int(line.product_uom_qty),
+                'price_subtotal': '{:.2f}'.format(line.price_subtotal),
             })
             sum_qty += line.product_uom_qty
             sum_amount += line.price_total
@@ -487,8 +513,8 @@ class TradingInvoice(models.Model):
             sale_order.partner_id.currency_id.name,
         )
         return {
-            'sum_qty': sum_qty,
-            'sum_amount': sum_amount,
+            'sum_qty': int(sum_qty),
+            'sum_amount': '{:.2f}'.format(sum_amount),
             'sum_amount_text': sum_amount_text,
             'product_lines': product_lines,
         }
@@ -530,6 +556,7 @@ class TradingInvoice(models.Model):
     def get_pack_lot_list_per_package_type(self, account_invoice):
         """This function returns package type names and package name of each
         package type, which is used in stock picking list"""
+        lang = account_invoice.partner_id.lang
         stock_picking_obj = self.env['stock.picking']
         stock_picking_list = \
             stock_picking_obj.search([('invoice_id', '=', account_invoice.id)])
@@ -556,10 +583,13 @@ class TradingInvoice(models.Model):
                     'client_order_ref':
                     pack_lot.operation_id.picking_id.sale_id.client_order_ref,
                     'product_id': pack_lot.operation_id.product_id,
-                    'product_uom': pack_lot.operation_id.product_uom_id.name,
-                    'product_uom_qty': pack_lot.qty_todo + pack_lot.qty,
-                    'qty_delivery': pack_lot.qty,
-                    'carton_qty': pack_lot.lot_id.carton_qty
+                    'product_uom':
+                        pack_lot.operation_id.with_context(
+                            lang=lang
+                        ).product_uom_id.name,
+                    'product_uom_qty': '{:.2f}'.format(pack_lot.qty_todo),
+                    'qty_delivery': '{:.2f}'.format(pack_lot.qty),
+                    'carton_qty': '{:.2f}'.format(pack_lot.lot_id.carton_qty)
                 })
             package_list.append({package_type.name: pack_lot_list})
         return {
