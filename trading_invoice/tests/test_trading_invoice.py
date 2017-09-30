@@ -185,8 +185,8 @@ class TestTradingInvoice(common.TransactionCase):
         self.lines_per_invoice = self.trading_invoice_model.\
             get_order_lines_per_invoice(self.sale_order.invoice_ids)
         self.assertEqual(
-            int(self.lines_per_invoice['sum_amount']),
-            int(self.sale_order.amount_total))
+            int(float(self.lines_per_invoice['sum_amount'])),
+            int(float(self.sale_order.amount_total)))
         self.assertEqual(self.lines_per_invoice['ship_to'],
                          self.sale_order.invoice_ids.
                          partner_shipping_id.country_id.name)
@@ -199,22 +199,22 @@ class TestTradingInvoice(common.TransactionCase):
         self.detail_lot_list = self.trading_invoice_model.\
             get_detail_lot_list_per_invoice(self.sale_order.invoice_ids)
         self.assertEqual(
-            int(self.detail_lot_list['total_meas']),
-            int(self.lot1.volume))
+            int(float(self.detail_lot_list['total_meas'])),
+            int(float(self.lot1.volume)))
         self.assertEqual(
-            int(self.detail_lot_list['package_list'][0]['pallet_sum']),
-            int(self.lot1.carton_qty))
+            int(float(self.detail_lot_list['package_list'][0]['pallet_sum'])),
+            int(float(self.lot1.carton_qty)))
 
     def test_get_invoice_lines_per_invoice(self):
         self.invoice_lines = self.trading_invoice_model.\
             get_invoice_lines_per_invoice(self.sale_order)
         self.assertEqual(
-            int(self.invoice_lines['product_lines'][0]['price_unit']),
-            int(self.sale_order.order_line[0]['price_unit']))
+            int(float(self.invoice_lines['product_lines'][0]['price_unit'])),
+            int(float(self.sale_order.order_line[0]['price_unit'])))
         self.assertEqual(
-            int(self.invoice_lines['product_lines'][0]['price_subtotal']),
-            int(self.sale_order.order_line[0]['price_unit'] *
-                self.sale_order.order_line[0]['product_uom_qty']))
+            int(float(self.invoice_lines['product_lines'][0]['price_subtotal'])),
+            int(float(self.sale_order.order_line[0]['price_unit'] *
+                      self.sale_order.order_line[0]['product_uom_qty'])))
 
     def test_get_package_name_per_package_list(self):
         self.package_list = self.trading_invoice_model.\
