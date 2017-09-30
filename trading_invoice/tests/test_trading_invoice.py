@@ -212,7 +212,8 @@ class TestTradingInvoice(common.TransactionCase):
             int(float(self.invoice_lines['product_lines'][0]['price_unit'])),
             int(float(self.sale_order.order_line[0]['price_unit'])))
         self.assertEqual(
-            int(float(self.invoice_lines['product_lines'][0]['price_subtotal'])),
+            int(float(
+                self.invoice_lines['product_lines'][0]['price_subtotal'])),
             int(float(self.sale_order.order_line[0]['price_unit'] *
                       self.sale_order.order_line[0]['product_uom_qty'])))
 
