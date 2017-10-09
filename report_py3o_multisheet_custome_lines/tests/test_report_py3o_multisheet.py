@@ -16,6 +16,7 @@ class TestReportPy3oMultisheet(common.TransactionCase):
             'Sheet1': {
                 'name': 'Sheet1',
                 'lines': 16,
+                'full_lines': 16,
                 'duplicate': True,
                 'head_end_line': 20,
                 'sequence': 1
@@ -23,6 +24,7 @@ class TestReportPy3oMultisheet(common.TransactionCase):
             'Sheet2': {
                 'name': 'Sheet2',
                 'lines': 16,
+                'full_lines': 16,
                 'duplicate': True,
                 'head_end_line': 20,
                 'sequence': 2
@@ -30,6 +32,7 @@ class TestReportPy3oMultisheet(common.TransactionCase):
             'Sheet3': {
                 'name': 'Sheet3',
                 'lines': 4,
+                'full_lines': 16,
                 'duplicate': True,
                 'head_end_line': 20,
                 'sequence': 3

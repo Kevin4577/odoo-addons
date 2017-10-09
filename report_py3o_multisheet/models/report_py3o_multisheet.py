@@ -67,6 +67,7 @@ class ReportPy3oMultisheet(models.Model):
         'Sheet name':{
                     'name': 'Sheet name',
                     'lines': 'Lines number per sheet',
+                    'full_lines': 'Full Lines Number per sheet',
                     'duplicate': True if need to duplicate head and
                                  foot of base sheet,
                     'head_end_line': The number of the line header
@@ -92,6 +93,7 @@ class ReportPy3oMultisheet(models.Model):
         'Sheet name':{
                     'name': 'Sheet name',
                     'lines': 'Lines number per sheet',
+                    'full_lines': 'Full Lines Number per sheet',
                     'duplicate': True if need to duplicate head and
                                  foot of base sheet,
                     'head_end_line': The number of the line header
@@ -102,11 +104,11 @@ class ReportPy3oMultisheet(models.Model):
         for sheet in sheets:
             # Append the new sheet
             lines_per_sheet = \
-                sheet_lines_data[sheet.name].get('lines', 1)
+                sheet_lines_data[sheet.name].get('full_lines', 1)
             head_end_line = \
                 sheet_lines_data[sheet.name].get('head_end_line', 1)
             sheet.insert_rows(index=head_end_line,
-                              count=lines_per_sheet)
+                              count=lines_per_sheet*2)
         return sheets
 
     def multi_attribute_per_line(
@@ -124,6 +126,7 @@ class ReportPy3oMultisheet(models.Model):
         'Sheet name':{
                     'name': 'Sheet name',
                     'lines': 'Lines number per sheet',
+                    'full_lines': 'Full Lines Number per sheet',
                     'duplicate': True if need to duplicate head and
                                  foot of base sheet,
                     'head_end_line': The number of the line header
