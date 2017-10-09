@@ -4,7 +4,7 @@
 
 from odoo import api, models
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT,\
-    DEFAULT_SERVER_DATETIME_FORMAT
+    DEFAULT_SERVER_DATETIME_FORMAT, float_repr
 from datetime import datetime
 
 PRODUCT_STANDARD_UNIT = 'PCS'
@@ -100,6 +100,10 @@ class TradingSale(models.Model):
         same hs code of products inside those line. Quantity and price total
         of lines per hs code would be summed.
         Unit price = summary of price total / summary of quantity"""
+        price_unit_four_digits_precision = \
+            self.env['decimal.precision'].precision_get('Price Unit Printout')
+        price_unit_two_digits_precision = \
+            self.env['decimal.precision'].precision_get('Product Price')
         product_pricelist_name = account_invoice.currency_id.name
         hs_code_list = account_invoice.mapped('invoice_line_ids'). \
             mapped('product_id').mapped('product_hs_code_id')
@@ -123,12 +127,19 @@ class TradingSale(models.Model):
                         total_price_with_same_hs_code / qty_with_same_hs_code
                     production_dict.update({
                         'unit_price':
-                            '{:.4f}'.format(unit_price_with_same_hs_code)
+                        float_repr(
+                            unit_price_with_same_hs_code,
+                            precision_digits=price_unit_four_digits_precision
+                        ),
                     })
                 production_dict.update({
                     'hs_code': hs_code,
                     'qty': str(int(qty_with_same_hs_code)),
-                    'total': '{:.2f}'.format(total_price_with_same_hs_code),
+                    'total':
+                        float_repr(
+                            total_price_with_same_hs_code,
+                            precision_digits=price_unit_two_digits_precision
+                    ),
                     'pricelist': product_pricelist_name,
                     'index': index + 1,
                 })
