@@ -106,7 +106,7 @@ def change_ctx(report_xml_id, ctx):
                         'sequence': (index / LINES_PER_SHEET),
                         'duplicate': True,
                         'lines': lines_per_lines,
-                        'full_lines': LINES_PER_SHEET,
+                        'full_lines': LINES_PER_SHEET * lines_per_lines,
                         'head_end_line': HEAD_END_LINE,
                     })
             else:

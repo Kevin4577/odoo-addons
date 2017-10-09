@@ -108,7 +108,7 @@ class ReportPy3oMultisheet(models.Model):
             head_end_line = \
                 sheet_lines_data[sheet.name].get('head_end_line', 1)
             sheet.insert_rows(index=head_end_line,
-                              count=lines_per_sheet*2)
+                              count=lines_per_sheet)
         return sheets
 
     def multi_attribute_per_line(
