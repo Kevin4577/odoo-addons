@@ -295,16 +295,14 @@ class TradingInvoice(models.Model):
                         float_repr(
                             line.price_unit,
                             precision_digits=price_unit_precision,
-
-                    ),
+                        ),
                     'uom': line.with_context(lang=lang).uom_id.name,
                     'currency_id': line.currency_id,
                     'price_subtotal':
                         float_repr(
                             line.price_subtotal,
                             precision_digits=price_unit_precision,
-
-                    ),
+                        ),
                 })
             sale_order_lists.append({
                 'sale_order_name': sale_order.name,
