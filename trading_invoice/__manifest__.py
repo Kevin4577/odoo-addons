@@ -18,7 +18,9 @@
         "sale_order_dates"
     ],
     'data': [
-        'security/ir.model.access.csv'
+        'security/ir.model.access.csv',
+        'data/decimal_case_lot.xml',
+        'data/decimal_product.xml',
     ],
     "installable": True,
 }

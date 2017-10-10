@@ -16,10 +16,25 @@ def render_template_with_data(report_xml_id, ctx):
     account_invoice = ctx['objects']
     base_invoice_export_obj = account_invoice.env['trading.invoice']
     if account_invoice.invoice_line_ids:
+        lang = account_invoice.partner_id.lang
         ctx.update(base_invoice_export_obj.get_order_lines_per_invoice
                    (account_invoice))
         ctx.update(base_invoice_export_obj.get_customer(
-            account_invoice.company_id))
+            account_invoice.company_id, lang))
+        ctx.update(
+            {
+                'country_name':
+                    account_invoice.with_context(
+                        lang=lang
+                    ).partner_id.country_id.name,
+                'shipping_country_name':
+                    account_invoice.with_context(
+                        lang=lang
+                    ).partner_shipping_id.country_id.name,
+                'number':
+                    account_invoice.number if account_invoice.number else '--'
+            }
+        )
         ctx.update(base_invoice_export_obj.get_date_invoice(account_invoice))
     else:
         raise ValidationError(_('Please check whether this account invoice'

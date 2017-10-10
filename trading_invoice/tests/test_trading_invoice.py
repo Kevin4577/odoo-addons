@@ -141,7 +141,10 @@ class TestTradingInvoice(common.TransactionCase):
         })
 
     def test_get_customer(self):
-        self.trading_invoice_model.get_customer(self.env.user.company_id)
+        self.trading_invoice_model.get_customer(
+            self.env.user.company_id,
+            'en_US'
+        )
 
     def test_get_order_lines(self):
         self.lines = self.trading_invoice_model.\
@@ -181,8 +184,9 @@ class TestTradingInvoice(common.TransactionCase):
     def test_get_order_lines_per_invoice(self):
         self.lines_per_invoice = self.trading_invoice_model.\
             get_order_lines_per_invoice(self.sale_order.invoice_ids)
-        self.assertEqual(self.lines_per_invoice['sum_amount'],
-                         self.sale_order.amount_total)
+        self.assertEqual(
+            int(float(self.lines_per_invoice['sum_amount'])),
+            int(float(self.sale_order.amount_total)))
         self.assertEqual(self.lines_per_invoice['ship_to'],
                          self.sale_order.invoice_ids.
                          partner_shipping_id.country_id.name)
@@ -194,21 +198,24 @@ class TestTradingInvoice(common.TransactionCase):
     def test_get_detail_lot_list_per_invoice(self):
         self.detail_lot_list = self.trading_invoice_model.\
             get_detail_lot_list_per_invoice(self.sale_order.invoice_ids)
-        self.assertEqual(self.detail_lot_list['total_meas'],
-                         self.lot1.volume)
-        self.assertEqual(self.detail_lot_list['package_list'][0]['pallet_sum'],
-                         self.lot1.carton_qty)
+        self.assertEqual(
+            int(float(self.detail_lot_list['total_meas'])),
+            int(float(self.lot1.volume)))
+        self.assertEqual(
+            int(float(self.detail_lot_list['package_list'][0]['pallet_sum'])),
+            int(float(self.lot1.carton_qty)))
 
     def test_get_invoice_lines_per_invoice(self):
         self.invoice_lines = self.trading_invoice_model.\
             get_invoice_lines_per_invoice(self.sale_order)
-        self.assertEqual(self.invoice_lines['product_lines'][0]['price_unit'],
-                         self.sale_order.order_line[0]['price_unit'])
-        self.assertEqual(self.invoice_lines['product_lines'][0]
-                         ['price_subtotal'],
-                         self.sale_order.
-                         order_line[0]['price_unit'] * self.sale_order.
-                         order_line[0]['product_uom_qty'])
+        self.assertEqual(
+            int(float(self.invoice_lines['product_lines'][0]['price_unit'])),
+            int(float(self.sale_order.order_line[0]['price_unit'])))
+        self.assertEqual(
+            int(float(
+                self.invoice_lines['product_lines'][0]['price_subtotal'])),
+            int(float(self.sale_order.order_line[0]['price_unit'] *
+                      self.sale_order.order_line[0]['product_uom_qty'])))
 
     def test_get_package_name_per_package_list(self):
         self.package_list = self.trading_invoice_model.\

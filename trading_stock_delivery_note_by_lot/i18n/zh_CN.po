@@ -30,5 +30,5 @@ msgstr "请检查是否发货单由销售单生成。"
 #. module: trading_stock_delivery_note_by_lot
 #: model:ir.actions.report.xml,name:trading_stock_delivery_note_by_lot.trading_stock_delivery_note_by_lot_py3o
 msgid "Trading Stock Delivery Note By Lot"
-msgstr "出库单"
+msgstr "TEC出库单"
 
