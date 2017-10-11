@@ -28,6 +28,7 @@ class ReportPy3oMultisheet(models.Model):
         'Sheet name':{
                     'name': 'Sheet name',
                     'lines': 'Lines number per sheet',
+                    'full_lines': 'Full Lines Number per sheet',
                     'duplicate': True if need to duplicate head and
                                  foot of base sheet,
                     'head_end_line': The number of the line header

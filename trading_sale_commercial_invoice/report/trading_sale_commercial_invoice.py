@@ -18,6 +18,7 @@ def change_ctx(report_xml_id, ctx):
     stock_picking_obj = account_invoice.env['stock.picking']
     stock_picking_list = \
         stock_picking_obj.search([('invoice_id', '=', account_invoice.id)])
+    lang = account_invoice.partner_id.lang
     data = {}
     if not stock_picking_list:
         raise ValidationError(_('Please specify delivery orders '
@@ -30,6 +31,12 @@ def change_ctx(report_xml_id, ctx):
             package_list = \
             trading_sale_obj. \
             get_product_stock_list(account_invoice)
+        data['company_country_name'] = \
+            account_invoice.company_id.with_context(lang=lang).country_id.name
+        data['shipping_country_name'] = \
+            account_invoice.partner_shipping_id.with_context(
+                lang=lang
+        ).country_id.name if account_invoice.partner_shipping_id else '--'
         ctx['data'].update(trading_sale_obj.get_date_invoice(account_invoice))
         ctx['data'].update(data)
     else:

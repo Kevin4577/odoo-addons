@@ -4,7 +4,7 @@
 
 from odoo import api, models
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT,\
-    DEFAULT_SERVER_DATETIME_FORMAT
+    DEFAULT_SERVER_DATETIME_FORMAT, float_repr
 from datetime import datetime
 
 PRODUCT_STANDARD_UNIT = 'PCS'
@@ -100,6 +100,10 @@ class TradingSale(models.Model):
         same hs code of products inside those line. Quantity and price total
         of lines per hs code would be summed.
         Unit price = summary of price total / summary of quantity"""
+        price_unit_four_digits_precision = \
+            self.env['decimal.precision'].precision_get('Price Unit Printout')
+        price_unit_two_digits_precision = \
+            self.env['decimal.precision'].precision_get('Product Price')
         product_pricelist_name = account_invoice.currency_id.name
         hs_code_list = account_invoice.mapped('invoice_line_ids'). \
             mapped('product_id').mapped('product_hs_code_id')
@@ -122,12 +126,20 @@ class TradingSale(models.Model):
                     unit_price_with_same_hs_code =\
                         total_price_with_same_hs_code / qty_with_same_hs_code
                     production_dict.update({
-                        'unit_price': unit_price_with_same_hs_code
+                        'unit_price':
+                        float_repr(
+                            unit_price_with_same_hs_code,
+                            precision_digits=price_unit_four_digits_precision
+                        ),
                     })
                 production_dict.update({
                     'hs_code': hs_code,
-                    'qty': str(qty_with_same_hs_code) + PRODUCT_STANDARD_UNIT,
-                    'total': total_price_with_same_hs_code,
+                    'qty': str(int(qty_with_same_hs_code)),
+                    'total':
+                        float_repr(
+                            total_price_with_same_hs_code,
+                            precision_digits=price_unit_two_digits_precision
+                    ),
                     'pricelist': product_pricelist_name,
                     'index': index + 1,
                 })
@@ -262,6 +274,14 @@ class TradingSale(models.Model):
                     operation_lines_with_same_hs_code.\
                     mapped('pack_lot_ids').\
                     mapped('lot_id')
+
+                production_lines.append({
+                    'hs_code': hs_code,
+                    'qty_ctn': sum(prod_lot_ids.mapped('carton_qty')),
+                    'total_gw': sum(prod_lot_ids.mapped('gross_weight')),
+                    'total_nw': sum(prod_lot_ids.mapped('net_weight')),
+                    'total_meas': sum(prod_lot_ids.mapped('volume'))
+                })
                 for pack_lot in prod_lot_ids:
                     carton_quantity_with_same_hs_code = sum(
                         [pack_lot.carton_qty])
@@ -270,18 +290,11 @@ class TradingSale(models.Model):
                     total_net_weight_with_same_hs_code = sum(
                         [pack_lot.net_weight])
                     total_volume_with_same_hs_code = sum([pack_lot.volume])
-                    production_lines.append({
-                        'hs_code': hs_code,
-                        'qty_ctn': carton_quantity_with_same_hs_code,
-                        'total_gw': total_gross_weight_with_same_hs_code,
-                        'total_nw': total_net_weight_with_same_hs_code,
-                        'total_meas': total_volume_with_same_hs_code
-                    })
                     sum_carton_quantity += carton_quantity_with_same_hs_code
                     sum_gross_weight += total_gross_weight_with_same_hs_code
                     sum_net_weight += total_net_weight_with_same_hs_code
                     sum_volume += total_volume_with_same_hs_code
-        return sum_carton_quantity, sum_gross_weight, sum_net_weight, \
+        return int(sum_carton_quantity), sum_gross_weight, sum_net_weight, \
             sum_volume, production_lines
 
     @api.multi
