@@ -159,8 +159,6 @@ class TestTradingInvoice(common.TransactionCase):
     def test_get_product_lot_list_per_sale_order(self):
         self.order = self.trading_invoice_model.\
             get_product_lot_list_per_sale_order(self.sale_order.picking_ids)
-        self.assertEqual(self.order['warehouse'],
-                         self.sale_order.warehouse_id.name)
         self.assertEqual(self.order['sum_carton_qty'], self.lot1.carton_qty)
 
     def test_get_product_order_list_with_qty(self):

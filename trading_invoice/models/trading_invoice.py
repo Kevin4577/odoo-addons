@@ -6,7 +6,6 @@ from datetime import datetime
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT,\
     DEFAULT_SERVER_DATETIME_FORMAT, float_repr
 from odoo.tools import amount_to_text_en
-import math
 
 
 class TradingInvoice(models.Model):
@@ -307,15 +306,13 @@ class TradingInvoice(models.Model):
                     'price_unit':
                         float_repr(
                             line.price_unit,
-                            precision_digits=price_unit_precision,
-                    ),
+                            precision_digits=price_unit_precision,),
                     'uom': line.with_context(lang=lang).uom_id.name,
                     'currency_id': line.currency_id,
                     'price_subtotal':
                         float_repr(
                             line.price_subtotal,
-                            precision_digits=price_unit_precision,
-                    ),
+                            precision_digits=price_unit_precision,),
                 })
             sale_order_lists.append({
                 'sale_order_name': sale_order.name,
@@ -454,8 +451,8 @@ class TradingInvoice(models.Model):
                 self.env['res.partner'],
             'ship_to':
                 account_invoice.partner_shipping_id.with_context(
-                    lang=lang
-            ).country_id.name}
+                    lang=lang).country_id.name
+        }
 
     @api.multi
     def get_detail_lot_list_per_invoice_sub_list(self,
