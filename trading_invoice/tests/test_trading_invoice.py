@@ -34,7 +34,7 @@ class TestTradingInvoice(common.TransactionCase):
             'customer_product_code': 'Test',
             'default_code': 'Test Default Code',
             'property_account_income_id': self.account_rev_id.id,
-            'location_default_id': self.env.ref('stock.location_inventory'),
+            'location_default_id': self.env.ref('stock.location_inventory').id,
             'default_storage_area': 'Test Storage Area',
         })
         self.product_5 = self.env.ref('product.product_product_5')
@@ -43,7 +43,7 @@ class TestTradingInvoice(common.TransactionCase):
             'customer_product_code': 'Test',
             'default_code': 'Test Default Code 2',
             'property_account_income_id': self.account_rev_id.id,
-            'location_default_id': self.env.ref('stock.location_inventory'),
+            'location_default_id': self.env.ref('stock.location_inventory').id,
             'default_storage_area': 'Test Storage Area',
         })
         self.partner_id = self.env.ref('base.res_partner_2')
