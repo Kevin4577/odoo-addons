@@ -27,6 +27,10 @@ def render_template_with_data(report_xml_id, ctx):
                     account_invoice.with_context(
                         lang=lang
                     ).partner_id.country_id.name,
+                'payment_term_id':
+                    account_invoice.payment_term_id.with_context(
+                        lang=lang
+                    ),
                 'shipping_country_name':
                     account_invoice.with_context(
                         lang=lang

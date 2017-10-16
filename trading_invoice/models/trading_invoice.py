@@ -68,6 +68,10 @@ class TradingInvoice(models.Model):
     def get_order_lines(self, sale_order):
         """This function get the product information of each order lines
         inside sale order."""
+        price_total_precision = \
+            self.env['decimal.precision'].precision_get(
+                'Product Price'
+            )
         order_lines = sale_order.order_line
         product_lines = []
         sum_qty = 0.0
@@ -81,14 +85,22 @@ class TradingInvoice(models.Model):
                 'name': line.name,
                 'product_uom': line.product_uom,
                 'price_unit': line.price_unit,
-                'qty': line.product_uom_qty,
-                'price_total': line.price_total,
+                'qty': int(line.product_uom_qty),
+                'price_total':
+                    float_repr(
+                        line.price_total,
+                        precision_digits=price_total_precision,
+                ),
             })
             sum_qty += line.product_uom_qty
             sum_amount += line.price_total
         return {
-            'sum_qty': sum_qty,
-            'sum_amount': sum_amount,
+            'sum_qty': int(sum_qty),
+            'sum_amount':
+                float_repr(
+                    sum_amount,
+                    precision_digits=price_total_precision,
+            ),
             'product_lines': product_lines,
             'confirmation_date': self.get_date(sale_order.confirmation_date)
         }
@@ -106,6 +118,7 @@ class TradingInvoice(models.Model):
             mapped('linked_move_operation_ids').mapped('move_id'). \
             mapped('procurement_id').mapped('sale_line_id')
         sale_order_list = sale_order_lines.mapped('order_id')
+        default_storage_area = ''
         for line in sale_order_lines:
             sale_order = line.order_id
             client_order_ref = sale_order.client_order_ref
@@ -116,11 +129,14 @@ class TradingInvoice(models.Model):
                     ).mapped('move_id').
                     mapped('procurement_id').
                     mapped('sale_line_id').ids)
+            default_storage = line.product_id.default_storage_area
+            default_storage_area = \
+                default_storage if default_storage else default_storage_area
             for operation_line in operation_lines_per_sale_order_line:
                 stock_move = \
                     operation_line.mapped('linked_move_operation_ids').\
                     mapped('move_id')
-                current_location = stock_move[0].location_id
+                current_location = line.product_id.location_default_id
                 orgin = stock_move[0].origin
                 location_name = current_location.name
                 track_order = stock_move[0].picking_id.name
@@ -134,10 +150,7 @@ class TradingInvoice(models.Model):
                         'location': location_name,
                         'origin': orgin,
                         'client_order_ref': client_order_ref,
-                        'product_id':
-                        operation_line.product_id.with_context(
-                            lang=sale_order.partner_id.lang
-                        ),
+                        'product_id': operation_line.product_id,
                         'qty': operation_lot_line.qty,
                         'price_unit': line.price_unit,
                         'carton_qty':
@@ -150,7 +163,7 @@ class TradingInvoice(models.Model):
             'sum_product_qty': sum_product_qty,
             'sum_carton_qty': sum_carton_qty,
             'product_lines': product_lines,
-            'warehouse': sale_order_list[0].warehouse_id.name or False,
+            'warehouse': default_storage_area,
             'delivery_date':
                 self.get_date(stock_picking_list[0].min_date) or False,
             'team_id': sale_order_list[0].team_id or
@@ -295,14 +308,14 @@ class TradingInvoice(models.Model):
                         float_repr(
                             line.price_unit,
                             precision_digits=price_unit_precision,
-                        ),
+                    ),
                     'uom': line.with_context(lang=lang).uom_id.name,
                     'currency_id': line.currency_id,
                     'price_subtotal':
                         float_repr(
                             line.price_subtotal,
                             precision_digits=price_unit_precision,
-                        ),
+                    ),
                 })
             sale_order_lists.append({
                 'sale_order_name': sale_order.name,
@@ -442,7 +455,7 @@ class TradingInvoice(models.Model):
             'ship_to':
                 account_invoice.partner_shipping_id.with_context(
                     lang=lang
-                ).country_id.name}
+            ).country_id.name}
 
     @api.multi
     def get_detail_lot_list_per_invoice_sub_list(self,
@@ -513,6 +526,7 @@ class TradingInvoice(models.Model):
                 'Case Volume Printout'
             )
         for pack_operation_lot in operation_lot_list_sale_order:
+            carton_qty = pack_operation_lot.lot_id.carton_qty
             order_lines.append({
                 'carton_no': pack_operation_lot.lot_id.carton_no,
                 'customer_product_code':
@@ -533,27 +547,29 @@ class TradingInvoice(models.Model):
                         pack_operation_lot.lot_id.net_by_carton,
                         precision_digits=case_weight_precision,
                     ),
-                'carton_qty': int(pack_operation_lot.lot_id.carton_qty),
+                'carton_qty':
+                    int(carton_qty) if int(carton_qty) == carton_qty
+                    else carton_qty,
                 'gross_weight':
                     float_repr(
                         pack_operation_lot.lot_id.gross_weight,
                         precision_digits=case_weight_precision,
-                        ),
+                    ),
                 'net_weight':
                     float_repr(
                         pack_operation_lot.lot_id.net_weight,
                         precision_digits=case_weight_precision,
-                        ),
+                    ),
                 'volume':
                     float_repr(
                         pack_operation_lot.lot_id.volume,
                         precision_digits=case_volume_precision,
-                        ),
+                    ),
                 'volume_per_carton':
                     float_repr(
                         pack_operation_lot.lot_id.volume_by_carton,
                         precision_digits=case_volume_precision,
-                        ),
+                    ),
                 'mixed_loading':
                     'Y' if pack_operation_lot.lot_id.mixed_loading else '',
             })
@@ -596,7 +612,7 @@ class TradingInvoice(models.Model):
             sum_qty += line.product_uom_qty
             sum_amount += line.price_total
         sum_amount_text = amount_to_text_en.amount_to_text(
-            math.floor(sum_amount),
+            sum_amount,
             'en',
             sale_order.partner_id.currency_id.name,
         )
@@ -682,7 +698,10 @@ class TradingInvoice(models.Model):
                 pack_lot_list.append({
                     'client_order_ref':
                     pack_lot.operation_id.picking_id.sale_id.client_order_ref,
-                    'product_id': pack_lot.operation_id.product_id,
+                    'product_id':
+                        pack_lot.operation_id.product_id.with_context(
+                            lang=lang
+                        ),
                     'product_uom':
                         pack_lot.operation_id.with_context(
                             lang=lang
