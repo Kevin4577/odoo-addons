@@ -120,7 +120,7 @@ def change_ctx(report_xml_id, ctx):
         )
         package_qty, total_package_gw, package_meas = \
             trading_sale_obj.get_package_sum(account_invoice)
-        data['gw_sum'] = gw_sum_witout_package + total_package_gw
+        data['gw_sum'] = gw_sum_witout_package + float(total_package_gw)
         data['ship_to'] = \
             account_invoice.partner_shipping_id.country_id and \
             account_invoice.partner_shipping_id.country_id.name or ''
