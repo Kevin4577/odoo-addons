@@ -252,6 +252,14 @@ class TradingSale(models.Model):
          the same hs code of products inside those line.
          Carton quantity, total gross weight and total net
          weight of lots of those lines per hs code would be summed."""
+        case_weight_precision = \
+            self.env['decimal.precision'].precision_get(
+                'Case Weight Printout'
+            )
+        case_volume_precision = \
+            self.env['decimal.precision'].precision_get(
+                'Case Volume Printout'
+            )
         stock_picking_obj = self.env['stock.picking']
         stock_picking_list = \
             stock_picking_obj.search([('invoice_id', '=', account_invoice.id)])
@@ -277,10 +285,20 @@ class TradingSale(models.Model):
 
                 production_lines.append({
                     'hs_code': hs_code,
-                    'qty_ctn': sum(prod_lot_ids.mapped('carton_qty')),
-                    'total_gw': sum(prod_lot_ids.mapped('gross_weight')),
-                    'total_nw': sum(prod_lot_ids.mapped('net_weight')),
-                    'total_meas': sum(prod_lot_ids.mapped('volume'))
+                    'qty_ctn':
+                        int(sum(prod_lot_ids.mapped('carton_qty'))),
+                    'total_gw': float_repr(
+                        sum(prod_lot_ids.mapped('gross_weight')),
+                        precision_digits=case_weight_precision
+                        ),
+                    'total_nw': float_repr(
+                        sum(prod_lot_ids.mapped('net_weight')),
+                        precision_digits=case_weight_precision
+                        ),
+                    'total_meas': float_repr(
+                        sum(prod_lot_ids.mapped('volume')),
+                        precision_digits=case_volume_precision
+                        ),
                 })
                 for pack_lot in prod_lot_ids:
                     carton_quantity_with_same_hs_code = sum(
@@ -294,13 +312,24 @@ class TradingSale(models.Model):
                     sum_gross_weight += total_gross_weight_with_same_hs_code
                     sum_net_weight += total_net_weight_with_same_hs_code
                     sum_volume += total_volume_with_same_hs_code
-        return int(sum_carton_quantity), sum_gross_weight, sum_net_weight, \
-            sum_volume, production_lines
+        return int(sum_carton_quantity), sum_gross_weight, \
+            float_repr(
+            sum_net_weight,
+            precision_digits=case_weight_precision
+        ), sum_volume, production_lines
 
     @api.multi
     def get_package_sum(self, account_invoice):
         """This function would return the sum of quantity, gross weight,
         and volume of packages which was used in this stock picking."""
+        case_weight_precision = \
+            self.env['decimal.precision'].precision_get(
+                'Case Weight Printout'
+            )
+        case_volume_precision = \
+            self.env['decimal.precision'].precision_get(
+                'Case Volume Printout'
+            )
         stock_picking_obj = self.env['stock.picking']
         stock_picking_list = \
             stock_picking_obj.search([('invoice_id', '=', account_invoice.id)])
@@ -316,6 +345,13 @@ class TradingSale(models.Model):
                                               no_repeat_package_list])
             total_package_meas = sum([package.volume for package in
                                       no_repeat_package_list])
-            return quantity_packages, total_package_gross_weight, \
-                total_package_meas
+            return int(quantity_packages), \
+                float_repr(
+                total_package_gross_weight,
+                precision_digits=case_weight_precision
+            ), \
+                float_repr(
+                total_package_meas,
+                precision_digits=case_volume_precision
+            ),
         return 0, 0, 0

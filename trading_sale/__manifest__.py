@@ -17,7 +17,8 @@
         'stock_packaging_lot',
         'stock_picking_invoice_reference',
         'account_invoice_customer_reference',
-        'sale_order_dates'
+        'sale_order_dates',
+        'trading_invoice',
     ],
     'data': [
         'security/ir.model.access.csv',

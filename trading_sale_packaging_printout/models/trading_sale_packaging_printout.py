@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import _
+from odoo.tools import float_repr
 from odoo.exceptions import ValidationError
 from odoo.addons.report_py3o.models import py3o_report
 
@@ -18,6 +19,14 @@ def change_ctx(report_xml_id, ctx):
         in order to render the ods template """
     data = {}
     account_invoice = ctx['objects']
+    case_weight_precision = \
+        account_invoice.env['decimal.precision'].precision_get(
+            'Case Weight Printout'
+        )
+    case_volume_precision = \
+        account_invoice.env['decimal.precision'].precision_get(
+            'Case Volume Printout'
+        )
     trading_sale_obj = account_invoice.env['trading.sale']
     sale_order_lines = account_invoice.invoice_line_ids.mapped('sale_line_ids')
     sale_order_list = sale_order_lines.mapped('order_id')
@@ -35,10 +44,16 @@ def change_ctx(report_xml_id, ctx):
         data['qty_package'], data['total_package_gw'],\
             data['total_package_meas'] =\
             trading_sale_obj.get_package_sum(account_invoice)
-        data['gw_sum'] =\
-            gw_sum_witout_package + data['total_package_gw']
-        data['meas_sum'] =\
-            meas_sum_witout_package + data['total_package_meas']
+        data['gw_sum'] = \
+            float_repr(
+                gw_sum_witout_package + float(data['total_package_gw']),
+                precision_digits=case_weight_precision
+            )
+        data['meas_sum'] = \
+            float_repr(
+                meas_sum_witout_package + float(data['total_package_meas']),
+                precision_digits=case_volume_precision
+            )
         data['company_country_name'] = \
             account_invoice.company_id.with_context(lang=lang).country_id.name
         data['shipping_country_name'] = \
