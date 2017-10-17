@@ -34,6 +34,8 @@ class TestTradingInvoice(common.TransactionCase):
             'customer_product_code': 'Test',
             'default_code': 'Test Default Code',
             'property_account_income_id': self.account_rev_id.id,
+            'location_default_id': self.env.ref('stock.location_inventory').id,
+            'default_storage_area': 'Test Storage Area',
         })
         self.product_5 = self.env.ref('product.product_product_5')
         self.product_5.write({
@@ -41,6 +43,8 @@ class TestTradingInvoice(common.TransactionCase):
             'customer_product_code': 'Test',
             'default_code': 'Test Default Code 2',
             'property_account_income_id': self.account_rev_id.id,
+            'location_default_id': self.env.ref('stock.location_inventory').id,
+            'default_storage_area': 'Test Storage Area',
         })
         self.partner_id = self.env.ref('base.res_partner_2')
         self.partner_id.write({'ref': 'test_reference'})
@@ -153,15 +157,14 @@ class TestTradingInvoice(common.TransactionCase):
         for order in self.sale_order.order_line:
             qty += order.product_uom_qty
         self.assertEqual(self.lines['sum_qty'], qty)
-        self.assertEqual(self.lines['sum_amount'],
+        self.assertEqual(float(self.lines['sum_amount']),
                          self.sale_order.amount_total)
 
     def test_get_product_lot_list_per_sale_order(self):
         self.order = self.trading_invoice_model.\
             get_product_lot_list_per_sale_order(self.sale_order.picking_ids)
-        self.assertEqual(self.order['warehouse'],
-                         self.sale_order.warehouse_id.name)
-        self.assertEqual(self.order['sum_carton_qty'], self.lot1.carton_qty)
+        self.assertEqual(float(self.order['sum_carton_qty']),
+                         self.lot1.carton_qty)
 
     def test_get_product_order_list_with_qty(self):
         self.product_order_list = self.trading_invoice_model.\
@@ -179,7 +182,7 @@ class TestTradingInvoice(common.TransactionCase):
         self.assertEqual(self.product_lot['ship_to'], self.shipping_id.ship_to)
         self.assertEqual(self.product_lot['print_date'],
                          datetime.today().strftime('%Y-%m-%d'))
-        self.assertEqual(self.product_lot['sum_meas'], self.lot1.volume)
+        self.assertEqual(float(self.product_lot['sum_meas']), self.lot1.volume)
 
     def test_get_order_lines_per_invoice(self):
         self.lines_per_invoice = self.trading_invoice_model.\

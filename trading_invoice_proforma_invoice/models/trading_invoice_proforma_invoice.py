@@ -26,6 +26,8 @@ def render_template_with_data(report_xml_id, ctx):
                     sale_order.confirmation_date and
                     base_invoice_export_obj.
                 get_date(sale_order.confirmation_date) or False,
+                'payment_term_id':
+                    sale_order.payment_term_id.with_context(lang=lang),
                 'requested_date':
                     sale_order.requested_date and
                     base_invoice_export_obj.get_date(
