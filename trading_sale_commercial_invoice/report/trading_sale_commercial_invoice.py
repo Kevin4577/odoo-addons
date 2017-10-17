@@ -37,6 +37,10 @@ def change_ctx(report_xml_id, ctx):
             account_invoice.partner_shipping_id.with_context(
                 lang=lang
         ).country_id.name if account_invoice.partner_shipping_id else '--'
+        ctx['data'].update({
+            'payment_term_id':
+                account_invoice.payment_term_id.with_context(lang=lang)
+        })
         ctx['data'].update(trading_sale_obj.get_date_invoice(account_invoice))
         ctx['data'].update(data)
     else:
