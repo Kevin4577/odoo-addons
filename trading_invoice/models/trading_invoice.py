@@ -112,6 +112,7 @@ class TradingInvoice(models.Model):
         product_lines = []
         sum_product_qty = 0.0
         sum_carton_qty = 0
+        location_name = ''
         sale_order_lines = \
             stock_picking_list.mapped('pack_operation_product_ids'). \
             mapped('linked_move_operation_ids').mapped('move_id'). \
@@ -146,7 +147,7 @@ class TradingInvoice(models.Model):
                 for operation_lot_line in operation_line.pack_lot_ids:
                     product_lines.append({
                         'uom': line.product_uom.name,
-                        'location': location_name,
+                        'location': line.product_id.default_storage_area or '',
                         'origin': orgin,
                         'client_order_ref': client_order_ref,
                         'product_id': operation_line.product_id,
@@ -162,7 +163,7 @@ class TradingInvoice(models.Model):
             'sum_product_qty': sum_product_qty,
             'sum_carton_qty': sum_carton_qty,
             'product_lines': product_lines,
-            'warehouse': default_storage_area,
+            'warehouse': location_name,
             'delivery_date':
                 self.get_date(stock_picking_list[0].min_date) or False,
             'team_id': sale_order_list[0].team_id or
