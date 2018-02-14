@@ -113,6 +113,7 @@ class TradingInvoice(models.Model):
         sum_product_qty = 0.0
         sum_carton_qty = 0
         location_name = ''
+        sequence = 1
         sale_order_lines = \
             stock_picking_list.mapped('pack_operation_product_ids'). \
             mapped('linked_move_operation_ids').mapped('move_id'). \
@@ -142,6 +143,7 @@ class TradingInvoice(models.Model):
                 track_order = stock_move[0].picking_id.name
                 for operation_lot_line in operation_line.pack_lot_ids:
                     product_lines.append({
+                        'sequence':sequence,
                         'uom': line.product_uom.name,
                         'location': line.product_id.default_storage_area or '',
                         'origin': orgin,
@@ -153,6 +155,7 @@ class TradingInvoice(models.Model):
                         operation_lot_line.lot_id.carton_qty,
                         'track_order': track_order,
                     })
+                    sequence += 1
                     sum_product_qty += operation_lot_line.qty
                     sum_carton_qty += operation_lot_line.lot_id.carton_qty
         return {
