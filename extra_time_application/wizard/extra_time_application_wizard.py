@@ -21,7 +21,7 @@ class TimePromptBox(models.TransientModel):
                               default=_get_task_id, readonly="True"
                               )
     reason = fields.Text('Reason', help='the reason of apply')
-    apply_hours = fields.Float('Apply Hours', help='the length of apply time')
+    apply_hours = fields.Float('Apply Hours', help='Duration of applied time extension')
 
     @api.multi
     def subscribe(self):

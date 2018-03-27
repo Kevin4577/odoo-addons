@@ -4,8 +4,8 @@
 ======================
 Extra Time Application
 ======================
-This module adds functionality to the application time and
-will not allow to add new items if the task time is less than 0
+This module adds functionality of time application to extend the remaining time in tasks and
+will not allow to add new timesheets if the task time is less than 0
 
 Bug Tracker
 ===========

@@ -9,7 +9,7 @@ from lxml import etree
 class ProjectTaskInherit(models.Model):
     _inherit = 'project.task'
 
-    sub_extra_time = fields.Float(
+    total_extra_time = fields.Float(
         'Extra Time', help='the sum of the extra time',
         default='0',
     )
@@ -49,7 +49,7 @@ class ProjectTaskInherit(models.Model):
                 if remaining < 0:
                     raise UserError(
                         _(
-                            'The task has no enough time left, '
+                            'The task has not enough time left, '
                             'please apply for more extra time.'
                         ))
         res = super(ProjectTaskInherit, self).write(vals)
@@ -64,7 +64,7 @@ class ProjectTaskInherit(models.Model):
             if not is_exist and self.project_id.user_id != current_user:
                 raise UserError(
                     _('You do not have permission to '
-                      'create task belong to this project.'))
+                      'create task in this project.'))
         return super(ProjectTaskInherit, self).create(vals)
 
     @api.multi
