@@ -13,7 +13,7 @@
                 <button class="oe_inline oe_stat_button"
                     type="object" name="open_extra_time_line"
                         icon="fa-tasks">
-                    <field name="sub_extra_time" widget="statinfo"/>
+                    <field name="total_extra_time" widget="statinfo"/>
                 </button>
             </xpath>
         </field>
