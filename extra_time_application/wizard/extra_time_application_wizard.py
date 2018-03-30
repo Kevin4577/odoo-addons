@@ -38,7 +38,7 @@ class TimePromptBox(models.TransientModel):
             })
             self.with_context(flag_remaine='True'). \
                 task_id.remaining_hours += self.apply_hours
-            self.task_id.sub_extra_time += self.apply_hours
+            self.task_id.total_extra_time += self.apply_hours
 
         else:
             mail = self.env['mail.mail'].create({

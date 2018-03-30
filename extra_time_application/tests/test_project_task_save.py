@@ -15,7 +15,7 @@ class TestProjectTaskSave(common.TransactionCase):
         self.name_2 = self.env.ref('project.project_task_8')
         self.project_id = self.env.ref('project.project_project_4')
         self.user_id = self.env.ref('base.user_root')
-        self.sub_extra_time = 0
+        self.total_extra_time = 0
         self.timesheet_ids = self.env['account.analytic.line'].write([[
             0, False, {
                 'date_time': datetime.today().strftime(

@@ -43,7 +43,7 @@ class ProjectTaskInherit(models.Model):
                             log.remaining_hours + spending_hours,
                         'state': 'approve',
                     })
-                    log.sub_extra_time += \
+                    log.total_extra_time += \
                         (vals.get('remaining_hours') -
                          log.remaining_hours + spending_hours)
                 if remaining < 0:

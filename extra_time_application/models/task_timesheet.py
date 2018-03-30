@@ -31,7 +31,7 @@ class TaskTimeSheet(models.Model):
                 task_id.project_id.is_modified:
             self.with_context(flag='True'). \
                 task_id.remaining_hours += self.apply_hours
-            self.task_id.sub_extra_time += self.apply_hours
+            self.task_id.total_extra_time += self.apply_hours
             self.state = 'approve'
             self.message_post(
                 body=_(" <em>%s</em> <b>Approved</b>.") % (self.env.user.name))
