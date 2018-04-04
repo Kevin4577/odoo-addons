@@ -143,7 +143,7 @@ class TradingInvoice(models.Model):
                 track_order = stock_move[0].picking_id.name
                 for operation_lot_line in operation_line.pack_lot_ids:
                     product_lines.append({
-                        'sequence':sequence,
+                        'sequence': sequence,
                         'uom': line.product_uom.name,
                         'location': line.product_id.default_storage_area or '',
                         'origin': orgin,
