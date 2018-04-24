@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     "name": "Trading Invoice",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.1.0",
     "summary": """Trading Invoice common methods and information""",
     "author": "Elico Corp",
     "support": "support@elico-corp.com",

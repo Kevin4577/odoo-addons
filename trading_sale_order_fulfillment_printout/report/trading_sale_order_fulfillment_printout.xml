@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="local_py3o_server" model="py3o.server">
+<!--     <record id="local_py3o_server" model="py3o.server">
         <field name="url">http://localhost:8765/form</field>
-    </record>
+    </record> -->
 
     <record id="trading_sale_order_fulfillment_py3o" model="ir.actions.report.xml">
         <field name="name">Trading Sale Order Fulfillment</field>
@@ -12,7 +12,7 @@
         <field name="report_name">Trading Sale Order Fulfillment</field>
         <field name="report_type">py3o</field>
         <field name="py3o_filetype">ods</field>
-        <field name="py3o_server_id" ref="local_py3o_server"/>
+        <!-- <field name="py3o_server_id" ref="local_py3o_server"/> -->
         <field eval="True" name="py3o_multi_in_one"/>
         <field name="module">trading_sale_order_fulfillment_printout</field>
         <field name="py3o_template_fallback">report/order_fulfillment_template.ods</field>
