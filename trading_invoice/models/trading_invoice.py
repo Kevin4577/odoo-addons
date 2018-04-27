@@ -125,8 +125,12 @@ class TradingInvoice(models.Model):
         model_order_list = model_lines.mapped('order_id')
         default_storage_area = ''
         for line in model_lines:
-            sale_order = line.order_id
-            client_order_ref = sale_order.client_order_ref
+            model_order = line.order_id
+            if self._context.get("report_name") == \
+                    "trading_purchase_delivery_note_by_lot":
+                client_order_ref = model_order.partner_ref
+            else:
+                client_order_ref = model_order.client_order_ref
             operation_lines_per_sale_order_line = stock_picking_list.\
                 mapped('pack_operation_product_ids').filtered(
                     lambda operation: line.id in operation.mapped(
