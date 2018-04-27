@@ -2,7 +2,7 @@
 # © 2018 Elico Corp (https://www.elico-corp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
-    "name": "Trading Purchase Order Note By lot",
+    "name": "Trading Purchase Delivery Note By lot",
     "summary": """This module generates Trading Purchase Delivery Note By 
     Lot for multi-delivery orders""",
     "version": "10.0.1.0.0",
