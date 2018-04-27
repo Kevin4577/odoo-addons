@@ -109,18 +109,22 @@ class TradingInvoice(models.Model):
         """This function get the lot detail of each delivery order lines,
         which was group by client order reference of sale order for each
         of them."""
+
+        flag = "purchase_line_id" if self._context.get("report_name") == \
+                "trading_purchase_delivery_note_by_lot" else "sale_line_id"
+
         product_lines = []
         sum_product_qty = 0.0
         sum_carton_qty = 0
         location_name = ''
         sequence = 1
-        sale_order_lines = \
+        model_lines = \
             stock_picking_list.mapped('pack_operation_product_ids'). \
             mapped('linked_move_operation_ids').mapped('move_id'). \
-            mapped('procurement_id').mapped('sale_line_id')
-        sale_order_list = sale_order_lines.mapped('order_id')
+            mapped('procurement_id').mapped(flag)
+        model_order_list = model_lines.mapped('order_id')
         default_storage_area = ''
-        for line in sale_order_lines:
+        for line in model_lines:
             sale_order = line.order_id
             client_order_ref = sale_order.client_order_ref
             operation_lines_per_sale_order_line = stock_picking_list.\
@@ -129,7 +133,7 @@ class TradingInvoice(models.Model):
                         'linked_move_operation_ids'
                     ).mapped('move_id').
                     mapped('procurement_id').
-                    mapped('sale_line_id').ids)
+                    mapped(flag).ids)
             default_storage = line.product_id.default_storage_area
             default_storage_area = \
                 default_storage if default_storage else default_storage_area
@@ -165,7 +169,7 @@ class TradingInvoice(models.Model):
             'warehouse': location_name,
             'delivery_date':
                 self.get_date(stock_picking_list[0].min_date) or False,
-            'team_id': sale_order_list[0].team_id or
+            'team_id': model_order_list[0].team_id or
             self.env['crm.team'],
         }
 

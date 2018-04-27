@@ -7,7 +7,7 @@
 
     <record id="trading_purchase_delivery_note_by_lot_py3o"
             model="ir.actions.report.xml">
-        <field name="name">Trading Purchase Delivery Note By Lot</field>
+        <field name="name"> Purchase Order Receipts</field>
         <field name="type">ir.actions.report.xml</field>
         <field name="model">stock.picking</field>
         <field name="report_name">trading_purchase_delivery_note_by_lot</field>
@@ -23,7 +23,7 @@
         <field eval="'action'" name="key" />
         <field eval="'client_print_multi'" name="key2" />
         <field name="model">stock.picking</field>
-        <field name="name">Trading Purchase Delivery Note By Lot</field>
+        <field name="name">Purchase Order Receipts</field>
         <field eval="'ir.actions.report.xml,' + str(trading_purchase_delivery_note_by_lot_py3o)"
                name="value"/>
     </record>
