@@ -169,8 +169,8 @@ class TradingInvoice(models.Model):
             'warehouse': location_name,
             'delivery_date':
                 self.get_date(stock_picking_list[0].min_date) or False,
-            'team_id': model_order_list[0].team_id or
-            self.env['crm.team'],
+            'team_id': model_order_list[0].team_id if model_order_list else
+                   self.env['crm.team'],
         }
 
     @api.multi
