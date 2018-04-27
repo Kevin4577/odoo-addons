@@ -5,9 +5,8 @@
         <field name="url">http://localhost:8765/form</field>
     </record> -->
 
-    <record id="trading_purchase_delivery_note_by_lot_py3o"
-            model="ir.actions.report.xml">
-        <field name="name"> Purchase Order Receipts</field>
+    <record id="trading_purchase_delivery_note_by_lot_py3o" model="ir.actions.report.xml">
+        <field name="name">Purchase Order Receipts</field>
         <field name="type">ir.actions.report.xml</field>
         <field name="model">stock.picking</field>
         <field name="report_name">trading_purchase_delivery_note_by_lot</field>

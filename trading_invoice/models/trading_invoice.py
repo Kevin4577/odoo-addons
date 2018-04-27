@@ -733,3 +733,75 @@ class TradingInvoice(models.Model):
             'partner_shipping_id': partner_shipping_id,
             'package_list': package_list
         }
+
+    @api.multi
+    def get_product_lot_list_per_purhcase_order(self, stock_picking_list):
+        """This function get the lot detail of each delivery order lines,
+        which was group by client order reference of sale order for each
+        of them."""
+
+        flag = "purchase_line_id" if self._context.get("report_name") == \
+                "trading_purchase_delivery_note_by_lot" else "sale_line_id"
+
+        product_lines = []
+        sum_product_qty = 0.0
+        sum_carton_qty = 0
+        location_name = ''
+        vendor_no = stock_picking_list.partner_id.ref
+        department = stock_picking_list.location_id.display_name
+        sequence = 1
+        model_lines = \
+            stock_picking_list.mapped('pack_operation_product_ids'). \
+            mapped('linked_move_operation_ids').mapped('move_id'). \
+            mapped('procurement_id').mapped(flag)
+        # model_order_list = model_lines.mapped('order_id')
+        default_storage_area = ''
+        for line in model_lines:
+            model_order = line.order_id
+            if self._context.get("report_name") == \
+                    "trading_purchase_delivery_note_by_lot":
+                client_order_ref = model_order.partner_ref
+            else:
+                client_order_ref = model_order.client_order_ref
+            operation_lines_per_sale_order_line = stock_picking_list.\
+                mapped('pack_operation_product_ids').filtered(
+                    lambda operation: line.id in operation.mapped(
+                        'linked_move_operation_ids'
+                    ).mapped('move_id').
+                    mapped('procurement_id').
+                    mapped(flag).ids)
+            default_storage = line.product_id.default_storage_area
+            default_storage_area = \
+                default_storage if default_storage else default_storage_area
+            for operation_line in operation_lines_per_sale_order_line:
+                stock_move = \
+                    operation_line.mapped('linked_move_operation_ids').\
+                    mapped('move_id')
+                current_location = stock_move[0].location_dest_id
+                orgin = stock_move[0].origin
+                location_name = current_location.display_name
+                track_order = stock_move[0].picking_id.name
+                # for operation_lot_line in operation_line.pack_lot_ids:
+                product_lines.append({
+                    'sequence': sequence,
+                    'uom': operation_line.product_uom_id.name,
+                    'location': operation_line.product_id.default_storage_area or '',
+                    'origin': orgin,
+                    'client_order_ref': client_order_ref,
+                    'product_id': operation_line.product_id,
+                    'qty': operation_line.ordered_qty,
+                    'price_unit': '',
+                    'track_order': track_order,
+                })
+                sequence += 1
+                sum_product_qty += operation_line.ordered_qty
+                    # sum_carton_qty += operation_lot_line.lot_id.carton_qty
+        return {
+            'sum_product_qty': sum_product_qty,
+            'product_lines': product_lines,
+            'warehouse': location_name,
+            'delivery_date':
+                self.get_date(stock_picking_list[0].min_date) or False,
+            'supplier_num': vendor_no or '',
+            'department': department or '',
+        }
