@@ -745,10 +745,11 @@ class TradingInvoice(models.Model):
 
         product_lines = []
         sum_product_qty = 0.0
-        sum_carton_qty = 0
         location_name = ''
         vendor_no = stock_picking_list.partner_id.ref
         department = stock_picking_list.location_id.display_name
+        orgin = stock_picking_list.origin
+        track_order = stock_picking_list.name
         sequence = 1
         model_lines = \
             stock_picking_list.mapped('pack_operation_product_ids'). \
@@ -763,24 +764,16 @@ class TradingInvoice(models.Model):
                 client_order_ref = model_order.partner_ref
             else:
                 client_order_ref = model_order.client_order_ref
-            operation_lines_per_sale_order_line = stock_picking_list.\
-                mapped('pack_operation_product_ids').filtered(
-                    lambda operation: line.id in operation.mapped(
-                        'linked_move_operation_ids'
-                    ).mapped('move_id').
-                    mapped('procurement_id').
-                    mapped(flag).ids)
+
+            pack_operation_product_ids_lines = stock_picking_list. \
+                mapped('pack_operation_product_ids')
             default_storage = line.product_id.default_storage_area
             default_storage_area = \
                 default_storage if default_storage else default_storage_area
-            for operation_line in operation_lines_per_sale_order_line:
-                stock_move = \
-                    operation_line.mapped('linked_move_operation_ids').\
-                    mapped('move_id')
-                current_location = stock_move[0].location_dest_id
-                orgin = stock_move[0].origin
+            for operation_line in pack_operation_product_ids_lines:
+
+                current_location = operation_line.location_dest_id
                 location_name = current_location.display_name
-                track_order = stock_move[0].picking_id.name
                 # for operation_lot_line in operation_line.pack_lot_ids:
                 product_lines.append({
                     'sequence': sequence,
