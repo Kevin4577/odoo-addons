@@ -776,7 +776,7 @@ class TradingInvoice(models.Model):
                 'track_order': track_order,
             })
             sequence += 1
-            sum_product_qty += operation_line.ordered_qty
+            sum_product_qty += operation_line.product_qty
         return {
             'sum_product_qty': sum_product_qty,
             'product_lines': product_lines,
