@@ -18,7 +18,7 @@ def render_report_with_data(report_xml_id, ctx):
     ods template with necessary data."""
     stock_picking_list = ctx['objects']
     if len(stock_picking_list.mapped('partner_id').ids) > 1:
-        raise ValidationError(_('Please check whether all delivery '
+        raise ValidationError(_('Please check whether all purchase '
                                 'orders period belong to one customer'))
     base_invoice_export_obj = stock_picking_list.env['trading.invoice']
     if not stock_picking_list.filtered(lambda stock_picking:

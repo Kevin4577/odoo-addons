@@ -740,6 +740,7 @@ class TradingInvoice(models.Model):
         which was group by client order reference of sale order for each
         of them."""
 
+        self.ensure_one()
         product_lines = []
         sum_product_qty = 0.0
         location_name = ''
