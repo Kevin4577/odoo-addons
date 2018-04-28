@@ -740,9 +740,6 @@ class TradingInvoice(models.Model):
         which was group by client order reference of sale order for each
         of them."""
 
-        flag = "purchase_line_id" if self._context.get("report_name") == \
-                "trading_purchase_delivery_note_by_lot" else "sale_line_id"
-
         product_lines = []
         sum_product_qty = 0.0
         location_name = ''
@@ -751,44 +748,28 @@ class TradingInvoice(models.Model):
         orgin = stock_picking_list.origin
         track_order = stock_picking_list.name
         sequence = 1
-        model_lines = \
-            stock_picking_list.mapped('pack_operation_product_ids'). \
-            mapped('linked_move_operation_ids').mapped('move_id'). \
-            mapped('procurement_id').mapped(flag)
-        # model_order_list = model_lines.mapped('order_id')
         default_storage_area = ''
-        for line in model_lines:
-            model_order = line.order_id
-            if self._context.get("report_name") == \
-                    "trading_purchase_delivery_note_by_lot":
-                client_order_ref = model_order.partner_ref
-            else:
-                client_order_ref = model_order.client_order_ref
 
-            pack_operation_product_ids_lines = stock_picking_list. \
-                mapped('pack_operation_product_ids')
-            default_storage = line.product_id.default_storage_area
+        pack_operation_product_ids_lines = stock_picking_list. \
+            mapped('pack_operation_product_ids')
+        for operation_line in pack_operation_product_ids_lines:
+
+            default_storage = operation_line.product_id.default_storage_area
             default_storage_area = \
                 default_storage if default_storage else default_storage_area
-            for operation_line in pack_operation_product_ids_lines:
-
-                current_location = operation_line.location_dest_id
-                location_name = current_location.display_name
-                # for operation_lot_line in operation_line.pack_lot_ids:
-                product_lines.append({
-                    'sequence': sequence,
-                    'uom': operation_line.product_uom_id.name,
-                    'location': operation_line.product_id.default_storage_area or '',
-                    'origin': orgin,
-                    'client_order_ref': client_order_ref,
-                    'product_id': operation_line.product_id,
-                    'qty': operation_line.ordered_qty,
-                    'price_unit': '',
-                    'track_order': track_order,
-                })
-                sequence += 1
-                sum_product_qty += operation_line.ordered_qty
-                    # sum_carton_qty += operation_lot_line.lot_id.carton_qty
+            current_location = operation_line.location_dest_id
+            location_name = current_location.display_name
+            product_lines.append({
+                'sequence': sequence,
+                'uom': operation_line.product_uom_id.name,
+                'location': operation_line.product_id.default_storage_area or '',
+                'origin': orgin,
+                'product_id': operation_line.product_id,
+                'qty': operation_line.ordered_qty,
+                'track_order': track_order,
+            })
+            sequence += 1
+            sum_product_qty += operation_line.ordered_qty
         return {
             'sum_product_qty': sum_product_qty,
             'product_lines': product_lines,
