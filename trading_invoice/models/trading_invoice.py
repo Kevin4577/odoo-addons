@@ -765,8 +765,14 @@ class TradingInvoice(models.Model):
                 'uom': operation_line.product_uom_id.name,
                 'location': operation_line.product_id.default_storage_area or '',
                 'origin': orgin,
+                'rd_product_code': operation_line.product_id.rd_product_code
+                                   or '',
+                'default_code': operation_line.product_id.default_code or '',
+                'name': operation_line.product_id.name or '',
+                'customer_product_code':
+                    operation_line.product_id.customer_product_code or '',
                 'product_id': operation_line.product_id,
-                'qty': operation_line.ordered_qty,
+                'qty': operation_line.product_qty,
                 'track_order': track_order,
             })
             sequence += 1
