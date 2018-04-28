@@ -30,5 +30,5 @@ msgstr "请检查是否发货单由入库单生成。"
 #. module: trading_purchase_delivery_note_by_lot
 #: model:ir.actions.report.xml,name:trading_purchase_delivery_note_by_lot.trading_purchase_delivery_note_by_lot_py3o
 msgid "Purchase Order Receipts"
-msgstr "Purchase Order Receipts"
+msgstr "采购收货入库单"
 
