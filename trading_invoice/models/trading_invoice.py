@@ -111,7 +111,7 @@ class TradingInvoice(models.Model):
         of them."""
 
         flag = "purchase_line_id" if self._context.get("report_name") == \
-                "trading_purchase_delivery_note_by_lot" else "sale_line_id"
+            "trading_purchase_delivery_note_by_lot" else "sale_line_id"
 
         product_lines = []
         sum_product_qty = 0.0
@@ -174,7 +174,7 @@ class TradingInvoice(models.Model):
             'delivery_date':
                 self.get_date(stock_picking_list[0].min_date) or False,
             'team_id': model_order_list[0].team_id if model_order_list else
-                   self.env['crm.team'],
+            self.env['crm.team'],
         }
 
     @api.multi
@@ -763,10 +763,11 @@ class TradingInvoice(models.Model):
             product_lines.append({
                 'sequence': sequence,
                 'uom': operation_line.product_uom_id.name,
-                'location': operation_line.product_id.default_storage_area or '',
+                'location': operation_line.product_id.default_storage_area
+                or '',
                 'origin': orgin,
                 'rd_product_code': operation_line.product_id.rd_product_code
-                                   or '',
+                or '',
                 'default_code': operation_line.product_id.default_code or '',
                 'name': operation_line.product_id.name or '',
                 'customer_product_code':
