@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="utf-8"?>
 
 <odoo noupdate="1">
@@ -7,4 +8,5 @@
         <field name="name">Product Quantity Printout</field>
         <field name="digits">2</field>
     </record>
+
 </odoo>

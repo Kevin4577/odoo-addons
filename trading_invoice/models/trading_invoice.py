@@ -763,11 +763,11 @@ class TradingInvoice(models.Model):
             product_lines.append({
                 'sequence': sequence,
                 'uom': operation_line.product_uom_id.name,
-                'location': operation_line.product_id.default_storage_area
-                or '',
+                'location':
+                    operation_line.product_id.default_storage_area or '',
                 'origin': orgin,
-                'rd_product_code': operation_line.product_id.rd_product_code
-                or '',
+                'rd_product_code':
+                    operation_line.product_id.rd_product_code or '',
                 'default_code': operation_line.product_id.default_code or '',
                 'name': operation_line.product_id.name or '',
                 'customer_product_code':
