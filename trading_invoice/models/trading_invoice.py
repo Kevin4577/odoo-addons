@@ -740,50 +740,50 @@ class TradingInvoice(models.Model):
         which was group by client order reference of sale order for each
         of them."""
 
-        stock_picking_list.ensure_one()
         product_lines = []
-        sum_product_qty = 0.0
-        location_name = ''
-        vendor_no = stock_picking_list.partner_id.ref
-        department = stock_picking_list.location_id.display_name
-        orgin = stock_picking_list.origin
-        track_order = stock_picking_list.name
         sequence = 1
-        default_storage_area = ''
+        sum_product_qty = 0.0
+        for reocrd in stock_picking_list:
+            location_name = ''
+            vendor_no = reocrd.partner_id.ref
+            department = reocrd.location_id.display_name
+            orgin = reocrd.origin
+            track_order = reocrd.name
+            default_storage_area = ''
 
-        pack_operation_product_ids_lines = stock_picking_list. \
-            mapped('pack_operation_product_ids')
-        for operation_line in pack_operation_product_ids_lines:
+            pack_operation_product_ids_lines = reocrd. \
+                mapped('pack_operation_product_ids')
+            for operation_line in pack_operation_product_ids_lines:
 
-            default_storage = operation_line.product_id.default_storage_area
-            default_storage_area = \
-                default_storage if default_storage else default_storage_area
-            current_location = operation_line.location_dest_id
-            location_name = current_location.display_name
-            product_lines.append({
-                'sequence': sequence,
-                'uom': operation_line.product_uom_id.name,
-                'location':
-                    operation_line.product_id.default_storage_area or '',
-                'origin': orgin,
-                'rd_product_code':
-                    operation_line.product_id.rd_product_code or '',
-                'default_code': operation_line.product_id.default_code or '',
-                'name': operation_line.product_id.name or '',
-                'customer_product_code':
-                    operation_line.product_id.customer_product_code or '',
-                'product_id': operation_line.product_id,
-                'qty': operation_line.product_qty,
-                'track_order': track_order,
-            })
-            sequence += 1
-            sum_product_qty += operation_line.product_qty
+                default_storage = operation_line.product_id.default_storage_area
+                default_storage_area = \
+                    default_storage if default_storage else default_storage_area
+                current_location = operation_line.location_dest_id
+                location_name = current_location.display_name
+                product_lines.append({
+                    'sequence': sequence,
+                    'uom': operation_line.product_uom_id.name,
+                    'location':
+                        operation_line.product_id.default_storage_area or '',
+                    'origin': orgin,
+                    'rd_product_code':
+                        operation_line.product_id.rd_product_code or '',
+                    'default_code': operation_line.product_id.default_code or '',
+                    'name': operation_line.product_id.name or '',
+                    'customer_product_code':
+                        operation_line.product_id.customer_product_code or '',
+                    'product_id': operation_line.product_id,
+                    'qty': operation_line.product_qty,
+                    'track_order': track_order,
+                })
+                sequence += 1
+                sum_product_qty += operation_line.product_qty
         return {
             'sum_product_qty': sum_product_qty,
             'product_lines': product_lines,
             'warehouse': location_name,
             'delivery_date':
-                self.get_date(stock_picking_list[0].min_date) or False,
+                self.get_date(reocrd[0].min_date) or False,
             'supplier_num': vendor_no or '',
             'department': department or '',
         }
