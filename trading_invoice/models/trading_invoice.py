@@ -867,4 +867,5 @@ class TradingInvoice(models.Model):
             'delivery_date':
                 self.get_date(stock_picking_list[0].min_date) or False,
             'source_location': source_location or '',
+            'type': picking_type or '',
         }
