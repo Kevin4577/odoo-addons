@@ -802,3 +802,69 @@ class TradingInvoice(models.Model):
             'supplier_num': vendor_no or '',
             'department': department or '',
         }
+
+    @api.multi
+    def get_product_lot_list_requisition(self, stock_picking_list):
+        """This function get the lot detail of each stock picking lines,
+        for requisition. """
+
+        product_lines = []
+        sequence = 1
+        sum_product_qty = 0.0
+        source_location = ''
+        location_name = ''
+        picking_type = ''
+        for stock_picking in stock_picking_list:
+            if not source_location == stock_picking.location_id.display_name:
+                raise UserError(_(
+                    "The outbound warehouse of the selected record is "
+                    "different"))
+            if not picking_type == stock_picking.picking_type_id.display_name:
+                raise UserError(_(
+                    "The stock picking type of the selected record is "
+                    "different"))
+            picking_type = stock_picking.picking_type_id.display_name
+            source_location = stock_picking.location_id.display_name
+            orgin = stock_picking.origin
+            track_order = stock_picking.name
+            default_storage_area = ''
+            pack_operation_product_ids_lines = stock_picking. \
+                mapped('pack_operation_product_ids')
+            for operation_line in pack_operation_product_ids_lines:
+                default_storage = \
+                    operation_line.product_id.default_storage_area
+                default_storage_area = \
+                    default_storage if default_storage else \
+                        default_storage_area
+                current_location = operation_line.location_dest_id
+                if not location_name == current_location.display_name:
+                    raise UserError(_(
+                        "The warehouse of the selected record is "
+                        "different"))
+                location_name = current_location.display_name
+                product_lines.append({
+                    'sequence': sequence,
+                    'uom': operation_line.product_uom_id.name,
+                    'location':
+                        operation_line.product_id.default_storage_area or '',
+                    'origin': orgin,
+                    'rd_product_code':
+                        operation_line.product_id.rd_product_code or '',
+                    'default_code': operation_line.product_id.default_code or'',
+                    'name': operation_line.product_id.name or '',
+                    'customer_product_code':
+                        operation_line.product_id.customer_product_code or '',
+                    'product_id': operation_line.product_id,
+                    'qty': operation_line.product_qty,
+                    'track_order': track_order,
+                })
+                sequence += 1
+                sum_product_qty += operation_line.product_qty
+        return {
+            'sum_product_qty': sum_product_qty,
+            'product_lines': product_lines,
+            'destination_location': location_name,
+            'delivery_date':
+                self.get_date(stock_picking_list[0].min_date) or False,
+            'source_location': source_location or '',
+        }
