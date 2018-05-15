@@ -9,7 +9,6 @@ from odoo.tools import amount_to_text_en
 from odoo.exceptions import UserError
 
 
-
 class TradingInvoice(models.Model):
 
     _name = "trading.invoice"
@@ -765,9 +764,11 @@ class TradingInvoice(models.Model):
             pack_operation_product_ids_lines = stock_picking. \
                 mapped('pack_operation_product_ids')
             for operation_line in pack_operation_product_ids_lines:
-                default_storage = operation_line.product_id.default_storage_area
+                default_storage = \
+                    operation_line.product_id.default_storage_area
                 default_storage_area = \
-                    default_storage if default_storage else default_storage_area
+                    default_storage if default_storage else \
+                        default_storage_area
                 current_location = operation_line.location_dest_id
                 if not location_name == current_location.display_name:
                     raise UserError(_(
@@ -782,7 +783,7 @@ class TradingInvoice(models.Model):
                     'origin': orgin,
                     'rd_product_code':
                         operation_line.product_id.rd_product_code or '',
-                    'default_code': operation_line.product_id.default_code or '',
+                    'default_code': operation_line.product_id.default_code or'',
                     'name': operation_line.product_id.name or '',
                     'customer_product_code':
                         operation_line.product_id.customer_product_code or '',
