@@ -1,0 +1,70 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* trading_invoice
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-15 09:21+0000\n"
+"PO-Revision-Date: 2018-05-15 09:21+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: trading_invoice
+#: model:ir.model.fields,field_description:trading_invoice.field_trading_invoice_create_uid
+msgid "Created by"
+msgstr "创建人"
+
+#. module: trading_invoice
+#: model:ir.model.fields,field_description:trading_invoice.field_trading_invoice_create_date
+msgid "Created on"
+msgstr "创建时间"
+
+#. module: trading_invoice
+#: model:ir.model.fields,field_description:trading_invoice.field_trading_invoice_display_name
+msgid "Display Name"
+msgstr "显示名称"
+
+#. module: trading_invoice
+#: model:ir.model.fields,field_description:trading_invoice.field_trading_invoice___last_update
+msgid "Last Modified on"
+msgstr "最后修改日"
+
+#. module: trading_invoice
+#: model:ir.model.fields,field_description:trading_invoice.field_trading_invoice_write_uid
+msgid "Last Updated by"
+msgstr "最后更新人"
+
+#. module: trading_invoice
+#: model:ir.model.fields,field_description:trading_invoice.field_trading_invoice_write_date
+msgid "Last Updated on"
+msgstr "最后更新时间"
+
+#. module: trading_invoice
+#: code:addons/trading_invoice/models/trading_invoice.py:753
+#, python-format
+msgid "The entry department of the selected record is different"
+msgstr "所选记录的入库部门不同"
+
+#. module: trading_invoice
+#: code:addons/trading_invoice/models/trading_invoice.py:757
+#, python-format
+msgid "The supplier of the selected record is different"
+msgstr "所选记录的供应商不同"
+
+#. module: trading_invoice
+#: code:addons/trading_invoice/models/trading_invoice.py:775
+#, python-format
+msgid "The warehouse of the selected record is different"
+msgstr "所选记录的仓库不同"
+
+#. module: trading_invoice
+#: model:ir.model,name:trading_invoice.model_trading_invoice
+msgid "Trading Invoice"
+msgstr "Trading Invoice"
+

@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 # © 2017 Elico Corp (https://www.elico-corp.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import api, models
+from odoo import api, models, _
 from datetime import datetime
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT,\
     DEFAULT_SERVER_DATETIME_FORMAT, float_repr
 from odoo.tools import amount_to_text_en
+from odoo.exceptions import UserError
+
 
 
 class TradingInvoice(models.Model):
@@ -743,8 +745,18 @@ class TradingInvoice(models.Model):
         product_lines = []
         sequence = 1
         sum_product_qty = 0.0
+        department = ''
+        location_name = ''
+        vendor_no = ''
         for reocrd in stock_picking_list:
-            location_name = ''
+            if not department == reocrd.location_id.display_name:
+                raise UserError(_(
+                    "The entry department of the selected record is "
+                    "different"))
+            if not vendor_no == reocrd.partner_id.ref:
+                raise UserError(_(
+                    "The supplier of the selected record is "
+                    "different"))
             vendor_no = reocrd.partner_id.ref
             department = reocrd.location_id.display_name
             orgin = reocrd.origin
@@ -759,6 +771,10 @@ class TradingInvoice(models.Model):
                 default_storage_area = \
                     default_storage if default_storage else default_storage_area
                 current_location = operation_line.location_dest_id
+                if not location_name == current_location.display_name:
+                    raise UserError(_(
+                        "The warehouse of the selected record is "
+                        "different"))
                 location_name = current_location.display_name
                 product_lines.append({
                     'sequence': sequence,
