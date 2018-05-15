@@ -748,25 +748,23 @@ class TradingInvoice(models.Model):
         department = ''
         location_name = ''
         vendor_no = ''
-        for reocrd in stock_picking_list:
-            if not department == reocrd.location_id.display_name:
+        for stock_picking in stock_picking_list:
+            if not department == stock_picking.location_id.display_name:
                 raise UserError(_(
                     "The entry department of the selected record is "
                     "different"))
-            if not vendor_no == reocrd.partner_id.ref:
+            if not vendor_no == stock_picking.partner_id.ref:
                 raise UserError(_(
                     "The supplier of the selected record is "
                     "different"))
-            vendor_no = reocrd.partner_id.ref
-            department = reocrd.location_id.display_name
-            orgin = reocrd.origin
-            track_order = reocrd.name
+            vendor_no = stock_picking.partner_id.ref
+            department = stock_picking.location_id.display_name
+            orgin = stock_picking.origin
+            track_order = stock_picking.name
             default_storage_area = ''
-
-            pack_operation_product_ids_lines = reocrd. \
+            pack_operation_product_ids_lines = stock_picking. \
                 mapped('pack_operation_product_ids')
             for operation_line in pack_operation_product_ids_lines:
-
                 default_storage = operation_line.product_id.default_storage_area
                 default_storage_area = \
                     default_storage if default_storage else default_storage_area
@@ -799,7 +797,7 @@ class TradingInvoice(models.Model):
             'product_lines': product_lines,
             'warehouse': location_name,
             'delivery_date':
-                self.get_date(reocrd[0].min_date) or False,
+                self.get_date(stock_picking_list[0].min_date) or False,
             'supplier_num': vendor_no or '',
             'department': department or '',
         }
