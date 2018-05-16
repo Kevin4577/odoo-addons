@@ -21,11 +21,7 @@ def render_report_with_data(report_xml_id, ctx):
         raise ValidationError(_('Please check whether all purchase '
                                 'orders period belong to one customer'))
     base_invoice_export_obj = stock_picking_list.env['trading.invoice']
-    if not stock_picking_list.filtered(lambda stock_picking:
-                                       not stock_picking.purchase_id):
-        data = base_invoice_export_obj.get_product_lot_list_requisition(
-            stock_picking_list)
-        ctx.update(data)
-    else:
-        raise ValidationError(_('Please check whether this stock picking '
-                                'was generated from purchase order.'))
+    data = base_invoice_export_obj.get_product_lot_list_requisition(
+        stock_picking_list)
+    ctx.update(data)
+
