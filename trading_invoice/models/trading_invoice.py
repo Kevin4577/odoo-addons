@@ -748,11 +748,12 @@ class TradingInvoice(models.Model):
         location_name = ''
         vendor_no = ''
         for stock_picking in stock_picking_list:
-            if not department == stock_picking.location_id.display_name:
+            if department and not department == \
+                    stock_picking.location_id.display_name:
                 raise UserError(_(
                     "The entry department of the selected record is "
                     "different"))
-            if not vendor_no == stock_picking.partner_id.ref:
+            if vendor_no and not vendor_no == stock_picking.partner_id.ref:
                 raise UserError(_(
                     "The supplier of the selected record is "
                     "different"))
@@ -770,7 +771,8 @@ class TradingInvoice(models.Model):
                     default_storage if default_storage else \
                         default_storage_area
                 current_location = operation_line.location_dest_id
-                if not location_name == current_location.display_name:
+                if location_name and not location_name == \
+                        current_location.display_name:
                     raise UserError(_(
                         "The warehouse of the selected record is "
                         "different"))
@@ -815,11 +817,13 @@ class TradingInvoice(models.Model):
         location_name = ''
         picking_type = ''
         for stock_picking in stock_picking_list:
-            if not source_location == stock_picking.location_id.display_name:
+            if source_location or not source_location == \
+                    stock_picking.location_id.display_name:
                 raise UserError(_(
                     "The outbound warehouse of the selected record is "
                     "different"))
-            if not picking_type == stock_picking.picking_type_id.display_name:
+            if picking_type or not picking_type == \
+                    stock_picking.picking_type_id.display_name:
                 raise UserError(_(
                     "The stock picking type of the selected record is "
                     "different"))
@@ -837,7 +841,8 @@ class TradingInvoice(models.Model):
                     default_storage if default_storage else \
                         default_storage_area
                 current_location = operation_line.location_dest_id
-                if not location_name == current_location.display_name:
+                if location_name or not location_name == \
+                        current_location.display_name:
                     raise UserError(_(
                         "The warehouse of the selected record is "
                         "different"))
