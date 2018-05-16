@@ -769,7 +769,7 @@ class TradingInvoice(models.Model):
                     operation_line.product_id.default_storage_area
                 default_storage_area = \
                     default_storage if default_storage else \
-                        default_storage_area
+                    default_storage_area
                 current_location = operation_line.location_dest_id
                 if location_name and not location_name == \
                         current_location.display_name:
@@ -785,7 +785,8 @@ class TradingInvoice(models.Model):
                     'origin': orgin,
                     'rd_product_code':
                         operation_line.product_id.rd_product_code or '',
-                    'default_code': operation_line.product_id.default_code or'',
+                    'default_code': operation_line.product_id.default_code
+                    or '',
                     'name': operation_line.product_id.name or '',
                     'customer_product_code':
                         operation_line.product_id.customer_product_code or '',
@@ -839,7 +840,7 @@ class TradingInvoice(models.Model):
                     operation_line.product_id.default_storage_area
                 default_storage_area = \
                     default_storage if default_storage else \
-                        default_storage_area
+                    default_storage_area
                 current_location = operation_line.location_dest_id
                 if location_name and not location_name == \
                         current_location.display_name:
@@ -855,7 +856,8 @@ class TradingInvoice(models.Model):
                     'origin': orgin,
                     'rd_product_code':
                         operation_line.product_id.rd_product_code or '',
-                    'default_code': operation_line.product_id.default_code or'',
+                    'default_code': operation_line.product_id.default_code
+                    or '',
                     'name': operation_line.product_id.name or '',
                     'customer_product_code':
                         operation_line.product_id.customer_product_code or '',
