@@ -52,13 +52,26 @@ msgid "The entry department of the selected record is different"
 msgstr "所选记录的入库部门不同"
 
 #. module: trading_invoice
+#: code:addons/trading_invoice/models/trading_invoice.py:819
+#, python-format
+msgid "The outbound warehouse of the selected record is different"
+msgstr "所选记录的出库仓库不同"
+
+#. module: trading_invoice
+#: code:addons/trading_invoice/models/trading_invoice.py:823
+#, python-format
+msgid "The stock picking type of the selected record is different"
+msgstr "所选记录的调拨类型不同"
+
+#. module: trading_invoice
 #: code:addons/trading_invoice/models/trading_invoice.py:757
 #, python-format
 msgid "The supplier of the selected record is different"
 msgstr "所选记录的供应商不同"
 
 #. module: trading_invoice
-#: code:addons/trading_invoice/models/trading_invoice.py:775
+#: code:addons/trading_invoice/models/trading_invoice.py:774
+#: code:addons/trading_invoice/models/trading_invoice.py:841
 #, python-format
 msgid "The warehouse of the selected record is different"
 msgstr "所选记录的仓库不同"
