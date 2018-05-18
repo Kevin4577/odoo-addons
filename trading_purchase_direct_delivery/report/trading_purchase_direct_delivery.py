@@ -29,3 +29,4 @@ def render_report_with_data(report_xml_id, ctx):
     else:
         raise ValidationError(_('Please check whether this stock picking '
                                 'was generated from purchase order.'))
+
