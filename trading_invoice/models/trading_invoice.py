@@ -876,3 +876,75 @@ class TradingInvoice(models.Model):
             'source_location': source_location or '',
             'type': picking_type or '',
         }
+
+    @api.multi
+    def trading_purchase_direct_delivery_per_purhcase_order(
+            self, stock_picking_list):
+        """This function get the lot detail of each delivery order lines,
+        which was group by client order reference of sale order for each
+        of them."""
+
+        product_lines = []
+        sequence = 1
+        sum_product_qty = 0.0
+        department = ''
+        vendor_no = ''
+        customer = ''
+        for stock_picking in stock_picking_list:
+            if department and not department == \
+                    stock_picking.location_id.display_name:
+                raise UserError(_(
+                    "The entry department of the selected record is "
+                    "different"))
+            if vendor_no and not vendor_no == stock_picking.partner_id.ref:
+                raise UserError(_(
+                    "The supplier of the selected record is "
+                    "different"))
+            vendor_no = stock_picking.partner_id.ref
+            department = stock_picking.location_id.display_name
+            orgin = stock_picking.origin
+            track_order = stock_picking.name
+            customer = stock_picking.partner_id.name
+            default_storage_area = ''
+            pack_operation_product_ids_lines = stock_picking. \
+                mapped('pack_operation_product_ids')
+            for operation_line in pack_operation_product_ids_lines:
+                default_storage = \
+                    operation_line.product_id.default_storage_area
+                default_storage_area = \
+                    default_storage if default_storage else \
+                    default_storage_area
+                current_location = operation_line.location_dest_id
+                if customer and not customer == \
+                        current_location.display_name:
+                    raise UserError(_(
+                        "The warehouse of the selected record is "
+                        "different"))
+                product_lines.append({
+                    'sequence': sequence,
+                    'uom': operation_line.product_uom_id.name,
+                    'location':
+                        operation_line.product_id.default_storage_area or '',
+                    'origin': orgin,
+                    'rd_product_code':
+                        operation_line.product_id.rd_product_code or '',
+                    'default_code': operation_line.product_id.default_code
+                    or '',
+                    'name': operation_line.product_id.name or '',
+                    'customer_product_code':
+                        operation_line.product_id.customer_product_code or '',
+                    'product_id': operation_line.product_id,
+                    'qty': operation_line.product_qty,
+                    'track_order': track_order,
+                })
+                sequence += 1
+                sum_product_qty += operation_line.product_qty
+        return {
+            'sum_product_qty': sum_product_qty,
+            'product_lines': product_lines,
+            'customer': customer,
+            'delivery_date':
+                self.get_date(stock_picking_list[0].min_date) or False,
+            'supplier_num': vendor_no or '',
+            'department': department or '',
+        }
