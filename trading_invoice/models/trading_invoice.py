@@ -878,7 +878,7 @@ class TradingInvoice(models.Model):
         }
 
     @api.multi
-    def direct_delivery_per_purhcase_order(
+    def direct_delivery_per_purchase_order(
             self, stock_picking_list):
         """This function get the lot detail of each delivery order lines,
         which was group by client order reference of sale order for each
@@ -907,7 +907,7 @@ class TradingInvoice(models.Model):
             customer = stock_picking.partner_id.name
             if not customer or customer == '':
                 raise UserError(_(
-                    "The customer name does not exit ,please check it"))
+                    "No customer name, please check it"))
             default_storage_area = ''
             pack_operation_product_ids_lines = stock_picking. \
                 mapped('pack_operation_product_ids')

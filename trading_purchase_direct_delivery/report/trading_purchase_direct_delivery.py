@@ -19,11 +19,11 @@ def render_report_with_data(report_xml_id, ctx):
     stock_picking_list = ctx['objects']
     if len(stock_picking_list.mapped('partner_id').ids) > 1:
         raise ValidationError(_('Please check whether all purchase '
-                                'orders period belong to one customer'))
+                                'orders periods belong to one customer'))
     base_invoice_export_obj = stock_picking_list.env['trading.invoice']
     if not stock_picking_list.filtered(lambda stock_picking:
                                        not stock_picking.purchase_id):
-        data = base_invoice_export_obj.direct_delivery_per_purhcase_order(
+        data = base_invoice_export_obj.direct_delivery_per_purchase_order(
             stock_picking_list)
         ctx.update(data)
     else:
