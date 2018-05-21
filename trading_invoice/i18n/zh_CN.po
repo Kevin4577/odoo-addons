@@ -81,8 +81,3 @@ msgstr "所选记录的仓库不同"
 msgid "Trading Invoice"
 msgstr "Trading Invoice"
 
-#. module: trading_invoice
-#: code:addons/trading_invoice/models/trading_invoice.py:910
-#, python-format
-msgid "No customer name, please check it"
-msgstr "客户名称为空，请检查"
