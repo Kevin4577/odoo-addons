@@ -23,10 +23,9 @@ def render_report_with_data(report_xml_id, ctx):
     base_invoice_export_obj = stock_picking_list.env['trading.invoice']
     if not stock_picking_list.filtered(lambda stock_picking:
                                        not stock_picking.purchase_id):
-        data = base_invoice_export_obj.trading_purchase_direct_delivery_per_purhcase_order(
+        data = base_invoice_export_obj.direct_delivery_per_purhcase_order(
             stock_picking_list)
         ctx.update(data)
     else:
         raise ValidationError(_('Please check whether this stock picking '
                                 'was generated from purchase order.'))
-

@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     "name": "Trading Purchase Direct Delivery",
-    "summary": """This module generates Trading Direct Delivery Note  
+    "summary": """This module generates Trading Direct Delivery Note
      for direct-delivery orders""",
     "version": "10.0.1.0.0",
     "author": "Elico Corp",
@@ -19,4 +19,3 @@
     ],
     "installable": True,
 }
-

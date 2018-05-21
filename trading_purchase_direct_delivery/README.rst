@@ -41,6 +41,7 @@ Contributors
 * Eric Caudal <eric.caudal@elico-corp.com>
 * Victor Martin <victor.martin@elico-corp.com>
 * Hulk Liu <hulk.liu@elico-corp.com>
+* Kevin Wei <kevin.wei@elico-corp.com>
 
 Maintainer
 ----------

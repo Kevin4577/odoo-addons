@@ -878,7 +878,7 @@ class TradingInvoice(models.Model):
         }
 
     @api.multi
-    def trading_purchase_direct_delivery_per_purhcase_order(
+    def direct_delivery_per_purhcase_order(
             self, stock_picking_list):
         """This function get the lot detail of each delivery order lines,
         which was group by client order reference of sale order for each
@@ -905,6 +905,9 @@ class TradingInvoice(models.Model):
             orgin = stock_picking.origin
             track_order = stock_picking.name
             customer = stock_picking.partner_id.name
+            if not customer or customer == '':
+                raise UserError(_(
+                    "The customer name does not exit ,please check it"))
             default_storage_area = ''
             pack_operation_product_ids_lines = stock_picking. \
                 mapped('pack_operation_product_ids')
@@ -914,12 +917,7 @@ class TradingInvoice(models.Model):
                 default_storage_area = \
                     default_storage if default_storage else \
                     default_storage_area
-                current_location = operation_line.location_dest_id
-                if customer and not customer == \
-                        current_location.display_name:
-                    raise UserError(_(
-                        "The warehouse of the selected record is "
-                        "different"))
+
                 product_lines.append({
                     'sequence': sequence,
                     'uom': operation_line.product_uom_id.name,
