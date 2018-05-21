@@ -905,9 +905,8 @@ class TradingInvoice(models.Model):
             orgin = stock_picking.origin
             track_order = stock_picking.name
             customer = stock_picking.partner_id.name
-            if not customer or customer == '':
-                raise UserError(_(
-                    "No customer name, please check it"))
+            if not customer:
+		customer = ''
             default_storage_area = ''
             pack_operation_product_ids_lines = stock_picking. \
                 mapped('pack_operation_product_ids')

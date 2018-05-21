@@ -19,13 +19,13 @@ msgstr ""
 #: code:addons/trading_purchase_direct_delivery/report/trading_purchase_direct_delivery.py:21
 #, python-format
 msgid "Please check whether all purchase orders period belong to one customer"
-msgstr "Please check whether all purchase orders period belong to one customer"
+msgstr "请查看是否所选直运单属于同一客户"
 
 #. module: trading_purchase_direct_delivery
 #: code:addons/trading_purchase_direct_delivery/report/trading_purchase_direct_delivery.py:30
 #, python-format
 msgid "Please check whether this stock picking was generated from purchase order."
-msgstr "Please check whether this stock picking was generated from purchase order."
+msgstr "请检查是否直运单由采购单生成."
 
 #. module: trading_purchase_direct_delivery
 #: model:ir.actions.report.xml,name:trading_purchase_direct_delivery.trading_purchase_direct_delivery_py3o
