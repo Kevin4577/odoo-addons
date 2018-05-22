@@ -890,6 +890,7 @@ class TradingInvoice(models.Model):
         department = ''
         vendor_no = ''
         customer = ''
+        customer_num = ''
         for stock_picking in stock_picking_list:
             if department and not department == \
                     stock_picking.location_id.display_name:
@@ -902,11 +903,16 @@ class TradingInvoice(models.Model):
                     "different"))
             vendor_no = stock_picking.partner_id.ref
             department = stock_picking.location_id.display_name
-            orgin = stock_picking.origin
+            po_no = stock_picking.origin
             track_order = stock_picking.name
-            customer = stock_picking.partner_id.name
-            if not customer:
-		customer = ''
+            po_obj = self.env['purchase.order'].search([('name', '=', po_no)])
+            so_no = po_obj.origin
+            so_obj = self.env['sale.order'].search([('name', '=', so_no)])
+            customer = so_obj.partner_id.name
+            customer_num = so_obj.partner_id.ref
+            if not customer_num:
+                raise UserError(_(
+                    "The customer must have a ref number !"))
             default_storage_area = ''
             pack_operation_product_ids_lines = stock_picking. \
                 mapped('pack_operation_product_ids')
@@ -922,7 +928,7 @@ class TradingInvoice(models.Model):
                     'uom': operation_line.product_uom_id.name,
                     'location':
                         operation_line.product_id.default_storage_area or '',
-                    'origin': orgin,
+                    'origin': so_no,
                     'rd_product_code':
                         operation_line.product_id.rd_product_code or '',
                     'default_code': operation_line.product_id.default_code
@@ -944,4 +950,5 @@ class TradingInvoice(models.Model):
                 self.get_date(stock_picking_list[0].min_date) or False,
             'supplier_num': vendor_no or '',
             'department': department or '',
+            'customer_num': customer_num,
         }

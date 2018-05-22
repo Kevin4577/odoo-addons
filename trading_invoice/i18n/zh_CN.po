@@ -81,3 +81,8 @@ msgstr "所选记录的仓库不同"
 msgid "Trading Invoice"
 msgstr "Trading Invoice"
 
+#. module: trading_invoice
+#: code:addons/trading_invoice/models/trading_invoice.py:915
+#, python-format
+msgid "The customer must have a ref number"
+msgstr "客户必须要有一个客户编号"
