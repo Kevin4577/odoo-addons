@@ -23,5 +23,4 @@ def render_report_with_data(report_xml_id, ctx):
     base_invoice_export_obj = stock_picking_list.env['trading.invoice']
     data = base_invoice_export_obj.get_product_lot_list_requisition(
         stock_picking_list)
-    
     ctx.update(data)
