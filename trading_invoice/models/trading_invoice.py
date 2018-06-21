@@ -743,7 +743,8 @@ class TradingInvoice(models.Model):
 
         product_lines = []
         sequence = 1
-        sum_product_qty = 0.0
+        sum_ordered_qty = 0.0
+        sum_qty_done = 0.0
         department = ''
         location_name = ''
         vendor_no = ''
@@ -758,7 +759,12 @@ class TradingInvoice(models.Model):
                     "The supplier of the selected record is "
                     "different"))
             vendor_no = stock_picking.partner_id.ref
-            department = stock_picking.location_id.display_name
+            user_id = stock_picking.env.user.id
+            department_obj = self.env['hr.employee'].search([(
+                'id', '=', user_id
+            )])
+            if department_obj:
+                department = department_obj.department_id.name
             orgin = stock_picking.origin
             track_order = stock_picking.name
             default_storage_area = ''
@@ -777,27 +783,33 @@ class TradingInvoice(models.Model):
                         "The warehouse of the selected record is "
                         "different"))
                 location_name = current_location.display_name
-                product_lines.append({
-                    'sequence': sequence,
-                    'uom': operation_line.product_uom_id.name,
-                    'location':
-                        operation_line.product_id.default_storage_area or '',
-                    'origin': orgin,
-                    'rd_product_code':
-                        operation_line.product_id.rd_product_code or '',
-                    'default_code': operation_line.product_id.default_code
-                    or '',
-                    'name': operation_line.product_id.name or '',
-                    'customer_product_code':
-                        operation_line.product_id.customer_product_code or '',
-                    'product_id': operation_line.product_id,
-                    'qty': operation_line.product_qty,
-                    'track_order': track_order,
-                })
-                sequence += 1
-                sum_product_qty += operation_line.product_qty
+                if operation_line.qty_done != 0:
+                    product_lines.append({
+                        'sequence': sequence,
+                        'uom': operation_line.product_uom_id.name,
+                        'location':
+                            operation_line.product_id.default_storage_area
+                            or '',
+                        'origin': orgin,
+                        'rd_product_code':
+                            operation_line.product_id.rd_product_code or '',
+                        'default_code': operation_line.product_id.default_code
+                        or '',
+                        'name': operation_line.product_id.name or '',
+                        'customer_product_code':
+                            operation_line.product_id.customer_product_code
+                            or '',
+                        'product_id': operation_line.product_id,
+                        'ordered_qty': operation_line.ordered_qty,
+                        'qty_done': operation_line.qty_done,
+                        'track_order': track_order,
+                    })
+                    sequence += 1
+                    sum_qty_done += operation_line.product_qty
+                    sum_ordered_qty += operation_line.ordered_qty
         return {
-            'sum_product_qty': sum_product_qty,
+            'sum_ordered_qty': sum_ordered_qty,
+            'sum_qty_done': sum_qty_done,
             'product_lines': product_lines,
             'warehouse': location_name,
             'delivery_date':
@@ -813,7 +825,9 @@ class TradingInvoice(models.Model):
 
         product_lines = []
         sequence = 1
-        sum_product_qty = 0.0
+        sum_ordered_qty = 0.0
+        sum_qty_done = 0.0
+        department = ''
         source_location = ''
         location_name = ''
         picking_type = ''
@@ -847,34 +861,47 @@ class TradingInvoice(models.Model):
                     raise UserError(_(
                         "The warehouse of the selected record is "
                         "different"))
+                user_id = stock_picking.env.user.id
+                department_obj = self.env['hr.employee'].search([(
+                    'id', '=', user_id
+                )])
+                if department_obj:
+                    department = department_obj.department_id.name
                 location_name = current_location.display_name
-                product_lines.append({
-                    'sequence': sequence,
-                    'uom': operation_line.product_uom_id.name,
-                    'location':
-                        operation_line.product_id.default_storage_area or '',
-                    'origin': orgin,
-                    'rd_product_code':
-                        operation_line.product_id.rd_product_code or '',
-                    'default_code': operation_line.product_id.default_code
-                    or '',
-                    'name': operation_line.product_id.name or '',
-                    'customer_product_code':
-                        operation_line.product_id.customer_product_code or '',
-                    'product_id': operation_line.product_id,
-                    'qty': operation_line.product_qty,
-                    'track_order': track_order,
-                })
-                sequence += 1
-                sum_product_qty += operation_line.product_qty
+                if operation_line.qty_done != 0:
+                    product_lines.append({
+                        'sequence': sequence,
+                        'uom': operation_line.product_uom_id.name,
+                        'location':
+                            operation_line.product_id.default_storage_area
+                            or '',
+                        'origin': orgin,
+                        'rd_product_code':
+                            operation_line.product_id.rd_product_code or '',
+                        'default_code': operation_line.product_id.default_code
+                        or '',
+                        'name': operation_line.product_id.name or '',
+                        'customer_product_code':
+                            operation_line.product_id.customer_product_code
+                            or '',
+                        'product_id': operation_line.product_id,
+                        'ordered_qty': operation_line.ordered_qty,
+                        'qty_done': operation_line.qty_done,
+                        'track_order': track_order,
+                    })
+                    sequence += 1
+                    sum_qty_done += operation_line.product_qty
+                    sum_ordered_qty += operation_line.ordered_qty
         return {
-            'sum_product_qty': sum_product_qty,
+            'sum_ordered_qty': sum_ordered_qty,
+            'sum_qty_done': sum_qty_done,
             'product_lines': product_lines,
             'destination_location': location_name,
             'delivery_date':
                 self.get_date(stock_picking_list[0].min_date) or False,
             'source_location': source_location or '',
             'type': picking_type or '',
+            'department': department or '',
         }
 
     @api.multi
@@ -886,7 +913,8 @@ class TradingInvoice(models.Model):
 
         product_lines = []
         sequence = 1
-        sum_product_qty = 0.0
+        sum_ordered_qty = 0.0
+        sum_qty_done = 0.0
         department = ''
         vendor_no = ''
         customer = ''
@@ -902,7 +930,12 @@ class TradingInvoice(models.Model):
                     "The supplier of the selected record is "
                     "different"))
             vendor_no = stock_picking.partner_id.ref
-            department = stock_picking.location_id.display_name
+            user_id = stock_picking.env.user.id
+            department_obj = self.env['hr.employee'].search([(
+                'id', '=',  user_id
+            )])
+            if department_obj:
+                department = department_obj.department_id.name
             po_no = stock_picking.origin
             track_order = stock_picking.name
             po_obj = self.env['purchase.order'].search([('name', '=', po_no)])
@@ -922,28 +955,33 @@ class TradingInvoice(models.Model):
                 default_storage_area = \
                     default_storage if default_storage else \
                     default_storage_area
-
-                product_lines.append({
-                    'sequence': sequence,
-                    'uom': operation_line.product_uom_id.name,
-                    'location':
-                        operation_line.product_id.default_storage_area or '',
-                    'origin': so_no,
-                    'rd_product_code':
-                        operation_line.product_id.rd_product_code or '',
-                    'default_code': operation_line.product_id.default_code
-                    or '',
-                    'name': operation_line.product_id.name or '',
-                    'customer_product_code':
-                        operation_line.product_id.customer_product_code or '',
-                    'product_id': operation_line.product_id,
-                    'qty': operation_line.product_qty,
-                    'track_order': track_order,
-                })
-                sequence += 1
-                sum_product_qty += operation_line.product_qty
+                if operation_line.qty_done != 0:
+                    product_lines.append({
+                        'sequence': sequence,
+                        'uom': operation_line.product_uom_id.name,
+                        'location':
+                            operation_line.product_id.default_storage_area
+                            or '',
+                        'origin': so_no,
+                        'rd_product_code':
+                            operation_line.product_id.rd_product_code or '',
+                        'default_code': operation_line.product_id.default_code
+                        or '',
+                        'name': operation_line.product_id.name or '',
+                        'customer_product_code':
+                            operation_line.product_id.customer_product_code
+                            or '',
+                        'product_id': operation_line.product_id,
+                        'ordered_qty': operation_line.ordered_qty,
+                        'qty_done': operation_line.qty_done,
+                        'track_order': track_order,
+                    })
+                    sequence += 1
+                    sum_qty_done += operation_line.product_qty
+                    sum_ordered_qty += operation_line.ordered_qty
         return {
-            'sum_product_qty': sum_product_qty,
+            'sum_ordered_qty': sum_ordered_qty,
+            'sum_qty_done': sum_qty_done,
             'product_lines': product_lines,
             'customer': customer,
             'delivery_date':
