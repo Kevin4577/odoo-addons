@@ -30,5 +30,5 @@ msgstr "请检查是否发货单由入库单生成"
 #. module: trading_purchase_requisition_report
 #: model:ir.actions.report.xml,name:trading_purchase_requisition_report.trading_purchase_requisition_report_py3o
 msgid "Requisition"
-msgstr "调拨单"
+msgstr "打印调拨单"
 
