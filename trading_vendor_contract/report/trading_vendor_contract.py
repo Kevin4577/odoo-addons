@@ -16,6 +16,7 @@ def render_report_with_data(report_xml_id, data):
     """This function get order lines from purchase orders, and sum the
     quantity and price amount, in order to render the ods template with
     necessary data."""
+    product_purchase_need = []
     purchase_order_list = data['objects']
     partner_list = list(purchase_order_list.mapped('partner_id').ids)
     if len(partner_list) > 1:
@@ -28,6 +29,11 @@ def render_report_with_data(report_xml_id, data):
         get_purchase_order_company_contact(purchase_order_list[0])
     qty_total, price_total = trading_vendor_obj.\
         get_purchase_order_list_total_quantity_and_price(purchase_order_list)
+    planned_delivery_time = purchase_order_list.date_planned[:10]
+    for line in purchase_order_list.order_line:
+        if line.product_id.description_purchase:
+            every_need = line.product_id.description_purchase + '; '
+            product_purchase_need.append(every_need)
     data.update(vendor_contact_person)
     data.update(company_contact_person)
     data_order = datetime.\
@@ -37,4 +43,7 @@ def render_report_with_data(report_xml_id, data):
     data.update({'qty_total': qty_total,
                  'price_total': price_total,
                  'object': purchase_order_list[0],
-                 'data_order': data_order})
+                 'data_order': data_order,
+                 'planned_delivery_time': planned_delivery_time,
+                 'product_purchase_need': product_purchase_need,
+                 })
