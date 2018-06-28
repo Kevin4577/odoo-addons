@@ -35,6 +35,7 @@ def render_report_with_data(report_xml_id, data):
                  DEFAULT_SERVER_DATE_FORMAT)
     planned_delivery_time = purchase_order_list.date_planned[:10]
     company_name = purchase_order_list.env.user.company_id.name
+    # get different product description and make them print out on the report
     for line in purchase_order_list.order_line:
         if line.product_id.description_purchase:
             every_need = line.product_id.description_purchase + '; '

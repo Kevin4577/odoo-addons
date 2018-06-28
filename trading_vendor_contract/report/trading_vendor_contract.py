@@ -30,6 +30,7 @@ def render_report_with_data(report_xml_id, data):
     qty_total, price_total = trading_vendor_obj.\
         get_purchase_order_list_total_quantity_and_price(purchase_order_list)
     planned_delivery_time = purchase_order_list.date_planned[:10]
+    # get different product description and make them print out on the report
     for line in purchase_order_list.order_line:
         if line.product_id.description_purchase:
             every_need = line.product_id.description_purchase + '; '
