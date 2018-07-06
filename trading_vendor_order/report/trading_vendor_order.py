@@ -34,7 +34,12 @@ def render_report_with_data(report_xml_id, data):
                                    DEFAULT_SERVER_DATETIME_FORMAT),
                  DEFAULT_SERVER_DATE_FORMAT)
     planned_delivery_time = purchase_order_list.date_planned[:10]
-    company_name = purchase_order_list.env.user.company_id.name
+    company_name = purchase_order_list.env.user.company_id.street
+    current_user = purchase_order_list.env.user
+    vendor_list = purchase_order_list.partner_ref
+    tax_rate = 0
+    if purchase_order_list.order_line[0].taxes_id:
+        tax_rate = purchase_order_list.order_line[0].taxes_id.amount
     # get different product description and make them print out on the report
     for line in purchase_order_list.order_line:
         if line.product_id.description_purchase:
@@ -49,4 +54,7 @@ def render_report_with_data(report_xml_id, data):
                  'planned_delivery_time': planned_delivery_time,
                  'company_name': company_name,
                  'product_purchase_need': product_purchase_need,
+                 'current_user': current_user,
+                 'tax_rate': tax_rate,
+                 'vendor_list': vendor_list,
                  })
